@@ -1,0 +1,8 @@
+aserradero (0, 2)
+planta electrica (0, 3)
+planta electrica (0, 4)
+piedra (0, 5)
+madera (0, 6)
+metal (1, 5)
+mina (4, 7)
+fabrica (7, 2)
