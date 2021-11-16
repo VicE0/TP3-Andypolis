@@ -4,13 +4,13 @@
 template <class T>
 class Nodo {
 private:
-    T dato;
+    T * dato;
     Nodo * siguiente;
 
 public:
-    Nodo<T>(T d);
+    Nodo<T>(T * d);
 
-    T obtener_dato();
+    T * obtener_dato();
 
     Nodo<T> * obtener_siguiente();
 
@@ -21,7 +21,7 @@ public:
 };  
 
 template <class T>
-Nodo<T>::Nodo(T d){
+Nodo<T>::Nodo(T * d){
 
     this->dato = d;
     this->siguiente = nullptr;
@@ -29,7 +29,7 @@ Nodo<T>::Nodo(T d){
 }
 
 template <class T>
-T Nodo<T>::obtener_dato(){
+T * Nodo<T>::obtener_dato(){
     return dato;
 }
 

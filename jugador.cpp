@@ -1,9 +1,17 @@
 #include "jugador.h"
 
 Jugador::Jugador(){
-    this->usuario_inventario = 0;
+
+    this->inventario = new Lista<Material>;
 }
 
-Inventario * Jugador::obtener_inventario(){
-    return usuario_inventario;
+Lista<Material> * Jugador::obtener_inventario(){
+    return inventario;
 }
+
+void Jugador::agregar_material(Material * material){
+
+    inventario->alta(material, inventario->obtener_cantidad());
+
+}
+

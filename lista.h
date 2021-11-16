@@ -20,9 +20,13 @@ public:
 
     Nodo<T> * obtener_nodo(int pos); 
 
-    T consulta(int pos);  
+    int obtener_cantidad();
 
-    void alta(T d, int pos); 
+    void cambiar_cantidad(int nueva_cantidad);
+
+    T * consulta(int pos);  
+
+    void alta(T * d, int pos); 
 
     void baja(int pos); 
 
@@ -41,6 +45,7 @@ Lista<T>::Lista(){
     // Primero seria el primer nodo de la lista
     primero = 0;
     cantidad = 0;
+
 }
 
 template <class T>
@@ -53,7 +58,17 @@ Nodo<T> * Lista<T>::obtener_nodo(int pos){
 }
 
 template <class T>
-void Lista<T>::alta(T d, int pos){   
+int Lista<T>::obtener_cantidad(){
+    return cantidad;
+}
+
+template <class T>
+void Lista<T>::cambiar_cantidad(int nueva_cantidad){
+    cantidad = nueva_cantidad;
+}
+
+template <class T>
+void Lista<T>::alta(T * d, int pos){   
 
     Nodo<T> * nuevo = new Nodo<T>(d);
     Nodo<T> * siguiente = primero;
@@ -79,9 +94,9 @@ void Lista<T>::alta(T d, int pos){
 }
 
 template <class T>
-T Lista<T>::consulta(int pos){
+T * Lista<T>::consulta(int pos){
     Nodo<T> * aux = obtener_nodo(pos);
-    int d = aux->obtener_dato();
+    T * d = aux->obtener_dato();
     return d;
 }
 

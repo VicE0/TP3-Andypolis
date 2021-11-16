@@ -1,15 +1,21 @@
 #ifndef JUGADOR_H 
 #define JUGADOR_H
 
+#include "lista.h"
 #include "inventario.h"
 
-class Jugador
-{
+class Jugador {
 private:
-    Inventario * usuario_inventario;
+
+    Lista<Material> * inventario;
+
 public:
+
     Jugador();
-    Inventario * obtener_inventario();
+
+    void agregar_material(Material * material);
+
+    Lista<Material> * obtener_inventario();
 
 };
 

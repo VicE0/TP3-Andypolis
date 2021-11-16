@@ -72,6 +72,9 @@ public:
 
     bool aceptar_condiciones();
 
+    // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
+    void procesar_archivo_materiales();
+
     //--------------- EDIFICIOS ----------------------------------------------------
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.

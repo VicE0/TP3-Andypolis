@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> total_casilleros = 0;
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
+
 }
 
 bool Mapa::carga_incorrecta_archivos(){
@@ -73,6 +74,44 @@ void Mapa::generar_matriz(){
         mapa[i] = new Casillero * [ cantidad_columnas ];
     }
 
+}
+
+// Proceso el archivo de materiales :
+void Mapa::procesar_archivo_materiales(){
+    ifstream archivo;
+    archivo.open(ARCHIVO_MATERIALES);
+
+    if(archivo.is_open()){
+
+        string nombre;
+        string cantidad_1;
+        string cantidad_2;
+
+        Material * material_j1;
+        Material * material_j2;
+        
+        while(archivo >> nombre){
+            archivo >> cantidad_1;
+            archivo >> cantidad_2;
+
+            material_j1 = new Material(nombre, stoi(cantidad_1) );
+            material_j2 = new Material(nombre, stoi(cantidad_2) );
+
+            // dependiendo que jugador este , cargo sus datos en sus inventarios :
+            j1.agregar_material(material_j1);
+            j2.agregar_material(material_j2);
+        }
+
+        archivo.close();
+    }
+    else{
+
+        j1.obtener_inventario()->cambiar_cantidad(ERROR);
+        j2.obtener_inventario()->cambiar_cantidad(ERROR);
+
+    }
+
+    archivo.close();
 }
 
 void Mapa::procesar_archivo_ubicaciones(){
