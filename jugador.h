@@ -15,6 +15,10 @@ public:
 
     void agregar_material(Material * material);
 
+    Material * obtener_material(string nombre);
+
+    void mostrar_cantidad_material( string nombre );
+
     Lista<Material> * obtener_inventario();
 
 };

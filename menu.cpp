@@ -125,5 +125,3 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
         break;
     }
 }
-
-

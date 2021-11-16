@@ -25,6 +25,7 @@ int main(){
             procesar_opcion_jugador(opcion, mapa);
             mostrar_menu_partida();
             opcion = elegir_opcion();
+
         }
     }else{
         cout <<"Uno o varios archivos no se pudieron abrir correctamente";
