@@ -11,6 +11,7 @@ const string FABRICA = "fabrica";
 const string ESCUELA = "escuela";
 const string OBELISCO = "obelisco";
 const string PLANTA_ELECTRICA = "planta electrica";
+const string MINA_ORO = "mina oro";
 
 class Edificio
 {

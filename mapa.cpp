@@ -235,6 +235,11 @@ ifstream nuevo_archivo;
                 nuevo_edificio = new Planta_electrica( piedra, madera, metal, maximo_construir);
 
             }
+            else if ( nombre_edificio == MINA_ORO){
+
+                nuevo_edificio = new Mina_oro( piedra, madera, metal, maximo_construir);
+
+            }
             agregar_edificio(nuevo_edificio);
 
         }
