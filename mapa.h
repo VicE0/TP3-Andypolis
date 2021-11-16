@@ -15,6 +15,7 @@ const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
 const string ARCHIVO_EDIFICIO = "edificios.txt";
+const string ARCHIVO_MATERIALES = "materiales.txt";
 
 class Mapa
 {
@@ -26,7 +27,8 @@ private:
     // Elimino el inventario que vamos a poner en los jugadores
 
     // Agrego jugadores provisorios
-
+    Jugador j1;
+    Jugador j2;
 
     int cantidad_edificios;
     Edificio ** edificios_posibles;

@@ -15,13 +15,13 @@ int main(){
 
     if ( ! (mapa->carga_incorrecta_archivos()) ){
 
-        mostrar_menu();
+        mostrar_menu_partida();
         int opcion = elegir_opcion();
 
         while ( opcion != GUARDAR_SALIR ){
 
-            procesar_opcion(opcion, mapa);
-            mostrar_menu();
+            procesar_opcion_jugador(opcion, mapa);
+            mostrar_menu_partida();
             opcion = elegir_opcion();
         }
     }else{

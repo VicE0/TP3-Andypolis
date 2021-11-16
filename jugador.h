@@ -9,7 +9,7 @@ private:
     Inventario * usuario_inventario;
 public:
     Jugador();
-
+    Inventario * obtener_inventario();
 
 };
 
