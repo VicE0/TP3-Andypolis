@@ -7,7 +7,6 @@ Mapa::Mapa(){
     this -> mapa = 0;
     this -> cantidad_edificios = 0;
     this -> edificios_posibles = 0;
-    this -> usuario_inventario = 0;
     this -> vector_casilleros_lluvia = 0;
     this -> total_casilleros = 0;
     this -> mapa_bien_cargado = true;
@@ -15,8 +14,7 @@ Mapa::Mapa(){
 }
 
 bool Mapa::carga_incorrecta_archivos(){
-    bool carga_incorrecta = ( ( ! mapa_bien_cargado ) || ( ! ubicaciones_bien_cargadas ) || (obtener_cantidad_edificios() == -1) 
-    || (usuario_inventario->obtener_cantidad_de_materiales() == -1) );
+    bool carga_incorrecta = ( ( ! mapa_bien_cargado ) || ( ! ubicaciones_bien_cargadas ) || (obtener_cantidad_edificios() == -1) );
 
     return carga_incorrecta;
 
@@ -24,12 +22,10 @@ bool Mapa::carga_incorrecta_archivos(){
 
 void Mapa::ingreso_datos_mapa(){
 
-    this->usuario_inventario = new Inventario;
-    usuario_inventario->cargar_materiales();
-
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
+
 }
 
 void Mapa::procesar_archivo_mapa(){
@@ -349,10 +345,12 @@ void Mapa::realizar_construccion(string nombre_nuevo){
         int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
 
         bool supera_max = supera_maximo(nombre_nuevo);
-        bool alcanzan_materiales = usuario_inventario->alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+        // Ahora tengo que definir si alcanza para cada usuario.
+        //bool alcanzan_materiales = usuario_inventario->alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
-            if (alcanzan_materiales){
+            // puse como valor true pero hay que cambiarlo segun el jugador.
+            if (true){
                 if ( aceptar_condiciones() ){
 
                     int fila , columna;
@@ -365,7 +363,8 @@ void Mapa::realizar_construccion(string nombre_nuevo){
                         if ( ! existe_edificio_construido ){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
-                            usuario_inventario->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+                            // Mismo : tengo que usar el inventario del jugador.
+                            //usuario_inventario->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
                         }else{
                             cout << "\n El casillero ya contiene un edificio .\n" << endl;
@@ -505,7 +504,8 @@ void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int met
     cout << METAL << " : " << metal_obtenida << endl;
     cout << "\n------------------------------\n" << endl;
 
-    usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
+    // Ahora se le devolvera a cada jugador
+    //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
 
@@ -538,7 +538,9 @@ void Mapa::consultar_coordenada(){
 }
 
 void Mapa::mostrar_inv(){
-    usuario_inventario->mostrar_inventario();
+    cout << "No muestro inventario cada jugador tiene el suyo" << endl;
+    // Ahora cada jugador muestra su inventario
+    //usuario_inventario->mostrar_inventario();
 }
 
 void Mapa::recolectar_recursos_producidos(){
@@ -797,7 +799,5 @@ Mapa::~Mapa(){
     delete [] edificios_posibles;
     edificios_posibles = nullptr;
 
-    delete usuario_inventario;
-    usuario_inventario = 0;
-    
+
 }

@@ -7,6 +7,7 @@
 #include "casilleros/casillero_construible.h"
 #include "casilleros/casillero_transitable.h"
 #include "casilleros/casillero_inaccesible.h"
+#include "jugador.h"
 
 using namespace std;
 
@@ -22,13 +23,13 @@ private:
     int cantidad_columnas;
     Casillero *** mapa;
 
-    Inventario * usuario_inventario;
+    // Elimino el inventario que vamos a poner en los jugadores
+
+    // Agrego jugadores provisorios
+
 
     int cantidad_edificios;
     Edificio ** edificios_posibles;
-
-    Jugador jugador1;
-    Jugador jugador2;
 
     Casillero_transitable ** vector_casilleros_lluvia;
     int total_casilleros;

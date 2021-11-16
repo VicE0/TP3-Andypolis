@@ -1,16 +1,28 @@
 #include "menu.h"
 
-void mostrar_menu(){
-cout << "1.Construir edificio por nombre." << endl;
-cout << "2.Listar los edificios construidos." << endl;
-cout << "3.Listar todos los edificios." << endl;
-cout << "4.Demoler un edificio por coordenada." << endl;
-cout << "5.Mostrar mapa." << endl;
-cout << "6.Consultar coordenada." << endl;
-cout << "7.Mostrar inventario." << endl;
-cout << "8.Recolectar recursos producidos." << endl;
-cout << "9.Lluvia de recursos." << endl;
-cout << "10.Guardar y salir." << endl;
+void mostrar_menu_principal(){
+    cout << "1.Modificar edificio por nombre." << endl;
+    cout << "2.Listar todos los edificios." << endl;
+    cout << "3.Mostrar mapa." << endl;
+    cout << "4.Comenzar partida." << endl;
+    cout << "5.Guardar y salir." << endl;
+}
+
+void mostrar_menu_partida(){
+
+    cout << "1.Construir edificio por nombre." << endl;
+    cout << "2.Listar los edificios construidos." << endl;
+    cout << "3.Demoler un edificio por coordenada." << endl;
+    cout << "4.Atacar un edificio por coordenada" << endl;
+    cout << "5.Reparar un edificio por coordenada." << endl;
+    cout << "6.Comprar bombas." << endl;
+    cout << "7.Consultar coordenada." << endl;
+    cout << "8.Mostrar inventario." << endl;
+    cout << "9.Mostrar objetivos." << endl;
+    cout << "10.Recolectar recursos producidos." << endl;
+    cout << "11.Moverse a una coordenada." << endl;
+    cout << "12.Finalizar turno." << endl;
+    cout << "13.Guardar y salir." << endl;
 
 }
 
@@ -37,7 +49,30 @@ int elegir_opcion(){
     return opcion;
 }
 
-void procesar_opcion(int opcion, Mapa * mapa){
+void procesar_opcion_principal(int opcion, Mapa * mapa){
+    switch (opcion)
+    {
+
+    case P_MODIFICAR_EDIFICIO:
+        cout << "Modificar edificio" << endl;
+        break;
+    
+    case P_LISTAR_TODOS_EDIFICIOS:
+            mapa->listar_todos_edificios();
+        break;
+    
+    case P_MOSTRAR_MAPA:
+            mapa->mostrar_mapa();
+        break;
+    
+    case P_COMENZAR_PARTIDA:
+            cout << "Comenzar partida" << endl;
+        break;
+
+    }
+}
+
+void procesar_opcion_jugador(int opcion, Mapa * mapa){
 
     switch (opcion)
     {
@@ -49,16 +84,20 @@ void procesar_opcion(int opcion, Mapa * mapa){
             mapa->listar_edificios_construidos();
         break;
 
-    case LISTAR_TODOS_EDIFICIOS:
-            mapa->listar_todos_edificios();
-        break;
-
     case DEMOLER_EDIFICIO:
-            mapa->demoler_edificio();
+            cout << "Demoler edificio" << endl;
         break;
 
-    case MOSTRAR_MAPA:
-            mapa->mostrar_mapa();
+    case ATACAR_EDIFICIO:
+            cout << "Atacar edificio" << endl;
+        break;
+
+    case REPARAR_EDIFICIO:
+            cout << "Reparar edificio" << endl;
+        break;
+
+    case COMPRAR_BOMBAS:
+            cout << "Comprar bombas" << endl;
         break;
 
     case CONSULTAR_COORDENADA:
@@ -69,12 +108,22 @@ void procesar_opcion(int opcion, Mapa * mapa){
             mapa->mostrar_inv();
         break;
 
+    case MOSTRAR_OBJETIVOS:
+            cout << "mostrar objetivos" << endl;
+        break;
+
     case RECOLECTAR_RECURSOS:
             mapa->recolectar_recursos_producidos();
         break;
 
-    case LLUVIA_RECURSOS:
-            mapa->lluvia_recursos();
+    case MOVERSE:
+            cout << "moverse a una coordenada" << endl;
+        break;
+
+    case FINALIZAR_TURNO:
+            cout << "finalizo el turno" << endl;
         break;
     }
 }
+
+
