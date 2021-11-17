@@ -192,7 +192,22 @@ ifstream nuevo_archivo;
 
                 nombre_edificio += " " + segundo_nombre;
 
-            } else {
+            } else if ( nombre_edificio == "mina"){
+                nuevo_archivo >> segundo_nombre;
+                if (segundo_nombre == "oro"){
+                    nuevo_archivo >> cantidad_piedra;
+                    nuevo_archivo >> cantidad_madera;
+                    nuevo_archivo >> cantidad_metal;
+                    nuevo_archivo >> maximo;
+
+                    nombre_edificio += " " + segundo_nombre;
+                }else{
+                    cantidad_piedra = segundo_nombre;
+                    nuevo_archivo >> cantidad_madera;
+                    nuevo_archivo >> cantidad_metal;
+                    nuevo_archivo >> maximo;
+                }
+            }else {
                 nuevo_archivo >> cantidad_piedra;
                 nuevo_archivo >> cantidad_madera;
                 nuevo_archivo >> cantidad_metal;
