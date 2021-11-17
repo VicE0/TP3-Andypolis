@@ -126,8 +126,6 @@ void Mapa::procesar_archivo_ubicaciones(){
 
                     }
                 }
-
-
             }
 
             archivo.close();
