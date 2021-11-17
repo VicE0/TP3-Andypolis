@@ -26,3 +26,5 @@ int elegir_opcion();
 // Pre: 0 < opcion < 6 , y la ciudad andynopolis con los archivos ya procesados 
 // Pos: Se dirige a la opcion elegida por el usuario.
 void procesar_opcion(int opcion, Mapa * mapa);
+
+void selector_de_menu(Mapa * mapa);

@@ -83,54 +83,65 @@ void Mapa::procesar_archivo_ubicaciones(){
 
     ifstream archivo;
     archivo.open(ARCHIVO_UBICACIONES);
+    archivo.seekg(0, ios::end);
 
-    if(archivo.is_open() && mapa_bien_cargado){
-        string nombre,segundo_nombre, barra, fila, columna;
+    if (archivo && mapa_bien_cargado){
+        if (archivo.tellg() != 0){
+            string nombre,segundo_nombre, barra, fila, columna;
+            partida_empezada = true;
+    
 
-        while( archivo >> nombre ){
-            if ( nombre == "planta"){
-                archivo >> segundo_nombre;
-                getline(archivo, barra, '(');
-                getline(archivo, fila, ',');
-                getline(archivo, barra, ' ');
-                getline(archivo, columna, ')');
+            while( archivo >> nombre ){
+                if ( nombre == "planta"){
+                    archivo >> segundo_nombre;
+                    getline(archivo, barra, '(');
+                    getline(archivo, fila, ',');
+                    getline(archivo, barra, ' ');
+                    getline(archivo, columna, ')');
 
-                nombre += " " + segundo_nombre;
-            } else {
-                getline(archivo, barra, '(');
-                getline(archivo, fila, ',');
-                getline(archivo, barra, ' ');
-                getline(archivo, columna, ')');
-            }
-
-            if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
-                mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
-            }
-
-            int madera, piedra, metal, maximo;
-
-            for ( int i = 0; i < obtener_cantidad_edificios(); i++){
-                if ( obtener_edificio(i)->obtener_nombre() == nombre){
-                    piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
-                    madera = obtener_edificio(i)->obtener_cantidad_madera();
-                    metal = obtener_edificio(i)->obtener_cantidad_metal();
-                    maximo = obtener_edificio(i)->obtener_maximo_construir();
-
-                    mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
-
-                    obtener_edificio(i) ->sumar_cantidad();
-
+                    nombre += " " + segundo_nombre;
+                } else {
+                    getline(archivo, barra, '(');
+                    getline(archivo, fila, ',');
+                    getline(archivo, barra, ' ');
+                    getline(archivo, columna, ')');
                 }
+
+                if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
+                    mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
+                }
+
+                int madera, piedra, metal, maximo;
+
+                for ( int i = 0; i < obtener_cantidad_edificios(); i++){
+                    if ( obtener_edificio(i)->obtener_nombre() == nombre){
+                        piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
+                        madera = obtener_edificio(i)->obtener_cantidad_madera();
+                        metal = obtener_edificio(i)->obtener_cantidad_metal();
+                        maximo = obtener_edificio(i)->obtener_maximo_construir();
+
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
+
+                        obtener_edificio(i) ->sumar_cantidad();
+
+                    }
+                }
+
+
             }
 
-
+            archivo.close();
         }
-
-        archivo.close();
+        else{
+            partida_empezada = false;
+        }
     }else{
         ubicaciones_bien_cargadas = false;
     }
+}
 
+bool Mapa::verificar_partida_empezada(){
+    return partida_empezada;
 }
 
 void Mapa::validar_coordenada(int &fila, int &columna){

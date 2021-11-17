@@ -27,14 +27,15 @@ private:
     int cantidad_edificios;
     Edificio ** edificios_posibles;
 
-    Jugador jugador1;
-    Jugador jugador2;
+    //Jugador jugador1;
+    //Jugador jugador2;
 
     Casillero_transitable ** vector_casilleros_lluvia;
     int total_casilleros;
 
     bool ubicaciones_bien_cargadas;
     bool mapa_bien_cargado;
+    bool partida_empezada;
 
 public:
 
@@ -68,6 +69,8 @@ public:
     void validar_coordenada(int &fila, int &columna);
 
     bool aceptar_condiciones();
+
+    bool verificar_partida_empezada();
 
     //--------------- EDIFICIOS ----------------------------------------------------
 
