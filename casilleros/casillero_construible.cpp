@@ -51,6 +51,11 @@ void Casillero_construible::agregar_edificio(string nombre, int piedra, int made
             this->edificio_construido = new Planta_electrica( piedra, madera, metal, maximo);
 
         }
+        else if ( nombre == MINA_ORO){
+
+            this->edificio_construido = new Mina_oro( piedra, madera, metal, maximo);
+
+        }
     } else {
         cout << "\n El casillero ya esta ocupado. \n" << endl;
     }
