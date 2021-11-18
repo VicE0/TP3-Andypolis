@@ -1,9 +1,9 @@
 #include "mina_oro.h"
 
 Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo) : Edificio( piedra, madera, metal, maximo){
-    this->nombre = "planta electrica";
-    this->diminutivo = "P";
-    this->brinda = 0;
+    this->nombre = "mina oro";
+    this->diminutivo = "Mo";
+    this->brinda = 50;
 }
 
 int Mina_oro::obtener_cantidad_brindada(){
@@ -11,5 +11,5 @@ int Mina_oro::obtener_cantidad_brindada(){
 }
 
 void Mina_oro::mostrar_mensaje(){
-    cout << " Soy una " << nombre << " no brindo materiales, me encuentro en el casillero consultado . " << endl;
+    cout << " Soy una " << nombre << " brindo 50 andycoins y me encuentro en el casillero consultado . " << endl;
 }

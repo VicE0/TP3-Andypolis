@@ -57,7 +57,7 @@ void Casillero_construible::agregar_edificio(string nombre, int piedra, int made
 
         }
     } else {
-        cout << "\n El casillero ya esta ocupado. \n" << endl;
+        cout << "\n El casillero ya esta ocupado.\n" << endl;
     }
 
 }
