@@ -15,11 +15,12 @@ const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
 const string ARCHIVO_EDIFICIO = "edificios.txt";
+const string ARCHIVO_MATERIALES = "materiales.txt";
 const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
-const string ARCHIVO_MATERIALES = "materiales.txt";
+
 
 class Mapa
 {
