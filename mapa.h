@@ -38,6 +38,7 @@ private:
 
     bool ubicaciones_bien_cargadas;
     bool mapa_bien_cargado;
+    bool partida_empezada;
 
 public:
 
@@ -71,6 +72,8 @@ public:
     void validar_coordenada(int &fila, int &columna);
 
     bool aceptar_condiciones();
+
+    bool verificar_partida_empezada();
 
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales();

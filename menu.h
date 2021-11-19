@@ -46,3 +46,5 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa);
 //Pre : 0 < opcion < 5 
 //Pos : Se dirige a la opcion elegida por los usuarios.
 void procesar_opcion_principal(int opcion, Mapa * mapa);
+
+void selector_de_menu(Mapa * mapa);

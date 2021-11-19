@@ -15,6 +15,8 @@ Material :: Material(string nombre, int cantidad){
   else if (nombre == "metal"){
     this -> diminutivo = "I";
   }
+  else if (nombre == "andycoins"){
+    this -> diminutivo = "C";}
   else{
     // int letra  = toupper(nombre[0]);
     // char ascii_inicial = char(letra);
@@ -22,7 +24,6 @@ Material :: Material(string nombre, int cantidad){
     // this ->diminutivo = letra_inicial;
     this -> diminutivo = "mat";
   }
-
 }
 
 Material :: ~Material(){

@@ -125,3 +125,24 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
         break;
     }
 }
+
+void selector_de_menu(Mapa * mapa){
+
+    if (mapa -> verificar_partida_empezada()){
+        cout << 1 << endl;
+    }
+
+    else{
+    cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
+
+        mostrar_menu();
+        int opcion = elegir_opcion();
+
+        while ( opcion != GUARDAR_SALIR ){
+
+            procesar_opcion(opcion, mapa);
+            mostrar_menu();
+            opcion = elegir_opcion();
+        }
+    }
+}
