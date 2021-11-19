@@ -2,6 +2,9 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+#include "lista.h"
+#include "inventario.h"
+
 #include <string>
 using std::string;
 
@@ -15,7 +18,11 @@ class Jugador
         int objetivos_cumplidos;
         //AGREGAR PARTE DE MATERIALES HECHA POR GIAN
 
+        Lista<Material> * inventario;
+
     public:
+
+        Jugador();
 
         Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos); //constructor
 
@@ -35,30 +42,13 @@ class Jugador
         // //Destructor, seguro lo necesitamos para liberar el inventario
         // ~Jugador();
 
-=======
-#ifndef JUGADOR_H 
-#define JUGADOR_H
+        void agregar_material(Material * material);
 
-#include "lista.h"
-#include "inventario.h"
+        Material * obtener_material(string nombre);
 
-class Jugador {
-private:
+        void mostrar_cantidad_material( string nombre );
 
-    Lista<Material> * inventario;
-
-public:
-
-    Jugador();
-
-    void agregar_material(Material * material);
-
-    Material * obtener_material(string nombre);
-
-    void mostrar_cantidad_material( string nombre );
-
-    Lista<Material> * obtener_inventario();
-
+        Lista<Material> * obtener_inventario();
 };
 
 
