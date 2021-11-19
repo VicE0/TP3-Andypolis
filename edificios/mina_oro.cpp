@@ -2,7 +2,7 @@
 
 Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo) : Edificio( piedra, madera, metal, maximo){
     this->nombre = "mina oro";
-    this->diminutivo = "Mo";
+    this->diminutivo = "G";
     this->brinda = 50;
 }
 

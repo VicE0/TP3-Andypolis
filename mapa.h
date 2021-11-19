@@ -7,6 +7,7 @@
 #include "casilleros/casillero_construible.h"
 #include "casilleros/casillero_transitable.h"
 #include "casilleros/casillero_inaccesible.h"
+#include "jugador.h"
 
 using namespace std;
 
@@ -14,10 +15,12 @@ const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
 const string ARCHIVO_EDIFICIO = "edificios.txt";
+const string ARCHIVO_MATERIALES = "materiales.txt";
 const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
+
 
 class Mapa
 {
@@ -26,19 +29,21 @@ private:
     int cantidad_columnas;
     Casillero *** mapa;
 
-    Inventario * usuario_inventario;
+    // Elimino el inventario que vamos a poner en los jugadores
+
+    // Agrego jugadores provisorios
+    Jugador j1;
+    Jugador j2;
 
     int cantidad_edificios;
     Edificio ** edificios_posibles;
-
-    //Jugador jugador1;
-    //Jugador jugador2;
 
     Casillero_transitable ** vector_casilleros_lluvia;
     int total_casilleros;
 
     bool ubicaciones_bien_cargadas;
     bool mapa_bien_cargado;
+    bool partida_empezada;
 
 public:
 
@@ -72,6 +77,11 @@ public:
     void validar_coordenada(int &fila, int &columna);
 
     bool aceptar_condiciones();
+
+    bool verificar_partida_empezada();
+
+    // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
+    void procesar_archivo_materiales();
 
     //--------------- EDIFICIOS ----------------------------------------------------
 
@@ -139,7 +149,7 @@ public:
 
     //PRE: Una ves demolido el edificio.
     //POS: Muestro por pantalla los materiales obtenidos, y los guardo en el inventario. 
-    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida);
+    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos);
 
     //PRE: Teniendo cargada la matriz dinamica.
     //POS: Recorro la matriz y muestro los nombres de los casilleros. 
