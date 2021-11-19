@@ -1,3 +1,0 @@
-madera 9947
-metal 65840
-piedra 91012
