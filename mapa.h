@@ -149,7 +149,7 @@ public:
 
     //PRE: Una ves demolido el edificio.
     //POS: Muestro por pantalla los materiales obtenidos, y los guardo en el inventario. 
-    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida);
+    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos);
 
     //PRE: Teniendo cargada la matriz dinamica.
     //POS: Recorro la matriz y muestro los nombres de los casilleros. 

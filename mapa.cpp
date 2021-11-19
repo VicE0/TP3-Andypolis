@@ -576,21 +576,23 @@ void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila,
 
     }
 
-    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal);
+    // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
+    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal, 0);
 
     mapa[fila][columna]->eliminar_edificio();
 }
 
-void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida){
+void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
 
     cout << "\n------------------------------\n" << endl;
     cout << "\nMateriales obtenidos \n" << endl;
     cout << PIEDRA << " : " << piedra_obtenida << endl;
     cout << MADERA <<" : " << madera_obtenida << endl;
     cout << METAL << " : " << metal_obtenida << endl;
+    cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // Ahora se le devolvera a cada jugador
+    // Ahora se le devolvera a cada jugador  [ ] --------------------------------------------
     //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
@@ -633,6 +635,7 @@ void Mapa::recolectar_recursos_producidos(){
     int piedra = 0;
     int madera = 0;
     int metal = 0;
+    int andycoin = 0;
     int cantidad_edificios, total_brindado , cantidad_construidos, cantidad_a_brindar;
     string nombre_edificio;
 
@@ -659,10 +662,14 @@ void Mapa::recolectar_recursos_producidos(){
         } else if ( nombre_edificio == FABRICA){
 
             metal += total_brindado;
-        }
+        } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
+
+            andycoin += total_brindado;
+
+        } 
     }
 
-    devolver_materiales(piedra, madera, metal);
+    devolver_materiales(piedra, madera, metal, andycoin);
 }
 
 int Mapa::generar_numero_random(int min, int max){
@@ -683,10 +690,12 @@ void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_mad
     } else if (cant_gen_piedras){
         material_a_colocar = "metal";
         cant_gen_metales --;
+
     } else if (cant_gen_coins){
         material_a_colocar = "andycoins";
         cant_gen_coins --;
     }
+
 }
 
 void Mapa::mostrar_alerta_materiales_no_colocados(int materiales_restantes, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales,int cant_gen_coins){
@@ -856,10 +865,10 @@ void Mapa :: lluvia_recursos(){
     
         
     cout << "Han llovido los siguientes articulos en el mapa:" <<endl
-    <<cant_gen_piedras * 100 <<" unidades de piedra"<<endl
-    <<cant_gen_maderas * 50 <<" unidades de madera" <<endl
-    <<cant_gen_metales * 50 <<" unidades de metal " <<endl
-    <<cant_gen_coins * 250 << "andycoins" <<endl<<endl
+    <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
+    <<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl
+    <<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl
+    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << "andycoins" <<endl<<endl
     <<"en las siguientes posiciones: "<< endl;
 
     ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);
