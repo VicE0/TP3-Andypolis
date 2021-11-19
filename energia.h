@@ -19,7 +19,7 @@ class Energia //?
         //POST: si la energía del jugador es igual o mayor al tope, resetea la energía a 0
         virtual void resetear_energia() = 0;
 
-        
+        //Cualquier cosa podemos implementar estos métodos en cada .h
 
 
 };
