@@ -3,6 +3,8 @@
 #include "mapa.h"
 #include "edificio.h"
 
+#include "jugador.h"
+
 using namespace std;
 
 
@@ -22,6 +24,7 @@ int main(){
     delete mapa;
 
     cout << "\n Muchas gracias por visitar la ciudad , nos vemos pronto ! \n" << endl; 
+
 
     return 0;
 }

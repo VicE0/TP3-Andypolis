@@ -28,6 +28,7 @@ Material* Inventario :: obtener_material_de_lista_materiales(int posicion){
 
 
 //cargar materiales
+// Leer el arcivo materiales , luego de ingresar los jugadores
 void Inventario :: cargar_materiales(){
     
     fstream archivo_materiales(PATH_MATERIALES, ios::in);

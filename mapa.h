@@ -7,6 +7,7 @@
 #include "casilleros/casillero_construible.h"
 #include "casilleros/casillero_transitable.h"
 #include "casilleros/casillero_inaccesible.h"
+#include "jugador.h"
 
 using namespace std;
 
@@ -14,6 +15,12 @@ const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
 const string ARCHIVO_EDIFICIO = "edificios.txt";
+const string ARCHIVO_MATERIALES = "materiales.txt";
+const int UNIDADES_POR_PACK_PIEDRA = 100;
+const int UNIDADES_POR_PACK_MADERA = 50;
+const int UNIDADES_POR_PACK_METAL = 50;
+const int UNIDADES_POR_PACK_COINS = 250;
+
 
 class Mapa
 {
@@ -22,13 +29,14 @@ private:
     int cantidad_columnas;
     Casillero *** mapa;
 
-    Inventario * usuario_inventario;
+    // Elimino el inventario que vamos a poner en los jugadores
+
+    // Agrego jugadores provisorios
+    Jugador j1;
+    Jugador j2;
 
     int cantidad_edificios;
     Edificio ** edificios_posibles;
-
-    //Jugador jugador1;
-    //Jugador jugador2;
 
     Casillero_transitable ** vector_casilleros_lluvia;
     int total_casilleros;
@@ -71,6 +79,9 @@ public:
     bool aceptar_condiciones();
 
     bool verificar_partida_empezada();
+
+    // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
+    void procesar_archivo_materiales();
 
     //--------------- EDIFICIOS ----------------------------------------------------
 
@@ -138,7 +149,7 @@ public:
 
     //PRE: Una ves demolido el edificio.
     //POS: Muestro por pantalla los materiales obtenidos, y los guardo en el inventario. 
-    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida);
+    void devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos);
 
     //PRE: Teniendo cargada la matriz dinamica.
     //POS: Recorro la matriz y muestro los nombres de los casilleros. 
@@ -179,29 +190,33 @@ public:
     //PRE: -
     //POST: Carga en vector_casilleros_lluvia los casilleros habilitados para que puedan llover materiales(son transitables
     //y no tienen ningun material ya ubicado en ellos).
-    void cargar_vector_casilleros_lluvia_con_casileros_permitidos();  
+    void cargar_vector_casilleros_lluvia_con_casileros_permitidos();
+
+    //PRE: Recibe un string con el nombre del material a colocar.
+    //POST: Con el nombre, identifica la cantidad a agregar de dicho material y retorna el entero
+    int definir_cantidad_material(string material_a_colocar);
 
     //Colocar materiales llovidos en mapa
     //PRE: Recibe enteros con las cantidades totales y pariciales de materiales generados.
     //POST: Coloca en el mapa en las posicione aleatorias generadas por generar_numeros_random() los materiales generados.
-    void colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales);
+    void colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales, int cant_gen_coins);
 
     //Consultar material a colocar
-    //PRE: Recibe los enteros "cant_gen_piedras", "cant_gen_maderas" y "cant_gen_metales" y el string material_a_colocar
+    //PRE: Recibe los enteros "cant_gen_piedras", "cant_gen_maderas", "cant_gen_metales" y "cant_gen_coins" y el string material_a_colocar
     //POST: Modifica por parametro "material_a_colocar" y las cantidades de piedra y madera restantes.
-    void consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, string &material_a_colocar);
+    void consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, int &cant_gen_coins, string &material_a_colocar);
 
     //mostrar alerta materiales no colocados
-    //PRE: Recibe 4 enteros con las cantidades de madera piedra y metal que han quedado sin colocar
+    //PRE: Recibe 5 enteros con las cantidades de madera piedra metal y coins que han quedado sin colocar
     //Muestra una alerta por pantalla indicando que materiales no se pudieron colocar
-    void mostrar_alerta_materiales_no_colocados(int materiales_restantes, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales);
+    void mostrar_alerta_materiales_no_colocados(int materiales_restantes, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales,int cant_gen_coins);
 
     //Ejecutar lluvia
-    //PRE: Recibe un entero con la cantidad total de materiales y otros 3 enteros con las cantiades de piedra,
-    //madera y metal generadas.
+    //PRE: Recibe un entero con la cantidad total de materiales y otros 4 enteros con las cantiades de piedra,
+    //madera, metal y coins generadas.
     //POST: Efectua la lluvia de materiales colocando en el mapa en las posiciones hablitadas y generadas por
     //la funcion "generar_numero_random".
-    void ejecutar_lluvia(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales);
+    void ejecutar_lluvia(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales, int cant_gen_coins);
 
     //Agregar casillero a vector casilleros lluvia
     //PRE: Recibe un puntero a casillero transitable, un entero con el nuevo tamanio del vector y el entero posicion con la posicion
