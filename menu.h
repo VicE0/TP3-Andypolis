@@ -48,3 +48,5 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa);
 void procesar_opcion_principal(int opcion, Mapa * mapa);
 
 void selector_de_menu(Mapa * mapa);
+
+void partida(Mapa * mapa);

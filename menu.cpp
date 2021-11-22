@@ -66,7 +66,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
         break;
     
     case P_COMENZAR_PARTIDA:
-            cout << "Comenzar partida" << endl;
+            partida(mapa);
         break;
 
     }
@@ -126,23 +126,32 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
     }
 }
 
+void partida(Mapa * mapa){
+    int opcion;
+    do {
+
+        mostrar_menu_partida();
+        opcion = elegir_opcion();
+        procesar_opcion_jugador(opcion, mapa);
+
+    }while ( opcion != GUARDAR_SALIR );
+}
+
 void selector_de_menu(Mapa * mapa){
 
+    int opcion;
     if (mapa -> verificar_partida_empezada()){
-        cout << 1 << endl;
+        partida(mapa);
     }
 
     else{
     cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
+        do {
 
-        mostrar_menu_partida();
-        int opcion = elegir_opcion();
-
-        while ( opcion != GUARDAR_SALIR ){
-
-            procesar_opcion_jugador(opcion, mapa);
-            mostrar_menu_partida();
+            mostrar_menu_principal();
             opcion = elegir_opcion();
-        }
+            procesar_opcion_principal(opcion, mapa);
+
+        }while ( opcion != P_GUARDAR_SALIR );
     }
 }
