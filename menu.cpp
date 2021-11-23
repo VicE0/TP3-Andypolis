@@ -68,7 +68,10 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
     case P_COMENZAR_PARTIDA:
             partida(mapa);
         break;
-
+    
+    case P_GUARDAR_SALIR:
+            cout << "Guardar y Salir" << endl;
+        break;
     }
 }
 
@@ -123,18 +126,29 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
     case FINALIZAR_TURNO:
             cout << "finalizo el turno" << endl;
         break;
+    
+    case GUARDAR_SALIR:
+            cout << "Guardar y Salir" << endl;
+        break;
     }
 }
 
 void partida(Mapa * mapa){
     int opcion;
+    int turno;
     do {
+        turno++;
+        verificar_lluvia_de_materiales(turno, mapa);
 
+        do{
         mostrar_menu_partida();
         opcion = elegir_opcion();
         procesar_opcion_jugador(opcion, mapa);
+        }
+        while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
 
-    }while ( opcion != GUARDAR_SALIR );
+    }
+    while ( opcion != GUARDAR_SALIR );
 }
 
 void selector_de_menu(Mapa * mapa){
@@ -153,5 +167,11 @@ void selector_de_menu(Mapa * mapa){
             procesar_opcion_principal(opcion, mapa);
 
         }while ( opcion != P_GUARDAR_SALIR );
+    }
+}
+
+void verificar_lluvia_de_materiales(int turno, Mapa * mapa){
+    if (turno % 2 == 0){
+        mapa -> lluvia_recursos();
     }
 }

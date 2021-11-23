@@ -50,3 +50,5 @@ void procesar_opcion_principal(int opcion, Mapa * mapa);
 void selector_de_menu(Mapa * mapa);
 
 void partida(Mapa * mapa);
+
+void verificar_lluvia_de_materiales(int turno, Mapa * mapa);
