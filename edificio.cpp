@@ -1,7 +1,7 @@
 #include "edificio.h"
 
 Edificio::Edificio(){
-    this->id_jugador = 0;
+    this->id_jugador = 1;
     this-> nombre = "nada";
     this-> diminutivo = "";
     this-> cantidad_piedra = 0;
@@ -13,7 +13,7 @@ Edificio::Edificio(){
 }
 
 Edificio::Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
-    this->id_jugador = id_jugador;
+    this->id_jugador = 1;
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
@@ -77,4 +77,8 @@ void Edificio::restar_cantidad(){
 }
 
 Edificio::~Edificio(){}
+
+int Edificio::obtener_id_jugador(){
+    return id_jugador;
+}
 

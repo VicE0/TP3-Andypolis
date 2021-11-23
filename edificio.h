@@ -106,6 +106,8 @@ public:
     // POS: -
     virtual ~Edificio();
 
+    int obtener_id_jugador();
+
 
 };
 

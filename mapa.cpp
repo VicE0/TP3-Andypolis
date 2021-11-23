@@ -433,12 +433,13 @@ void Mapa::realizar_construccion(string nombre_nuevo){
         int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
 
         bool supera_max = supera_maximo(nombre_nuevo);
-        // Ahora tengo que definir si alcanza para cada usuario.
-        //bool alcanzan_materiales = usuario_inventario->alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+        // OJO 
+        // PRUEBA CON EL JUGADOR 1, HACER QUE SEA PARA EL JUGADOR EN TURNO [ ] 
+        bool alcanzan_materiales = j1.alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
             // puse como valor true pero hay que cambiarlo segun el jugador.
-            if (true){
+            if (alcanzan_materiales){
                 if ( aceptar_condiciones() ){
 
                     int fila , columna;
@@ -451,8 +452,11 @@ void Mapa::realizar_construccion(string nombre_nuevo){
                         if ( ! existe_edificio_construido ){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
-                            // Mismo : tengo que usar el inventario del jugador.
-                            //usuario_inventario->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
+                            // OJO
+                            // UTILIZO LOS MATERIALES SOLO DEL JUGADOR 1, FALTA HACERLO PARA EL JUGADOR EN TURNO [ ]
+                            j1.utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
                         }else{
                             cout << "\n El casillero ya contiene un edificio .\n" << endl;
@@ -594,8 +598,8 @@ void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int met
     cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // Ahora se le devolvera a cada jugador  [ ] --------------------------------------------
-    //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
+    // FALTA PONER AL JUGADOR EN TURNO  [ ] --------------------------------------------
+    j1.devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
 

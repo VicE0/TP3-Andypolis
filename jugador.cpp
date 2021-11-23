@@ -78,4 +78,81 @@ void Jugador::mostrar_inventario(){
     }
 }
 
+bool Jugador::alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int 
+cantidad_metal_nec){
 
+    bool alcanza = true;
+    int i = 0;
+    int cantidad_de_materiales = inventario->obtener_cantidad();
+    while (alcanza && i < cantidad_de_materiales){
+        
+        string material_a_chequear = inventario->obtener_nodo(i)->obtener_dato()->obtener_nombre();
+
+        int cantidad_disponible = inventario->obtener_nodo(i)->obtener_dato()->obtener_cantidad_disponible();
+        
+        if (material_a_chequear == PIEDRA){
+            chequear_material(cantidad_disponible, cantidad_piedra_nec, alcanza);
+        } 
+        if (material_a_chequear == MADERA){
+            chequear_material(cantidad_disponible, cantidad_madera_nec, alcanza);
+        } 
+        if (material_a_chequear == METAL){
+            chequear_material(cantidad_disponible, cantidad_metal_nec, alcanza);
+        } 
+        i++;
+    }
+    return alcanza;
+}
+
+void Jugador::chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza){
+    if (cantidad_disponible < cantidad_material_nec){
+                alcanza = false;
+    }
+}
+
+
+void Jugador::utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int 
+cantidad_metal_nec){
+    
+    int i = 0;
+    int cantidad_de_materiales = inventario->obtener_cantidad();
+    while (i < cantidad_de_materiales){
+    
+        string material_a_chequear = inventario->obtener_nodo(i)->obtener_dato()->obtener_nombre();
+
+        if (material_a_chequear == PIEDRA){
+            restar_cantidad_material(material_a_chequear, cantidad_piedra_nec);
+        }
+        if (material_a_chequear == MADERA){
+            restar_cantidad_material(material_a_chequear,cantidad_madera_nec);
+        } 
+        if (material_a_chequear == METAL){
+            restar_cantidad_material(material_a_chequear,cantidad_metal_nec);
+        }
+        i++;
+    }
+}
+
+void Jugador::devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int 
+cantidad_metal_nec){
+    
+    int i = 0;
+    int cantidad_de_materiales = inventario->obtener_cantidad();
+
+    while (i < cantidad_de_materiales){
+    
+        string material_a_chequear = inventario->obtener_nodo(i)->obtener_dato()->obtener_nombre();
+        
+        if (material_a_chequear == PIEDRA){
+            sumar_cantidad_material(material_a_chequear,cantidad_piedra_nec);
+        }
+        if (material_a_chequear == MADERA){
+            sumar_cantidad_material(material_a_chequear,cantidad_madera_nec);        
+        } 
+        if (material_a_chequear == METAL){
+            sumar_cantidad_material(material_a_chequear,cantidad_metal_nec);
+        }
+        i++;
+    }
+
+};

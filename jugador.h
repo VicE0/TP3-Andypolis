@@ -55,6 +55,16 @@ class Jugador
         void restar_cantidad_material(string nombre, int cantidad);
 
         void mostrar_inventario();
+
+        bool alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+        void chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza);
+
+        void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+        void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+
 };
 
 
