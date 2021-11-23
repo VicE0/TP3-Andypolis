@@ -175,7 +175,7 @@ void Mapa::procesar_archivo_ubicaciones(){
                         metal = obtener_edificio(i)->obtener_cantidad_metal();
                         maximo = obtener_edificio(i)->obtener_maximo_construir();
 
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
 
                         obtener_edificio(i) ->sumar_cantidad();
 
@@ -286,37 +286,37 @@ ifstream nuevo_archivo;
 
             if (nombre_edificio == ASERRADERO){
 
-                nuevo_edificio = new Aserradero(piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica( 1,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
 
-                nuevo_edificio = new Planta_electrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina_oro( 1, piedra, madera, metal, maximo_construir);
 
             }
             agregar_edificio(nuevo_edificio);
@@ -450,7 +450,7 @@ void Mapa::realizar_construccion(string nombre_nuevo){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
-                            mapa[fila][columna]->agregar_edificio(nombre_nuevo, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
+                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,1, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
 
                             // OJO

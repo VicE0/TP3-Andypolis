@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Escuela(int piedra, int madera, int metal, int maximo);
+    Escuela(int id_jugador,int piedra, int madera, int metal, int maximo);
 
     int obtener_cantidad_brindada();
 

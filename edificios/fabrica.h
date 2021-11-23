@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Fabrica(int piedra, int madera, int metal, int maximo);
+    Fabrica(int id_jugador,int piedra, int madera, int metal, int maximo);
 
     int obtener_cantidad_brindada();
 
