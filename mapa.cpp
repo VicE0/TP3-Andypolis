@@ -23,6 +23,7 @@ bool Mapa::carga_incorrecta_archivos(){
 
 void Mapa::ingreso_datos_mapa(){
 
+    procesar_archivo_materiales();
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
@@ -114,6 +115,7 @@ void Mapa::procesar_archivo_materiales(){
     archivo.close();
 }
 
+// COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
 void Mapa::procesar_archivo_ubicaciones(){
 
     ifstream archivo;
@@ -626,9 +628,8 @@ void Mapa::consultar_coordenada(){
 }
 
 void Mapa::mostrar_inv(){
-    cout << "No muestro inventario cada jugador tiene el suyo" << endl;
-    // Ahora cada jugador muestra su inventario
-    //usuario_inventario->mostrar_inventario();
+    j1.mostrar_inventario();
+
 }
 
 void Mapa::recolectar_recursos_producidos(){

@@ -49,6 +49,12 @@ class Jugador
         void mostrar_cantidad_material( string nombre );
 
         Lista<Material> * obtener_inventario();
+
+        void sumar_cantidad_material(string nombre, int cantidad);
+
+        void restar_cantidad_material(string nombre, int cantidad);
+
+        void mostrar_inventario();
 };
 
 

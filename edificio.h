@@ -17,6 +17,7 @@ class Edificio
 {
 protected:
 
+    int id_jugador;
     string nombre;
     string diminutivo;
     int cantidad_piedra;
@@ -36,7 +37,7 @@ public:
     // PRE: -
     // POS: Como es una clase abstracta cada edificio va a implementar su nombre, aca se
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
-    Edificio( int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
+    Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )

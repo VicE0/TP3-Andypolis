@@ -55,3 +55,27 @@ void Jugador::mostrar_cantidad_material(string nombre){
 
 }
 
+void Jugador::sumar_cantidad_material(string nombre, int cantidad){
+
+    Material * aux = obtener_material(nombre);
+    aux->sumar_material(cantidad);
+
+}
+
+void Jugador::restar_cantidad_material(string nombre, int cantidad){
+
+    Material * aux = obtener_material(nombre);
+    aux->restar_material(cantidad);
+
+}
+
+void Jugador::mostrar_inventario(){
+    int cantidad = inventario->obtener_cantidad();
+    for ( int i = 0; i < cantidad; i++){
+        Material * aux = inventario->obtener_nodo(i)->obtener_dato();
+        cout << "Nombre : " << aux->obtener_nombre();
+        cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
+    }
+}
+
+

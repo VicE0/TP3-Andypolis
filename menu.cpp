@@ -72,7 +72,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
     }
 }
 
-void procesar_opcion_jugador(int opcion, Mapa * mapa){
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 
     switch (opcion)
     {
