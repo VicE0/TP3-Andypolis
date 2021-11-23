@@ -8,6 +8,7 @@
 #include "../edificios/mina.h"
 #include "../edificios/obelisco.h"
 #include "../edificios/planta_electrica.h"
+#include "../edificios/mina_oro.h"
 #include "casillero.h"
 
 

@@ -118,54 +118,81 @@ void Mapa::procesar_archivo_ubicaciones(){
 
     ifstream archivo;
     archivo.open(ARCHIVO_UBICACIONES);
+    archivo.seekg(0, ios::end);
 
-    if(archivo.is_open() && mapa_bien_cargado){
-        string nombre,segundo_nombre, barra, fila, columna;
+    if (archivo && mapa_bien_cargado){
+        if (archivo.tellg() != 0){
+            string nombre,segundo_nombre, barra, fila, columna;
+            partida_empezada = true;
+    
 
-        while( archivo >> nombre ){
-            if ( nombre == "planta"){
-                archivo >> segundo_nombre;
-                getline(archivo, barra, '(');
-                getline(archivo, fila, ',');
-                getline(archivo, barra, ' ');
-                getline(archivo, columna, ')');
+            while( archivo >> nombre ){
+                if ( nombre == "planta"){
+                    archivo >> segundo_nombre;
+                    getline(archivo, barra, '(');
+                    getline(archivo, fila, ',');
+                    getline(archivo, barra, ' ');
+                    getline(archivo, columna, ')');
 
                 nombre += " " + segundo_nombre;
-            } else {
+            }else if ( nombre == "mina"){
+                getline(archivo,segundo_nombre,'(');
+                cout << segundo_nombre << endl;
+                if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
+                    getline(archivo, barra, '(');
+                    getline(archivo, fila, ',');
+                    getline(archivo, barra, ' ');
+                    getline(archivo, columna, ')');
+
+                    nombre += " " + segundo_nombre;
+                }else{
+                    barra = segundo_nombre;
+                    getline(archivo,barra,'(');
+                    getline(archivo, fila, ',');
+                    getline(archivo, barra, ' ');
+                    getline(archivo, columna, ')');
+                }
+            }
+            else {
                 getline(archivo, barra, '(');
                 getline(archivo, fila, ',');
                 getline(archivo, barra, ' ');
                 getline(archivo, columna, ')');
             }
 
-            if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
-                mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
-            }
+                if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
+                    mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
+                }
 
-            int madera, piedra, metal, maximo;
+                int madera, piedra, metal, maximo;
 
-            for ( int i = 0; i < obtener_cantidad_edificios(); i++){
-                if ( obtener_edificio(i)->obtener_nombre() == nombre){
-                    piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
-                    madera = obtener_edificio(i)->obtener_cantidad_madera();
-                    metal = obtener_edificio(i)->obtener_cantidad_metal();
-                    maximo = obtener_edificio(i)->obtener_maximo_construir();
+                for ( int i = 0; i < obtener_cantidad_edificios(); i++){
+                    if ( obtener_edificio(i)->obtener_nombre() == nombre){
+                        piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
+                        madera = obtener_edificio(i)->obtener_cantidad_madera();
+                        metal = obtener_edificio(i)->obtener_cantidad_metal();
+                        maximo = obtener_edificio(i)->obtener_maximo_construir();
 
-                    mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
 
-                    obtener_edificio(i) ->sumar_cantidad();
+                        obtener_edificio(i) ->sumar_cantidad();
 
+                    }
                 }
             }
 
-
+            archivo.close();
         }
-
-        archivo.close();
+        else{
+            partida_empezada = false;
+        }
     }else{
         ubicaciones_bien_cargadas = false;
     }
+}
 
+bool Mapa::verificar_partida_empezada(){
+    return partida_empezada;
 }
 
 void Mapa::validar_coordenada(int &fila, int &columna){
@@ -227,7 +254,22 @@ ifstream nuevo_archivo;
 
                 nombre_edificio += " " + segundo_nombre;
 
-            } else {
+            } else if ( nombre_edificio == "mina"){
+                nuevo_archivo >> segundo_nombre;
+                if (segundo_nombre == "oro"){
+                    nuevo_archivo >> cantidad_piedra;
+                    nuevo_archivo >> cantidad_madera;
+                    nuevo_archivo >> cantidad_metal;
+                    nuevo_archivo >> maximo;
+
+                    nombre_edificio += " " + segundo_nombre;
+                }else{
+                    cantidad_piedra = segundo_nombre;
+                    nuevo_archivo >> cantidad_madera;
+                    nuevo_archivo >> cantidad_metal;
+                    nuevo_archivo >> maximo;
+                }
+            }else {
                 nuevo_archivo >> cantidad_piedra;
                 nuevo_archivo >> cantidad_madera;
                 nuevo_archivo >> cantidad_metal;
@@ -268,6 +310,11 @@ ifstream nuevo_archivo;
             else if ( nombre_edificio == PLANTA_ELECTRICA){
 
                 nuevo_edificio = new Planta_electrica( piedra, madera, metal, maximo_construir);
+
+            }
+            else if ( nombre_edificio == MINA_ORO){
+
+                nuevo_edificio = new Mina_oro( piedra, madera, metal, maximo_construir);
 
             }
             agregar_edificio(nuevo_edificio);
@@ -529,21 +576,23 @@ void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila,
 
     }
 
-    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal);
+    // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
+    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal, 0);
 
     mapa[fila][columna]->eliminar_edificio();
 }
 
-void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida){
+void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
 
     cout << "\n------------------------------\n" << endl;
     cout << "\nMateriales obtenidos \n" << endl;
     cout << PIEDRA << " : " << piedra_obtenida << endl;
     cout << MADERA <<" : " << madera_obtenida << endl;
     cout << METAL << " : " << metal_obtenida << endl;
+    cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // Ahora se le devolvera a cada jugador
+    // Ahora se le devolvera a cada jugador  [ ] --------------------------------------------
     //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
@@ -586,6 +635,7 @@ void Mapa::recolectar_recursos_producidos(){
     int piedra = 0;
     int madera = 0;
     int metal = 0;
+    int andycoin = 0;
     int cantidad_edificios, total_brindado , cantidad_construidos, cantidad_a_brindar;
     string nombre_edificio;
 
@@ -612,10 +662,14 @@ void Mapa::recolectar_recursos_producidos(){
         } else if ( nombre_edificio == FABRICA){
 
             metal += total_brindado;
-        }
+        } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
+
+            andycoin += total_brindado;
+
+        } 
     }
 
-    devolver_materiales(piedra, madera, metal);
+    devolver_materiales(piedra, madera, metal, andycoin);
 }
 
 int Mapa::generar_numero_random(int min, int max){
@@ -624,7 +678,7 @@ int Mapa::generar_numero_random(int min, int max){
 
 }
 
-void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, string &material_a_colocar ){
+void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, int &cant_gen_coins,string &material_a_colocar ){
     if (cant_gen_piedras){
         material_a_colocar = "piedra";
         cant_gen_piedras --;
@@ -633,43 +687,66 @@ void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_mad
         material_a_colocar = "madera";
         cant_gen_maderas --;
 
-    } else{
+    } else if (cant_gen_piedras){
         material_a_colocar = "metal";
         cant_gen_metales --;
+
+    } else if (cant_gen_coins){
+        material_a_colocar = "andycoins";
+        cant_gen_coins --;
     }
+
 }
 
-void Mapa::mostrar_alerta_materiales_no_colocados(int materiales_restantes, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales){
-    cout <<endl<<"No se pudieron colocar los siguientes " <<materiales_restantes 
-    << " materiales porque los casilleros transitables ya estan todos ocupados: "<<endl;
+void Mapa::mostrar_alerta_materiales_no_colocados(int materiales_restantes, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales,int cant_gen_coins){
+    cout <<endl<<"No se pudieron colocar los siguientes " << materiales_restantes
+    << " conjuntos porque los casilleros transitables ya estan todos ocupados: "<<endl;
     if (cant_gen_piedras > 0){
-        cout<<cant_gen_piedras <<" unidades de piedra"<<endl;
+        cout<<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl;
     }
     if (cant_gen_maderas > 0){
-        cout<<cant_gen_maderas <<" unidades de madera" <<endl;
+        cout<<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl;
     }
     if (cant_gen_metales > 0){
-        cout<<cant_gen_metales <<" unidades de metal " <<endl;
+        cout<<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl;
+    }
+    if (cant_gen_coins > 0){
+        cout<<cant_gen_coins * UNIDADES_POR_PACK_COINS <<" unidades de andycoins " <<endl;
     }
 }
 
-void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales){
+int Mapa::definir_cantidad_material(string material_a_colocar){
+    int cantidad = 0;
+    if (material_a_colocar == "piedra"){
+        cantidad = UNIDADES_POR_PACK_PIEDRA;
+    } else if (material_a_colocar == "madera"){
+        cantidad = UNIDADES_POR_PACK_MADERA;
+    }else if (material_a_colocar == "metal"){
+        cantidad = UNIDADES_POR_PACK_METAL;
+    }else if (material_a_colocar == "andycoins"){
+        cantidad = UNIDADES_POR_PACK_COINS;
+    }
+    return cantidad;
+}
+
+void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales, int cant_gen_coins){
 
     string material_a_colocar = "";
     int materiales_restantes = tot_materiales_gen;
 
     while (materiales_restantes >0 && total_casilleros >0){
 
-        consultar_material_a_colocar(cant_gen_piedras, cant_gen_maderas, cant_gen_metales, material_a_colocar);
+        consultar_material_a_colocar(cant_gen_piedras, cant_gen_maderas, cant_gen_metales, cant_gen_coins, material_a_colocar);
 
         int pos_coordenada =  generar_numero_random( 0, total_casilleros - 1);
         
         int fila =  obtener_casillero_vector_casilleros_lluvia(pos_coordenada) ->obtener_fila() ;
         int columna =  obtener_casillero_vector_casilleros_lluvia(pos_coordenada) ->obtener_columna() ;
 
-        mapa[fila][columna] -> agregar_material(material_a_colocar, 1);
+        int cantidad = definir_cantidad_material(material_a_colocar);
+        mapa[fila][columna] -> agregar_material(material_a_colocar, cantidad);
 
-        cout <<"1 unidad de " << material_a_colocar << " en " <<"("<< fila << ","  << columna <<")" << endl;
+        cout << "Cayeron " << cantidad << " unidades de " << material_a_colocar << " en " <<"("<< fila << ","  << columna <<")" << endl;
 
         sacar_casillero(pos_coordenada);
 
@@ -677,7 +754,7 @@ void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_pied
     }
 
     if ( materiales_restantes != 0 ){
-        mostrar_alerta_materiales_no_colocados(materiales_restantes, cant_gen_piedras, cant_gen_maderas, cant_gen_metales);
+        mostrar_alerta_materiales_no_colocados(materiales_restantes, cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);
     }
 
 }
@@ -757,11 +834,11 @@ void Mapa::cargar_vector_casilleros_lluvia_con_casileros_permitidos(){
     }
 }
 
-void Mapa::ejecutar_lluvia(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales){
+void Mapa::ejecutar_lluvia(int tot_materiales_gen, int cant_gen_piedras, int cant_gen_maderas, int cant_gen_metales, int cant_gen_coins){
 
     cargar_vector_casilleros_lluvia_con_casileros_permitidos();
 
-    colocar_materiales_llovidos(tot_materiales_gen, cant_gen_piedras, cant_gen_maderas, cant_gen_metales);
+    colocar_materiales_llovidos(tot_materiales_gen, cant_gen_piedras, cant_gen_maderas, cant_gen_metales, cant_gen_coins);
     
     int total_cas = total_casilleros;
 
@@ -780,19 +857,21 @@ void Mapa :: lluvia_recursos(){
     srand( (unsigned)time(0) );
 
     int cant_gen_piedras = generar_numero_random(1,2); 
-    int cant_gen_maderas = generar_numero_random(0,1);
+    int cant_gen_maderas = generar_numero_random(0,3);
     int cant_gen_metales = generar_numero_random(2,4);
+    int cant_gen_coins = generar_numero_random(0,1);
     
-    int tot_materiales_gen = cant_gen_piedras + cant_gen_maderas + cant_gen_metales;
+    int tot_materiales_gen = cant_gen_piedras + cant_gen_maderas + cant_gen_metales + cant_gen_coins;
     
         
-    cout << "Han llovido en el mapa " << tot_materiales_gen << " unidades de materiales: " <<endl
-    <<cant_gen_piedras <<" unidades de piedra"<<endl
-    <<cant_gen_maderas <<" unidades de madera" <<endl
-    <<cant_gen_metales <<" unidades de metal " <<endl<<endl
+    cout << "Han llovido los siguientes articulos en el mapa:" <<endl
+    <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
+    <<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl
+    <<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl
+    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << "andycoins" <<endl<<endl
     <<"en las siguientes posiciones: "<< endl;
 
-    ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales);
+    ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);
 
     cout <<endl;
 }
