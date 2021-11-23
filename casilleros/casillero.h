@@ -94,6 +94,7 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     virtual int obtener_columna() = 0;
 
+
 };
 
 

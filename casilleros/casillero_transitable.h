@@ -6,19 +6,29 @@
 
 
 class Casillero_transitable : public Casillero {
-private:
+
+protected:
     Material * material;
 public:
 
     //Constructor de casillero transitable
     //PRE: Recibe un entero con la fila y otro con la columna
-    //POST: Construye un casillero transitable con nombre = "c" e inicializa el puntero material en null.
+    //POST: Construye un casillero transitable e inicializa el puntero material en null.
     Casillero_transitable(int fila, int columna);
+
+
+    //PRE:
+    //POST: Devuelve un string con el nombre del casillero.
+    virtual string obtener_nombre();
 
     //PRE: Dos casos posibles , si existe o no un materiaal ubicado en e 
     //POS: Si existe : se muestra el mensaje que el casillero no esta vacio y manda el mensaje del material,
     //     si no existe: muestra el mensaje del tipo de casillero y que se encuentra vacio.
-    void mostrar_casillero();
+    virtual void mostrar_casillero();
+
+    //PRE: -
+    //POST: Devuelve la cantidad de energia necesaria para transitar un determinado casillero.
+    virtual int obtener_costo_energia(int codigo_jugador);
     
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero transitable, muestra por pantalla un mensaje diciendo
@@ -63,10 +73,6 @@ public:
     //PRE: -
     //POST: Devulve treu si existe un material en el casillero y false en caso contrario
     bool existe_material();
-
-    //PRE:
-    //POST: Devuelve un string con el nombre del casillero, en este caso "C" pues es un camino
-    string obtener_nombre();
 
     //PRE: -
     //POST: Muestra por pantalla un mensaje diciendo que no existe edificio construido en

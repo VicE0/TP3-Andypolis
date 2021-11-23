@@ -17,6 +17,10 @@ public:
     //POS: muestra por pantalla un mensaje diciendo que que el casillero es inaccesible
     void mostrar_casillero();
 
+    //PRE: Le pido el codigo paras aber que jugador es.
+    //POST: Devuelve un int con el costo de energia para transitar por estee casillero.
+    int obtener_costo_energia(int codigo_jugador);
+    
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero inaccesible, muestra por pantalla un mensaje diciendo
     //que no se pueden construir edificios aqui

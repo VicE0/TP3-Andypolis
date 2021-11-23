@@ -1,22 +1,8 @@
 #include "casillero_transitable.h"
 
 Casillero_transitable::Casillero_transitable(int fila, int columna): Casillero(fila, columna){
-    this->nombre = "C";
+    this->nombre = "";
     this->material = 0;
-}
-
-string Casillero_transitable::obtener_nombre(){
-    return nombre;
-}
-
-void Casillero_transitable::mostrar_casillero(){
-    if (!material){
-        cout << " Soy un casillero transitable y me encuentro vacio" << endl;
-    }
-    else{
-        cout << " Soy un casillero transitable y no me encuentro vacio" << endl;
-        material -> saludar();
-    }
 }
 
 void Casillero_transitable::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){

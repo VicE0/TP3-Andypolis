@@ -53,10 +53,16 @@ void Mapa::procesar_archivo_mapa(){
                 if ( nombre == "T") {
                     this->mapa[i][j] = new Casillero_construible(i, j);
                 } 
-                if (nombre == "C") {
-                    this->mapa[i][j] = new Casillero_transitable(i,j);
+                else if (nombre == "C") {
+                    this->mapa[i][j] = new Camino(i,j);
                 }
-                if (nombre == "L") {
+                else if (nombre == "B") {
+                    this->mapa[i][j] = new Betun(i,j);
+                }
+                else if (nombre == "M") {
+                    this->mapa[i][j] = new Muelle(i,j);
+                }
+                else if (nombre == "L") {
                     this->mapa[i][j] = new Casillero_inaccesible(i,j);
                 }
             }

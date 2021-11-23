@@ -13,6 +13,12 @@ void Casillero_inaccesible::mostrar_casillero(){
     cout << " Este es un lago y es un casillero inaccesible. " << endl;
 }
 
+int Casillero_inaccesible::obtener_costo_energia(int codigo_jugador){
+    if(codigo_jugador == 1){
+        return 2;
+    } else {return 5;}
+}
+
 void Casillero_inaccesible::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un casillero inaccesible , no se podran construir edificios en el. \n" << endl;
 }

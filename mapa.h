@@ -5,8 +5,10 @@
 #include "inventario.h"
 #include "casilleros/casillero.h"
 #include "casilleros/casillero_construible.h"
-#include "casilleros/casillero_transitable.h"
 #include "casilleros/casillero_inaccesible.h"
+#include "casilleros/betun.h"
+#include "casilleros/camino.h"
+#include "casilleros/muelle.h"
 #include "jugador.h"
 
 using namespace std;

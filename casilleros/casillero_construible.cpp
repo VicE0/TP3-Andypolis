@@ -9,12 +9,16 @@ string Casillero_construible::obtener_nombre(){
     return nombre;
 }
 
+int Casillero_construible::obtener_costo_energia(){
+    return 25;
+}
+
 void Casillero_construible::mostrar_casillero(){
     if ( ! edificio_construido ){
-        cout << " Soy un casillero construible y me encuentro vacio" << endl;
+        cout << " Soy un terreno y me encuentro vacio" << endl;
     }
     else{
-        cout << " Soy un casillero construible y no me encuentro vacio" << endl;
+        cout << " Soy un terreno y no me encuentro vacio" << endl;
         edificio_construido->mostrar_mensaje();
     }
 }

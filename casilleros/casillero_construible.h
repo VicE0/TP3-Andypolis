@@ -24,6 +24,14 @@ public:
     //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
     Casillero_construible(int fila, int columna);
 
+    //PRE: -
+    //POS: Devuelve el nombre del casillero ( getter ).
+    string obtener_nombre();
+    
+    //PRE:
+    //POST: Devuelve un int con el costo de energia para transitar por este casillero.
+    int obtener_costo_energia();
+
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
     void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo);
@@ -58,10 +66,6 @@ public:
     //POS: Si existe : se muestra el mensaje que el casillero no esta vacio y manda el mensaje del objeto,
     //     si no existe: muestra el mensaje del tipo de casillero y que se encuentra vacio.
     void mostrar_casillero();
-
-    //PRE: -
-    //POS: Devuelve el nombre del casillero ( getter ).
-    string obtener_nombre();
 
     //PRE: En caso edificio_construido != NULL.  
     //POS: Muestra por pantalla las coordenadas del edificio y el nombre del edificio existente.
