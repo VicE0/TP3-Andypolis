@@ -1,39 +1,31 @@
 #include "jugador.h"
 
-Jugador::Jugador(){
-    this -> numero_jugador = 0;
-    this -> energia = 0;
+
+Jugador::Jugador(int id_jugador ,int energia, int objetivos_cumplidos, int andycoins_totales)
+{
+    this -> id_jugador = 0;
+    this -> energia = ENERGIA_INICIAL; //dudoso, es solo al inicio
     this -> objetivos_cumplidos = 0;
+    this -> andycoins_totales = 0;
     this->inventario = new Lista<Material>;
 }
 
-Jugador::Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos)
+int Jugador::obtener_ID()
 {
-    this -> numero_jugador = 0;
-    this -> energia = 0;
-    this -> objetivos_cumplidos = 0;
-    this->inventario = new Lista<Material>;
+    return id_jugador;
 }
 
-string Jugador::obtener_nombre()
-{
-    return this -> nombre;
-}
-
-int Jugador::dar_numero()
-{
-    return this ->numero_jugador;
-}
 
 Lista<Material> * Jugador::obtener_inventario(){
     return inventario;
 }
 
-void Jugador::agregar_material(Material * material){
 
+void Jugador::agregar_material(Material * material)
+{
     inventario->alta(material, inventario->obtener_cantidad());
-
 }
+
 
 Material * Jugador::obtener_material(string nombre){
     Material * aux;
@@ -53,5 +45,10 @@ void Jugador::mostrar_cantidad_material(string nombre){
 
     aux->mostrar_nombre();
 
+}
+
+bool Jugador::tiene_energia()
+{
+    return energia > 0;
 }
 

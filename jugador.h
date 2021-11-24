@@ -2,6 +2,8 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+const int ENERGIA_INICIAL = 50;
+
 #include "lista.h"
 #include "inventario.h"
 
@@ -12,43 +14,50 @@ class Jugador
 {
 
     private:
-        string nombre;
-        int numero_jugador;
+        int id_jugador; // El mismo que va para identificar los edificios de c/u (1 - 2)
         int energia;
         int objetivos_cumplidos;
-        //AGREGAR PARTE DE MATERIALES HECHA POR GIAN
-
+        int andycoins_totales; // debe ser un contador, el objetivo tiene en cuenta TODAS las coins usadas/recolectadas
         Lista<Material> * inventario;
 
     public:
 
-        Jugador();
+        // -------------------------------- Constructores --------------------------------
 
-        Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos); //constructor
+        Jugador(int id_jugador,int energia, int objetivos_cumplidos, int andycoins_totales);
 
-        //PRE: ~
-        //POST: Devuelve el nombre del jugador
-        string obtener_nombre();
+        // -------------------------------- Getters --------------------------------
 
         //PRE: ~
-        //POST: Devuelve el numero del jugador (1 o 2)
-        int dar_numero();
+        //POST: Devuelve el ID del jugador (1 / 2)
+        int obtener_ID();
 
-        // //PRE: ~
-        // //POST: Devuelve TRUE si la energía del jugador es suficiente para realizar la opción
-        // bool tiene_energia();
+        //PRE: ~
+        //POST: Obtiene la cantidad de energia del jugador 
+        int obtener_energia();
 
+        //PRE: ~
+        //POST: Devuelve TRUE si la energía del jugador es suficiente para realizar la opción
+        bool tiene_energia();
 
-        // //Destructor, seguro lo necesitamos para liberar el inventario
-        // ~Jugador();
-
-        void agregar_material(Material * material);
+        //Obtener bombas / andycoins ?
 
         Material * obtener_material(string nombre);
 
+        Lista<Material> * obtener_inventario();
+
+
+        // -------------------------------- Funciones jugador --------------------------------
+
+        void agregar_material(Material * material);
+
+
         void mostrar_cantidad_material( string nombre );
 
-        Lista<Material> * obtener_inventario();
+        // Destructor, seguro lo necesitamos para liberar el inventario
+        // ~Jugador();
+
+        
 };
 
 
