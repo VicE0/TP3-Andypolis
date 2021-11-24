@@ -80,7 +80,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
-            mapa->construir_edificio_nombre();
+            mapa->construir_edificio_nombre(jugador);
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
@@ -108,7 +108,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case MOSTRAR_INVENTARIO:
-            mapa->mostrar_inv();
+            mapa->mostrar_inv(jugador);
         break;
 
     case MOSTRAR_OBJETIVOS:
@@ -116,7 +116,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case RECOLECTAR_RECURSOS:
-            mapa->recolectar_recursos_producidos();
+            mapa->recolectar_recursos_producidos(jugador);
         break;
 
     case MOVERSE:

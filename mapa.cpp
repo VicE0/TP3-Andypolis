@@ -21,9 +21,9 @@ bool Mapa::carga_incorrecta_archivos(){
 
 }
 
-void Mapa::ingreso_datos_mapa(){
+void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
-    procesar_archivo_materiales();
+    procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
@@ -78,7 +78,7 @@ void Mapa::generar_matriz(){
 }
 
 // Proceso el archivo de materiales :
-void Mapa::procesar_archivo_materiales(){
+void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     ifstream archivo;
     archivo.open(ARCHIVO_MATERIALES);
 
@@ -99,16 +99,16 @@ void Mapa::procesar_archivo_materiales(){
             material_j2 = new Material(nombre, stoi(cantidad_2) );
 
             // dependiendo que jugador este , cargo sus datos en sus inventarios :
-            j1.agregar_material(material_j1);
-            j2.agregar_material(material_j2);
+            j1->agregar_material(material_j1);
+            j2->agregar_material(material_j2);
         }
 
         archivo.close();
     }
     else{
 
-        j1.obtener_inventario()->cambiar_cantidad(ERROR);
-        j2.obtener_inventario()->cambiar_cantidad(ERROR);
+        j1->obtener_inventario()->cambiar_cantidad(ERROR);
+        j2->obtener_inventario()->cambiar_cantidad(ERROR);
 
     }
 
@@ -413,7 +413,7 @@ bool Mapa::supera_maximo(string nombre){
 
 // -------------- DIVISION PUNTO POR PUNTO : MENU -------------------------------
 
-void Mapa::construir_edificio_nombre(){
+void Mapa::construir_edificio_nombre(Jugador * jugador){
 
     string nombre_nuevo;
     cout << "\n -> Ingrese el nombre del nuevo edificio que desea construir : ";
@@ -424,14 +424,14 @@ void Mapa::construir_edificio_nombre(){
 
     if ( existe_edificio ){
 
-        realizar_construccion(nombre_nuevo);
+        realizar_construccion(nombre_nuevo, jugador);
 
     } else {
         cout << "\n El edificio buscado NO existe . \n" << endl;
     }
 }
 
-void Mapa::realizar_construccion(string nombre_nuevo){
+void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 
         int pos_edificio = obtener_posicion_edificio(nombre_nuevo);
 
@@ -443,7 +443,7 @@ void Mapa::realizar_construccion(string nombre_nuevo){
         bool supera_max = supera_maximo(nombre_nuevo);
         // OJO 
         // PRUEBA CON EL JUGADOR 1, HACER QUE SEA PARA EL JUGADOR EN TURNO [ ] 
-        bool alcanzan_materiales = j1.alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+        bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
             // puse como valor true pero hay que cambiarlo segun el jugador.
@@ -461,9 +461,7 @@ void Mapa::realizar_construccion(string nombre_nuevo){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo,1, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
 
-                            // OJO
-                            // UTILIZO LOS MATERIALES SOLO DEL JUGADOR 1, FALTA HACERLO PARA EL JUGADOR EN TURNO [ ]
-                            j1.utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+                            jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
                         }else{
@@ -543,7 +541,7 @@ void Mapa::mostrar_coordenadas(string nombre){
     }
 }
 
-void Mapa::demoler_edificio(){
+void Mapa::demoler_edificio(Jugador * jugador){
 
     cout << "\n\t\t ###   En esta seccion podra DEMOLER un EDIFICIO :   ###" << endl;
     
@@ -559,7 +557,7 @@ void Mapa::demoler_edificio(){
 
         if ( aceptar_condiciones() ){
 
-            obtengo_materiales_elimino_edificio(nombre_edificio, fila, columna);
+            obtengo_materiales_elimino_edificio(jugador, nombre_edificio, fila, columna);
             cout << "\n\t\t ###   El edificio : " << nombre_edificio << ", ha sido DEMOLIDO exitosamente !   ###\n" << endl;
 
         }
@@ -571,7 +569,7 @@ void Mapa::demoler_edificio(){
 
 }
 
-void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila, int columna){
+void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna){
 
     int mitad_piedra, mitad_madera, mitad_metal;
 
@@ -591,12 +589,12 @@ void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila,
     }
 
     // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
-    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal, 0);
+    devolver_materiales( jugador, mitad_piedra, mitad_madera, mitad_metal, 0);
 
     mapa[fila][columna]->eliminar_edificio();
 }
 
-void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
+void Mapa::devolver_materiales(Jugador * jugador,int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
 
     cout << "\n------------------------------\n" << endl;
     cout << "\nMateriales obtenidos \n" << endl;
@@ -606,8 +604,7 @@ void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int met
     cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // FALTA PONER AL JUGADOR EN TURNO  [ ] --------------------------------------------
-    j1.devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
+    jugador->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
 
@@ -639,12 +636,12 @@ void Mapa::consultar_coordenada(){
     cout << "\n";
 }
 
-void Mapa::mostrar_inv(){
-    j1.mostrar_inventario();
+void Mapa::mostrar_inv(Jugador * jugador){
+    jugador->mostrar_inventario();
 
 }
 
-void Mapa::recolectar_recursos_producidos(){
+void Mapa::recolectar_recursos_producidos(Jugador * jugador){
     int piedra = 0;
     int madera = 0;
     int metal = 0;
@@ -682,7 +679,7 @@ void Mapa::recolectar_recursos_producidos(){
         } 
     }
 
-    devolver_materiales(piedra, madera, metal, andycoin);
+    devolver_materiales( jugador, piedra, madera, metal, andycoin);
 }
 
 int Mapa::generar_numero_random(int min, int max){

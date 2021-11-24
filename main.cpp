@@ -14,7 +14,7 @@ int main(){
     Jugador * j1 = new Jugador(1);
     Jugador * j2 = new Jugador(2);
 
-    mapa->ingreso_datos_mapa();
+    mapa->ingreso_datos_mapa(j1,j2);
 
     if ( ! (mapa->carga_incorrecta_archivos()) ){
     selector_de_menu(mapa, j1, j2);
