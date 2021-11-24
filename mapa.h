@@ -122,7 +122,7 @@ public:
 
     //PRE: En caso de que existan edificios construidos en los casilleros.
     //POS: Muestra cuales edificios estan construidos con su cantidad y en que coordenadas se encuentran.
-    void listar_edificios_construidos();
+    void listar_edificios_construidos(Jugador * jugador);
 
     //PRE: - 
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.

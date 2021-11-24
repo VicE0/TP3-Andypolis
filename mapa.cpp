@@ -182,6 +182,8 @@ void Mapa::procesar_archivo_ubicaciones(){
                         metal = obtener_edificio(i)->obtener_cantidad_metal();
                         maximo = obtener_edificio(i)->obtener_maximo_construir();
 
+
+                        // FALTA PASARLE POR PARAMETRO A "AGREGAR EDIFICIO"-> EL ID_JUGADOR [ ]
                         mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
 
                         obtener_edificio(i) ->sumar_cantidad();
@@ -433,6 +435,7 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
 
 void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 
+        int id_jugador = jugador->dar_numero();
         int pos_edificio = obtener_posicion_edificio(nombre_nuevo);
 
         int piedra_necesaria = obtener_edificio(pos_edificio)->obtener_cantidad_piedra();
@@ -441,12 +444,9 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
         int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
 
         bool supera_max = supera_maximo(nombre_nuevo);
-        // OJO 
-        // PRUEBA CON EL JUGADOR 1, HACER QUE SEA PARA EL JUGADOR EN TURNO [ ] 
         bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
-            // puse como valor true pero hay que cambiarlo segun el jugador.
             if (alcanzan_materiales){
                 if ( aceptar_condiciones() ){
 
@@ -458,7 +458,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
-                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,1, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
+                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
 
                             jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
@@ -483,31 +483,30 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 
 }
 
-void Mapa::listar_edificios_construidos(){
+void Mapa::listar_edificios_construidos(Jugador * jugador){
+    int id_jugador = jugador->dar_numero();
+    int cantidad_construidos;
+    int codigo_edificio;
+    string nombre_edificio;
+    Edificio * aux = nullptr;
+
     cout << "\n";
-    cout << "\t\t###   Listado de los edificio construidos :   ### " << endl;
-    cout << "\nOrden de los elementos : " << endl;
-    cout << " -> nombre : cantidad construidos " << endl;
-    cout << " - coordenada \n - coordenada\n ..." << endl;
-    cout << "\n" ;
-    cout << "___________________________________________________" << endl;
-    cout << "\n" ;
-    for (int i = 0; i < obtener_cantidad_edificios(); i++){
+    for ( int i = 0; i < cantidad_filas; i++){
+        for ( int j = 0; j < cantidad_columnas ; j++ ){
+            
+            if ( mapa[i][j]->existe_edificio() ){
+                aux = mapa[i][j]->obtener_edificio_construido();
+                codigo_edificio = aux->obtener_id_jugador();
+                
+                if ( id_jugador == codigo_edificio ){
 
-        int cantidad_constuidos = obtener_edificio(i)->obtener_cantidad_construidos();
-        string nombre_edificio = obtener_edificio(i)->obtener_nombre();
-
-        if ( cantidad_constuidos > 0 ){
-
-            cout << " -> "<< nombre_edificio << " : " << cantidad_constuidos << endl;
-            mostrar_coordenadas(nombre_edificio);
-
+                    nombre_edificio = aux->obtener_nombre();
+                    cout << "Edificio construido : " << nombre_edificio << endl;
+                }
+            }
         }
-
     }
-    cout << "\n" ;
-    cout << "___________________________________________________" << endl;
-    cout << "\n" ;
+    cout << "\n";
 }
 
 void Mapa::listar_todos_edificios(){

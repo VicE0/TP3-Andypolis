@@ -2,6 +2,7 @@
 #define CASILLERO_H
 
 #include <iostream>
+#include "../edificio.h"
 
 using namespace std;
 
@@ -93,6 +94,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     virtual int obtener_columna() = 0;
+
+    virtual Edificio * obtener_edificio_construido() = 0;
 
 };
 

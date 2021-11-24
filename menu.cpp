@@ -84,7 +84,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
-            mapa->listar_edificios_construidos();
+            mapa->listar_edificios_construidos(jugador);
         break;
 
     case DEMOLER_EDIFICIO:

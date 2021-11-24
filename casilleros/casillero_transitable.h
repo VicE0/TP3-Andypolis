@@ -85,6 +85,8 @@ public:
 
     //Destructor de casillero transitable
     ~Casillero_transitable();
+
+    Edificio * obtener_edificio_construido();
 };
 
 

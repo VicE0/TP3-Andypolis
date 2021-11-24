@@ -82,6 +82,8 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
 
+    Edificio * obtener_edificio_construido();
+
 };
 
 

@@ -1,7 +1,6 @@
 #ifndef CASILLERO_CONSTRUIBLE_H
 #define CASILLERO_CONSTRUIBLE_H
 
-#include "../edificio.h"
 #include "../edificios/aserradero.h"
 #include "../edificios/escuela.h"
 #include "../edificios/fabrica.h"
@@ -89,6 +88,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
+
+    Edificio * obtener_edificio_construido();
 };
 
 

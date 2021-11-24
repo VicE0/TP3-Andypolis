@@ -140,3 +140,11 @@ int Casillero_construible::obtener_columna(){
     return columna;
 }
 
+Edificio * Casillero_construible::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    if ( edificio_construido != 0 ){
+        aux = edificio_construido;
+    }
+    return aux;
+}
+

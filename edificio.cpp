@@ -13,7 +13,7 @@ Edificio::Edificio(){
 }
 
 Edificio::Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
-    this->id_jugador = 1;
+    this-> id_jugador = id_jugador;
     this-> nombre = "";
     this-> diminutivo = "Ed";
     this-> cantidad_piedra = cantidad_piedra;
@@ -23,7 +23,7 @@ Edificio::Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int
     this-> brinda = 0;
     this-> maximo_construir = maximo_construir;
 
-} 
+}
 
 string Edificio::obtener_nombre(){
     return nombre;

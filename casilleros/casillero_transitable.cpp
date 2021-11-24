@@ -84,3 +84,8 @@ int Casillero_transitable::obtener_fila(){
 int Casillero_transitable::obtener_columna(){
     return columna;
 }
+
+Edificio * Casillero_transitable::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}

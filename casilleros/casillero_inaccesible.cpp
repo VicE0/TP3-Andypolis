@@ -60,3 +60,8 @@ int Casillero_inaccesible::obtener_fila(){
 int Casillero_inaccesible::obtener_columna(){
     return columna;
 }
+
+Edificio * Casillero_inaccesible::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}
