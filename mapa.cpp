@@ -378,8 +378,9 @@ Edificio * Mapa::obtener_edificio(int posicion){
 
 bool Mapa::existe_el_edificio(string nombre){
     bool existe = false;
+    string nombre_buscado;
     for (int i = 0; i < cantidad_edificios; i++){
-        string nombre_buscado = edificios_posibles[i]->obtener_nombre();
+        nombre_buscado = edificios_posibles[i]->obtener_nombre();
         if ( nombre_buscado == nombre ){
             existe = true;
         }
@@ -453,8 +454,8 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                     int fila , columna;
                     cout << "\n ### En esta seccion podra CONSTRUIR un EDIFICIO : ###\n" << endl;
                     validar_coordenada( fila, columna);
-
-                    if ( mapa[fila][columna]->obtener_nombre() == "T"){
+                    cout << mapa[fila][columna]->obtener_nombre() << endl;
+                    if ( mapa[fila][columna]->obtener_nombre() == "T" ){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
