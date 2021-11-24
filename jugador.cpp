@@ -4,21 +4,25 @@ Jugador::Jugador(){
     this -> numero_jugador = 0;
     this -> energia = 0;
     this -> objetivos_cumplidos = 0;
-    this->inventario = new Lista<Material>;
+    this -> inventario = new Lista<Material>;
+    this -> turno = 0;
 }
 
-Jugador::Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos)
+Jugador::Jugador(int numero_jugador)
 {
-    this -> numero_jugador = 0;
+    this -> numero_jugador = numero_jugador;
     this -> energia = 0;
     this -> objetivos_cumplidos = 0;
-    this->inventario = new Lista<Material>;
+    this -> inventario = new Lista<Material>;
+    this -> turno = 0;
 }
 
+/*
 string Jugador::obtener_nombre()
 {
     return this -> nombre;
 }
+*/
 
 int Jugador::dar_numero()
 {
@@ -55,3 +59,10 @@ void Jugador::mostrar_cantidad_material(string nombre){
 
 }
 
+void Jugador::establecer_turno(int turno){
+    this -> turno = turno;
+}
+
+int Jugador::obtener_turno(){
+    return turno;
+}

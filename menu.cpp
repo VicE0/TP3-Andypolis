@@ -49,7 +49,7 @@ int elegir_opcion(){
     return opcion;
 }
 
-void procesar_opcion_principal(int opcion, Mapa * mapa){
+void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
     switch (opcion)
     {
 
@@ -66,7 +66,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
         break;
     
     case P_COMENZAR_PARTIDA:
-            partida(mapa);
+            partida(mapa, j1, j2);
         break;
     
     case P_GUARDAR_SALIR:
@@ -75,7 +75,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
     }
 }
 
-void procesar_opcion_jugador(int opcion, Mapa * mapa){
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 
     switch (opcion)
     {
@@ -133,29 +133,34 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
     }
 }
 
-void partida(Mapa * mapa){
+void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     int opcion;
-    int turno;
+    int turno = 1;
+    randomizador_de_turnos(j1,j2);
     do {
-        turno++;
         verificar_lluvia_de_materiales(turno, mapa);
+
+        Jugador * jugador = verificar_turno_jugador(turno, j1, j2);
+
+        cout<<"Es el turno del jugador "<< jugador ->dar_numero()<<endl;
 
         do{
         mostrar_menu_partida();
         opcion = elegir_opcion();
-        procesar_opcion_jugador(opcion, mapa);
+        procesar_opcion_jugador(opcion, mapa, jugador);
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
-
+        turno++;
     }
     while ( opcion != GUARDAR_SALIR );
 }
 
-void selector_de_menu(Mapa * mapa){
+void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
-        partida(mapa);
+        cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
+        partida(mapa, j1, j2);
     }
 
     else{
@@ -164,14 +169,34 @@ void selector_de_menu(Mapa * mapa){
 
             mostrar_menu_principal();
             opcion = elegir_opcion();
-            procesar_opcion_principal(opcion, mapa);
+            procesar_opcion_principal(opcion, mapa, j1, j2);
 
         }while ( opcion != P_GUARDAR_SALIR );
     }
 }
 
 void verificar_lluvia_de_materiales(int turno, Mapa * mapa){
-    if (turno % 2 == 0){
+    if (turno % 2 == 1){
         mapa -> lluvia_recursos();
     }
+}
+
+void randomizador_de_turnos(Jugador * j1, Jugador * j2){  
+    int jugador_que_empieza = rand() % 2 + 1;
+
+    if (jugador_que_empieza == 1){
+        j1 -> establecer_turno(1);
+        j2 -> establecer_turno(2);
+    }
+    else{
+        j1 -> establecer_turno(2);
+        j2 -> establecer_turno(1);
+    }
+}
+
+Jugador * verificar_turno_jugador(int turno, Jugador * j1, Jugador * j2){
+    if (turno % 2 == j1 -> obtener_turno() % 2)
+        return j1;
+    else
+        return j2;
 }

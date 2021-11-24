@@ -124,40 +124,47 @@ void Mapa::procesar_archivo_ubicaciones(){
         if (archivo.tellg() != 0){
             string nombre,segundo_nombre, barra, fila, columna;
             partida_empezada = true;
-    
 
-            while( archivo >> nombre ){
-                if ( nombre == "planta"){
-                    archivo >> segundo_nombre;
+            while( archivo >> nombre){
+                if ( nombre == "1" || nombre == "2"){
                     getline(archivo, barra, '(');
                     getline(archivo, fila, ',');
                     getline(archivo, barra, ' ');
                     getline(archivo, columna, ')');
+                    cout << "Cargando jugador " << nombre << endl;
 
-                nombre += " " + segundo_nombre;
-            }else if ( nombre == "mina"){
-                getline(archivo,segundo_nombre,'(');
-                cout << segundo_nombre << endl;
-                if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
-                    getline(archivo, barra, '(');
-                    getline(archivo, fila, ',');
-                    getline(archivo, barra, ' ');
-                    getline(archivo, columna, ')');
+                    if ( nombre == "planta"){
+                        archivo >> segundo_nombre;
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
 
                     nombre += " " + segundo_nombre;
-                }else{
-                    barra = segundo_nombre;
-                    getline(archivo,barra,'(');
-                    getline(archivo, fila, ',');
-                    getline(archivo, barra, ' ');
-                    getline(archivo, columna, ')');
-                }
-            }
-            else {
-                getline(archivo, barra, '(');
-                getline(archivo, fila, ',');
-                getline(archivo, barra, ' ');
-                getline(archivo, columna, ')');
+                    }
+                    else if ( nombre == "mina"){
+                        getline(archivo,segundo_nombre,'(');
+                        cout << segundo_nombre << endl;
+                        if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
+                            getline(archivo, barra, '(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+
+                            nombre += " " + segundo_nombre;
+                        }else{
+                            barra = segundo_nombre;
+                            getline(archivo,barra,'(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+                        }
+                    }
+                    else {
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
             }
 
                 if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
@@ -180,6 +187,7 @@ void Mapa::procesar_archivo_ubicaciones(){
                     }
                 }
             }
+                }
 
             archivo.close();
         }

@@ -12,10 +12,10 @@ class Jugador
 {
 
     private:
-        string nombre;
         int numero_jugador;
         int energia;
         int objetivos_cumplidos;
+        int turno;
         //AGREGAR PARTE DE MATERIALES HECHA POR GIAN
 
         Lista<Material> * inventario;
@@ -24,7 +24,7 @@ class Jugador
 
         Jugador();
 
-        Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos); //constructor
+        Jugador(int numero_jugador); //constructor
 
         //PRE: ~
         //POST: Devuelve el nombre del jugador
@@ -49,6 +49,10 @@ class Jugador
         void mostrar_cantidad_material( string nombre );
 
         Lista<Material> * obtener_inventario();
+
+        void establecer_turno(int turno);
+
+        int obtener_turno();
 };
 
 
