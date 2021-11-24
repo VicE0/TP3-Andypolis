@@ -693,7 +693,7 @@ void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_mad
         material_a_colocar = "madera";
         cant_gen_maderas --;
 
-    } else if (cant_gen_piedras){
+    } else if (cant_gen_metales){
         material_a_colocar = "metal";
         cant_gen_metales --;
 
@@ -765,7 +765,7 @@ void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_pied
 
 }
 
-Casillero_transitable* Mapa :: obtener_casillero_vector_casilleros_lluvia ( int pos) {
+Casillero* Mapa :: obtener_casillero_vector_casilleros_lluvia ( int pos) {
 	return vector_casilleros_lluvia[pos];
 }
 
@@ -776,7 +776,7 @@ void Mapa::sacar_casillero(int posicion_numero_a_sacar){
         //mando el q quiero elimnar a la ult pos y lo intercambio con ese
         swap_casillero(total_casilleros - 1, posicion_numero_a_sacar);
         
-        Casillero_transitable **vector_aux_casilleros_lluvia = new Casillero_transitable*[total_casilleros - 1];
+        Casillero **vector_aux_casilleros_lluvia = new Casillero*[total_casilleros - 1];
 
         for(int i = 0; i < total_casilleros - 1; i++){
             vector_aux_casilleros_lluvia[i] = vector_casilleros_lluvia[i];
@@ -798,14 +798,14 @@ void Mapa::sacar_casillero(int posicion_numero_a_sacar){
 }
 
 void Mapa::swap_casillero(int posicion_1, int posicion_2){
-    Casillero_transitable *aux = vector_casilleros_lluvia[posicion_1];
+    Casillero *aux = vector_casilleros_lluvia[posicion_1];
     vector_casilleros_lluvia[posicion_1] = vector_casilleros_lluvia[posicion_2]; //mando al final (pos_1) el quiero eliminar(pos_2)
     vector_casilleros_lluvia[posicion_2] = aux; //el ultimo lo pongo en donde estaba el que quiero eliminar
 }
 
-void Mapa :: agregar_casillero_a_vector_casilleros_lluvia (Casillero_transitable *casillero, int tam_nuevo, int pos ) {
+void Mapa::agregar_casillero_a_vector_casilleros_lluvia (Casillero *casillero, int tam_nuevo, int pos ) {
     
-    Casillero_transitable** vector_aux = new Casillero_transitable*[tam_nuevo];
+    Casillero** vector_aux = new Casillero*[tam_nuevo];
 
     for (int i = 0; i<pos; i++){
         vector_aux[i] = vector_casilleros_lluvia[i];
@@ -823,16 +823,34 @@ void Mapa :: agregar_casillero_a_vector_casilleros_lluvia (Casillero_transitable
 
 void Mapa::cargar_vector_casilleros_lluvia_con_casileros_permitidos(){
     
-    int pos = 0;
-    Casillero_transitable *casillero_aux;
+    int pos = 0;   
+    Camino *camino_aux;
+    Muelle *muelle_aux;
+    Betun *betun_aux;   
+
+
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
             if (mapa[i][j] -> obtener_nombre() =="C" && !( mapa[i][j] -> existe_material() ) ){    
                 
-                casillero_aux  = new Casillero_transitable(i, j);
+                camino_aux  = new Camino (i, j);
 
-                agregar_casillero_a_vector_casilleros_lluvia(casillero_aux,pos+1, pos);
+                agregar_casillero_a_vector_casilleros_lluvia(camino_aux,pos+1, pos);
+                
+                pos+=1;
+            }else if (mapa[i][j] -> obtener_nombre() =="M" && !( mapa[i][j] -> existe_material() ) ){    
+                
+                muelle_aux  = new Muelle(i, j);
+
+                agregar_casillero_a_vector_casilleros_lluvia(muelle_aux,pos+1, pos);
+                
+                pos+=1;
+            }else if (mapa[i][j] -> obtener_nombre() =="B" && !( mapa[i][j] -> existe_material() ) ){ 
+                
+                betun_aux  = new Betun(i, j);
+
+                agregar_casillero_a_vector_casilleros_lluvia(betun_aux,pos+1, pos);
                 
                 pos+=1;
             }

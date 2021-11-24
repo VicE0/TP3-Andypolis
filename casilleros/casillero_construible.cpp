@@ -9,7 +9,7 @@ string Casillero_construible::obtener_nombre(){
     return nombre;
 }
 
-int Casillero_construible::obtener_costo_energia(){
+int Casillero_construible::obtener_costo_energia(int JUGADOR_1){
     return 25;
 }
 
@@ -123,9 +123,7 @@ void Casillero_construible::mostrar_coordenadas_edificio(string nombre){
         if ( nombre == edificio_construido->obtener_nombre()){
 
             cout << " - (" << fila << "," << columna << ") " << endl;
-
         }
-
     }
 }
 

@@ -30,7 +30,7 @@ public:
     
     //PRE:
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia();
+    int obtener_costo_energia(int codigo_jugador);
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
