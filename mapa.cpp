@@ -51,7 +51,7 @@ void Mapa::procesar_archivo_mapa(){
             for (int j = 0; j < cantidad_columnas; j++){
                 arch >> nombre ;
                 if ( nombre == "T") {
-                    this->mapa[i][j] = new Casillero_construible(i, j);
+                    this->mapa[i][j] = new Terreno(i, j);
                 } 
                 else if (nombre == "C") {
                     this->mapa[i][j] = new Camino(i,j);
@@ -63,7 +63,7 @@ void Mapa::procesar_archivo_mapa(){
                     this->mapa[i][j] = new Muelle(i,j);
                 }
                 else if (nombre == "L") {
-                    this->mapa[i][j] = new Casillero_inaccesible(i,j);
+                    this->mapa[i][j] = new Lago(i,j);
                 }
             }
         }

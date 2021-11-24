@@ -1,5 +1,5 @@
-#ifndef CASILLERO_CONSTRUIBLE_H
-#define CASILLERO_CONSTRUIBLE_H
+#ifndef TERRENO_H
+#define TERRENO_H
 
 #include "../edificio.h"
 #include "../edificios/aserradero.h"
@@ -12,7 +12,7 @@
 #include "casillero.h"
 
 
-class Casillero_construible : public Casillero {
+class Terreno : public Casillero {
 
 private:
     Edificio * edificio_construido;
@@ -22,7 +22,7 @@ public:
     // Constructor
     //PRE: -
     //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
-    Casillero_construible(int fila, int columna);
+    Terreno(int fila, int columna);
 
     //PRE: -
     //POS: Devuelve el nombre del casillero ( getter ).
@@ -82,7 +82,7 @@ public:
     // Destructor
     //PRE: En caso de que el casillero contenga un edificio. 
     //POS: Libero la memoria y edificio_construido = 0.
-    ~Casillero_construible();
+    ~Terreno();
 
     //Obtener fila
     //PRE:-

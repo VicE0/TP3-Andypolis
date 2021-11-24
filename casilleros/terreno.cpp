@@ -1,19 +1,19 @@
-#include "casillero_construible.h"
+#include "terreno.h"
 
-Casillero_construible::Casillero_construible(int fila, int columna): Casillero(fila, columna){
+Terreno::Terreno(int fila, int columna): Casillero(fila, columna){
     this->nombre = "T";
     this->edificio_construido = 0;
 }
 
-string Casillero_construible::obtener_nombre(){
+string Terreno::obtener_nombre(){
     return nombre;
 }
 
-int Casillero_construible::obtener_costo_energia(int JUGADOR_1){
+int Terreno::obtener_costo_energia(int JUGADOR_1){
     return 25;
 }
 
-void Casillero_construible::mostrar_casillero(){
+void Terreno::mostrar_casillero(){
     if ( ! edificio_construido ){
         cout << " Soy un terreno y me encuentro vacio" << endl;
     }
@@ -23,7 +23,7 @@ void Casillero_construible::mostrar_casillero(){
     }
 }
 
-void Casillero_construible::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Terreno::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
     if ( ! edificio_construido ){
         if (nombre == "aserradero"){
 
@@ -67,10 +67,10 @@ void Casillero_construible::agregar_edificio(string nombre, int piedra, int made
 }
 
 
-void Casillero_construible::agregar_material(string nombre, int cantidad){
+void Terreno::agregar_material(string nombre, int cantidad){
 }
 
-string Casillero_construible::obtener_nombre_edificio(){
+string Terreno::obtener_nombre_edificio(){
 
     string nombre_edificio = "";
     if ( edificio_construido ){
@@ -81,11 +81,11 @@ string Casillero_construible::obtener_nombre_edificio(){
 }
 
 
-string Casillero_construible::obtener_nombre_material(){
+string Terreno::obtener_nombre_material(){
     return "";
 }
 
-string Casillero_construible::obtener_diminutivo_edificio(){
+string Terreno::obtener_diminutivo_edificio(){
 
     string diminutivo = "";
     if ( edificio_construido ){
@@ -94,17 +94,17 @@ string Casillero_construible::obtener_diminutivo_edificio(){
     return diminutivo;
 }
 
-string Casillero_construible::obtener_diminutivo_material(){
+string Terreno::obtener_diminutivo_material(){
     return "";
 }
 
-void Casillero_construible::eliminar_edificio(){
+void Terreno::eliminar_edificio(){
     delete edificio_construido;
     edificio_construido = 0;
 
 }
 
-bool Casillero_construible::existe_edificio(){
+bool Terreno::existe_edificio(){
     bool existe = false;
     if ( edificio_construido ){
         existe = true;
@@ -112,11 +112,11 @@ bool Casillero_construible::existe_edificio(){
     return existe;
 }
 
-bool Casillero_construible::existe_material(){
+bool Terreno::existe_material(){
     return false;
 }
 
-void Casillero_construible::mostrar_coordenadas_edificio(string nombre){
+void Terreno::mostrar_coordenadas_edificio(string nombre){
 
     if ( edificio_construido ){
 
@@ -127,18 +127,18 @@ void Casillero_construible::mostrar_coordenadas_edificio(string nombre){
     }
 }
 
-Casillero_construible::~Casillero_construible(){
+Terreno::~Terreno(){
     if ( edificio_construido ){
         delete edificio_construido;
     }
     edificio_construido = 0;
 }
 
-int Casillero_construible::obtener_fila(){
+int Terreno::obtener_fila(){
     return fila;
 }
 
-int Casillero_construible::obtener_columna(){
+int Terreno::obtener_columna(){
     return columna;
 }
 
