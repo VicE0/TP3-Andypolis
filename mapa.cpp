@@ -876,7 +876,7 @@ void Mapa::ejecutar_lluvia(int tot_materiales_gen, int cant_gen_piedras, int can
     }
 }
 
-void Mapa :: lluvia_recursos(){
+void Mapa::lluvia_recursos(){
 
     srand( (unsigned)time(0) );
 
