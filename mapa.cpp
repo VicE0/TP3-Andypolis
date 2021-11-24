@@ -23,6 +23,7 @@ bool Mapa::carga_incorrecta_archivos(){
 
 void Mapa::ingreso_datos_mapa(){
 
+    procesar_archivo_materiales();
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
@@ -114,6 +115,7 @@ void Mapa::procesar_archivo_materiales(){
     archivo.close();
 }
 
+// COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
 void Mapa::procesar_archivo_ubicaciones(){
 
     ifstream archivo;
@@ -180,7 +182,7 @@ void Mapa::procesar_archivo_ubicaciones(){
                         metal = obtener_edificio(i)->obtener_cantidad_metal();
                         maximo = obtener_edificio(i)->obtener_maximo_construir();
 
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
 
                         obtener_edificio(i) ->sumar_cantidad();
 
@@ -292,37 +294,37 @@ ifstream nuevo_archivo;
 
             if (nombre_edificio == ASERRADERO){
 
-                nuevo_edificio = new Aserradero(piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica( 1,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
 
-                nuevo_edificio = new Planta_electrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina_oro( 1, piedra, madera, metal, maximo_construir);
 
             }
             agregar_edificio(nuevo_edificio);
@@ -439,12 +441,13 @@ void Mapa::realizar_construccion(string nombre_nuevo){
         int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
 
         bool supera_max = supera_maximo(nombre_nuevo);
-        // Ahora tengo que definir si alcanza para cada usuario.
-        //bool alcanzan_materiales = usuario_inventario->alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+        // OJO 
+        // PRUEBA CON EL JUGADOR 1, HACER QUE SEA PARA EL JUGADOR EN TURNO [ ] 
+        bool alcanzan_materiales = j1.alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
             // puse como valor true pero hay que cambiarlo segun el jugador.
-            if (true){
+            if (alcanzan_materiales){
                 if ( aceptar_condiciones() ){
 
                     int fila , columna;
@@ -455,10 +458,13 @@ void Mapa::realizar_construccion(string nombre_nuevo){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
-                            mapa[fila][columna]->agregar_edificio(nombre_nuevo, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
+                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,1, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
-                            // Mismo : tengo que usar el inventario del jugador.
-                            //usuario_inventario->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
+                            // OJO
+                            // UTILIZO LOS MATERIALES SOLO DEL JUGADOR 1, FALTA HACERLO PARA EL JUGADOR EN TURNO [ ]
+                            j1.utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
                         }else{
                             cout << "\n El casillero ya contiene un edificio .\n" << endl;
@@ -600,8 +606,8 @@ void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int met
     cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // Ahora se le devolvera a cada jugador  [ ] --------------------------------------------
-    //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
+    // FALTA PONER AL JUGADOR EN TURNO  [ ] --------------------------------------------
+    j1.devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
 
@@ -634,9 +640,8 @@ void Mapa::consultar_coordenada(){
 }
 
 void Mapa::mostrar_inv(){
-    cout << "No muestro inventario cada jugador tiene el suyo" << endl;
-    // Ahora cada jugador muestra su inventario
-    //usuario_inventario->mostrar_inventario();
+    j1.mostrar_inventario();
+
 }
 
 void Mapa::recolectar_recursos_producidos(){

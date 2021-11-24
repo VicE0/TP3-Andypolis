@@ -19,7 +19,7 @@ void Casillero_transitable::mostrar_casillero(){
     }
 }
 
-void Casillero_transitable::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Casillero_transitable::agregar_edificio(string nombre,  int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un casillero transitable no se podran construir edificios en el. \n" << endl;
 }
 
