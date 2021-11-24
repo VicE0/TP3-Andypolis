@@ -11,8 +11,8 @@ using namespace std;
 int main(){
 
     Mapa * mapa = new Mapa;
-    Jugador * j1 = new Jugador(1);
-    Jugador * j2 = new Jugador(2);
+    Jugador * j1 = new Jugador(1, "J");
+    Jugador * j2 = new Jugador(2, "U");
 
     mapa->ingreso_datos_mapa(j1,j2);
 

@@ -6,15 +6,17 @@ Jugador::Jugador(){
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
     this -> turno = 0;
+    this -> diminutivo = "";
 }
 
-Jugador::Jugador(int numero_jugador)
+Jugador::Jugador(int numero_jugador, string diminutivo)
 {
     this -> numero_jugador = numero_jugador;
     this -> energia = 0;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
     this -> turno = 0;
+    this -> diminutivo = diminutivo;
 }
 
 /*
@@ -31,6 +33,10 @@ int Jugador::dar_numero()
 
 Lista<Material> * Jugador::obtener_inventario(){
     return inventario;
+}
+
+string Jugador::obtener_diminutivo(){
+    return diminutivo;
 }
 
 void Jugador::agregar_material(Material * material){

@@ -16,15 +16,14 @@ class Jugador
         int energia;
         int objetivos_cumplidos;
         int turno;
-        //AGREGAR PARTE DE MATERIALES HECHA POR GIAN
-
+        string diminutivo;
         Lista<Material> * inventario;
 
     public:
 
         Jugador();
 
-        Jugador(int numero_jugador); //constructor
+        Jugador(int numero_jugador, string diminutivo); //constructor
 
         //PRE: ~
         //POST: Devuelve el nombre del jugador
@@ -50,6 +49,7 @@ class Jugador
 
         Lista<Material> * obtener_inventario();
 
+        string obtener_diminutivo();
 
         void establecer_turno(int turno);
 
