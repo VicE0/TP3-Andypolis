@@ -188,6 +188,15 @@ bool Mapa::aceptar_condiciones(){
     return acepto;
 }
 
+bool Mapa::verificacion_energia(int cantidad_disponible, int cantidad_necesaria){
+    bool disponible = false;
+    if ( cantidad_disponible >= cantidad_necesaria ){
+        disponible = true;
+    }
+    return disponible;
+}
+
+
 // --------------- EDIFICIOS POSIBLES --------------------------------------------------
 
 void Mapa::cargar_edificios(){
@@ -365,20 +374,26 @@ bool Mapa::supera_maximo(string nombre){
 
 void Mapa::construir_edificio_nombre(Jugador * jugador){
 
+    int energia_jugador = jugador->obtener_energia();
     string nombre_nuevo;
     cout << "\n -> Ingrese el nombre del nuevo edificio que desea construir : ";
     cin.ignore();
     getline(cin , nombre_nuevo);
 
-    bool existe_edificio = existe_el_edificio(nombre_nuevo);
+    if ( verificacion_energia( energia_jugador, 15) ){
 
-    if ( existe_edificio ){
+        bool existe_edificio = existe_el_edificio(nombre_nuevo);
+        if ( existe_edificio ){
 
-        realizar_construccion(nombre_nuevo, jugador);
+            realizar_construccion(nombre_nuevo, jugador);
 
+        } else {
+            cout << "\n El edificio buscado NO existe . \n" << endl;
+        }
     } else {
-        cout << "\n El edificio buscado NO existe . \n" << endl;
+        cout << "\n -> Usted no puede construir por falta de energia.\n" << endl;
     }
+
 }
 
 void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
@@ -408,6 +423,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
 
+                            jugador->restar_energia(15);
                             jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
@@ -490,35 +506,39 @@ void Mapa::mostrar_coordenadas(string nombre){
 void Mapa::demoler_edificio(Jugador * jugador){
 
     int id_jugador = jugador->dar_numero();
+    int energia_jugador = jugador->obtener_energia();
     cout << "\n\t\t ###   En esta seccion podra DEMOLER un EDIFICIO :   ###" << endl;
-    
     cout << "\n";
-    int fila, columna;
-    cout << " Ingrese las coordenadas del edificio a demoler : \n" << endl;
+    
+    if ( verificacion_energia(energia_jugador, 15 )){
+        int fila, columna;
+        cout << " Ingrese las coordenadas del edificio a demoler : \n" << endl;
 
-    validar_coordenada( fila, columna);
+        validar_coordenada( fila, columna);
 
-    string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
+        string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
 
-    if ( nombre_edificio != ""){
-        int codigo_edificio = mapa[fila][columna]->obtener_edificio_construido()->obtener_id_jugador();
+        if ( nombre_edificio != ""){
+            int codigo_edificio = mapa[fila][columna]->obtener_edificio_construido()->obtener_id_jugador();
 
-        if ( id_jugador == codigo_edificio ){
-            if ( aceptar_condiciones() ){
+            if ( id_jugador == codigo_edificio ){
+                if ( aceptar_condiciones() ){
 
-            obtengo_materiales_elimino_edificio(jugador, nombre_edificio, fila, columna);
-            cout << "\n\t\t ###   El edificio : " << nombre_edificio << ", ha sido DEMOLIDO exitosamente !   ###\n" << endl;
+                obtengo_materiales_elimino_edificio(jugador, nombre_edificio, fila, columna);
+                cout << "\n\t\t ###   El edificio : " << nombre_edificio << ", ha sido DEMOLIDO exitosamente !   ###\n" << endl;
 
+                }
+
+            } else {
+                cout << "\n\t -> No se puede demoler un edificio que no es propio.\n" << endl;
             }
 
         } else {
-            cout << "\n\t -> No se puede demoler un edificio que no es propio.\n" << endl;
+            cout << "\n En la coordenada ingresada no existe ningun edificio ...\n" << endl;
         }
-
     } else {
-        cout << "\n En la coordenada ingresada no existe ningun edificio ...\n" << endl;
+        cout << "\n -> Usted no cuenta con la cantidad de enrgia necesaria. \n" << endl;
     }
-
 
 }
 

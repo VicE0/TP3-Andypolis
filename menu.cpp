@@ -79,6 +79,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
 
 void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 
+
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
@@ -126,6 +127,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case FINALIZAR_TURNO:
+            jugador->sumar_energia(20);
             cout << "\n\tSu turno ha finalizado.\n" << endl;
         break;
     

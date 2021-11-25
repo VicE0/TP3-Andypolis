@@ -189,8 +189,15 @@ int Jugador::obtener_energia(){
     return energia;
 }
 
-// bool Jugador::tiene_energia()
-// {
-//     return energia > 0;
-// }
+void Jugador::sumar_energia(int cantidad){
+    energia += cantidad;
+}
 
+void Jugador::restar_energia(int cantdiad){
+    energia -= cantdiad;
+}
+
+Jugador::~Jugador(){
+    delete inventario;
+    inventario = 0;
+}
