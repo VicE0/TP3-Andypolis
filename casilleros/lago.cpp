@@ -19,7 +19,7 @@ int Lago::obtener_costo_energia(int codigo_jugador){
     } else {return 5;}
 }
 
-void Lago::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Lago::agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un lago , no se podran construir edificios en el. \n" << endl;
 }
 
@@ -65,4 +65,9 @@ int Lago::obtener_fila(){
 
 int Lago::obtener_columna(){
     return columna;
+}
+
+Edificio * Lago::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
 }

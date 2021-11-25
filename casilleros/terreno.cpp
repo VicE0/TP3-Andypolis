@@ -23,41 +23,41 @@ void Terreno::mostrar_casillero(){
     }
 }
 
-void Terreno::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Terreno::agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo){
     if ( ! edificio_construido ){
         if (nombre == "aserradero"){
 
-            this->edificio_construido = new Aserradero(piedra, madera, metal, maximo);
+            this->edificio_construido = new Aserradero(id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == ESCUELA){ 
 
-            this->edificio_construido = new Escuela( piedra, madera, metal, maximo);
+            this->edificio_construido = new Escuela( id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == FABRICA){
 
-            this->edificio_construido = new Fabrica( piedra, madera, metal, maximo);
+            this->edificio_construido = new Fabrica( id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA){
 
-            this->edificio_construido = new Mina( piedra, madera, metal, maximo);
+            this->edificio_construido = new Mina( id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA){
 
-            this->edificio_construido = new Obelisco( piedra, madera, metal, maximo);
+            this->edificio_construido = new Obelisco( id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == PLANTA_ELECTRICA){
 
-            this->edificio_construido = new Planta_electrica( piedra, madera, metal, maximo);
+            this->edificio_construido = new Planta_electrica( id_jugador,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA_ORO){
 
-            this->edificio_construido = new Mina_oro( piedra, madera, metal, maximo);
+            this->edificio_construido = new Mina_oro( id_jugador,piedra, madera, metal, maximo);
 
         }
     } else {
@@ -140,5 +140,13 @@ int Terreno::obtener_fila(){
 
 int Terreno::obtener_columna(){
     return columna;
+}
+
+Edificio * Terreno::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    if ( edificio_construido != 0 ){
+        aux = edificio_construido;
+    }
+    return aux;
 }
 

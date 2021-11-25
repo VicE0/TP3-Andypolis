@@ -2,6 +2,7 @@
 #define CASILLERO_H
 
 #include <iostream>
+#include "../edificio.h"
 #include "../material.h"
 
 using namespace std;
@@ -31,7 +32,7 @@ public:
 
     // PRE: - 
     // POS: Implementada en los casilleros_construibles, creara un nuevo edificio en el casillero.
-    virtual void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo) = 0;
+    virtual void agregar_edificio(string nombre, int id_jugador,int piedra, int madera, int metal, int maximo) = 0;
 
     // PRE: -
     // POS: En casillero transitable, en caso de estar vacio, coloca un objeto material. 
@@ -91,7 +92,7 @@ public:
     // Destructor
     // PRE: -
     // POS: - 
-    virtual ~Casillero() = 0;
+    virtual ~Casillero(){};
     
     //Obtener fila
     //PRE:-
@@ -103,6 +104,7 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     virtual int obtener_columna() = 0;
 
+    virtual Edificio * obtener_edificio_construido() = 0;
 
 };
 

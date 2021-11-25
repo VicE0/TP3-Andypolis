@@ -2,6 +2,7 @@
 
 Muelle::Muelle(int fila, int columna): Casillero(fila, columna){
     this->nombre = "M";
+    this->material = 0;
 }
 
 void Muelle::mostrar_casillero(){
@@ -25,7 +26,7 @@ int Muelle::obtener_costo_energia(int codigo_jugador){
 }
 
 
-void Muelle::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Muelle::agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un muelle no se podran construir edificios en el. \n" << endl;
 }
 
@@ -82,6 +83,11 @@ int Muelle::obtener_fila(){
 
 int Muelle::obtener_columna(){
     return columna;
+}
+
+Edificio * Muelle::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
 }
 
 Muelle::~Muelle(){

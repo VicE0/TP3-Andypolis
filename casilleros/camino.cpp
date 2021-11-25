@@ -2,6 +2,7 @@
 
 Camino::Camino(int fila, int columna): Casillero(fila, columna){
     this->nombre = "C";
+    this->material = 0;
 }
 
 void Camino::mostrar_casillero(){
@@ -22,7 +23,7 @@ int Camino::obtener_costo_energia(int JUGADOR_1){
     return 4;
 }
 
-void Camino::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Camino::agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un camino no se podran construir edificios en el. \n" << endl;
 }
 
@@ -79,6 +80,11 @@ int Camino::obtener_fila(){
 
 int Camino::obtener_columna(){
     return columna;
+}
+
+Edificio * Camino::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
 }
 
 Camino::~Camino(){

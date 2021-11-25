@@ -21,8 +21,9 @@ bool Mapa::carga_incorrecta_archivos(){
 
 }
 
-void Mapa::ingreso_datos_mapa(){
+void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
+    procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
@@ -83,7 +84,7 @@ void Mapa::generar_matriz(){
 }
 
 // Proceso el archivo de materiales :
-void Mapa::procesar_archivo_materiales(){
+void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     ifstream archivo;
     archivo.open(ARCHIVO_MATERIALES);
 
@@ -104,22 +105,23 @@ void Mapa::procesar_archivo_materiales(){
             material_j2 = new Material(nombre, stoi(cantidad_2) );
 
             // dependiendo que jugador este , cargo sus datos en sus inventarios :
-            j1.agregar_material(material_j1);
-            j2.agregar_material(material_j2);
+            j1->agregar_material(material_j1);
+            j2->agregar_material(material_j2);
         }
 
         archivo.close();
     }
     else{
 
-        j1.obtener_inventario()->cambiar_cantidad(ERROR);
-        j2.obtener_inventario()->cambiar_cantidad(ERROR);
+        j1->obtener_inventario()->cambiar_cantidad(ERROR);
+        j2->obtener_inventario()->cambiar_cantidad(ERROR);
 
     }
 
     archivo.close();
 }
 
+// COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
 void Mapa::procesar_archivo_ubicaciones(){
 
     ifstream archivo;
@@ -130,40 +132,47 @@ void Mapa::procesar_archivo_ubicaciones(){
         if (archivo.tellg() != 0){
             string nombre,segundo_nombre, barra, fila, columna;
             partida_empezada = true;
-    
 
-            while( archivo >> nombre ){
-                if ( nombre == "planta"){
-                    archivo >> segundo_nombre;
+            while( archivo >> nombre){
+                if ( nombre == "1" || nombre == "2"){
                     getline(archivo, barra, '(');
                     getline(archivo, fila, ',');
                     getline(archivo, barra, ' ');
                     getline(archivo, columna, ')');
+                    cout << "Cargando jugador " << nombre << endl;
 
-                nombre += " " + segundo_nombre;
-            }else if ( nombre == "mina"){
-                getline(archivo,segundo_nombre,'(');
-                cout << segundo_nombre << endl;
-                if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
-                    getline(archivo, barra, '(');
-                    getline(archivo, fila, ',');
-                    getline(archivo, barra, ' ');
-                    getline(archivo, columna, ')');
+                    if ( nombre == "planta"){
+                        archivo >> segundo_nombre;
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
 
                     nombre += " " + segundo_nombre;
-                }else{
-                    barra = segundo_nombre;
-                    getline(archivo,barra,'(');
-                    getline(archivo, fila, ',');
-                    getline(archivo, barra, ' ');
-                    getline(archivo, columna, ')');
-                }
-            }
-            else {
-                getline(archivo, barra, '(');
-                getline(archivo, fila, ',');
-                getline(archivo, barra, ' ');
-                getline(archivo, columna, ')');
+                    }
+                    else if ( nombre == "mina"){
+                        getline(archivo,segundo_nombre,'(');
+                        cout << segundo_nombre << endl;
+                        if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
+                            getline(archivo, barra, '(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+
+                            nombre += " " + segundo_nombre;
+                        }else{
+                            barra = segundo_nombre;
+                            getline(archivo,barra,'(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+                        }
+                    }
+                    else {
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
             }
 
                 if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
@@ -179,13 +188,16 @@ void Mapa::procesar_archivo_ubicaciones(){
                         metal = obtener_edificio(i)->obtener_cantidad_metal();
                         maximo = obtener_edificio(i)->obtener_maximo_construir();
 
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, piedra, madera, metal, maximo);
+
+                        // FALTA PASARLE POR PARAMETRO A "AGREGAR EDIFICIO"-> EL ID_JUGADOR [ ]
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
 
                         obtener_edificio(i) ->sumar_cantidad();
 
                     }
                 }
             }
+                }
 
             archivo.close();
         }
@@ -290,37 +302,37 @@ ifstream nuevo_archivo;
 
             if (nombre_edificio == ASERRADERO){
 
-                nuevo_edificio = new Aserradero(piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica( 1,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
 
-                nuevo_edificio = new Planta_electrica( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica( 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro( piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina_oro( 1, piedra, madera, metal, maximo_construir);
 
             }
             agregar_edificio(nuevo_edificio);
@@ -372,8 +384,9 @@ Edificio * Mapa::obtener_edificio(int posicion){
 
 bool Mapa::existe_el_edificio(string nombre){
     bool existe = false;
+    string nombre_buscado;
     for (int i = 0; i < cantidad_edificios; i++){
-        string nombre_buscado = edificios_posibles[i]->obtener_nombre();
+        nombre_buscado = edificios_posibles[i]->obtener_nombre();
         if ( nombre_buscado == nombre ){
             existe = true;
         }
@@ -409,7 +422,7 @@ bool Mapa::supera_maximo(string nombre){
 
 // -------------- DIVISION PUNTO POR PUNTO : MENU -------------------------------
 
-void Mapa::construir_edificio_nombre(){
+void Mapa::construir_edificio_nombre(Jugador * jugador){
 
     string nombre_nuevo;
     cout << "\n -> Ingrese el nombre del nuevo edificio que desea construir : ";
@@ -420,15 +433,16 @@ void Mapa::construir_edificio_nombre(){
 
     if ( existe_edificio ){
 
-        realizar_construccion(nombre_nuevo);
+        realizar_construccion(nombre_nuevo, jugador);
 
     } else {
         cout << "\n El edificio buscado NO existe . \n" << endl;
     }
 }
 
-void Mapa::realizar_construccion(string nombre_nuevo){
+void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 
+        int id_jugador = jugador->dar_numero();
         int pos_edificio = obtener_posicion_edificio(nombre_nuevo);
 
         int piedra_necesaria = obtener_edificio(pos_edificio)->obtener_cantidad_piedra();
@@ -437,26 +451,25 @@ void Mapa::realizar_construccion(string nombre_nuevo){
         int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
 
         bool supera_max = supera_maximo(nombre_nuevo);
-        // Ahora tengo que definir si alcanza para cada usuario.
-        //bool alcanzan_materiales = usuario_inventario->alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+        bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
-            // puse como valor true pero hay que cambiarlo segun el jugador.
-            if (true){
+            if (alcanzan_materiales){
                 if ( aceptar_condiciones() ){
 
                     int fila , columna;
                     cout << "\n ### En esta seccion podra CONSTRUIR un EDIFICIO : ###\n" << endl;
                     validar_coordenada( fila, columna);
-
-                    if ( mapa[fila][columna]->obtener_nombre() == "T"){
+                    cout << mapa[fila][columna]->obtener_nombre() << endl;
+                    if ( mapa[fila][columna]->obtener_nombre() == "T" ){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
-                            mapa[fila][columna]->agregar_edificio(nombre_nuevo, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
+                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             obtener_edificio(pos_edificio)->sumar_cantidad();
-                            // Mismo : tengo que usar el inventario del jugador.
-                            //usuario_inventario->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
+                            jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
                         }else{
                             cout << "\n El casillero ya contiene un edificio .\n" << endl;
@@ -477,31 +490,30 @@ void Mapa::realizar_construccion(string nombre_nuevo){
 
 }
 
-void Mapa::listar_edificios_construidos(){
+void Mapa::listar_edificios_construidos(Jugador * jugador){
+    int id_jugador = jugador->dar_numero();
+    int cantidad_construidos;
+    int codigo_edificio;
+    string nombre_edificio;
+    Edificio * aux = nullptr;
+
     cout << "\n";
-    cout << "\t\t###   Listado de los edificio construidos :   ### " << endl;
-    cout << "\nOrden de los elementos : " << endl;
-    cout << " -> nombre : cantidad construidos " << endl;
-    cout << " - coordenada \n - coordenada\n ..." << endl;
-    cout << "\n" ;
-    cout << "___________________________________________________" << endl;
-    cout << "\n" ;
-    for (int i = 0; i < obtener_cantidad_edificios(); i++){
+    for ( int i = 0; i < cantidad_filas; i++){
+        for ( int j = 0; j < cantidad_columnas ; j++ ){
+            
+            if ( mapa[i][j]->existe_edificio() ){
+                aux = mapa[i][j]->obtener_edificio_construido();
+                codigo_edificio = aux->obtener_id_jugador();
+                
+                if ( id_jugador == codigo_edificio ){
 
-        int cantidad_constuidos = obtener_edificio(i)->obtener_cantidad_construidos();
-        string nombre_edificio = obtener_edificio(i)->obtener_nombre();
-
-        if ( cantidad_constuidos > 0 ){
-
-            cout << " -> "<< nombre_edificio << " : " << cantidad_constuidos << endl;
-            mostrar_coordenadas(nombre_edificio);
-
+                    nombre_edificio = aux->obtener_nombre();
+                    cout << "Edificio construido : " << nombre_edificio << endl;
+                }
+            }
         }
-
     }
-    cout << "\n" ;
-    cout << "___________________________________________________" << endl;
-    cout << "\n" ;
+    cout << "\n";
 }
 
 void Mapa::listar_todos_edificios(){
@@ -535,7 +547,7 @@ void Mapa::mostrar_coordenadas(string nombre){
     }
 }
 
-void Mapa::demoler_edificio(){
+void Mapa::demoler_edificio(Jugador * jugador){
 
     cout << "\n\t\t ###   En esta seccion podra DEMOLER un EDIFICIO :   ###" << endl;
     
@@ -551,7 +563,7 @@ void Mapa::demoler_edificio(){
 
         if ( aceptar_condiciones() ){
 
-            obtengo_materiales_elimino_edificio(nombre_edificio, fila, columna);
+            obtengo_materiales_elimino_edificio(jugador, nombre_edificio, fila, columna);
             cout << "\n\t\t ###   El edificio : " << nombre_edificio << ", ha sido DEMOLIDO exitosamente !   ###\n" << endl;
 
         }
@@ -563,7 +575,7 @@ void Mapa::demoler_edificio(){
 
 }
 
-void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila, int columna){
+void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna){
 
     int mitad_piedra, mitad_madera, mitad_metal;
 
@@ -583,12 +595,12 @@ void Mapa::obtengo_materiales_elimino_edificio(string nombre_edificio, int fila,
     }
 
     // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
-    devolver_materiales(mitad_piedra, mitad_madera, mitad_metal, 0);
+    devolver_materiales( jugador, mitad_piedra, mitad_madera, mitad_metal, 0);
 
     mapa[fila][columna]->eliminar_edificio();
 }
 
-void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
+void Mapa::devolver_materiales(Jugador * jugador,int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos){
 
     cout << "\n------------------------------\n" << endl;
     cout << "\nMateriales obtenidos \n" << endl;
@@ -598,8 +610,7 @@ void Mapa::devolver_materiales(int piedra_obtenida, int madera_obtenida, int met
     cout << COINS << " : " << coins_obtenidos << endl;
     cout << "\n------------------------------\n" << endl;
 
-    // Ahora se le devolvera a cada jugador  [ ] --------------------------------------------
-    //usuario_inventario->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
+    jugador->devolver_materiales(piedra_obtenida, madera_obtenida, metal_obtenida);
 
 }
 
@@ -631,13 +642,12 @@ void Mapa::consultar_coordenada(){
     cout << "\n";
 }
 
-void Mapa::mostrar_inv(){
-    cout << "No muestro inventario cada jugador tiene el suyo" << endl;
-    // Ahora cada jugador muestra su inventario
-    //usuario_inventario->mostrar_inventario();
+void Mapa::mostrar_inv(Jugador * jugador){
+    jugador->mostrar_inventario();
+
 }
 
-void Mapa::recolectar_recursos_producidos(){
+void Mapa::recolectar_recursos_producidos(Jugador * jugador){
     int piedra = 0;
     int madera = 0;
     int metal = 0;
@@ -675,7 +685,7 @@ void Mapa::recolectar_recursos_producidos(){
         } 
     }
 
-    devolver_materiales(piedra, madera, metal, andycoin);
+    devolver_materiales( jugador, piedra, madera, metal, andycoin);
 }
 
 int Mapa::generar_numero_random(int min, int max){
@@ -740,7 +750,7 @@ void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_pied
     string material_a_colocar = "";
     int materiales_restantes = tot_materiales_gen;
 
-    while (materiales_restantes >0 && total_casilleros >0){
+    while (materiales_restantes > 0 && total_casilleros >0){
 
         consultar_material_a_colocar(cant_gen_piedras, cant_gen_maderas, cant_gen_metales, cant_gen_coins, material_a_colocar);
 
@@ -770,27 +780,26 @@ Casillero* Mapa :: obtener_casillero_vector_casilleros_lluvia ( int pos) {
 }
 
 void Mapa::sacar_casillero(int posicion_numero_a_sacar){
-    
+    int nuevo_total = total_casilleros - 1;
     if (total_casilleros > 1) {
 
         //mando el q quiero elimnar a la ult pos y lo intercambio con ese
-        swap_casillero(total_casilleros - 1, posicion_numero_a_sacar);
+        swap_casillero(nuevo_total, posicion_numero_a_sacar);
         
-        Casillero **vector_aux_casilleros_lluvia = new Casillero*[total_casilleros - 1];
+        Casillero **vector_aux_casilleros_lluvia = new Casillero*[nuevo_total];
 
         for(int i = 0; i < total_casilleros - 1; i++){
             vector_aux_casilleros_lluvia[i] = vector_casilleros_lluvia[i];
             //Como esta en la ult pos nunca lo copio!
         }
-        
-        delete vector_casilleros_lluvia[total_casilleros - 1];
-        delete[] vector_casilleros_lluvia;
 
+        delete vector_casilleros_lluvia[nuevo_total];
+        delete[] vector_casilleros_lluvia;
 
         vector_casilleros_lluvia = vector_aux_casilleros_lluvia;
 
     }else{
-        delete vector_casilleros_lluvia[total_casilleros - 1];
+        delete vector_casilleros_lluvia[nuevo_total];
         delete[] vector_casilleros_lluvia;
     }
 
@@ -892,7 +901,7 @@ void Mapa::lluvia_recursos(){
     <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
     <<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl
     <<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl
-    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << "andycoins" <<endl<<endl
+    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << " andycoins" <<endl<<endl
     <<"en las siguientes posiciones: "<< endl;
 
     ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);

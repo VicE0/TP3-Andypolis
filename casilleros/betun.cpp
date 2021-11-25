@@ -2,6 +2,7 @@
 
 Betun::Betun(int fila, int columna): Casillero(fila, columna){
     this->nombre = "B";
+    this->material = 0;
 }
 
 void Betun::mostrar_casillero(){
@@ -22,7 +23,7 @@ int Betun::obtener_costo_energia(int JUGADOR_1){
     return 0;
 }
 
-void Betun::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Betun::agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un betun no se podran construir edificios en el. \n" << endl;
 }
 
@@ -81,9 +82,15 @@ int Betun::obtener_columna(){
     return columna;
 }
 
+Edificio * Betun::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}
+
 Betun::~Betun(){
     if ( material ){
         delete material;
     }
     material = 0;
 }
+
