@@ -2,6 +2,7 @@
 
 Muelle::Muelle(int fila, int columna): Casillero(fila, columna){
     this->nombre = "M";
+    this->material = 0;
 }
 
 void Muelle::mostrar_casillero(){

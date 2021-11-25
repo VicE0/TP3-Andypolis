@@ -2,6 +2,7 @@
 
 Betun::Betun(int fila, int columna): Casillero(fila, columna){
     this->nombre = "B";
+    this->material = 0;
 }
 
 void Betun::mostrar_casillero(){
