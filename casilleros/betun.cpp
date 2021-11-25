@@ -81,9 +81,15 @@ int Betun::obtener_columna(){
     return columna;
 }
 
+Edificio * Betun::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}
+
 Betun::~Betun(){
     if ( material ){
         delete material;
     }
     material = 0;
 }
+

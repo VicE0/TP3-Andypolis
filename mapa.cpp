@@ -902,7 +902,7 @@ void Mapa::lluvia_recursos(){
     <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
     <<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl
     <<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl
-    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << "andycoins" <<endl<<endl
+    <<cant_gen_coins * UNIDADES_POR_PACK_COINS << " andycoins" <<endl<<endl
     <<"en las siguientes posiciones: "<< endl;
 
     ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);

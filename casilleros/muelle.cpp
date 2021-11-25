@@ -84,6 +84,11 @@ int Muelle::obtener_columna(){
     return columna;
 }
 
+Edificio * Muelle::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}
+
 Muelle::~Muelle(){
     if ( material ){
         delete material;

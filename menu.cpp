@@ -49,11 +49,9 @@ int elegir_opcion(){
     return opcion;
 }
 
-<<<<<<< HEAD
+
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
-=======
-void procesar_opcion_principal(int opcion, Mapa * mapa, Jugada* partida_jugador){
->>>>>>> vicky
+
     switch (opcion)
     {
 
@@ -70,24 +68,16 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugada* partida_jugador)
         break;
     
     case P_COMENZAR_PARTIDA:
-<<<<<<< HEAD
             partida(mapa, j1, j2);
         break;
     
     case P_GUARDAR_SALIR:
             cout << "Guardar y Salir" << endl;
-=======
-            partida(mapa, partida_jugador);
->>>>>>> vicky
         break;
     }
 }
 
-<<<<<<< HEAD
 void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
-=======
-void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugada* partida_jugador){
->>>>>>> vicky
 
     switch (opcion)
     {
@@ -124,7 +114,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugada* partida_jugador){
         break;
 
     case MOSTRAR_OBJETIVOS:
-            partida_jugador -> mostrar_objetivos_jugador();
+            cout << "mostrar objetivos" << endl;
         break;
 
     case RECOLECTAR_RECURSOS:
@@ -145,12 +135,8 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugada* partida_jugador){
     }
 }
 
-<<<<<<< HEAD
 void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
-=======
-void partida(Mapa * mapa, Jugada* partida_jugador)
-{
->>>>>>> vicky
+
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
@@ -164,7 +150,6 @@ void partida(Mapa * mapa, Jugada* partida_jugador)
         do{
         mostrar_menu_partida();
         opcion = elegir_opcion();
-<<<<<<< HEAD
         procesar_opcion_jugador(opcion, mapa, jugador);
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
@@ -179,18 +164,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
     if (mapa -> verificar_partida_empezada()){
         cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
-=======
-        procesar_opcion_jugador(opcion, mapa, partida_jugador);
 
-    }while ( opcion != GUARDAR_SALIR );
-}
-
-void selector_de_menu(Mapa * mapa, Jugada* partida_jugador){
-
-    int opcion;
-    if (mapa -> verificar_partida_empezada()){
-        partida(mapa, partida_jugador);
->>>>>>> vicky
     }
 
     else{
@@ -199,11 +173,8 @@ void selector_de_menu(Mapa * mapa, Jugada* partida_jugador){
 
             mostrar_menu_principal();
             opcion = elegir_opcion();
-<<<<<<< HEAD
+
             procesar_opcion_principal(opcion, mapa, j1, j2);
-=======
-            procesar_opcion_principal(opcion, mapa, partida_jugador);
->>>>>>> vicky
 
         }while ( opcion != P_GUARDAR_SALIR );
     }

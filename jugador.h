@@ -14,7 +14,7 @@ class Jugador
 {
 
     private:
-        int numero_jugador;
+        int id_jugador;
         int energia;
         int objetivos_cumplidos;
         int turno;
@@ -26,7 +26,7 @@ class Jugador
         // -------------------------------- Constructores --------------------------------
         Jugador();
 
-        Jugador(int numero_jugador, string diminutivo); //constructor
+        Jugador(int id_jugador, string diminutivo); //constructor
 
         //PRE: ~
         //POST: Devuelve el numero del jugador (1 / 2)
@@ -53,8 +53,6 @@ class Jugador
 
 
         void mostrar_cantidad_material( string nombre );
-
-        Lista<Material> * obtener_inventario();
 
         string obtener_diminutivo();
 

@@ -1,7 +1,7 @@
 #include "jugador.h"
 
 Jugador::Jugador(){
-    this -> numero_jugador = 0;
+    this -> id_jugador = 0;
     this -> energia = 0;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
@@ -9,9 +9,9 @@ Jugador::Jugador(){
     this -> diminutivo = "";
 }
 
-Jugador::Jugador(int numero_jugador, string diminutivo)
+Jugador::Jugador(int id_jugador, string diminutivo)
 {
-    this -> numero_jugador = numero_jugador;
+    this -> id_jugador = id_jugador;
     this -> energia = 0;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
@@ -31,11 +31,12 @@ Jugador::Jugador(int id_jugador ,int energia, int objetivos_cumplidos, int andyc
     this->inventario = new Lista<Material>;
 }
 
-int Jugador::obtener_ID()
+*/
+
+int Jugador::dar_numero()
 {
     return id_jugador;
 }
-*/
 
 
 Lista<Material> * Jugador::obtener_inventario(){

@@ -81,6 +81,11 @@ int Camino::obtener_columna(){
     return columna;
 }
 
+Edificio * Camino::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
+}
+
 Camino::~Camino(){
     if ( material ){
         delete material;
