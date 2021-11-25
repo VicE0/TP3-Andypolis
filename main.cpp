@@ -23,6 +23,8 @@ int main(){
         cout <<"Uno o varios archivos no se pudieron abrir correctamente";
     }
 
+    delete j1;
+    delete j2;
     delete mapa;
 
     cout << "\n Muchas gracias por visitar la ciudad , nos vemos pronto ! \n" << endl; 
