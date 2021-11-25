@@ -1,7 +1,6 @@
 #ifndef CASILLERO_CONSTRUIBLE_H
 #define CASILLERO_CONSTRUIBLE_H
 
-#include "../edificio.h"
 #include "../edificios/aserradero.h"
 #include "../edificios/escuela.h"
 #include "../edificios/fabrica.h"
@@ -26,7 +25,7 @@ public:
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
-    void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo);
 
     //PRE:-
     //POS: En casilleros transitables hace apuntar el puntero material
@@ -89,6 +88,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
+
+    Edificio * obtener_edificio_construido();
 };
 
 

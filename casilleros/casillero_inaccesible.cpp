@@ -13,7 +13,7 @@ void Casillero_inaccesible::mostrar_casillero(){
     cout << " Este es un lago y es un casillero inaccesible. " << endl;
 }
 
-void Casillero_inaccesible::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Casillero_inaccesible::agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un casillero inaccesible , no se podran construir edificios en el. \n" << endl;
 }
 
@@ -59,4 +59,9 @@ int Casillero_inaccesible::obtener_fila(){
 
 int Casillero_inaccesible::obtener_columna(){
     return columna;
+}
+
+Edificio * Casillero_inaccesible::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
 }

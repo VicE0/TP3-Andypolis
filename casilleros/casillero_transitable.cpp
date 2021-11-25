@@ -19,7 +19,7 @@ void Casillero_transitable::mostrar_casillero(){
     }
 }
 
-void Casillero_transitable::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Casillero_transitable::agregar_edificio(string nombre,  int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un casillero transitable no se podran construir edificios en el. \n" << endl;
 }
 
@@ -83,4 +83,9 @@ int Casillero_transitable::obtener_fila(){
 
 int Casillero_transitable::obtener_columna(){
     return columna;
+}
+
+Edificio * Casillero_transitable::obtener_edificio_construido(){
+    Edificio * aux = 0;
+    return aux;
 }

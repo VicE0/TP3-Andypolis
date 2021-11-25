@@ -12,19 +12,18 @@ class Jugador
 {
 
     private:
-        string nombre;
         int numero_jugador;
         int energia;
         int objetivos_cumplidos;
-        //AGREGAR PARTE DE MATERIALES HECHA POR GIAN
-
+        int turno;
+        string diminutivo;
         Lista<Material> * inventario;
 
     public:
 
         Jugador();
 
-        Jugador(string nombre, int numero_jugador ,int energia, int objetivos_cumplidos); //constructor
+        Jugador(int numero_jugador, string diminutivo); //constructor
 
         //PRE: ~
         //POST: Devuelve el nombre del jugador
@@ -49,6 +48,28 @@ class Jugador
         void mostrar_cantidad_material( string nombre );
 
         Lista<Material> * obtener_inventario();
+
+        string obtener_diminutivo();
+
+        void establecer_turno(int turno);
+
+        int obtener_turno();
+  
+        void sumar_cantidad_material(string nombre, int cantidad);
+
+        void restar_cantidad_material(string nombre, int cantidad);
+
+        void mostrar_inventario();
+
+        bool alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+        void chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza);
+
+        void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+        void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+
 };
 
 
