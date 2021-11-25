@@ -2,7 +2,6 @@
 #include "menu.h"
 #include "mapa.h"
 #include "edificio.h"
-
 #include "jugador.h"
 
 using namespace std;
@@ -26,6 +25,7 @@ int main(){
     delete j1;
     delete j2;
     delete mapa;
+    // delete partida_jugador;
 
     cout << "\n Muchas gracias por visitar la ciudad , nos vemos pronto ! \n" << endl; 
 
