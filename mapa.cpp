@@ -750,7 +750,7 @@ void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_pied
     string material_a_colocar = "";
     int materiales_restantes = tot_materiales_gen;
 
-    while (materiales_restantes >0 && total_casilleros >0){
+    while (materiales_restantes > 0 && total_casilleros >0){
 
         consultar_material_a_colocar(cant_gen_piedras, cant_gen_maderas, cant_gen_metales, cant_gen_coins, material_a_colocar);
 
@@ -780,27 +780,26 @@ Casillero* Mapa :: obtener_casillero_vector_casilleros_lluvia ( int pos) {
 }
 
 void Mapa::sacar_casillero(int posicion_numero_a_sacar){
-    
+    int nuevo_total = total_casilleros - 1;
     if (total_casilleros > 1) {
 
         //mando el q quiero elimnar a la ult pos y lo intercambio con ese
-        swap_casillero(total_casilleros - 1, posicion_numero_a_sacar);
+        swap_casillero(nuevo_total, posicion_numero_a_sacar);
         
-        Casillero **vector_aux_casilleros_lluvia = new Casillero*[total_casilleros - 1];
+        Casillero **vector_aux_casilleros_lluvia = new Casillero*[nuevo_total];
 
         for(int i = 0; i < total_casilleros - 1; i++){
             vector_aux_casilleros_lluvia[i] = vector_casilleros_lluvia[i];
             //Como esta en la ult pos nunca lo copio!
         }
-        
-        delete vector_casilleros_lluvia[total_casilleros - 1];
-        delete[] vector_casilleros_lluvia;
 
+        delete vector_casilleros_lluvia[nuevo_total];
+        delete[] vector_casilleros_lluvia;
 
         vector_casilleros_lluvia = vector_aux_casilleros_lluvia;
 
     }else{
-        delete vector_casilleros_lluvia[total_casilleros - 1];
+        delete vector_casilleros_lluvia[nuevo_total];
         delete[] vector_casilleros_lluvia;
     }
 

@@ -2,6 +2,7 @@
 
 Camino::Camino(int fila, int columna): Casillero(fila, columna){
     this->nombre = "C";
+    this->material = 0;
 }
 
 void Camino::mostrar_casillero(){

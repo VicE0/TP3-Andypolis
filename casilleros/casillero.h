@@ -92,7 +92,7 @@ public:
     // Destructor
     // PRE: -
     // POS: - 
-    virtual ~Casillero() = 0;
+    virtual ~Casillero(){};
     
     //Obtener fila
     //PRE:-
