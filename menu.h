@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "mapa.h"
+#include "jugada.h"
 
 using namespace std;
 
@@ -41,12 +42,12 @@ int elegir_opcion();
 
 // Pre: 0 < opcion < 12 , y la ciudad andynopolis con los archivos ya procesados 
 // Pos: Se dirige a la opcion elegida por el jugador en turno.
-void procesar_opcion_jugador(int opcion, Mapa * mapa);
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugada* partida_jugador);
 
 //Pre : 0 < opcion < 5 
 //Pos : Se dirige a la opcion elegida por los usuarios.
-void procesar_opcion_principal(int opcion, Mapa * mapa);
+void procesar_opcion_principal(int opcion, Mapa * mapa, Jugada* partida_jugador);
 
-void selector_de_menu(Mapa * mapa);
+void selector_de_menu(Mapa * mapa, Jugada* partida_jugador);
 
-void partida(Mapa * mapa);
+void partida(Mapa * mapa, Jugada* partida_jugador);

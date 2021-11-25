@@ -49,7 +49,7 @@ int elegir_opcion(){
     return opcion;
 }
 
-void procesar_opcion_principal(int opcion, Mapa * mapa){
+void procesar_opcion_principal(int opcion, Mapa * mapa, Jugada* partida_jugador){
     switch (opcion)
     {
 
@@ -66,13 +66,13 @@ void procesar_opcion_principal(int opcion, Mapa * mapa){
         break;
     
     case P_COMENZAR_PARTIDA:
-            partida(mapa);
+            partida(mapa, partida_jugador);
         break;
 
     }
 }
 
-void procesar_opcion_jugador(int opcion, Mapa * mapa){
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugada* partida_jugador){
 
     switch (opcion)
     {
@@ -109,7 +109,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
         break;
 
     case MOSTRAR_OBJETIVOS:
-            cout << "mostrar objetivos" << endl;
+            partida_jugador -> mostrar_objetivos_jugador();
         break;
 
     case RECOLECTAR_RECURSOS:
@@ -126,22 +126,23 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa){
     }
 }
 
-void partida(Mapa * mapa){
+void partida(Mapa * mapa, Jugada* partida_jugador)
+{
     int opcion;
     do {
 
         mostrar_menu_partida();
         opcion = elegir_opcion();
-        procesar_opcion_jugador(opcion, mapa);
+        procesar_opcion_jugador(opcion, mapa, partida_jugador);
 
     }while ( opcion != GUARDAR_SALIR );
 }
 
-void selector_de_menu(Mapa * mapa){
+void selector_de_menu(Mapa * mapa, Jugada* partida_jugador){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
-        partida(mapa);
+        partida(mapa, partida_jugador);
     }
 
     else{
@@ -150,7 +151,7 @@ void selector_de_menu(Mapa * mapa){
 
             mostrar_menu_principal();
             opcion = elegir_opcion();
-            procesar_opcion_principal(opcion, mapa);
+            procesar_opcion_principal(opcion, mapa, partida_jugador);
 
         }while ( opcion != P_GUARDAR_SALIR );
     }
