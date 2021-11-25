@@ -22,7 +22,7 @@ int Betun::obtener_costo_energia(int JUGADOR_1){
     return 0;
 }
 
-void Betun::agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo){
+void Betun::agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un betun no se podran construir edificios en el. \n" << endl;
 }
 

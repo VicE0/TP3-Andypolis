@@ -27,7 +27,7 @@ public:
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un muelle, muestra por pantalla un mensaje diciendo
     //que no se pueden construir edificios aqui
-    void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo);
 
     //PRE: Recibe un string con el nombre del material y otro con la cantidad
     //que se desea gnerar del mismo
@@ -80,6 +80,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
+
+    Edificio * obtener_edificio_construido();
 
     //Destructor de Muelle
     ~Muelle();
