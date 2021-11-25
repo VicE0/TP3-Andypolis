@@ -126,7 +126,6 @@ void Mapa::procesar_archivo_ubicaciones(){
         if (archivo.tellg() != 0){
             string nombre,segundo_nombre, barra, fila, columna;
             partida_empezada = true;
-
             while( archivo >> nombre){
                 if ( nombre == "1" || nombre == "2"){
                     getline(archivo, barra, '(');
@@ -454,7 +453,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                     int fila , columna;
                     cout << "\n ### En esta seccion podra CONSTRUIR un EDIFICIO : ###\n" << endl;
                     validar_coordenada( fila, columna);
-                    cout << mapa[fila][columna]->obtener_nombre() << endl;
+                    cout << mapa[fila][columna]->obtener_nombre();
                     if ( mapa[fila][columna]->obtener_nombre() == "T" ){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
