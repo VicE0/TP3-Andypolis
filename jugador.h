@@ -2,6 +2,8 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+const int ENERGIA_INICIAL = 50;
+
 #include "lista.h"
 #include "inventario.h"
 
@@ -21,29 +23,34 @@ class Jugador
 
     public:
 
+        // -------------------------------- Constructores --------------------------------
         Jugador();
 
         Jugador(int numero_jugador, string diminutivo); //constructor
 
         //PRE: ~
-        //POST: Devuelve el nombre del jugador
-        string obtener_nombre();
-
-        //PRE: ~
-        //POST: Devuelve el numero del jugador (1 o 2)
+        //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
+
+        // //PRE: ~
+        // //POST: Obtiene la cantidad de energia del jugador 
+        // int obtener_energia();
 
         // //PRE: ~
         // //POST: Devuelve TRUE si la energía del jugador es suficiente para realizar la opción
         // bool tiene_energia();
 
+        //Obtener bombas / andycoins ?
 
-        // //Destructor, seguro lo necesitamos para liberar el inventario
-        // ~Jugador();
+        Material * obtener_material(string nombre);
+
+        Lista<Material> * obtener_inventario();
+
+
+        // -------------------------------- Funciones jugador --------------------------------
 
         void agregar_material(Material * material);
 
-        Material * obtener_material(string nombre);
 
         void mostrar_cantidad_material( string nombre );
 
@@ -70,6 +77,10 @@ class Jugador
         void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
 
+        // Destructor, seguro lo necesitamos para liberar el inventario
+        // ~Jugador();
+
+        
 };
 
 
