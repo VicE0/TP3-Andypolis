@@ -1,9 +1,9 @@
-#ifndef CASILLERO_INACCESIBLE_H
-#define CASILLERO_INACCESIBLE_H
+#ifndef LAGO_H
+#define LAGO_H
 
 #include "casillero.h"
 
-class Casillero_inaccesible : public Casillero {
+class Lago : public Casillero {
 
 
 public:
@@ -11,16 +11,20 @@ public:
     //Constructor de casillero inaccesible
     //PRE: Recibe un entero con la fila y otro con la columna
     //POST: Construye un casillero inaccesible con nombre = "L".
-    Casillero_inaccesible(int fila, int columna);
+    Lago(int fila, int columna);
 
     //PRE: -
-    //POS: muestra por pantalla un mensaje diciendo que que el casillero es inaccesible
+    //POS: muestra por pantalla un mensaje diciendo que que el casillero es un lago y es inaccesible
     void mostrar_casillero();
 
+    //PRE: Le pido el codigo paras aber que jugador es.
+    //POST: Devuelve un int con el costo de energia para transitar por este casillero.
+    int obtener_costo_energia(int codigo_jugador);
+    
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero inaccesible, muestra por pantalla un mensaje diciendo
     //que no se pueden construir edificios aqui
-    void agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo);
 
     //PRE: Recibe un string con el nombre del material y otro con la cantidad
     //que se desea gnerar del mismo

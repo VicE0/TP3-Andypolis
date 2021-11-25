@@ -49,7 +49,9 @@ int elegir_opcion(){
     return opcion;
 }
 
+
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
+
     switch (opcion)
     {
 
@@ -134,6 +136,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 }
 
 void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
+
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
@@ -161,6 +164,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
     if (mapa -> verificar_partida_empezada()){
         cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
+
     }
 
     else{
@@ -169,6 +173,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
             mostrar_menu_principal();
             opcion = elegir_opcion();
+
             procesar_opcion_principal(opcion, mapa, j1, j2);
 
         }while ( opcion != P_GUARDAR_SALIR );
