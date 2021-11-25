@@ -1,5 +1,5 @@
-#ifndef COMPRAR_ANDYPOLIS_H
-#define COMPRAR_ANDYPOLIS_H
+#ifndef EDAD_PIEDRA_H
+#define EDAD_PIEDRA_H
 
 #include "Objetivos.h"
 
@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class Comprar_andypolis : public Objetivo
+class Edad_piedra : public Objetivo
 {
     public:
-        Comprar_andypolis(int id_objetivo, int cantidad);
+        Edad_piedra(int id_objetivo, int cantidad);
 
         bool objetivo_cumplido();
 
@@ -20,4 +20,4 @@ class Comprar_andypolis : public Objetivo
 
 };
 
-#endif //COMPRAR_ANDYPOLIS
+#endif //EDAD_PIEDRA_H

@@ -1,5 +1,5 @@
-#ifndef COMPRAR_ANDYPOLIS_H
-#define COMPRAR_ANDYPOLIS_H
+#ifndef ARMADO_H
+#define ARMADO_H
 
 #include "Objetivos.h"
 
@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class Comprar_andypolis : public Objetivo
+class Armado : public Objetivo
 {
     public:
-        Comprar_andypolis(int id_objetivo, int cantidad);
+        Armado(int id_objetivo, int cantidad);
 
         bool objetivo_cumplido();
 
@@ -20,4 +20,4 @@ class Comprar_andypolis : public Objetivo
 
 };
 
-#endif //COMPRAR_ANDYPOLIS
+#endif //ARMADO_H

@@ -2,7 +2,6 @@
 #include "menu.h"
 #include "mapa.h"
 #include "edificio.h"
-#include "jugada.h"
 #include "jugador.h"
 
 using namespace std;
