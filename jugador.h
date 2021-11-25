@@ -46,11 +46,10 @@ class Jugador
 
         Lista<Material> * obtener_inventario();
 
-
         // -------------------------------- Funciones jugador --------------------------------
+        int obtener_energia();
 
         void agregar_material(Material * material);
-
 
         void mostrar_cantidad_material( string nombre );
 

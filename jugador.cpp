@@ -185,6 +185,10 @@ cantidad_metal_nec){
 
 };
 
+int Jugador::obtener_energia(){
+    return energia;
+}
+
 // bool Jugador::tiene_energia()
 // {
 //     return energia > 0;

@@ -129,76 +129,18 @@ void Mapa::procesar_archivo_ubicaciones(){
     archivo.seekg(0, ios::end);
 
     if (archivo && mapa_bien_cargado){
+
         if (archivo.tellg() != 0){
+            
+            int id_jugador;
             string nombre,segundo_nombre, barra, fila, columna;
             partida_empezada = true;
-            while( archivo >> nombre){
-                if ( nombre == "1" || nombre == "2"){
-                    getline(archivo, barra, '(');
-                    getline(archivo, fila, ',');
-                    getline(archivo, barra, ' ');
-                    getline(archivo, columna, ')');
-                    cout << "Cargando jugador " << nombre << endl;
+            cout << "veo un comentario para saber si entro " << endl;
 
-                    if ( nombre == "planta"){
-                        archivo >> segundo_nombre;
-                        getline(archivo, barra, '(');
-                        getline(archivo, fila, ',');
-                        getline(archivo, barra, ' ');
-                        getline(archivo, columna, ')');
+            while( getline(archivo, nombre ) ){
+                cout << "No lo puedo hacer" << endl; }
 
-                    nombre += " " + segundo_nombre;
-                    }
-                    else if ( nombre == "mina"){
-                        getline(archivo,segundo_nombre,'(');
-                        cout << segundo_nombre << endl;
-                        if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
-                            getline(archivo, barra, '(');
-                            getline(archivo, fila, ',');
-                            getline(archivo, barra, ' ');
-                            getline(archivo, columna, ')');
-
-                            nombre += " " + segundo_nombre;
-                        }else{
-                            barra = segundo_nombre;
-                            getline(archivo,barra,'(');
-                            getline(archivo, fila, ',');
-                            getline(archivo, barra, ' ');
-                            getline(archivo, columna, ')');
-                        }
-                    }
-                    else {
-                        getline(archivo, barra, '(');
-                        getline(archivo, fila, ',');
-                        getline(archivo, barra, ' ');
-                        getline(archivo, columna, ')');
-            }
-
-                if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
-                    mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
-                }
-
-                int madera, piedra, metal, maximo;
-
-                for ( int i = 0; i < obtener_cantidad_edificios(); i++){
-                    if ( obtener_edificio(i)->obtener_nombre() == nombre){
-                        piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
-                        madera = obtener_edificio(i)->obtener_cantidad_madera();
-                        metal = obtener_edificio(i)->obtener_cantidad_metal();
-                        maximo = obtener_edificio(i)->obtener_maximo_construir();
-
-
-                        // FALTA PASARLE POR PARAMETRO A "AGREGAR EDIFICIO"-> EL ID_JUGADOR [ ]
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
-
-                        obtener_edificio(i) ->sumar_cantidad();
-
-                    }
-                }
-            }
-                }
-
-            archivo.close();
+        archivo.close();
         }
         else{
             partida_empezada = false;
@@ -459,7 +401,6 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                     int fila , columna;
                     cout << "\n ### En esta seccion podra CONSTRUIR un EDIFICIO : ###\n" << endl;
                     validar_coordenada( fila, columna);
-                    cout << mapa[fila][columna]->obtener_nombre();
                     if ( mapa[fila][columna]->obtener_nombre() == "T" ){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
@@ -548,6 +489,7 @@ void Mapa::mostrar_coordenadas(string nombre){
 
 void Mapa::demoler_edificio(Jugador * jugador){
 
+    int id_jugador = jugador->dar_numero();
     cout << "\n\t\t ###   En esta seccion podra DEMOLER un EDIFICIO :   ###" << endl;
     
     cout << "\n";
@@ -559,12 +501,18 @@ void Mapa::demoler_edificio(Jugador * jugador){
     string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
 
     if ( nombre_edificio != ""){
+        int codigo_edificio = mapa[fila][columna]->obtener_edificio_construido()->obtener_id_jugador();
 
-        if ( aceptar_condiciones() ){
+        if ( id_jugador == codigo_edificio ){
+            if ( aceptar_condiciones() ){
 
             obtengo_materiales_elimino_edificio(jugador, nombre_edificio, fila, columna);
             cout << "\n\t\t ###   El edificio : " << nombre_edificio << ", ha sido DEMOLIDO exitosamente !   ###\n" << endl;
 
+            }
+
+        } else {
+            cout << "\n\t -> No se puede demoler un edificio que no es propio.\n" << endl;
         }
 
     } else {
@@ -895,15 +843,18 @@ void Mapa::lluvia_recursos(){
     
     int tot_materiales_gen = cant_gen_piedras + cant_gen_maderas + cant_gen_metales + cant_gen_coins;
     
-        
-    cout << "Han llovido los siguientes articulos en el mapa:" <<endl
+    cout << "\n\t.:Lluvia de materiales:. \n" << endl;
+
+    cout << "\nHan llovido los siguientes articulos en el mapa: \n" <<endl
     <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
     <<cant_gen_maderas * UNIDADES_POR_PACK_MADERA <<" unidades de madera" <<endl
     <<cant_gen_metales * UNIDADES_POR_PACK_METAL <<" unidades de metal " <<endl
     <<cant_gen_coins * UNIDADES_POR_PACK_COINS << " andycoins" <<endl<<endl
-    <<"en las siguientes posiciones: "<< endl;
-
+    <<"\nen las siguientes posiciones: "<< endl;
+    cout << "_____________________________________________________" << endl;
     ejecutar_lluvia(tot_materiales_gen,cant_gen_piedras, cant_gen_maderas, cant_gen_metales,cant_gen_coins);
+    cout << "_____________________________________________________" << endl;
+
 
     cout <<endl;
 }
