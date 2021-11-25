@@ -2,12 +2,18 @@
 #define CASILLERO_H
 
 #include <iostream>
+#include "../edificio.h"
+#include "../material.h"
 
 using namespace std;
+
+const int JUGADOR_1 = 1;
+const int JUGADOR_2 = 2;
 
 class Casillero
 {
 protected:
+    Material * material;
     int fila;
     int columna;
     string nombre;
@@ -26,7 +32,7 @@ public:
 
     // PRE: - 
     // POS: Implementada en los casilleros_construibles, creara un nuevo edificio en el casillero.
-    virtual void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo) = 0;
+    virtual void agregar_edificio(string nombre, int id_jugador,int piedra, int madera, int metal, int maximo) = 0;
 
     // PRE: -
     // POS: En casillero transitable, en caso de estar vacio, coloca un objeto material. 
@@ -36,6 +42,10 @@ public:
     // PRE: -
     // POST: Muestra informacion sobre el casillero.
     virtual void mostrar_casillero() = 0;
+
+    //PRE: -
+    //POST: Devuelve la cantidad de energia necesaria para transitar un determinado casillero.
+    virtual int obtener_costo_energia(int codigo_jugador) = 0;
 
     // PRE: -
     // POS: Se obtiene el nombre del casillero solicitado siendo estos = T,C,L.
@@ -82,7 +92,7 @@ public:
     // Destructor
     // PRE: -
     // POS: - 
-    virtual ~Casillero();
+    virtual ~Casillero(){};
     
     //Obtener fila
     //PRE:-
@@ -93,6 +103,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     virtual int obtener_columna() = 0;
+
+    virtual Edificio * obtener_edificio_construido() = 0;
 
 };
 

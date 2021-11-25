@@ -1,7 +1,6 @@
-#ifndef CASILLERO_CONSTRUIBLE_H
-#define CASILLERO_CONSTRUIBLE_H
+#ifndef TERRENO_H
+#define TERRENO_H
 
-#include "../edificio.h"
 #include "../edificios/aserradero.h"
 #include "../edificios/escuela.h"
 #include "../edificios/fabrica.h"
@@ -12,7 +11,7 @@
 #include "casillero.h"
 
 
-class Casillero_construible : public Casillero {
+class Terreno : public Casillero {
 
 private:
     Edificio * edificio_construido;
@@ -22,11 +21,19 @@ public:
     // Constructor
     //PRE: -
     //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
-    Casillero_construible(int fila, int columna);
+    Terreno(int fila, int columna);
+
+    //PRE: -
+    //POS: Devuelve el nombre del casillero ( getter ).
+    string obtener_nombre();
+    
+    //PRE:
+    //POST: Devuelve un int con el costo de energia para transitar por este casillero.
+    int obtener_costo_energia(int codigo_jugador);
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
-    void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo);
 
     //PRE:-
     //POS: En casilleros transitables hace apuntar el puntero material
@@ -59,10 +66,6 @@ public:
     //     si no existe: muestra el mensaje del tipo de casillero y que se encuentra vacio.
     void mostrar_casillero();
 
-    //PRE: -
-    //POS: Devuelve el nombre del casillero ( getter ).
-    string obtener_nombre();
-
     //PRE: En caso edificio_construido != NULL.  
     //POS: Muestra por pantalla las coordenadas del edificio y el nombre del edificio existente.
     void mostrar_coordenadas_edificio(string nombre);
@@ -78,7 +81,7 @@ public:
     // Destructor
     //PRE: En caso de que el casillero contenga un edificio. 
     //POS: Libero la memoria y edificio_construido = 0.
-    ~Casillero_construible();
+    ~Terreno();
 
     //Obtener fila
     //PRE:-
@@ -89,6 +92,8 @@ public:
     //PRE:-
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
+
+    Edificio * obtener_edificio_construido();
 };
 
 

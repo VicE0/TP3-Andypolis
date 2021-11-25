@@ -49,7 +49,9 @@ int elegir_opcion(){
     return opcion;
 }
 
+
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
+
     switch (opcion)
     {
 
@@ -80,11 +82,11 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
-            mapa->construir_edificio_nombre();
+            mapa->construir_edificio_nombre(jugador);
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
-            mapa->listar_edificios_construidos();
+            mapa->listar_edificios_construidos(jugador);
         break;
 
     case DEMOLER_EDIFICIO:
@@ -108,7 +110,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case MOSTRAR_INVENTARIO:
-            mapa->mostrar_inv();
+            mapa->mostrar_inv(jugador);
         break;
 
     case MOSTRAR_OBJETIVOS:
@@ -116,7 +118,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case RECOLECTAR_RECURSOS:
-            mapa->recolectar_recursos_producidos();
+            mapa->recolectar_recursos_producidos(jugador);
         break;
 
     case MOVERSE:
@@ -134,6 +136,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 }
 
 void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
+
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
@@ -161,6 +164,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
     if (mapa -> verificar_partida_empezada()){
         cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
+
     }
 
     else{
@@ -169,6 +173,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
             mostrar_menu_principal();
             opcion = elegir_opcion();
+
             procesar_opcion_principal(opcion, mapa, j1, j2);
 
         }while ( opcion != P_GUARDAR_SALIR );
@@ -182,6 +187,7 @@ void verificar_lluvia_de_materiales(int turno, Mapa * mapa){
 }
 
 void randomizador_de_turnos(Jugador * j1, Jugador * j2){  
+    srand( (unsigned)time(0) );
     int jugador_que_empieza = rand() % 2 + 1;
 
     if (jugador_que_empieza == 1){

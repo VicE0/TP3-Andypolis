@@ -1,6 +1,6 @@
 #include "mina_oro.h"
 
-Mina_oro::Mina_oro(int piedra, int madera, int metal, int maximo) : Edificio( piedra, madera, metal, maximo){
+Mina_oro::Mina_oro(int id_jugador,int piedra, int madera, int metal, int maximo) : Edificio( id_jugador,piedra, madera, metal, maximo){
     this->nombre = "mina oro";
     this->diminutivo = "G";
     this->brinda = 50;
