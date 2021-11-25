@@ -4,9 +4,11 @@
 #include <fstream>
 #include "inventario.h"
 #include "casilleros/casillero.h"
-#include "casilleros/casillero_construible.h"
-#include "casilleros/casillero_transitable.h"
-#include "casilleros/casillero_inaccesible.h"
+#include "casilleros/terreno.h"
+#include "casilleros/lago.h"
+#include "casilleros/betun.h"
+#include "casilleros/camino.h"
+#include "casilleros/muelle.h"
 #include "jugador.h"
 
 using namespace std;
@@ -32,7 +34,7 @@ private:
     int cantidad_edificios;
     Edificio ** edificios_posibles;
 
-    Casillero_transitable ** vector_casilleros_lluvia;
+    Casillero ** vector_casilleros_lluvia;
     int total_casilleros;
 
     bool ubicaciones_bien_cargadas;
@@ -215,7 +217,7 @@ public:
     //Agregar casillero a vector casilleros lluvia
     //PRE: Recibe un puntero a casillero transitable, un entero con el nuevo tamanio del vector y el entero posicion con la posicion
     //en la que se desea agregar el casillero en el vector (sera siempre al final)
-    void agregar_casillero_a_vector_casilleros_lluvia (Casillero_transitable* casillero, int tam_nuevo, int pos );
+    void agregar_casillero_a_vector_casilleros_lluvia (Casillero* casillero, int tam_nuevo, int pos );
 
     //Swap casiillero
     //PRE: Recibe 2 posiciones
@@ -231,7 +233,7 @@ public:
     //PRE: Recibe un entero con la posicion del casillero que se desea obtener
     //POST: Devuelve un puntero casillero transitable con el casillero que se encontraba en la posicion pos del 
     //vector casilleros lluvia
-    Casillero_transitable* obtener_casillero_vector_casilleros_lluvia( int pos);
+    Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
     
     //Detructor
