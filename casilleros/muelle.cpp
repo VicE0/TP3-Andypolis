@@ -30,7 +30,7 @@ void Muelle::agregar_edificio(string nombre, int id_jugador, int piedra, int mad
     cout << "\nEste es un muelle no se podran construir edificios en el. \n" << endl;
 }
 
-void Muelle:: agregar_material(string nombre, int cantidad){
+void Muelle::agregar_material(string nombre, int cantidad){
     if (!material){
         this->material = new Material(nombre, cantidad);
     }

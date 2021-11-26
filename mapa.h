@@ -2,7 +2,7 @@
 #define MAPA_H
 
 #include <fstream>
-#include "inventario.h"
+#include <string>
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
@@ -10,6 +10,7 @@
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "jugador.h"
+#include "ABB/ABB.h"
 
 using namespace std;
 
@@ -33,6 +34,8 @@ private:
 
     int cantidad_edificios;
     Edificio ** edificios_posibles;
+
+    Arbol * diccionario;
 
     Casillero ** vector_casilleros_lluvia;
     int total_casilleros;
@@ -78,6 +81,8 @@ public:
 
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
+
+    bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
     //--------------- EDIFICIOS ----------------------------------------------------
 
@@ -243,6 +248,10 @@ public:
     //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
+
+    Arbol * devolver_diccionario();
+
+    void modificar_edificios();
 };
 
 

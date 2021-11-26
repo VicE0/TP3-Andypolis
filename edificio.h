@@ -5,6 +5,10 @@
 
 using namespace std;
 
+const string PIEDRA = "piedra";
+const string MADERA = "madera";
+const string METAL = "metal";
+const string COINS = "andycoins";
 const string MINA = "mina";
 const string ASERRADERO = "aserradero";
 const string FABRICA = "fabrica";
@@ -21,11 +25,15 @@ protected:
     string nombre;
     string diminutivo;
     int cantidad_piedra;
-    int canitdad_madera;
+    int cantidad_madera;
     int cantidad_metal;
     int cantidad_edificios;
     int brinda;
     int maximo_construir;
+
+    void modificar_cantidad_piedra(int nueva_cantidad);
+    void modificar_cantidad_metal(int nueva_cantidad);
+    void modificar_cantidad_madera(int nueva_cantidad);
 
 public:
 
@@ -108,7 +116,7 @@ public:
 
     int obtener_id_jugador();
 
-
+    void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
 };
 
 

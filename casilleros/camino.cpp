@@ -27,7 +27,7 @@ void Camino::agregar_edificio(string nombre,int id_jugador, int piedra, int made
     cout << "\nEste es un camino no se podran construir edificios en el. \n" << endl;
 }
 
-void Camino:: agregar_material(string nombre, int cantidad){
+void Camino::agregar_material(string nombre, int cantidad){
     if (!material){
         this->material = new Material(nombre, cantidad);
     }
