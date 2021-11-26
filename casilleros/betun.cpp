@@ -27,7 +27,7 @@ void Betun::agregar_edificio(string nombre, int id_jugador, int piedra, int made
     cout << "\nEste es un betun no se podran construir edificios en el. \n" << endl;
 }
 
-void Betun:: agregar_material(string nombre, int cantidad){
+void Betun::agregar_material(string nombre, int cantidad){
     if (!material){
         this->material = new Material(nombre, cantidad);
     }

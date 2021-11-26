@@ -21,10 +21,10 @@ bool Mapa::carga_incorrecta_archivos(){
 
 }
 
-void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
+void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2, Arbol * diccionario){
 
     procesar_archivo_materiales(j1,j2);
-    cargar_edificios();
+    cargar_edificios(diccionario);
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
 
@@ -123,7 +123,7 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
 // COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
 void Mapa::procesar_archivo_ubicaciones(){
-
+    int madera, piedra, metal, maximo;
     ifstream archivo;
     archivo.open(ARCHIVO_UBICACIONES);
     archivo.seekg(0, ios::end);
@@ -133,7 +133,7 @@ void Mapa::procesar_archivo_ubicaciones(){
             string nombre,segundo_nombre, barra, fila, columna;
             partida_empezada = true;
 
-            while( archivo >> nombre){
+            while(archivo >> nombre){
                 if ( nombre == "1" || nombre == "2"){
                     getline(archivo, barra, '(');
                     getline(archivo, fila, ',');
@@ -149,6 +149,22 @@ void Mapa::procesar_archivo_ubicaciones(){
                         getline(archivo, columna, ')');
 
                     nombre += " " + segundo_nombre;
+                    
+                        for ( int i = 0; i < obtener_cantidad_edificios(); i++){
+                            if ( obtener_edificio(i)->obtener_nombre() == nombre){
+                            piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
+                            madera = obtener_edificio(i)->obtener_cantidad_madera();
+                            metal = obtener_edificio(i)->obtener_cantidad_metal();
+                            maximo = obtener_edificio(i)->obtener_maximo_construir();
+
+
+                        // FALTA PASARLE POR PARAMETRO A "AGREGAR EDIFICIO"-> EL ID_JUGADOR [ ]
+                            mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
+
+                            obtener_edificio(i) -> sumar_cantidad();
+
+                            }
+                        }
                     }
                     else if ( nombre == "mina"){
                         getline(archivo,segundo_nombre,'(');
@@ -173,31 +189,12 @@ void Mapa::procesar_archivo_ubicaciones(){
                         getline(archivo, fila, ',');
                         getline(archivo, barra, ' ');
                         getline(archivo, columna, ')');
-            }
-
-                if (nombre == "piedra" || nombre == "madera" || nombre == "metal"){
-                    mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
-                }
-
-                int madera, piedra, metal, maximo;
-
-                for ( int i = 0; i < obtener_cantidad_edificios(); i++){
-                    if ( obtener_edificio(i)->obtener_nombre() == nombre){
-                        piedra = obtener_edificio(i)-> obtener_cantidad_piedra();
-                        madera = obtener_edificio(i)->obtener_cantidad_madera();
-                        metal = obtener_edificio(i)->obtener_cantidad_metal();
-                        maximo = obtener_edificio(i)->obtener_maximo_construir();
-
-
-                        // FALTA PASARLE POR PARAMETRO A "AGREGAR EDIFICIO"-> EL ID_JUGADOR [ ]
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, 1, piedra, madera, metal, maximo);
-
-                        obtener_edificio(i) ->sumar_cantidad();
-
                     }
                 }
-            }
+                if (nombre == "piedra" || nombre == "madera" || nombre == "metal" || nombre == "andycoins"){
+                    mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre,1);
                 }
+            }
 
             archivo.close();
         }
@@ -249,7 +246,7 @@ bool Mapa::aceptar_condiciones(){
 
 // --------------- EDIFICIOS POSIBLES --------------------------------------------------
 
-void Mapa::cargar_edificios(){
+void Mapa::cargar_edificios(Arbol * diccionario){
 ifstream nuevo_archivo;
     nuevo_archivo.open(ARCHIVO_EDIFICIO);
 
@@ -295,11 +292,7 @@ ifstream nuevo_archivo;
 
             }
 
-            piedra = stoi(cantidad_piedra);
-            madera = stoi(cantidad_madera);
-            metal = stoi(cantidad_metal);
-            maximo_construir = stoi(maximo);
-
+            
             if (nombre_edificio == ASERRADERO){
 
                 nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
@@ -307,40 +300,38 @@ ifstream nuevo_archivo;
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica( 1,piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica(1,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
-
-                nuevo_edificio = new Planta_electrica( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro( 1, piedra, madera, metal, maximo_construir);
-
+                nuevo_edificio = new Mina_oro(1, piedra, madera, metal, maximo_construir);
             }
-            agregar_edificio(nuevo_edificio);
+            
+            diccionario -> insertar(nuevo_edificio);
 
         }
 
         nuevo_archivo.close();
-    
     }else{
         cantidad_edificios= ERROR;
     }
@@ -516,22 +507,13 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
     cout << "\n";
 }
 
-void Mapa::listar_todos_edificios(){
+void Mapa::listar_todos_edificios(Arbol * diccionario){
     cout << "\n";
     cout << "\t\t###   Listado de todos los edificios :   ###" << endl;
     cout << "\nOrden de los elementos :  " << endl;
     cout << "\n -> nombre / piedra / madera / metal / cuantos puedo construir " << endl;
     cout << "_________________________________________________________________" << endl;
-    for ( int i = 0; i < cantidad_edificios; i++){
-        cout << "\n";
-        cout << " -> " << edificios_posibles[i]->obtener_nombre() << " "
-        << edificios_posibles[i]->obtener_cantidad_piedra() << " "
-        << edificios_posibles[i]->obtener_cantidad_madera() << " "
-        << edificios_posibles[i]->obtener_cantidad_metal() << " "
-        << edificios_posibles[i]->obtener_cuantos_puedo_construir() << endl;
-        cout << "\n";
-        cout << "_________________________________________________________________" << endl;
-    }
+    diccionario -> mostrar();
     cout << "\n";
 }
 
@@ -952,3 +934,4 @@ Mapa::~Mapa(){
 
 
 }
+

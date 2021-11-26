@@ -10,6 +10,7 @@
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "jugador.h"
+#include "ABB/ABB.h"
 
 using namespace std;
 
@@ -53,7 +54,7 @@ public:
     //     en caso de existir ubicaciones de edificios o materiales.
     //     Ingresa los valores a los punteros usuarios_inventario y lista_edificio 
     //     haciendo lectura correspondiente de los arhivos
-    void ingreso_datos_mapa(Jugador * j1, Jugador * j2);
+    void ingreso_datos_mapa(Jugador * j1, Jugador * j2, Arbol * diccionario);
 
     //PRE: Utilizando el archivo ubicaciones.txt.
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
@@ -83,7 +84,7 @@ public:
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.
     //POS: Carga el archivo dentro del vector dinamico edificios_posibles.
-    void cargar_edificios();
+    void cargar_edificios(Arbol * diccionario);
 
     //PRE: con cantidad_edificios >= 0
     //POS: agrega un edificio al vector y lo redimensiona.
@@ -128,7 +129,7 @@ public:
 
     //PRE: - 
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
-    void listar_todos_edificios();
+    void listar_todos_edificios(Arbol * diccionario);
 
     //PRE: En caso que haya edificios construidos en los casilleros.
     //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.

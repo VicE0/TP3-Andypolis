@@ -50,7 +50,7 @@ int elegir_opcion(){
 }
 
 
-void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
+void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2, Arbol * diccionario){
 
     switch (opcion)
     {
@@ -60,7 +60,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
         break;
     
     case P_LISTAR_TODOS_EDIFICIOS:
-            mapa->listar_todos_edificios();
+            mapa->listar_todos_edificios(diccionario);
         break;
     
     case P_MOSTRAR_MAPA:
@@ -158,7 +158,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     while ( opcion != GUARDAR_SALIR );
 }
 
-void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
+void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2, Arbol * diccionario){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
@@ -174,7 +174,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
             mostrar_menu_principal();
             opcion = elegir_opcion();
 
-            procesar_opcion_principal(opcion, mapa, j1, j2);
+            procesar_opcion_principal(opcion, mapa, j1, j2, diccionario);
 
         }while ( opcion != P_GUARDAR_SALIR );
     }
