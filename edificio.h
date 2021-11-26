@@ -16,10 +16,7 @@ const string ESCUELA = "escuela";
 const string OBELISCO = "obelisco";
 const string PLANTA_ELECTRICA = "planta electrica";
 const string MINA_ORO = "mina oro";
-const string PIEDRA = "piedra";
-const string MADERA = "madera";
-const string METAL = "metal";
-const string COINS = "andycoins";
+
 
 class Edificio
 {
