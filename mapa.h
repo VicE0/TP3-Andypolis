@@ -2,7 +2,7 @@
 #define MAPA_H
 
 #include <fstream>
-#include "inventario.h"
+#include <string>
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
@@ -35,6 +35,8 @@ private:
     int cantidad_edificios;
     Edificio ** edificios_posibles;
 
+    Arbol * diccionario;
+
     Casillero ** vector_casilleros_lluvia;
     int total_casilleros;
 
@@ -54,7 +56,7 @@ public:
     //     en caso de existir ubicaciones de edificios o materiales.
     //     Ingresa los valores a los punteros usuarios_inventario y lista_edificio 
     //     haciendo lectura correspondiente de los arhivos
-    void ingreso_datos_mapa(Jugador * j1, Jugador * j2, Arbol * diccionario);
+    void ingreso_datos_mapa(Jugador * j1, Jugador * j2);
 
     //PRE: Utilizando el archivo ubicaciones.txt.
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
@@ -84,7 +86,7 @@ public:
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.
     //POS: Carga el archivo dentro del vector dinamico edificios_posibles.
-    void cargar_edificios(Arbol * diccionario);
+    void cargar_edificios();
 
     //PRE: con cantidad_edificios >= 0
     //POS: agrega un edificio al vector y lo redimensiona.
@@ -129,7 +131,7 @@ public:
 
     //PRE: - 
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
-    void listar_todos_edificios(Arbol * diccionario);
+    void listar_todos_edificios();
 
     //PRE: En caso que haya edificios construidos en los casilleros.
     //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.
@@ -244,6 +246,10 @@ public:
     //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
+
+    Arbol * devolver_diccionario();
+
+    void modificar_edificios();
 };
 
 

@@ -4,10 +4,11 @@
 
 const int ENERGIA_INICIAL = 50;
 
+#include "material.h"
 #include "lista.h"
-#include "inventario.h"
-
+#include "edificio.h"
 #include <string>
+
 using std::string;
 
 class Jugador

@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> total_casilleros = 0;
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
+    this -> diccionario = new Arbol;
 
 }
 
@@ -21,10 +22,10 @@ bool Mapa::carga_incorrecta_archivos(){
 
 }
 
-void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2, Arbol * diccionario){
+void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
     procesar_archivo_materiales(j1,j2);
-    cargar_edificios(diccionario);
+    cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones();
 
@@ -246,7 +247,7 @@ bool Mapa::aceptar_condiciones(){
 
 // --------------- EDIFICIOS POSIBLES --------------------------------------------------
 
-void Mapa::cargar_edificios(Arbol * diccionario){
+void Mapa::cargar_edificios(){
 ifstream nuevo_archivo;
     nuevo_archivo.open(ARCHIVO_EDIFICIO);
 
@@ -292,7 +293,11 @@ ifstream nuevo_archivo;
 
             }
 
-            
+            piedra = stoi(cantidad_piedra);
+            madera = stoi(cantidad_madera);
+            metal = stoi(cantidad_metal);
+            maximo_construir = stoi(maximo);
+
             if (nombre_edificio == ASERRADERO){
 
                 nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
@@ -327,7 +332,7 @@ ifstream nuevo_archivo;
                 nuevo_edificio = new Mina_oro(1, piedra, madera, metal, maximo_construir);
             }
             
-            diccionario -> insertar(nuevo_edificio);
+            this -> diccionario -> insertar(nuevo_edificio);
 
         }
 
@@ -337,24 +342,6 @@ ifstream nuevo_archivo;
     }
 }
 
-void Mapa::agregar_edificio(Edificio * nuevo_edificio){
-    int cantidad_vieja = cantidad_edificios;
-
-    Edificio ** vector_edificio = new Edificio * [ cantidad_vieja + 1];     
-
-    for ( int i = 0; i < cantidad_edificios; i++){
-        vector_edificio[i] = edificios_posibles[i];
-    }
-
-    vector_edificio[ cantidad_vieja ] = nuevo_edificio;
-
-    if ( cantidad_edificios != 0){
-        delete [] edificios_posibles; 
-    }
-
-    edificios_posibles = vector_edificio;
-    cantidad_edificios++;
-}
 
 int Mapa::obtener_cantidad_edificios(){
     return cantidad_edificios;
@@ -507,13 +494,13 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
     cout << "\n";
 }
 
-void Mapa::listar_todos_edificios(Arbol * diccionario){
+void Mapa::listar_todos_edificios(){
     cout << "\n";
     cout << "\t\t###   Listado de todos los edificios :   ###" << endl;
     cout << "\nOrden de los elementos :  " << endl;
     cout << "\n -> nombre / piedra / madera / metal / cuantos puedo construir " << endl;
     cout << "_________________________________________________________________" << endl;
-    diccionario -> mostrar();
+    this -> diccionario -> mostrar();
     cout << "\n";
 }
 
@@ -935,3 +922,13 @@ Mapa::~Mapa(){
 
 }
 
+Arbol * Mapa::devolver_diccionario(){
+    return diccionario;
+}
+
+void Mapa::modificar_edificios(){
+    string nombre_edificio;
+    cout<<"Deci el nombre de un edificio "<<endl;
+    cin >> nombre_edificio;
+    diccionario -> modificar_datos_edificio(nombre_edificio);
+}

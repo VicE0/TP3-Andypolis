@@ -8,6 +8,7 @@ using namespace std;
 const string PIEDRA = "piedra";
 const string MADERA = "madera";
 const string METAL = "metal";
+const string COINS = "andycoins";
 const string MINA = "mina";
 const string ASERRADERO = "aserradero";
 const string FABRICA = "fabrica";
