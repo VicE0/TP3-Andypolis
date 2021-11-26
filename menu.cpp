@@ -79,6 +79,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
 
 void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
 
+
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
@@ -90,7 +91,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case DEMOLER_EDIFICIO:
-            cout << "Demoler edificio" << endl;
+            mapa->demoler_edificio(jugador);
         break;
 
     case ATACAR_EDIFICIO:
@@ -126,7 +127,8 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case FINALIZAR_TURNO:
-            cout << "finalizo el turno" << endl;
+            jugador->sumar_energia(20);
+            cout << "\n\tSu turno ha finalizado.\n" << endl;
         break;
     
     case GUARDAR_SALIR:
@@ -145,7 +147,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
 
         Jugador * jugador = verificar_turno_jugador(turno, j1, j2);
 
-        cout<<"Es el turno del jugador "<< jugador ->dar_numero()<<endl;
+        cout<<"\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
 
         do{
         mostrar_menu_partida();

@@ -11,6 +11,8 @@ const int ENERGIA_INICIAL = 50;
 
 using std::string;
 
+const int MAX_ENERGIA = 100;
+
 class Jugador
 {
 
@@ -33,25 +35,18 @@ class Jugador
         //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
 
-        // //PRE: ~
-        // //POST: Obtiene la cantidad de energia del jugador 
-        // int obtener_energia();
-
-        // //PRE: ~
-        // //POST: Devuelve TRUE si la energía del jugador es suficiente para realizar la opción
-        // bool tiene_energia();
-
-        //Obtener bombas / andycoins ?
-
         Material * obtener_material(string nombre);
 
         Lista<Material> * obtener_inventario();
 
-
         // -------------------------------- Funciones jugador --------------------------------
+        int obtener_energia();
+
+        void sumar_energia(int cantidad);
+
+        void restar_energia(int cantidad);
 
         void agregar_material(Material * material);
-
 
         void mostrar_cantidad_material( string nombre );
 
@@ -75,9 +70,7 @@ class Jugador
 
         void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
-
-        // Destructor, seguro lo necesitamos para liberar el inventario
-        // ~Jugador();
+        ~Jugador();
 
         
 };

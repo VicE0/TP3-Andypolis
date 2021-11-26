@@ -82,6 +82,8 @@ public:
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
+    bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
+
     //--------------- EDIFICIOS ----------------------------------------------------
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.
