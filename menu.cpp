@@ -56,7 +56,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
     {
 
     case P_MODIFICAR_EDIFICIO:
-        cout << "Modificar edificio" << endl;
+        mapa -> modificar_edificios();
         break;
     
     case P_LISTAR_TODOS_EDIFICIOS:

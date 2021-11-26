@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> total_casilleros = 0;
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
+    this -> diccionario = new Arbol;
 
 }
 
@@ -123,7 +124,7 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
 // COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
 void Mapa::procesar_archivo_ubicaciones(){
-
+    int madera, piedra, metal, maximo;
     ifstream archivo;
     archivo.open(ARCHIVO_UBICACIONES);
     archivo.seekg(0, ios::end);
@@ -137,10 +138,12 @@ void Mapa::procesar_archivo_ubicaciones(){
             partida_empezada = true;
             cout << "veo un comentario para saber si entro " << endl;
 
+
             while( getline(archivo, nombre ) ){
                 cout << "No lo puedo hacer" << endl; }
 
         archivo.close();
+
         }
         else{
             partida_empezada = false;
@@ -257,63 +260,43 @@ ifstream nuevo_archivo;
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica( 1,piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica(1,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
-
-                nuevo_edificio = new Planta_electrica( 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica(1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro( 1, piedra, madera, metal, maximo_construir);
-
+                nuevo_edificio = new Mina_oro(1, piedra, madera, metal, maximo_construir);
             }
-            agregar_edificio(nuevo_edificio);
+            
+            this -> diccionario -> insertar(nuevo_edificio);
 
         }
 
         nuevo_archivo.close();
-    
     }else{
         cantidad_edificios= ERROR;
     }
 }
 
-void Mapa::agregar_edificio(Edificio * nuevo_edificio){
-    int cantidad_vieja = cantidad_edificios;
-
-    Edificio ** vector_edificio = new Edificio * [ cantidad_vieja + 1];     
-
-    for ( int i = 0; i < cantidad_edificios; i++){
-        vector_edificio[i] = edificios_posibles[i];
-    }
-
-    vector_edificio[ cantidad_vieja ] = nuevo_edificio;
-
-    if ( cantidad_edificios != 0){
-        delete [] edificios_posibles; 
-    }
-
-    edificios_posibles = vector_edificio;
-    cantidad_edificios++;
-}
 
 int Mapa::obtener_cantidad_edificios(){
     return cantidad_edificios;
@@ -478,16 +461,7 @@ void Mapa::listar_todos_edificios(){
     cout << "\nOrden de los elementos :  " << endl;
     cout << "\n -> nombre / piedra / madera / metal / cuantos puedo construir " << endl;
     cout << "_________________________________________________________________" << endl;
-    for ( int i = 0; i < cantidad_edificios; i++){
-        cout << "\n";
-        cout << " -> " << edificios_posibles[i]->obtener_nombre() << " "
-        << edificios_posibles[i]->obtener_cantidad_piedra() << " "
-        << edificios_posibles[i]->obtener_cantidad_madera() << " "
-        << edificios_posibles[i]->obtener_cantidad_metal() << " "
-        << edificios_posibles[i]->obtener_cuantos_puedo_construir() << endl;
-        cout << "\n";
-        cout << "_________________________________________________________________" << endl;
-    }
+    this -> diccionario -> mostrar();
     cout << "\n";
 }
 
@@ -921,4 +895,15 @@ Mapa::~Mapa(){
     edificios_posibles = nullptr;
 
 
+}
+
+Arbol * Mapa::devolver_diccionario(){
+    return diccionario;
+}
+
+void Mapa::modificar_edificios(){
+    string nombre_edificio;
+    cout<<"Deci el nombre de un edificio "<<endl;
+    cin >> nombre_edificio;
+    diccionario -> modificar_datos_edificio(nombre_edificio);
 }
