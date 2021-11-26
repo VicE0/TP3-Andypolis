@@ -26,7 +26,7 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
-    procesar_archivo_ubicaciones();
+    procesar_archivo_ubicaciones( j1, j2);
 
 }
 
@@ -121,35 +121,99 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
-// COMO PODEMOS HACER PARA QUE SE GUARDE EL ID_JUGADOR [ ]
-void Mapa::procesar_archivo_ubicaciones(){
-    int madera, piedra, metal, maximo;
-    ifstream archivo;
-    archivo.open(ARCHIVO_UBICACIONES);
-    archivo.seekg(0, ios::end);
-
-    if (archivo && mapa_bien_cargado){
-
-        if (archivo.tellg() != 0){
-            
-            int id_jugador;
-            string nombre,segundo_nombre, barra, fila, columna;
-            partida_empezada = true;
-            cout << "veo un comentario para saber si entro " << endl;
-
-
-            while( getline(archivo, nombre ) ){
-                cout << "No lo puedo hacer" << endl; }
-
-        archivo.close();
-
-        }
-        else{
-            partida_empezada = false;
-        }
-    }else{
-        ubicaciones_bien_cargadas = false;
+void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
+    if ( id_jugador == "1" ){
+        mapa[fila][columna]->agregar_jugador(j1);
+    } else {
+        mapa[fila][columna]->agregar_jugador(j2);
     }
+}
+
+void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
+    
+    int madera, piedra, metal, maximo, id;
+    ifstream archivo(ARCHIVO_UBICACIONES);
+    string nombre,segundo_nombre, barra, fila, columna, id_jugador;
+
+        if (archivo && mapa_bien_cargado){
+            if ( archivo.tellg() == 0 ){
+
+                while(archivo >> nombre){
+                    if ( nombre == "1" || nombre == "2"){ // EVALUO SI ES UN JUGADOR
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
+                        id_jugador = nombre;
+                        id = stoi(id_jugador);
+
+                        insertar_jugador_mapa(id_jugador, j1, j2, stoi(fila), stoi(columna));
+
+                    } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  ) { // EVALUO SI ES UN MATERIAL
+
+                        getline(archivo, barra, '(');
+                        getline(archivo, fila, ',');
+                        getline(archivo, barra, ' ');
+                        getline(archivo, columna, ')');
+                        mapa[stoi(fila)][stoi(columna)]->agregar_material(nombre, 1);
+
+                    } else { // EVALUO SI ES UN EDIFICIO 
+                        if ( nombre == "planta"){
+                            archivo >> segundo_nombre;
+                            getline(archivo, barra, '(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+                            nombre += " " + segundo_nombre;
+                        }
+
+                        if ( nombre == "mina"){
+                            getline(archivo,segundo_nombre,'(');
+                            if (segundo_nombre == " oro"){ //ver si hay q poner espacio o no
+                                getline(archivo, barra, '(');
+                                getline(archivo, fila, ',');
+                                getline(archivo, barra, ' ');
+                                getline(archivo, columna, ')');
+                                nombre += " " + segundo_nombre;
+                            } else {
+                                barra = segundo_nombre;
+                                getline(archivo,barra,'(');
+                                getline(archivo, fila, ',');
+                                getline(archivo, barra, ' ');
+                                getline(archivo, columna, ')');
+                            }
+                        } else {
+                            getline(archivo, barra, '(');
+                            getline(archivo, fila, ',');
+                            getline(archivo, barra, ' ');
+                            getline(archivo, columna, ')');
+                        }
+
+                        
+                        Edificio * edificio = diccionario->encontrar(nombre)->obtener_edificio();
+                        piedra = edificio-> obtener_cantidad_piedra();
+                        madera = edificio->obtener_cantidad_madera();
+                        metal = edificio->obtener_cantidad_metal();
+                        maximo = edificio->obtener_maximo_construir();
+
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, id, piedra, madera, metal, maximo);
+                        edificio -> sumar_cantidad();
+                    }
+
+                }
+                mostrar_mapa();
+
+                partida_empezada = true;
+                archivo.close();
+
+            }
+            else{
+                partida_empezada = false;
+            }
+        }else{
+            ofstream archivo(ARCHIVO_UBICACIONES);
+            ubicaciones_bien_cargadas = false;
+        }
 }
 
 bool Mapa::verificar_partida_empezada(){
@@ -502,6 +566,7 @@ void Mapa::mostrar_mapa(){
            cout << mapa[i][j]->obtener_nombre()
                 << mapa[i][j]->obtener_diminutivo_edificio()
                 << mapa[i][j]->obtener_diminutivo_material()
+                << mapa[i][j]->obtener_diminutivo_jugador()
                 << "\t";
         }
         cout << "\n" << endl;

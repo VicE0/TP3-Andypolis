@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <iostream>
 #include <fstream>
 #include <string>
 #include "casilleros/casillero.h"
@@ -10,6 +11,7 @@
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "jugador.h"
+#include "edificio.h"
 #include "ABB/ABB.h"
 
 using namespace std;
@@ -59,7 +61,7 @@ public:
 
     //PRE: Utilizando el archivo ubicaciones.txt.
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
-    void procesar_archivo_ubicaciones();
+    void procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2);
 
     //PRE: Utilizando el archivo mapa.txt.
     //POS: Obtiene la cantidad de filas y columnas. Ingresa los valores de los casilleros.
@@ -77,6 +79,8 @@ public:
     bool aceptar_condiciones();
 
     bool verificar_partida_empezada();
+
+    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
 
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
