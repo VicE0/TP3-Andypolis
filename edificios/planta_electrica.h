@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Planta_electrica(int piedra, int madera, int metal, int maximo);
+    Planta_electrica(int id_jugador,int piedra, int madera, int metal, int maximo);
 
     int obtener_cantidad_brindada();
 

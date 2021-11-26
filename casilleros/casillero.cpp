@@ -23,5 +23,3 @@ int Casillero::obtener_fila(){
 int Casillero::obtener_columna(){
     return fila;
 }
-
-Casillero::~Casillero(){}

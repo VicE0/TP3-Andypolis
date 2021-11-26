@@ -1,29 +1,34 @@
-#ifndef CASILLERO_TRANSITABLE_H
-#define CASILLERO_TRANSITABLE_H
+#ifndef BETUN_H
+#define BETUN_H
 
 #include "casillero.h"
-#include "../material.h"
 
 
-class Casillero_transitable : public Casillero {
-private:
-    Material * material;
+
+class Betun : public Casillero {
 public:
 
-    //Constructor de casillero transitable
+    //Constructor de Betun
     //PRE: Recibe un entero con la fila y otro con la columna
-    //POST: Construye un casillero transitable con nombre = "c" e inicializa el puntero material en null.
-    Casillero_transitable(int fila, int columna);
+    //POST: Construye un Betun con nombre = "B".
+    Betun(int fila, int columna);
 
-    //PRE: Dos casos posibles , si existe o no un materiaal ubicado en e 
-    //POS: Si existe : se muestra el mensaje que el casillero no esta vacio y manda el mensaje del material,
-    //     si no existe: muestra el mensaje del tipo de casillero y que se encuentra vacio.
+    //PRE: -
+    //POS: muestra por pantalla un mensaje diciendo que que el casillero es un Betun.
     void mostrar_casillero();
-    
+
+    //PRE:
+    //POST: Devuelve un string con el nombre del casillero, en este caso "C" pues es un Betun
+    string obtener_nombre();
+
+    //PRE: Le pide el numero del jugador (indiferente ya q ambos gastan lo mismo).
+    //POST: Devuelve un int con el costo de energia para transitar por este casillero.
+    int obtener_costo_energia(int codigo_jugador);
+
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero transitable, muestra por pantalla un mensaje diciendo
     //que no se pueden construir edificios aqui
-    void agregar_edificio(string nombre, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre, int id_jugador,int piedra, int madera, int metal, int maximo);
 
     //PRE: Recibe un string con el nombre del material y otro con la cantidad
     //que se desea gnerar del mismo
@@ -32,8 +37,7 @@ public:
     void agregar_material(string nombre, int cantidad);
 
     //PRE: Debe haber un  material colocado en el casillero
-    //POS: Getter Devuelve un string vacio poruqe no se pueden construir edificios en los
-    //casilleros transitables.
+    //POS: Getter Devuelve un string vacio poruqe no se pueden construir edificios en los Betunes
     string obtener_nombre_edificio();
 
     //PRE: - 
@@ -41,8 +45,7 @@ public:
     string obtener_nombre_material();
 
     //PRE:
-    //POST: Al ser un casillero transitable no devueve un string vacio pus
-    //no se pueden ubicar edificios en el.
+    //POST: Al ser un Betun nos devueve un string vacio pues no se pueden ubicar edificios en el.
     string obtener_diminutivo_edificio();
 
     //PRE: -
@@ -52,21 +55,16 @@ public:
 
     //PRE:
     //POST: Muestra un mensaje diciendo que no existe ningun edificio en
-    //el casillero puesto que es transitable
+    //el casillero puesto que es un Betun
     void eliminar_edificio();
 
     //PRE: -
-    //POST: Devuelve false puesto que no se pueden construir edificios en casilleros
-    //transitables
+    //POST: Devuelve false puesto que no se pueden construir edificios en los Betunes
     bool existe_edificio();
 
     //PRE: -
     //POST: Devulve treu si existe un material en el casillero y false en caso contrario
     bool existe_material();
-
-    //PRE:
-    //POST: Devuelve un string con el nombre del casillero, en este caso "C" pues es un camino
-    string obtener_nombre();
 
     //PRE: -
     //POST: Muestra por pantalla un mensaje diciendo que no existe edificio construido en
@@ -83,9 +81,10 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
 
-    //Destructor de casillero transitable
-    ~Casillero_transitable();
-};
+    Edificio * obtener_edificio_construido();
 
-
+    //Destructor de Betun
+    ~Betun();
+    };
+    
 #endif

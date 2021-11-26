@@ -1,5 +1,4 @@
-mina 200 50 140 2
-planta electrica 100 40 220 3
-fabrica 10 0 500 1
-aserradero 40 25 100 5
-escuela 45 125 140 2
+escuela 152 298 45 1
+fabrica 100 100 258 1
+aserradero 100 58 50 1
+planta electrica 100 50 12 1

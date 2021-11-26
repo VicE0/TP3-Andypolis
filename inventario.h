@@ -13,6 +13,7 @@ using namespace std;
 const string PIEDRA = "piedra";
 const string MADERA = "madera";
 const string METAL = "metal";
+const string COINS = "andycoins";
 
 class Inventario { 
 private:
