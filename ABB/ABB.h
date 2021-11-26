@@ -34,6 +34,10 @@ public:
 
     void modificar_datos_edificio(string clave);
 
+    bool existe_edificio(string clave);
+
+    bool supera_maximo(string clave);
+
 };
 
 #endif //

@@ -6,7 +6,6 @@ Mapa::Mapa(){
     this -> cantidad_columnas = 0;
     this -> mapa = 0;
     this -> cantidad_edificios = 0;
-    this -> edificios_posibles = 0;
     this -> vector_casilleros_lluvia = 0;
     this -> total_casilleros = 0;
     this -> mapa_bien_cargado = true;
@@ -200,7 +199,7 @@ bool Mapa::verificacion_energia(int cantidad_disponible, int cantidad_necesaria)
 }
 
 
-// --------------- EDIFICIOS POSIBLES --------------------------------------------------
+// --------------- DICCIONARIO : EDIFICIOS --------------------------------------------------
 
 void Mapa::cargar_edificios(){
 ifstream nuevo_archivo;
@@ -288,69 +287,18 @@ ifstream nuevo_archivo;
             }
             
             this -> diccionario -> insertar(nuevo_edificio);
+            cantidad_edificios++;
 
         }
 
         nuevo_archivo.close();
     }else{
-        cantidad_edificios= ERROR;
+        cantidad_edificios = ERROR;
     }
 }
-
 
 int Mapa::obtener_cantidad_edificios(){
     return cantidad_edificios;
-}
-
-int Mapa::obtener_posicion_edificio(string nombre){
-    int pos;
-    for ( int i = 0; i < cantidad_edificios ; i++){
-        if ( nombre == edificios_posibles[i]->obtener_nombre()){
-            pos = i;
-        }
-    }return pos;
-}
-
-Edificio * Mapa::obtener_edificio(int posicion){
-    return edificios_posibles[posicion];
-}
-
-bool Mapa::existe_el_edificio(string nombre){
-    bool existe = false;
-    string nombre_buscado;
-    for (int i = 0; i < cantidad_edificios; i++){
-        nombre_buscado = edificios_posibles[i]->obtener_nombre();
-        if ( nombre_buscado == nombre ){
-            existe = true;
-        }
-    }
-
-    return existe;
-}
-
-bool Mapa::supera_maximo(string nombre){
-    bool supera_max = true;
-    int maximo , construidos, restantes;
-    for ( int i = 0; i < cantidad_edificios ; i++){
-
-        Edificio * edificio_buscado = obtener_edificio(i);
-        string nombre_edificio = edificio_buscado->obtener_nombre();
-
-        if ( nombre_edificio == nombre ){
-
-            maximo = edificio_buscado->obtener_maximo_construir();
-            construidos = edificio_buscado->obtener_cantidad_construidos();
-
-            restantes = maximo - construidos;
-
-            if ( restantes > 0 ){
-                supera_max = false;
-            } 
-        }
-        
-    }
-
-    return supera_max;
 }
 
 // -------------- DIVISION PUNTO POR PUNTO : MENU -------------------------------
@@ -365,7 +313,7 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
 
     if ( verificacion_energia( energia_jugador, 15) ){
 
-        bool existe_edificio = existe_el_edificio(nombre_nuevo);
+        bool existe_edificio = diccionario->existe_edificio(nombre_nuevo);
         if ( existe_edificio ){
 
             realizar_construccion(nombre_nuevo, jugador);
@@ -382,14 +330,14 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
 void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 
         int id_jugador = jugador->dar_numero();
-        int pos_edificio = obtener_posicion_edificio(nombre_nuevo);
+        Edificio * edificio = diccionario->encontrar(nombre_nuevo)->obtener_edificio();
 
-        int piedra_necesaria = obtener_edificio(pos_edificio)->obtener_cantidad_piedra();
-        int madera_necesaria = obtener_edificio(pos_edificio)->obtener_cantidad_madera();
-        int metal_necesario = obtener_edificio(pos_edificio)->obtener_cantidad_metal();
-        int maximo = obtener_edificio(pos_edificio)->obtener_maximo_construir();
+        int piedra_necesaria = edificio->obtener_cantidad_piedra();
+        int madera_necesaria = edificio->obtener_cantidad_madera();
+        int metal_necesario = edificio->obtener_cantidad_metal();
+        int maximo = edificio->obtener_maximo_construir();
 
-        bool supera_max = supera_maximo(nombre_nuevo);
+        bool supera_max = diccionario -> supera_maximo(nombre_nuevo);
         bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
@@ -404,7 +352,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
-                            obtener_edificio(pos_edificio)->sumar_cantidad();
+                            edificio->sumar_cantidad();
 
                             jugador->restar_energia(15);
                             jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
@@ -519,21 +467,11 @@ void Mapa::demoler_edificio(Jugador * jugador){
 void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna){
 
     int mitad_piedra, mitad_madera, mitad_metal;
+    Edificio * edificio = diccionario->encontrar(nombre_edificio)->obtener_edificio();
 
-    for (int i = 0; i < obtener_cantidad_edificios(); i++){
-
-        string edificio_en_lista = obtener_edificio(i)->obtener_nombre();
-
-        if (edificio_en_lista == nombre_edificio){
-            obtener_edificio(i)->restar_cantidad();
-
-            mitad_piedra = obtener_edificio(i)->obtener_mitad_piedra();
-            mitad_madera = obtener_edificio(i)->obtener_mitad_madera();
-            mitad_metal = obtener_edificio(i)->obtener_mitad_metal();
-
-        }
-
-    }
+    mitad_piedra = edificio->obtener_mitad_piedra();
+    mitad_madera = edificio->obtener_mitad_madera();
+    mitad_metal = edificio->obtener_mitad_metal();
 
     // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
     devolver_materiales( jugador, mitad_piedra, mitad_madera, mitad_metal, 0);
@@ -598,33 +536,30 @@ void Mapa::recolectar_recursos_producidos(Jugador * jugador){
 
     cantidad_edificios = obtener_cantidad_edificios();
 
-    for ( int i = 0; i < cantidad_edificios; i++){
+    Edificio * edificio_solicitado = diccionario->encontrar(nombre_edificio)->obtener_edificio(); 
 
-        Edificio * edificio_solicitado = obtener_edificio(i); 
+    nombre_edificio = edificio_solicitado->obtener_nombre();
+    cantidad_construidos = edificio_solicitado->obtener_cantidad_construidos();
+    cantidad_a_brindar = edificio_solicitado->obtener_cantidad_brindada();
 
-        nombre_edificio = edificio_solicitado->obtener_nombre();
-        cantidad_construidos = edificio_solicitado->obtener_cantidad_construidos();
-        cantidad_a_brindar = edificio_solicitado->obtener_cantidad_brindada();
+    total_brindado = cantidad_construidos * cantidad_a_brindar;
 
-        total_brindado = cantidad_construidos * cantidad_a_brindar;
+    if ( nombre_edificio == MINA){
 
-        if ( nombre_edificio == MINA){
+        piedra += total_brindado;
 
-            piedra += total_brindado;
+    } else if ( nombre_edificio == ASERRADERO){
+        
+        madera += total_brindado;
 
-        } else if ( nombre_edificio == ASERRADERO){
-            
-            madera += total_brindado;
+    } else if ( nombre_edificio == FABRICA){
 
-        } else if ( nombre_edificio == FABRICA){
+    metal += total_brindado;
+    } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
 
-            metal += total_brindado;
-        } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
+        andycoin += total_brindado;
 
-            andycoin += total_brindado;
-
-        } 
-    }
+    } 
 
     devolver_materiales( jugador, piedra, madera, metal, andycoin);
 }
@@ -887,12 +822,9 @@ Mapa::~Mapa(){
 
     int total = cantidad_edificios;
     for ( int i = 0; i < total; i++){
-
-        delete edificios_posibles[i];
         cantidad_edificios--;
     }
-    delete [] edificios_posibles;
-    edificios_posibles = nullptr;
+
 
 
 }
