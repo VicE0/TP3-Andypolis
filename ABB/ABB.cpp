@@ -76,8 +76,8 @@ void Arbol::modificar_datos_edificio(string clave){
         cout << "ERROR: Edificio no encontrado" << endl;
         }
         else{
-            modificar_material(dato ->obtener_edificio(), MADERA);
             modificar_material(dato ->obtener_edificio(), PIEDRA);
+            modificar_material(dato ->obtener_edificio(), MADERA);
             modificar_material(dato ->obtener_edificio(), METAL);
         }
     }
@@ -87,8 +87,12 @@ void Arbol::modificar_material(Edificio * edificio, string nombre_material){
     string respuesta;
     int nueva_cantidad;
 
-    cout << "\n Queres modificar la cantidad de " << nombre_material << " del edificio seleccionado? s/n "<<endl;
+    cout << "\nQueres modificar la cantidad de " << nombre_material << " del edificio seleccionado? s/n ";
+    cin >> respuesta;
+    cout << endl;
     if (respuesta == "s"){
+        cout << "\nIngrese la nueva cantidad: ";
+        cin >> nueva_cantidad;
         edificio -> modificar_cantidad_material(nombre_material,nueva_cantidad);
     }
 }
