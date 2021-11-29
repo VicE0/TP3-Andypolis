@@ -96,3 +96,32 @@ void Arbol::modificar_material(Edificio * edificio, string nombre_material){
         edificio -> modificar_cantidad_material(nombre_material,nueva_cantidad);
     }
 }
+
+bool Arbol::existe_edificio(string clave){
+    bool existe = false;
+    Nodo_ABB * dato = encontrar_nodo(root, clave);
+
+    if ( dato != NULL ){
+        existe = true;
+    }
+
+    return existe;
+}
+
+bool Arbol::supera_maximo(string clave){
+
+    bool supera = true;
+    Edificio * dato = encontrar_nodo(root, clave)->obtener_edificio();
+
+    int maximo = dato -> obtener_maximo_construir();
+    int construidos = dato -> obtener_cantidad_construidos();
+
+    int restantes = maximo - construidos;
+
+    if ( restantes > 0 ){
+        supera = false;
+    }
+
+    return supera;
+
+}

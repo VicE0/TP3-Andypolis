@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <iostream>
 #include <fstream>
 #include <string>
 #include "casilleros/casillero.h"
@@ -10,6 +11,7 @@
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "jugador.h"
+#include "edificio.h"
 #include "ABB/ABB.h"
 
 using namespace std;
@@ -33,7 +35,6 @@ private:
     Casillero *** mapa;
 
     int cantidad_edificios;
-    Edificio ** edificios_posibles;
 
     Arbol * diccionario;
 
@@ -60,7 +61,7 @@ public:
 
     //PRE: Utilizando el archivo ubicaciones.txt.
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
-    void procesar_archivo_ubicaciones();
+    void procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2);
 
     //PRE: Utilizando el archivo mapa.txt.
     //POS: Obtiene la cantidad de filas y columnas. Ingresa los valores de los casilleros.
@@ -79,40 +80,23 @@ public:
 
     bool verificar_partida_empezada();
 
+    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
-    //--------------- EDIFICIOS ----------------------------------------------------
+    //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.
     //POS: Carga el archivo dentro del vector dinamico edificios_posibles.
     void cargar_edificios();
 
-    //PRE: con cantidad_edificios >= 0
-    //POS: agrega un edificio al vector y lo redimensiona.
-    void agregar_edificio(Edificio * nuevo_edificio);
-
     //PRE: - 
     //POS: Obtenemos el valor del atributo : cantidad_edificios.
     int obtener_cantidad_edificios();
 
-    //PRE: Si cantidad_edificios > 0 y recibiendo un nombre de edificio que este en el archivo edificios.txt 
-    //POS: para localizarlo devuelve la posicion en la que se encuentra el edificio en el vector.
-    int obtener_posicion_edificio(string nombre);
-
-    //PRE: Posicion >= 0, en caso que la lista contenga elementos.
-    //POS: Devuelve un puntero con la direccion de memoria donde se encuentra el edificio.
-    Edificio * obtener_edificio(int posicion);
-
-    //PRE: Nombre tiene que ser un nombre que se encuentre en el archivo edificios.txt
-    //POS: Obtendremos si el edificio se encuentra en el vector o no.
-    bool existe_el_edificio(string nombre);
-
-    //PRE: Pasando el nombre de algun edificio que exista en el vector.
-    //POS: Chequeo si supera el maximo a construir , retorna true si se supera el maximo.
-    bool supera_maximo(string nombre);
 
     // -------------- DIVISION PUNTO POR PUNTO : MENU -------------------------------
 
