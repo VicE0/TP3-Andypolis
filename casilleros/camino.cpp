@@ -23,7 +23,7 @@ int Camino::obtener_costo_energia(int JUGADOR_1){
     return 4;
 }
 
-void Camino::agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo){
+void Camino::agregar_edificio(string nombre,int id_jugador, int vida,int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un camino no se podran construir edificios en el. \n" << endl;
 }
 
@@ -86,6 +86,8 @@ Edificio * Camino::obtener_edificio_construido(){
     Edificio * aux = 0;
     return aux;
 }
+
+void Camino::comprobar_destruccion_edificio(){}
 
 Camino::~Camino(){
     if ( material ){

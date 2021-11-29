@@ -23,41 +23,41 @@ void Terreno::mostrar_casillero(){
     }
 }
 
-void Terreno::agregar_edificio(string nombre,int id_jugador, int piedra, int madera, int metal, int maximo){
+void Terreno::agregar_edificio(string nombre,int id_jugador, int vida, int piedra, int madera, int metal, int maximo){
     if ( ! edificio_construido ){
         if (nombre == "aserradero"){
 
-            this->edificio_construido = new Aserradero(id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Aserradero(id_jugador, vida, piedra, madera, metal, maximo);
 
         }
         else if ( nombre == ESCUELA){ 
 
-            this->edificio_construido = new Escuela( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Escuela( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == FABRICA){
 
-            this->edificio_construido = new Fabrica( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Fabrica( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA){
 
-            this->edificio_construido = new Mina( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Mina( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA){
 
-            this->edificio_construido = new Obelisco( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Obelisco( id_jugador, vida, piedra, madera, metal, maximo);
 
         }
         else if ( nombre == PLANTA_ELECTRICA){
 
-            this->edificio_construido = new Planta_electrica( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Planta_electrica( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
         else if ( nombre == MINA_ORO){
 
-            this->edificio_construido = new Mina_oro( id_jugador,piedra, madera, metal, maximo);
+            this->edificio_construido = new Mina_oro( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
     } else {
@@ -148,5 +148,15 @@ Edificio * Terreno::obtener_edificio_construido(){
         aux = edificio_construido;
     }
     return aux;
+}
+
+void Terreno::comprobar_destruccion_edificio(){
+    if (edificio_construido -> devolver_vida() != 0){
+        cout << "El edificio todavia esta de pie" <<endl;
+    }
+    else{
+        eliminar_edificio();
+        cout << "El edificio fue destruido exitosamente" <<endl;
+    }
 }
 

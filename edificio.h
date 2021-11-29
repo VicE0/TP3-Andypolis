@@ -32,7 +32,7 @@ protected:
     int brinda;
     int maximo_construir;
     int vida;
-    int vida_max
+    int vida_max;
 
     void modificar_cantidad_piedra(int nueva_cantidad);
     void modificar_cantidad_metal(int nueva_cantidad);
@@ -120,6 +120,12 @@ public:
     int obtener_id_jugador();
 
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
+
+    int devolver_vida();
+
+    int devolver_vida_max();
+
+    void reparar();
 };
 
 

@@ -131,7 +131,7 @@ void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, in
 
 void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
     
-    int madera, piedra, metal, maximo, id;
+    int madera, piedra, metal, maximo, id, vida;
     ifstream archivo(ARCHIVO_UBICACIONES);
     string nombre,segundo_nombre, barra, fila, columna, id_jugador;
 
@@ -191,12 +191,13 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
 
                         
                         Edificio * edificio = diccionario->encontrar(nombre)->obtener_edificio();
+                        vida = edificio -> devolver_vida();
                         piedra = edificio-> obtener_cantidad_piedra();
                         madera = edificio->obtener_cantidad_madera();
                         metal = edificio->obtener_cantidad_metal();
                         maximo = edificio->obtener_maximo_construir();
 
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, id, piedra, madera, metal, maximo);
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre,vida, id, piedra, madera, metal, maximo);
                         edificio -> sumar_cantidad();
                     }
 
@@ -400,6 +401,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
         int madera_necesaria = edificio->obtener_cantidad_madera();
         int metal_necesario = edificio->obtener_cantidad_metal();
         int maximo = edificio->obtener_maximo_construir();
+        int vida = edificio -> devolver_vida();
 
         bool supera_max = diccionario -> supera_maximo(nombre_nuevo);
         bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
@@ -415,7 +417,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                         
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
-                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
+                            mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, vida, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
                             edificio->sumar_cantidad();
 
                             jugador->restar_energia(15);
@@ -903,4 +905,64 @@ void Mapa::modificar_edificios(){
     cout<<"Deci el nombre de un edificio "<<endl;
     cin >> nombre_edificio;
     diccionario -> modificar_datos_edificio(nombre_edificio);
+}
+
+void Mapa::reparar_edificios(Jugador * jugador){
+    int energia_jugador = jugador->obtener_energia();
+    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n";
+    
+    if ( verificacion_energia(energia_jugador, 25 )){
+            realizar_reparacion(jugador);
+        }
+    else {
+        cout << "\n -> Usted no cuenta con la cantidad de energia necesaria. \n" << endl;
+    }
+
+}
+
+void Mapa::realizar_reparacion(Jugador * jugador){
+    int fila, columna;
+    int id_jugador = jugador->dar_numero();
+    
+
+    cout << " Ingrese las coordenadas del edificio a reparar : \n" << endl;
+
+    validar_coordenada(fila, columna);
+
+    string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
+
+    if ( nombre_edificio != ""){
+        Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
+        int codigo_edificio = edificio->obtener_id_jugador();
+
+        if ( id_jugador == codigo_edificio ){
+            if ( aceptar_condiciones() ){
+                bool edificio_reparable = edificio -> devolver_vida() < edificio -> devolver_vida_max();
+
+                if (edificio_reparable){
+                    int piedra_necesaria = edificio-> obtener_cantidad_piedra()/4;
+                    int madera_necesaria = edificio-> obtener_cantidad_madera()/4;
+                    int metal_necesario = edificio-> obtener_cantidad_metal()/4;
+                    bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+
+                    if (alcanzan_materiales){
+                        jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
+                        edificio -> reparar();
+                        cout << "\n\t\t ###   El edificio ha sido REPARADO exitosamente !   ###\n" << endl;
+                        jugador->restar_energia(25);
+                    }else{
+                        cout << "\n\t No tenes materiales suficientes.\n" << endl;
+                    }
+                    
+                }else{
+                    cout << "\n\t El edificio esta totalmente arreglado.\n" << endl;
+                }
+            }
+        }else {
+                cout << "\n\t -> No se puede reparar un edificio que no es propio.\n" << endl;
+        }
+    }else {
+        cout << "\n En la coordenada ingresada no existe ningun edificio ...\n" << endl;
+    }
 }

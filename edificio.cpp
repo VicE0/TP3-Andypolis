@@ -109,3 +109,15 @@ void Edificio::modificar_cantidad_madera(int nueva_cantidad){
 void Edificio::modificar_cantidad_metal(int nueva_cantidad){
     this -> cantidad_metal = nueva_cantidad;
 }
+
+int Edificio::devolver_vida(){
+   return vida;
+}
+
+int Edificio::devolver_vida_max(){
+    return vida_max;
+}
+
+void Edificio::reparar(){
+    vida += 1;
+}
