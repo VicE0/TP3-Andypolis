@@ -1,6 +1,6 @@
 #include "mina.h"
 
-Mina::Mina(int id_jugador,int piedra, int madera, int metal, int maximo) : Edificio(id_jugador,piedra, madera, metal, maximo){
+Mina::Mina(int id_jugador,int vida, int piedra, int madera, int metal, int maximo) : Edificio(id_jugador, vida, piedra, madera, metal, maximo){
     this->nombre = "mina";
     this->diminutivo = "M";
     this->brinda = 15;

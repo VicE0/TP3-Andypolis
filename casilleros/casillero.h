@@ -34,7 +34,7 @@ public:
 
     // PRE: - 
     // POS: Implementada en los casilleros_construibles, creara un nuevo edificio en el casillero.
-    virtual void agregar_edificio(string nombre, int id_jugador,int piedra, int madera, int metal, int maximo) = 0;
+    virtual void agregar_edificio(string nombre, int id_jugador,int vida,int piedra, int madera, int metal, int maximo) = 0;
 
     // PRE: -
     // POS: En casillero transitable, en caso de estar vacio, coloca un objeto material. 
@@ -107,6 +107,8 @@ public:
     virtual int obtener_columna() = 0;
 
     virtual Edificio * obtener_edificio_construido() = 0;
+
+    virtual void comprobar_destruccion_edificio() = 0;
 
     void agregar_jugador(Jugador * jugador);
 
