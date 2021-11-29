@@ -10,9 +10,11 @@ Edificio::Edificio(){
     this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = 0;
+    this-> vida = 1;
+    this-> vida_max = 1;
 }
 
-Edificio::Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
+Edificio::Edificio(int id_jugador, int vida, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
     this-> id_jugador = id_jugador;
     this-> nombre = "";
     this-> diminutivo = "Ed";
@@ -22,6 +24,8 @@ Edificio::Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int
     this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = maximo_construir;
+    this-> vida = vida;
+    this-> vida_max = vida;
 
 }
 

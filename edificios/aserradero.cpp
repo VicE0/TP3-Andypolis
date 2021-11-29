@@ -1,6 +1,6 @@
 #include "aserradero.h"
 
-Aserradero::Aserradero(int id_jugador,int piedra, int madera, int metal, int maximo) : Edificio(id_jugador, piedra, madera, metal, maximo){
+Aserradero::Aserradero(int id_jugador,int vida,int piedra, int madera, int metal, int maximo) : Edificio(id_jugador, vida, piedra, madera, metal, maximo){
     this->nombre = "aserradero";
     this->diminutivo = "A";
     this->brinda = 25;

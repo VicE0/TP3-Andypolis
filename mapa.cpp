@@ -255,36 +255,36 @@ ifstream nuevo_archivo;
 
             if (nombre_edificio == ASERRADERO){
 
-                nuevo_edificio = new Aserradero(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Aserradero(1, 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == ESCUELA){
 
-                nuevo_edificio = new Escuela(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Escuela(1, 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == FABRICA){
 
-                nuevo_edificio = new Fabrica(1,piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Fabrica(1, 2,piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA){
 
-                nuevo_edificio = new Mina(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina(1, 2, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco(1, 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
-                nuevo_edificio = new Planta_electrica(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Planta_electrica(1, 1, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == MINA_ORO){
 
-                nuevo_edificio = new Mina_oro(1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Mina_oro(1, 2, piedra, madera, metal, maximo_construir);
             }
             
             this -> diccionario -> insertar(nuevo_edificio);
