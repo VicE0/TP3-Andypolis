@@ -25,6 +25,7 @@ const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
+const int COSTO_BOMBA = 100;
 
 
 class Mapa
@@ -234,6 +235,10 @@ public:
     void reparar_edificios(Jugador * jugador);
 
     void realizar_reparacion(Jugador * jugador);
+
+    void comprar_bombas(Jugador * jugador);
+
+    bool verificacion_andycoins(int requerido, int disponible);
 };
 
 

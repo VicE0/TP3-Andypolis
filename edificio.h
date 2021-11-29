@@ -5,6 +5,7 @@
 
 using namespace std;
 
+const string BOMBA = "bombas";
 const string PIEDRA = "piedra";
 const string MADERA = "madera";
 const string METAL = "metal";

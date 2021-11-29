@@ -2,3 +2,4 @@ madera 10 20000
 metal 10 20000
 piedra 10 20000
 andycoins 1000 1000
+bombas 2 3

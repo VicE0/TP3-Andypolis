@@ -604,7 +604,35 @@ void Mapa::realizar_reparacion(Jugador * jugador){
 }
 
 // 6) COMPRAR BOMBAS ------------------------------------
-// FALTA []
+void Mapa::comprar_bombas(Jugador * jugador){
+    int cantidad_requerida, precio_total;
+    int cantidad_andycoins = jugador->obtener_material(COINS)->obtener_cantidad_disponible();
+    if ( verificacion_energia(jugador->obtener_energia(), 5) ){
+        cout << "Ingrese la cantidad que desea comprar : ";
+        cin >> cantidad_requerida;
+
+        precio_total *= COSTO_BOMBA * cantidad_requerida;
+        if ( verificacion_andycoins(precio_total, cantidad_andycoins) ){
+            // Sumo la cantidad de bombas compradas al inventario: 
+            jugador->obtener_material(BOMBA)->sumar_material(cantidad_requerida);
+            // Resto los andycoins utilizados: 
+            jugador->obtener_material(COINS)->restar_material(precio_total);
+        } else {
+            cout << "\n -> No tenes la cantidad necesaria de Andycoins para comprar tantas bombas.\n" << endl;
+        }
+
+    } else {
+        cout << "\n -> No tenes la cantidad suficiente de energia para realizar la compra. \n" << endl;
+    }
+}
+
+bool Mapa::verificacion_andycoins(int requerido, int disponible){
+    bool alcanza = false;
+    if ( requerido < disponible ){
+        alcanza = true;
+    }
+    return alcanza;
+}
 
 // 7) CONSULTAR COORDENADA ------------------------------------
 void Mapa::consultar_coordenada(){
