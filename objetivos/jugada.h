@@ -28,9 +28,10 @@ class Jugada
 
         void mostrar_objetivos_jugador();
 
-        int asignar_objetivo();
+        int randomizar_objetivo();
 
-        void cargar_objetivos(); //carga el array
+        void cargar_objetivos();
+
 
 };
 

@@ -25,7 +25,7 @@ void Minero::mostrar_progreso()
 
 void Minero::mostrar_descripcion()
 {
-    cout << "Minero: haber construido una mina de cada tipo"<<endl;
+    cout << "\nMinero: haber construido una mina de cada tipo"<<endl;
     mostrar_progreso();
 }
 
