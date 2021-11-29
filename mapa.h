@@ -119,10 +119,6 @@ public:
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
     void listar_todos_edificios();
 
-    //PRE: En caso que haya edificios construidos en los casilleros.
-    //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.
-    void mostrar_coordenadas(string nombre);
-
     //PRE: Solicitando coordenadas, fila <= cantidad_filas, columna <= cantidad_columnas.
     //POS: Elimina el edificio solicitado del casillero correspondiente y retorna la mitad de los materiales usados al inventario.
     void demoler_edificio(Jugador * jugador);
@@ -232,8 +228,6 @@ public:
     //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
-
-    Arbol * devolver_diccionario();
 
     void modificar_edificios();
 
