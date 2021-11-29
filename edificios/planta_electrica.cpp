@@ -1,6 +1,6 @@
 #include "planta_electrica.h"
 
-Planta_electrica::Planta_electrica(int id_jugador,int piedra, int madera, int metal, int maximo) : Edificio( id_jugador,piedra, madera, metal, maximo){
+Planta_electrica::Planta_electrica(int id_jugador,int vida,int piedra, int madera, int metal, int maximo) : Edificio(id_jugador, vida, piedra, madera, metal, maximo){
     this->nombre = "planta electrica";
     this->diminutivo = "P";
     this->brinda = 0;

@@ -31,6 +31,8 @@ protected:
     int cantidad_edificios;
     int brinda;
     int maximo_construir;
+    int vida;
+    int vida_max;
 
     void modificar_cantidad_piedra(int nueva_cantidad);
     void modificar_cantidad_metal(int nueva_cantidad);
@@ -46,7 +48,7 @@ public:
     // PRE: -
     // POS: Como es una clase abstracta cada edificio va a implementar su nombre, aca se
     //      establecen las cantidades requeridas a partir del archivo edificios.txt.
-    Edificio(int id_jugador, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
+    Edificio(int id_jugador, int vida, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve el nombre del edificio ( getter )
@@ -118,6 +120,12 @@ public:
     int obtener_id_jugador();
 
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
+
+    int devolver_vida();
+
+    int devolver_vida_max();
+
+    void reparar();
 };
 
 
