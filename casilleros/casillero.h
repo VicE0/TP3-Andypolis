@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../edificio.h"
 #include "../material.h"
+#include "../jugador.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ protected:
     int fila;
     int columna;
     string nombre;
+    Jugador * jugador;
 
 public:
     // Constructor
@@ -105,6 +107,10 @@ public:
     virtual int obtener_columna() = 0;
 
     virtual Edificio * obtener_edificio_construido() = 0;
+
+    void agregar_jugador(Jugador * jugador);
+
+    string obtener_diminutivo_jugador();
 
 };
 
