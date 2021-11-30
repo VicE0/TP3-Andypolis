@@ -2,16 +2,16 @@
 #define JUGADA_H
 
 #include "Objetivos.h"
-#include "comprar_andypolis.h"
-#include "edad_piedra.h"
-#include "bombardero.h"
-#include "energetico.h"
-#include "letrado.h"
-#include "minero.h"
-#include "cansado.h"
-#include "constructor.h"
-#include "armado.h"
-#include "extremista.h"
+#include "objetivos/comprar_andypolis.h"
+#include "objetivos/edad_piedra.h"
+#include "objetivos/bombardero.h"
+#include "objetivos/energetico.h"
+#include "objetivos/letrado.h"
+#include "objetivos/minero.h"
+#include "objetivos/cansado.h"
+#include "objetivos/constructor.h"
+#include "objetivos/armado.h"
+#include "objetivos/extremista.h"
 
 const int MAX_OBJETIVOS = 100;
 

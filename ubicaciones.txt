@@ -1,0 +1,4 @@
+metal (1, 5)
+madera (2, 3)
+metal (3, 0)
+piedra (7, 9)

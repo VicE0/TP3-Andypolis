@@ -26,3 +26,5 @@ int Objetivo::obtener_objetivo()
 {
     return id_objetivo;
 }
+
+Objetivo::~Objetivo(){}

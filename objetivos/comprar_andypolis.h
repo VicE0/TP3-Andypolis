@@ -1,7 +1,7 @@
 #ifndef COMPRAR_ANDYPOLIS_H
 #define COMPRAR_ANDYPOLIS_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 
