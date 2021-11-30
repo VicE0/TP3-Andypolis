@@ -19,10 +19,12 @@ class Jugador
     private:
         int id_jugador;
         int energia;
+        int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
         string diminutivo;
         Lista<Material> * inventario;
+        Lista<Material> * inventario_a_recolectar;
 
     public:
 
@@ -36,6 +38,7 @@ class Jugador
         int dar_numero();
 
         Material * obtener_material(string nombre);
+        Material * obtener_material_recolectar(string nombre);
 
         Lista<Material> * obtener_inventario();
 
@@ -56,9 +59,9 @@ class Jugador
 
         int obtener_turno();
   
-        void sumar_cantidad_material(string nombre, int cantidad);
+        void sumar_cantidad_material(string nombre, int cantidad,bool recolectar);
 
-        void restar_cantidad_material(string nombre, int cantidad);
+        void restar_cantidad_material(string nombre, int cantidad,bool recolectar);
 
         void mostrar_inventario();
 
@@ -68,7 +71,15 @@ class Jugador
 
         void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
-        void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+        void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec,int cantidad_coins_nec,int cantidad_energia_nec);
+
+        void devolver_materiales_recolectar(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec,int cantidad_coins_nec, int cantidad_energia_nec);
+
+        void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
+        
+        void coincidir_valores(int *piedra,int *madera,int *metal,int *coins,string nombre,int cantidad);
+        
+        void sumar_materiales_recolectados();
 
         ~Jugador();
 

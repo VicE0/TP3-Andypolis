@@ -26,7 +26,7 @@ int Muelle::obtener_costo_energia(int codigo_jugador){
 }
 
 
-void Muelle::agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo){
+void Muelle::agregar_edificio(string nombre, int id_jugador, int vida,int piedra, int madera, int metal, int maximo){
     cout << "\nEste es un muelle no se podran construir edificios en el. \n" << endl;
 }
 
@@ -89,6 +89,8 @@ Edificio * Muelle::obtener_edificio_construido(){
     Edificio * aux = 0;
     return aux;
 }
+
+void Muelle::comprobar_destruccion_edificio(){}
 
 Muelle::~Muelle(){
     if ( material ){

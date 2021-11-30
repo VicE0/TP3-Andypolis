@@ -33,7 +33,7 @@ public:
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
-    void agregar_edificio(string nombre, int id_jugador, int piedra, int madera, int metal, int maximo);
+    void agregar_edificio(string nombre, int id_jugador, int vida, int piedra, int madera, int metal, int maximo);
 
     //PRE:-
     //POS: En casilleros transitables hace apuntar el puntero material
@@ -94,6 +94,8 @@ public:
     int obtener_columna();
 
     Edificio * obtener_edificio_construido();
+
+    void comprobar_destruccion_edificio();
 };
 
 

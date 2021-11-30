@@ -99,11 +99,11 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case REPARAR_EDIFICIO:
-            cout << "Reparar edificio" << endl;
+            mapa -> reparar_edificios(jugador);
         break;
 
     case COMPRAR_BOMBAS:
-            cout << "Comprar bombas" << endl;
+            mapa -> comprar_bombas(jugador);
         break;
 
     case CONSULTAR_COORDENADA:
@@ -119,7 +119,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case RECOLECTAR_RECURSOS:
-            mapa->recolectar_recursos_producidos(jugador);
+            jugador->sumar_materiales_recolectados();
         break;
 
     case MOVERSE:
@@ -155,6 +155,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
         procesar_opcion_jugador(opcion, mapa, jugador);
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
+        mapa->almacenar_recursos_producidos(jugador); //ver con gian el tema del while
         turno++;
     }
     while ( opcion != GUARDAR_SALIR );

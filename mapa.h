@@ -1,6 +1,7 @@
 #ifndef MAPA_H
 #define MAPA_H
 
+#include <iostream>
 #include <fstream>
 #include <string>
 #include "casilleros/casillero.h"
@@ -10,6 +11,7 @@
 #include "casilleros/camino.h"
 #include "casilleros/muelle.h"
 #include "jugador.h"
+#include "edificio.h"
 #include "ABB/ABB.h"
 
 using namespace std;
@@ -23,6 +25,7 @@ const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
+const int COSTO_BOMBA = 100;
 
 
 class Mapa
@@ -33,7 +36,6 @@ private:
     Casillero *** mapa;
 
     int cantidad_edificios;
-    Edificio ** edificios_posibles;
 
     Arbol * diccionario;
 
@@ -60,7 +62,7 @@ public:
 
     //PRE: Utilizando el archivo ubicaciones.txt.
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
-    void procesar_archivo_ubicaciones();
+    void procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2);
 
     //PRE: Utilizando el archivo mapa.txt.
     //POS: Obtiene la cantidad de filas y columnas. Ingresa los valores de los casilleros.
@@ -79,40 +81,23 @@ public:
 
     bool verificar_partida_empezada();
 
+    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
-    //--------------- EDIFICIOS ----------------------------------------------------
+    //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
 
     //PRE: Usando el archivo de edificios con por lo menos 1 edificio.
     //POS: Carga el archivo dentro del vector dinamico edificios_posibles.
     void cargar_edificios();
 
-    //PRE: con cantidad_edificios >= 0
-    //POS: agrega un edificio al vector y lo redimensiona.
-    void agregar_edificio(Edificio * nuevo_edificio);
-
     //PRE: - 
     //POS: Obtenemos el valor del atributo : cantidad_edificios.
     int obtener_cantidad_edificios();
 
-    //PRE: Si cantidad_edificios > 0 y recibiendo un nombre de edificio que este en el archivo edificios.txt 
-    //POS: para localizarlo devuelve la posicion en la que se encuentra el edificio en el vector.
-    int obtener_posicion_edificio(string nombre);
-
-    //PRE: Posicion >= 0, en caso que la lista contenga elementos.
-    //POS: Devuelve un puntero con la direccion de memoria donde se encuentra el edificio.
-    Edificio * obtener_edificio(int posicion);
-
-    //PRE: Nombre tiene que ser un nombre que se encuentre en el archivo edificios.txt
-    //POS: Obtendremos si el edificio se encuentra en el vector o no.
-    bool existe_el_edificio(string nombre);
-
-    //PRE: Pasando el nombre de algun edificio que exista en el vector.
-    //POS: Chequeo si supera el maximo a construir , retorna true si se supera el maximo.
-    bool supera_maximo(string nombre);
 
     // -------------- DIVISION PUNTO POR PUNTO : MENU -------------------------------
 
@@ -135,10 +120,6 @@ public:
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
     void listar_todos_edificios();
 
-    //PRE: En caso que haya edificios construidos en los casilleros.
-    //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.
-    void mostrar_coordenadas(string nombre);
-
     //PRE: Solicitando coordenadas, fila <= cantidad_filas, columna <= cantidad_columnas.
     //POS: Elimina el edificio solicitado del casillero correspondiente y retorna la mitad de los materiales usados al inventario.
     void demoler_edificio(Jugador * jugador);
@@ -149,8 +130,8 @@ public:
     void obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna);
 
     //PRE: Una ves demolido el edificio.
-    //POS: Muestro por pantalla los materiales obtenidos, y los guardo en el inventario. 
-    void devolver_materiales(Jugador * jugador, int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos);
+    //POS: Muestro por pantalla los materiales obtenidos. 
+    void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
 
     //PRE: Teniendo cargada la matriz dinamica.
     //POS: Recorro la matriz y muestro los nombres de los casilleros. 
@@ -166,7 +147,7 @@ public:
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.
-    void recolectar_recursos_producidos(Jugador * jugador);
+    void almacenar_recursos_producidos(Jugador * jugador);
 
     //PRE: Recibe los eneteros "max_fila" y  "max_col" con los vaores de las maxima columna y la maxima fila que
     //hay en el mapa
@@ -249,9 +230,15 @@ public:
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
 
-    Arbol * devolver_diccionario();
-
     void modificar_edificios();
+
+    void reparar_edificios(Jugador * jugador);
+
+    void realizar_reparacion(Jugador * jugador);
+
+    void comprar_bombas(Jugador * jugador);
+
+    bool verificacion_andycoins(int requerido, int disponible);
 };
 
 
