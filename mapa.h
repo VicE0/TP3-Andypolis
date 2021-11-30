@@ -25,6 +25,7 @@ const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
+const int COSTO_BOMBA = 100;
 
 
 class Mapa
@@ -118,10 +119,6 @@ public:
     //PRE: - 
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
     void listar_todos_edificios();
-
-    //PRE: En caso que haya edificios construidos en los casilleros.
-    //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.
-    void mostrar_coordenadas(string nombre);
 
     //PRE: Solicitando coordenadas, fila <= cantidad_filas, columna <= cantidad_columnas.
     //POS: Elimina el edificio solicitado del casillero correspondiente y retorna la mitad de los materiales usados al inventario.
@@ -233,13 +230,15 @@ public:
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
 
-    Arbol * devolver_diccionario();
-
     void modificar_edificios();
 
     void reparar_edificios(Jugador * jugador);
 
     void realizar_reparacion(Jugador * jugador);
+
+    void comprar_bombas(Jugador * jugador);
+
+    bool verificacion_andycoins(int requerido, int disponible);
 };
 
 

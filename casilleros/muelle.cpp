@@ -90,6 +90,8 @@ Edificio * Muelle::obtener_edificio_construido(){
     return aux;
 }
 
+void Muelle::comprobar_destruccion_edificio(){}
+
 Muelle::~Muelle(){
     if ( material ){
         delete material;
