@@ -236,6 +236,10 @@ public:
     Arbol * devolver_diccionario();
 
     void modificar_edificios();
+
+    void reparar_edificios(Jugador * jugador);
+
+    void realizar_reparacion(Jugador * jugador);
 };
 
 

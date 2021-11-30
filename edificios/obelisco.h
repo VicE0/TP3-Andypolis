@@ -9,7 +9,7 @@ private:
 
 public:
 
-    Obelisco(int id_jugador,int piedra, int madera, int metal, int maximo);
+    Obelisco(int id_jugador, int vida, int piedra, int madera, int metal, int maximo);
 
     int obtener_cantidad_brindada();
 

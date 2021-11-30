@@ -99,7 +99,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case REPARAR_EDIFICIO:
-            cout << "Reparar edificio" << endl;
+            mapa -> reparar_edificios(jugador);
         break;
 
     case COMPRAR_BOMBAS:
