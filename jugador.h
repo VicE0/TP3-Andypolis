@@ -7,6 +7,17 @@ const int ENERGIA_INICIAL = 50;
 #include "material.h"
 #include "lista.h"
 #include "edificio.h"
+#include "Objetivos.h"
+#include "objetivos/comprar_andypolis.h"
+#include "objetivos/edad_piedra.h"
+#include "objetivos/bombardero.h"
+#include "objetivos/energetico.h"
+#include "objetivos/letrado.h"
+#include "objetivos/minero.h"
+#include "objetivos/cansado.h"
+#include "objetivos/constructor.h"
+#include "objetivos/armado.h"
+#include "objetivos/extremista.h"
 #include <string>
 
 using std::string;
@@ -21,8 +32,12 @@ class Jugador
         int energia;
         int objetivos_cumplidos;
         int turno;
+        int objetivo_principal;
+        int cantidad_objetivos;
         string diminutivo;
+        Objetivo* objetivos;
         Lista<Material> * inventario;
+
 
     public:
 
@@ -69,6 +84,13 @@ class Jugador
         void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
         void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
+
+        void cargar_objetivos();
+
+        void mostrar_objetivos_jugador();
+
+        int randomizar_objetivo();
+
 
         ~Jugador();
 

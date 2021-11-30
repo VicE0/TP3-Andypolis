@@ -25,7 +25,7 @@ void Energetico::mostrar_progreso()
 
 void Energetico::mostrar_descripcion()
 {
-    cout << "Energetico: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
+    cout << "\nEnergetico: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
     mostrar_progreso();
 }
 

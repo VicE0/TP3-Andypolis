@@ -1,7 +1,7 @@
 #ifndef ENERGETICO_H
 #define ENERGETICO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

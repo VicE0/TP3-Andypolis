@@ -25,7 +25,7 @@ void Bombardero::mostrar_progreso()
 
 void Bombardero::mostrar_descripcion()
 {
-    cout << "Bombardero: haber usado "<< cantidad << " bombas"<<endl;
+    cout << "\nBombardero: haber usado "<< cantidad << " bombas"<<endl;
     mostrar_progreso();
 }
 
