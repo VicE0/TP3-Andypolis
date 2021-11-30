@@ -29,9 +29,10 @@ protected:
     int cantidad_piedra;
     int cantidad_madera;
     int cantidad_metal;
-    int cantidad_edificios;
     int brinda;
     int maximo_construir;
+    int construidos_j1;
+    int construidos_j2;
     int vida;
     int vida_max;
 
@@ -71,9 +72,11 @@ public:
     // POS: Devuelve la cantidad de metal necesaria para construir.
     int obtener_cantidad_metal();
 
+    int obtener_cantidad_construidos();
+
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la cantidad que se encuentran construidos en el mapa hasta el momento.
-    int obtener_cantidad_construidos();
+    int obtener_cantidad_construidos(int id_jugador);
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
     // POS: Devuelve la maxima cantidad de edificios que se pueden construir , informacion que viene dada
@@ -95,15 +98,15 @@ public:
     // PRE: Que la cantidad maxima de edificios no sea menor que la cantidad de edificios construidos.
     // POS: Devuelve una resta entre el maximo y la cantidad de edificios construidos, para saber cuantos 
     //      mas puedo construir.
-    int obtener_cuantos_puedo_construir();
+    int obtener_cuantos_puedo_construir(int id_jugador);
 
     // PRE: En caso de que se pueda construir edificio sin superar el maximo.
     // POS: suma 1 a la cantidad de edificios.
-    void sumar_cantidad();
+    void sumar_cantidad(int id_jugador);
 
     // PRE: En caso de que exista por lo menos 1 edificio creado.
     // POS: Resta 1 a cantidad_edificios.
-    void restar_cantidad();
+    void restar_cantidad(int id_jugador);
 
     // PRE: -
     // POS: Por cada uno de los edificios muestra por pantalla su respectivo mensaje.
@@ -129,6 +132,10 @@ public:
     void reparar();
 
     void atacar();
+
+    int obtener_restantes_j1();
+
+    int obtener_restantes_j2();
 };
 
 

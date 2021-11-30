@@ -2,7 +2,7 @@
 
 Jugador::Jugador(){
     this -> id_jugador = 0;
-    this -> energia = 0;
+    this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
@@ -13,7 +13,7 @@ Jugador::Jugador(){
 Jugador::Jugador(int id_jugador, string diminutivo)
 {
     this -> id_jugador = id_jugador;
-    this -> energia = 0;
+    this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
@@ -22,22 +22,20 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> cargar_objetivos();
 }
 
-/*
-string Jugador::obtener_nombre()
-
-Jugador::Jugador(int id_jugador ,int energia, int objetivos_cumplidos, int andycoins_totales)
-{
-    this -> id_jugador = 0;
-    this -> energia = ENERGIA_INICIAL; //dudoso, es solo al inicio
-    this -> objetivos_cumplidos = 0;
-    this -> andycoins_totales = 0;
-    this->inventario = new Lista<Material>;
-}
-
-*/
-
 int Jugador::dar_numero()
 {
+    return id_jugador;
+}
+
+void Jugador::sumar_energia(int cantidad){
+    if ( energia += cantidad == MAX_ENERGIA ){
+        energia = MAX_ENERGIA;
+    } else {
+        energia  += cantidad;
+    }
+}
+
+int Jugador::obtener_id(){
     return id_jugador;
 }
 
@@ -190,10 +188,6 @@ cantidad_metal_nec){
 
 int Jugador::obtener_energia(){
     return energia;
-}
-
-void Jugador::sumar_energia(int cantidad){
-    energia += cantidad;
 }
 
 void Jugador::restar_energia(int cantdiad){

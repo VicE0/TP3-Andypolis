@@ -35,8 +35,8 @@ class Jugador
         int objetivo_principal;
         int cantidad_objetivos;
         string diminutivo;
-        Objetivo* objetivos;
-        Lista<Material> * inventario;
+        Objetivo * objetivos;
+        Lista <Material> * inventario;
 
 
     public:
@@ -46,6 +46,7 @@ class Jugador
 
         Jugador(int id_jugador, string diminutivo); //constructor
 
+        // -------------------------------- Funciones jugador --------------------------------
         //PRE: ~
         //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
@@ -54,7 +55,8 @@ class Jugador
 
         Lista<Material> * obtener_inventario();
 
-        // -------------------------------- Funciones jugador --------------------------------
+        int obtener_id();
+
         int obtener_energia();
 
         void sumar_energia(int cantidad);
@@ -70,7 +72,7 @@ class Jugador
         void establecer_turno(int turno);
 
         int obtener_turno();
-  
+
         void sumar_cantidad_material(string nombre, int cantidad);
 
         void restar_cantidad_material(string nombre, int cantidad);

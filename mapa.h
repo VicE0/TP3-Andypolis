@@ -83,7 +83,6 @@ public:
 
     void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
 
-    // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
     void procesar_objetivos(Jugador * j1, Jugador *  j2);
@@ -246,6 +245,9 @@ public:
     void comprar_bombas(Jugador * jugador);
 
     bool verificacion_andycoins(int requerido, int disponible);
+
+    bool vacio(std::ifstream& pFile);
+
 };
 
 

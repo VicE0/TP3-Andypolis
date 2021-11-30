@@ -129,6 +129,10 @@ void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, in
     }
 }
 
+bool Mapa::vacio(ifstream& pFile) { 
+    return pFile.peek() == std::ifstream::traits_type::eof(); 
+} 
+
 void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
     
     int madera, piedra, metal, maximo, id, vida;
@@ -136,7 +140,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
     string nombre,segundo_nombre, barra, fila, columna, id_jugador;
 
         if (archivo && mapa_bien_cargado){
-            if ( archivo.tellg() == 0 ){
+            if ( !vacio(archivo) ){
 
                 while(archivo >> nombre){
                     if ( nombre == "1" || nombre == "2"){ // EVALUO SI ES UN JUGADOR
@@ -188,7 +192,6 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                             getline(archivo, columna, ')');
                         }
 
-                        
                         Edificio * edificio = diccionario->encontrar(nombre)->obtener_edificio();
                         vida = edificio -> devolver_vida();
                         piedra = edificio-> obtener_cantidad_piedra();
@@ -196,13 +199,12 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                         metal = edificio->obtener_cantidad_metal();
                         maximo = edificio->obtener_maximo_construir();
 
-                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre,vida, id, piedra, madera, metal, maximo);
-                        edificio -> sumar_cantidad();
+                        mapa[stoi(fila)][stoi(columna)]->agregar_edificio(nombre, vida, id, piedra, madera, metal, maximo);
+                        edificio->sumar_cantidad(id);
                     }
 
                 }
-
-                mostrar_mapa();
+                
                 partida_empezada = true;
                 archivo.close();
 
@@ -403,7 +405,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
         int maximo = edificio->obtener_maximo_construir();
         int vida = edificio -> devolver_vida();
 
-        bool supera_max = diccionario -> supera_maximo(nombre_nuevo);
+        bool supera_max = diccionario -> supera_maximo(nombre_nuevo, id_jugador);
         bool alcanzan_materiales = jugador -> alcanzan_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
         if ( !supera_max){
@@ -418,7 +420,8 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                         bool existe_edificio_construido = mapa[fila][columna]->existe_edificio();
                         if ( ! existe_edificio_construido ){
                             mapa[fila][columna]->agregar_edificio(nombre_nuevo,id_jugador, vida, piedra_necesaria, madera_necesaria, metal_necesario, maximo);
-                            edificio->sumar_cantidad();
+
+                            edificio->sumar_cantidad(jugador->obtener_id());
 
                             jugador->restar_energia(15);
                             jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
@@ -462,7 +465,7 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
                 if ( id_jugador == codigo_edificio ){
 
                     nombre_edificio = aux->obtener_nombre();
-                    cout << "Edificio construido : " << nombre_edificio << endl;
+                    cout << "Edificio construido : " << nombre_edificio << " (" << i << ", "<< j << ") " << endl;
                 }
             }
         }
@@ -521,6 +524,8 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
 
     // NO SE OBTIENE ANDYCOINS CUANDO DEMUELO UN EDIFICIO : 
     devolver_materiales( jugador, mitad_piedra, mitad_madera, mitad_metal, 0);
+
+    edificio->restar_cantidad(jugador->obtener_id());
 
     mapa[fila][columna]->eliminar_edificio();
 }
@@ -666,7 +671,7 @@ void Mapa::recolectar_recursos_producidos(Jugador * jugador){
     Edificio * edificio_solicitado = diccionario->encontrar(nombre_edificio)->obtener_edificio(); 
 
     nombre_edificio = edificio_solicitado->obtener_nombre();
-    cantidad_construidos = edificio_solicitado->obtener_cantidad_construidos();
+    cantidad_construidos = edificio_solicitado->obtener_cantidad_construidos(jugador->obtener_id());
     cantidad_a_brindar = edificio_solicitado->obtener_cantidad_brindada();
 
     total_brindado = cantidad_construidos * cantidad_a_brindar;
@@ -694,7 +699,7 @@ void Mapa::recolectar_recursos_producidos(Jugador * jugador){
 // 11) MOVERSE A UNA COORDENADA
 // FALTA []
 
-// 12) FINALIZAR TURNO : OPCION DE MENU 
+// 12) FINALIZAR TURNO : OPCION DE MENU
 // 13) GUARDAR Y SALIR : OPCION DE MENU
 
 // LLUVIA DE MATERIALES ------------------------------------
@@ -785,7 +790,7 @@ void Mapa::colocar_materiales_llovidos(int tot_materiales_gen, int cant_gen_pied
 
 }
 
-Casillero* Mapa :: obtener_casillero_vector_casilleros_lluvia ( int pos) {
+Casillero* Mapa::obtener_casillero_vector_casilleros_lluvia ( int pos) {
 	return vector_casilleros_lluvia[pos];
 }
 
