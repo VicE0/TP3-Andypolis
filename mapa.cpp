@@ -129,8 +129,8 @@ void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, in
     }
 }
 
-bool Mapa::vacio(ifstream& pFile) { 
-    return pFile.peek() == std::ifstream::traits_type::eof(); 
+bool Mapa::vacio(ifstream& pArchivo) { 
+    return pArchivo.peek() == ifstream::traits_type::eof(); 
 } 
 
 void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){

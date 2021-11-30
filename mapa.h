@@ -246,7 +246,7 @@ public:
 
     bool verificacion_andycoins(int requerido, int disponible);
 
-    bool vacio(std::ifstream& pFile);
+    bool vacio(ifstream& pArchivo);
 
 };
 
