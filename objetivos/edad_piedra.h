@@ -1,7 +1,7 @@
 #ifndef EDAD_PIEDRA_H
 #define EDAD_PIEDRA_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

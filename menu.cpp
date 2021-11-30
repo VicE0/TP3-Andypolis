@@ -103,7 +103,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case COMPRAR_BOMBAS:
-            cout << "Comprar bombas" << endl;
+            mapa -> comprar_bombas(jugador);
         break;
 
     case CONSULTAR_COORDENADA:
@@ -115,7 +115,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case MOSTRAR_OBJETIVOS:
-            cout << "mostrar objetivos" << endl;
+            jugador -> mostrar_objetivos_jugador();
         break;
 
     case RECOLECTAR_RECURSOS:

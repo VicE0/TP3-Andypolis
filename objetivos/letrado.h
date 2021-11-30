@@ -1,7 +1,7 @@
 #ifndef LETRADO_H
 #define LETRADO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

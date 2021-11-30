@@ -25,6 +25,7 @@ const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
 const int UNIDADES_POR_PACK_METAL = 50;
 const int UNIDADES_POR_PACK_COINS = 250;
+const int COSTO_BOMBA = 100;
 
 
 class Mapa
@@ -85,6 +86,8 @@ public:
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
+    void procesar_objetivos(Jugador * j1, Jugador *  j2);
+
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
     //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
@@ -119,10 +122,6 @@ public:
     //POS: Recorre el vector mostrandonos las caracteristicas de los edificios que vienen en el archivo.
     void listar_todos_edificios();
 
-    //PRE: En caso que haya edificios construidos en los casilleros.
-    //POS: Muestra los edificios que estan construidos y donde se encuentran ubicados.
-    void mostrar_coordenadas(string nombre);
-
     //PRE: Solicitando coordenadas, fila <= cantidad_filas, columna <= cantidad_columnas.
     //POS: Elimina el edificio solicitado del casillero correspondiente y retorna la mitad de los materiales usados al inventario.
     void demoler_edificio(Jugador * jugador);
@@ -147,6 +146,11 @@ public:
     //PRE: - 
     //POS: Imprime por pantalla las cantidades de los materiales que se poseen.
     void mostrar_inv(Jugador * jugador);
+
+    //PRE: ~
+    //POS: Imprime por pantalla los objetivos del jugador correspondiente
+    void mostrar_objetivos(Jugador* jugador);
+
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.
@@ -233,13 +237,15 @@ public:
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
 
-    Arbol * devolver_diccionario();
-
     void modificar_edificios();
 
     void reparar_edificios(Jugador * jugador);
 
     void realizar_reparacion(Jugador * jugador);
+
+    void comprar_bombas(Jugador * jugador);
+
+    bool verificacion_andycoins(int requerido, int disponible);
 };
 
 
