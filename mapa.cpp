@@ -659,39 +659,39 @@ void Mapa::mostrar_inv(Jugador * jugador){
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
 void Mapa::recolectar_recursos_producidos(Jugador * jugador){
+    string nombres_edificios[] = {MINA, ASERRADERO, FABRICA, ESCUELA, PLANTA_ELECTRICA, MINA_ORO};
     int piedra = 0;
     int madera = 0;
     int metal = 0;
     int andycoin = 0;
-    int cantidad_edificios, total_brindado , cantidad_construidos, cantidad_a_brindar;
-    string nombre_edificio;
+    int  total_brindado , cantidad_construidos, cantidad_a_brindar;
+    string nombre;
 
     cantidad_edificios = obtener_cantidad_edificios();
 
-    Edificio * edificio_solicitado = diccionario->encontrar(nombre_edificio)->obtener_edificio(); 
+    Edificio * edificio_seleccionado;
 
-    nombre_edificio = edificio_solicitado->obtener_nombre();
-    cantidad_construidos = edificio_solicitado->obtener_cantidad_construidos(jugador->obtener_id());
-    cantidad_a_brindar = edificio_solicitado->obtener_cantidad_brindada();
+    for ( int i = 0; i < 6; i++ ){
+        edificio_seleccionado = diccionario -> encontrar( nombres_edificios[i] ) -> obtener_edificio();
+        nombre = edificio_seleccionado->obtener_nombre();
+        cantidad_construidos = edificio_seleccionado->obtener_cantidad_construidos(jugador->obtener_id());
+        cantidad_a_brindar = edificio_seleccionado->obtener_cantidad_brindada();
+        total_brindado = cantidad_construidos * cantidad_a_brindar;
 
-    total_brindado = cantidad_construidos * cantidad_a_brindar;
+        if ( nombre == MINA){
 
-    if ( nombre_edificio == MINA){
+            piedra += total_brindado;
 
-        piedra += total_brindado;
+        } else if ( nombre == ASERRADERO){
+            
+            madera += total_brindado;
 
-    } else if ( nombre_edificio == ASERRADERO){
-        
-        madera += total_brindado;
+        } else if ( nombre == FABRICA){
 
-    } else if ( nombre_edificio == FABRICA){
+            metal += total_brindado;
+        }
+    }
 
-    metal += total_brindado;
-    } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
-
-        andycoin += total_brindado;
-
-    } 
 
     devolver_materiales( jugador, piedra, madera, metal, andycoin);
 }
