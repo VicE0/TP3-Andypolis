@@ -115,7 +115,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case MOSTRAR_OBJETIVOS:
-            cout << "mostrar objetivos" << endl;
+            jugador -> mostrar_objetivos_jugador();
         break;
 
     case RECOLECTAR_RECURSOS:
@@ -191,8 +191,6 @@ void verificar_lluvia_de_materiales(int turno, Mapa * mapa){
 void randomizador_de_turnos(Jugador * j1, Jugador * j2){  
     srand( (unsigned)time(0) );
     int jugador_que_empieza = rand() % 2 + 1;
-
-    cout << jugador_que_empieza << endl;
 
     if (jugador_que_empieza == 1){
         j1 -> establecer_turno(1);

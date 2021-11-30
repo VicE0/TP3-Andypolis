@@ -86,6 +86,8 @@ public:
     // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
+    void procesar_objetivos(Jugador * j1, Jugador *  j2);
+
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
     //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
@@ -144,6 +146,11 @@ public:
     //PRE: - 
     //POS: Imprime por pantalla las cantidades de los materiales que se poseen.
     void mostrar_inv(Jugador * jugador);
+
+    //PRE: ~
+    //POS: Imprime por pantalla los objetivos del jugador correspondiente
+    void mostrar_objetivos(Jugador* jugador);
+
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.

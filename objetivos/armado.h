@@ -1,7 +1,7 @@
 #ifndef ARMADO_H
 #define ARMADO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

@@ -121,3 +121,7 @@ int Edificio::devolver_vida_max(){
 void Edificio::reparar(){
     vida += 1;
 }
+
+void Edificio::atacar(){
+    vida -= 1;
+}
