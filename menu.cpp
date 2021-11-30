@@ -192,8 +192,6 @@ void randomizador_de_turnos(Jugador * j1, Jugador * j2){
     srand( (unsigned)time(0) );
     int jugador_que_empieza = rand() % 2 + 1;
 
-    cout << jugador_que_empieza << endl;
-
     if (jugador_que_empieza == 1){
         j1 -> establecer_turno(1);
         j2 -> establecer_turno(2);

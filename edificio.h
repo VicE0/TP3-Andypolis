@@ -126,6 +126,8 @@ public:
     int devolver_vida_max();
 
     void reparar();
+
+    void atacar();
 };
 
 
