@@ -77,7 +77,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
     }
 }
 
-void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool recolecto){
 
 
     switch (opcion)
@@ -119,7 +119,8 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador){
         break;
 
     case RECOLECTAR_RECURSOS:
-            jugador->sumar_materiales_recolectados();
+        if (!recolecto){
+                jugador->sumar_materiales_recolectados();}
         break;
 
     case MOVERSE:
@@ -142,20 +143,27 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
+
     do {
+        bool recolecto = false;
         verificar_lluvia_de_materiales(turno, mapa);
 
         Jugador * jugador = verificar_turno_jugador(turno, j1, j2);
 
         cout<<"\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
 
+        mapa->almacenar_recursos_producidos(jugador);//ver con gian el tema del while
+
         do{
         mostrar_menu_partida();
         opcion = elegir_opcion();
-        procesar_opcion_jugador(opcion, mapa, jugador);
+        procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
+        if (opcion == 10){
+            recolecto = true;
+        }
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
-        mapa->almacenar_recursos_producidos(jugador); //ver con gian el tema del while
+        
         turno++;
     }
     while ( opcion != GUARDAR_SALIR );

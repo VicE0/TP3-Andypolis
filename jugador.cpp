@@ -275,13 +275,14 @@ void Jugador::sumar_materiales_recolectados(){
     while (i < cantidad_de_materiales){
         string material = inventario_a_recolectar->obtener_nodo(i)->obtener_dato()->obtener_nombre();
         int cantidad_recolectada = inventario_a_recolectar->obtener_nodo(i)->obtener_dato()->obtener_cantidad_disponible();
-
+        cout << energia_recolectada << material << cantidad_recolectada << endl;
         coincidir_valores(&piedra,&madera,&metal,&coins,material,cantidad_recolectada);
         
         sumar_cantidad_material(material,cantidad_recolectada,true);
         restar_cantidad_material(material,cantidad_recolectada,false);}
 
     imprimir_materiales(piedra,madera,metal,coins,energia_recolectada);
+    
     energia += energia_recolectada;
     energia_recolectada = 0;
 }
