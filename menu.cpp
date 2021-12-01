@@ -121,6 +121,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     case RECOLECTAR_RECURSOS:
         if (!recolecto){
                 jugador->sumar_materiales_recolectados();}
+        else{cout << "\nUsted ya recolecto los materiales en este turno.\n";}
         break;
 
     case MOVERSE:

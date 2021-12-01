@@ -14,6 +14,7 @@
 #include "edificio.h"
 #include "ABB/ABB.h"
 
+using std::string;
 using namespace std;
 
 const int ERROR = -1;

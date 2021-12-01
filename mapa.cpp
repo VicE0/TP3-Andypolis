@@ -595,22 +595,29 @@ void Mapa::realizar_reparacion(Jugador * jugador){
     }
 }
 
-void Mapa::mostrar_mapa(){
-    cout << " -------------------------------------------------------------------------- " << endl;
-    cout << "\n";
-    for (int i = 0; i < cantidad_filas ; i++){
-        for ( int j = 0; j < cantidad_columnas; j++){
-        cout << "  ";
-           cout << mapa[i][j]->obtener_nombre()
-                << mapa[i][j]->obtener_diminutivo_edificio()
-                << mapa[i][j]->obtener_diminutivo_material()
-                << "\t";
+
+// 6) COMPRAR BOMBAS ------------------------------------
+void Mapa::comprar_bombas(Jugador * jugador){
+    int cantidad_requerida, precio_total;
+    int cantidad_andycoins = jugador->obtener_material(COINS)->obtener_cantidad_disponible();
+    if ( verificacion_energia(jugador->obtener_energia(), 5) ){
+        cout << "Ingrese la cantidad que desea comprar : ";
+        cin >> cantidad_requerida;
+
+        precio_total *= COSTO_BOMBA * cantidad_requerida;
+        if ( verificacion_andycoins(precio_total, cantidad_andycoins) ){
+            // Sumo la cantidad de bombas compradas al inventario: 
+            jugador->obtener_material(BOMBA)->sumar_material(cantidad_requerida);
+            // Resto los andycoins utilizados: 
+            jugador->obtener_material(COINS)->restar_material(precio_total);
+        } else {
+            cout << "\n -> No tenes la cantidad necesaria de Andycoins para comprar tantas bombas.\n" << endl;
         }
-        cout << "\n" << endl;
+
+    } else {
+        cout << "\n -> No tenes la cantidad suficiente de energia para realizar la compra. \n" << endl;
     }
-    cout << "\n";
-    cout << " -------------------------------------------------------------------------- " << endl;
-    cout << "\n";
+}
 
 bool Mapa::verificacion_andycoins(int requerido, int disponible){
     bool alcanza = false;
@@ -620,6 +627,7 @@ bool Mapa::verificacion_andycoins(int requerido, int disponible){
     return alcanza;
 }
 
+// 7) CONSULTAR COORDENADA ------------------------------------
 void Mapa::consultar_coordenada(){
     int fila , columna;
 
@@ -639,6 +647,7 @@ void Mapa::mostrar_inv(Jugador * jugador){
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
 void Mapa::almacenar_recursos_producidos(Jugador * jugador){
+    string nombres_edificios[] = {MINA, ASERRADERO, FABRICA, ESCUELA, PLANTA_ELECTRICA, MINA_ORO};
     int piedra = 0;
     int madera = 0;
     int metal = 0;
@@ -653,39 +662,28 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
 
     for ( int i = 0; i < 6; i++ ){
         edificio_seleccionado = diccionario -> encontrar( nombres_edificios[i] ) -> obtener_edificio();
-        nombre = edificio_seleccionado->obtener_nombre();
+        nombre_edificio = edificio_seleccionado->obtener_nombre();
         cantidad_construidos = edificio_seleccionado->obtener_cantidad_construidos(jugador->obtener_id());
         cantidad_a_brindar = edificio_seleccionado->obtener_cantidad_brindada();
         total_brindado = cantidad_construidos * cantidad_a_brindar;
 
-        if ( nombre == MINA){
-
-    } else if ( nombre_edificio == FABRICA){
-        metal += total_brindado;
-
-        } else if ( nombre == ASERRADERO){
-            
-            madera += total_brindado;
-    } else if ( nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
-        andycoin += total_brindado;
-
-        } else if ( nombre == FABRICA){
-    } else if ( nombre_edificio == PLANTA_ELECTRICA){
-        energia += total_brindado;
-    }
-
+        if (nombre_edificio == MINA){
+            piedra + total_brindado;
+        } 
+        else if (nombre_edificio == FABRICA){
             metal += total_brindado;
+        }
+        else if (nombre_edificio == ASERRADERO){        
+            madera += total_brindado;
+        } 
+        else if (nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
+            andycoin += total_brindado;
+        } 
+        else if (nombre_edificio == PLANTA_ELECTRICA){
+            energia += total_brindado;
         }
     }
     jugador -> devolver_materiales_recolectar(piedra, madera, metal, andycoin, energia);
-}
-
-            andycoin += total_brindado;
-
-        } 
-    }
-
-    devolver_materiales( jugador, piedra, madera, metal, andycoin);
 }
 
 int Mapa::generar_numero_random(int min, int max){
@@ -948,9 +946,6 @@ Mapa::~Mapa(){
     for ( int i = 0; i < total; i++){
         cantidad_edificios--;
     }
-
-
-
 }
 
 // ----------------------- MENU PRINCIPAL : -----------------------
@@ -1000,4 +995,3 @@ void Mapa::mostrar_mapa(){
 
 // GUARDAR SALIR 5)
 // SE REALIZA DESDE EL MENU 
-
