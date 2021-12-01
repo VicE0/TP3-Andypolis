@@ -115,7 +115,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case MOSTRAR_OBJETIVOS:
-            cout << "mostrar objetivos" << endl;
+            jugador -> mostrar_objetivos_jugador();
         break;
 
     case RECOLECTAR_RECURSOS:

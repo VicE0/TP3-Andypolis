@@ -7,11 +7,12 @@ Edificio::Edificio(){
     this-> cantidad_piedra = 0;
     this-> cantidad_madera = 0;
     this-> cantidad_metal = 0;
-    this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = 0;
     this-> vida = 1;
     this-> vida_max = 1;
+    this-> construidos_j1 = 0;
+    this-> construidos_j2 = 0;
 }
 
 Edificio::Edificio(int id_jugador, int vida, int cantidad_piedra, int cantidad_madera, int cantidad_metal, int maximo_construir){
@@ -21,11 +22,13 @@ Edificio::Edificio(int id_jugador, int vida, int cantidad_piedra, int cantidad_m
     this-> cantidad_piedra = cantidad_piedra;
     this-> cantidad_madera = cantidad_madera;
     this-> cantidad_metal = cantidad_metal;
-    this-> cantidad_edificios = 0;
     this-> brinda = 0;
     this-> maximo_construir = maximo_construir;
     this-> vida = vida;
     this-> vida_max = vida;
+    this-> construidos_j1 = 0;
+    this-> construidos_j2 = 0;
+
 
 }
 
@@ -47,10 +50,6 @@ int Edificio::obtener_cantidad_metal(){
     return cantidad_metal;
 }
 
-int Edificio::obtener_cantidad_construidos(){
-    return cantidad_edificios;
-}
-
 int Edificio::obtener_maximo_construir(){
     return maximo_construir;
 }
@@ -67,17 +66,54 @@ int Edificio::obtener_mitad_metal(){
     return cantidad_metal/2;
 }
 
-int Edificio::obtener_cuantos_puedo_construir(){
-    int restantes = maximo_construir - cantidad_edificios ;
+int Edificio::obtener_cantidad_construidos(){
+    return construidos_j2 + construidos_j1;
+}
+
+int Edificio::obtener_cantidad_construidos(int id_jugador){
+    int cantidad = 0;
+    if ( id_jugador == 1){
+        cantidad = construidos_j1;
+    } else {
+        cantidad = construidos_j2;
+    }
+    return cantidad;
+}
+
+int Edificio::obtener_restantes_j1(){
+    int restantes = maximo_construir - construidos_j1;
     return restantes;
 }
 
-void Edificio::sumar_cantidad(){
-    cantidad_edificios++ ;
+int Edificio::obtener_restantes_j2(){
+    int restantes = maximo_construir - construidos_j2;
+    return restantes;
 }
 
-void Edificio::restar_cantidad(){
-    cantidad_edificios-- ;
+int Edificio::obtener_cuantos_puedo_construir(int id_jugador){
+    int restantes = 0;
+    if ( id_jugador == 1){
+        restantes = maximo_construir - construidos_j1;
+    } else {
+        restantes = maximo_construir - construidos_j2;   
+    }
+    return restantes;
+}
+
+void Edificio::sumar_cantidad(int id_jugador){
+    if ( id_jugador == 1 ){
+        construidos_j1 += 1;
+    } else {
+        construidos_j2 += 1;
+    }
+}
+
+void Edificio::restar_cantidad(int id_jugador){
+    if ( id_jugador == 1 ){
+        construidos_j1 += 1;
+    } else {
+        construidos_j2 += 1;
+    }
 }
 
 Edificio::~Edificio(){}

@@ -25,7 +25,7 @@ void Letrado::mostrar_progreso()
 
 void Letrado::mostrar_descripcion()
 {
-    cout << "Letrado: haber construido "<< cantidad << " escuelas"<<endl;
+    cout << "\nLetrado: haber construido "<< cantidad << " escuelas"<<endl;
     mostrar_progreso();
 }
 

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "mapa.h"
-#include "objetivos/jugada.h"
+#include "jugador.h"
 
 using namespace std;
 
