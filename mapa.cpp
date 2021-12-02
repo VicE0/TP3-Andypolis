@@ -24,6 +24,7 @@ bool Mapa::carga_incorrecta_archivos(){
 void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
     procesar_archivo_materiales(j1,j2);
+    inicializar_inventario_recoleccion(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
@@ -119,6 +120,20 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     }
 
     archivo.close();
+}
+
+void Mapa::inicializar_inventario_recoleccion(Jugador * j1, Jugador * j2){
+    string nombres_materiales[] = {PIEDRA, MADERA, METAL, COINS, ENERGIA};
+   
+    Material * material_j1;
+    Material * material_j2;
+    for ( int i = 0; i < 4; i++){
+        material_j1 = new Material(nombres_materiales[i],0);
+        material_j2 = new Material(nombres_materiales[i],0);
+
+        j1->agregar_material_inv_recolectar(material_j1);
+        j2->agregar_material_inv_recolectar(material_j2);
+    }
 }
 
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
@@ -652,7 +667,7 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
     int madera = 0;
     int metal = 0;
     int andycoin = 0;
-    int energia = 0;
+    int energia_rec = 0;
     int cantidad_edificios, total_brindado , cantidad_construidos, cantidad_a_brindar;
     string nombre_edificio;
 
@@ -660,7 +675,7 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
 
     Edificio * edificio_seleccionado;
 
-    for ( int i = 0; i < 6; i++ ){
+    for ( int i = 0; i < 6; i++ ){ //menor a la cantidad contruida
         edificio_seleccionado = diccionario -> encontrar( nombres_edificios[i] ) -> obtener_edificio();
         nombre_edificio = edificio_seleccionado->obtener_nombre();
         cantidad_construidos = edificio_seleccionado->obtener_cantidad_construidos(jugador->obtener_id());
@@ -668,22 +683,22 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
         total_brindado = cantidad_construidos * cantidad_a_brindar;
 
         if (nombre_edificio == MINA){
-            piedra + total_brindado;
+            piedra += total_brindado;
         } 
         else if (nombre_edificio == FABRICA){
             metal += total_brindado;
         }
-        else if (nombre_edificio == ASERRADERO){        
+        else if (nombre_edificio == ASERRADERO){     
             madera += total_brindado;
         } 
         else if (nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
             andycoin += total_brindado;
         } 
         else if (nombre_edificio == PLANTA_ELECTRICA){
-            energia += total_brindado;
+            energia_rec += total_brindado;
         }
     }
-    jugador -> devolver_materiales_recolectar(piedra, madera, metal, andycoin, energia);
+    jugador -> devolver_materiales_recolectar(piedra, madera, metal, andycoin, energia_rec);
 }
 
 int Mapa::generar_numero_random(int min, int max){
@@ -694,19 +709,19 @@ int Mapa::generar_numero_random(int min, int max){
 
 void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, int &cant_gen_coins,string &material_a_colocar ){
     if (cant_gen_piedras){
-        material_a_colocar = "piedra";
+        material_a_colocar = PIEDRA;
         cant_gen_piedras --;
 
     } else if (cant_gen_maderas){
-        material_a_colocar = "madera";
+        material_a_colocar = MADERA;
         cant_gen_maderas --;
 
     } else if (cant_gen_metales){
-        material_a_colocar = "metal";
+        material_a_colocar = METAL;
         cant_gen_metales --;
 
     } else if (cant_gen_coins){
-        material_a_colocar = "andycoins";
+        material_a_colocar = COINS;
         cant_gen_coins --;
     }
 
@@ -731,13 +746,13 @@ void Mapa::mostrar_alerta_materiales_no_colocados(int materiales_restantes, int 
 
 int Mapa::definir_cantidad_material(string material_a_colocar){
     int cantidad = 0;
-    if (material_a_colocar == "piedra"){
+    if (material_a_colocar == PIEDRA){
         cantidad = UNIDADES_POR_PACK_PIEDRA;
-    } else if (material_a_colocar == "madera"){
+    } else if (material_a_colocar == MADERA){
         cantidad = UNIDADES_POR_PACK_MADERA;
-    }else if (material_a_colocar == "metal"){
+    }else if (material_a_colocar == METAL){
         cantidad = UNIDADES_POR_PACK_METAL;
-    }else if (material_a_colocar == "andycoins"){
+    }else if (material_a_colocar == COINS){
         cantidad = UNIDADES_POR_PACK_COINS;
     }
     return cantidad;

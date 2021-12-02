@@ -54,6 +54,7 @@ class Jugador
         int dar_numero();
 
         Material * obtener_material(string nombre);
+
         Material * obtener_material_recolectar(string nombre);
 
         Lista<Material> * obtener_inventario();
@@ -68,6 +69,8 @@ class Jugador
 
         void agregar_material(Material * material);
 
+        void agregar_material_inv_recolectar(Material * material);
+
         void mostrar_cantidad_material( string nombre );
 
         string obtener_diminutivo();
@@ -81,6 +84,8 @@ class Jugador
         void restar_cantidad_material(string nombre, int cantidad,bool recolectar);
 
         void mostrar_inventario();
+
+        void mostrar_inventario_recolectar();
 
         bool alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 

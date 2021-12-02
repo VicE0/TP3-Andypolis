@@ -56,6 +56,11 @@ void Jugador::agregar_material(Material * material)
     inventario->alta(material, inventario->obtener_cantidad());
 }
 
+void Jugador::agregar_material_inv_recolectar(Material * material)
+{
+    inventario_a_recolectar->alta(material, inventario_a_recolectar->obtener_cantidad());
+}
+
 
 Material * Jugador::obtener_material(string nombre){
     Material * aux;
@@ -126,6 +131,20 @@ void Jugador::mostrar_inventario(){
         cout << "Nombre : " << aux->obtener_nombre();
         cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
     }
+    cout << "Nombre : " << ENERGIA;
+    cout << " - Cantidad : " << energia << endl;
+}
+
+void Jugador::mostrar_inventario_recolectar(){
+    int cantidad = inventario_a_recolectar->obtener_cantidad();
+
+    for ( int i = 0; i < cantidad; i++){
+        Material * aux = inventario_a_recolectar->obtener_nodo(i)->obtener_dato();
+        cout << "Nombre : " << aux->obtener_nombre();
+        cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
+    }
+    cout << "Nombre : " << ENERGIA;
+    cout << " - Cantidad : " << energia_recolectada << endl;
 }
 
 bool Jugador::alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int 
@@ -203,12 +222,9 @@ void Jugador::devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_n
         if (material_a_chequear == COINS){
             sumar_cantidad_material(material_a_chequear,cantidad_coins_nec,true);
         }
-        if (material_a_chequear == ENERGIA){
-            energia += cantidad_energia_nec;
-        }
         i++;
     }
-
+    sumar_energia(cantidad_energia_nec);
 };
 
 void Jugador::devolver_materiales_recolectar(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec,int cantidad_coins_nec, int cantidad_energia_nec){
@@ -232,11 +248,9 @@ void Jugador::devolver_materiales_recolectar(int cantidad_piedra_nec, int cantid
         if (material_a_chequear == COINS){
             sumar_cantidad_material(material_a_chequear,cantidad_coins_nec,false);
         }
-        if (material_a_chequear == ENERGIA){
-            sumar_cantidad_material(material_a_chequear,cantidad_energia_nec,false);
-        }
         i++;
     }
+    energia_recolectada += cantidad_energia_nec;
 
 };
 
@@ -270,21 +284,22 @@ void Jugador::coincidir_valores(int *piedra,int *madera,int *metal,int *coins,st
 
 void Jugador::sumar_materiales_recolectados(){
     int i = 0;
-    int piedra,madera,metal,coins;
+    int piedra= 0,madera= 0,metal= 0,coins = 0;
     int cantidad_de_materiales = inventario_a_recolectar->obtener_cantidad();
     
-    while (i < cantidad_de_materiales){
+    while (i < cantidad_de_materiales){ //y haya edificios construidos
         string material = inventario_a_recolectar->obtener_nodo(i)->obtener_dato()->obtener_nombre();
         int cantidad_recolectada = inventario_a_recolectar->obtener_nodo(i)->obtener_dato()->obtener_cantidad_disponible();
-        cout << energia_recolectada << material << cantidad_recolectada << endl;
+
         coincidir_valores(&piedra,&madera,&metal,&coins,material,cantidad_recolectada);
         
         sumar_cantidad_material(material,cantidad_recolectada,true);
-        restar_cantidad_material(material,cantidad_recolectada,false);}
-
+        restar_cantidad_material(material,cantidad_recolectada,false);
+        i++;
+        }
     imprimir_materiales(piedra,madera,metal,coins,energia_recolectada);
     
-    energia += energia_recolectada;
+    sumar_energia(energia_recolectada);
     energia_recolectada = 0;
 }
 

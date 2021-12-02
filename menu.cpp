@@ -42,7 +42,7 @@ int elegir_opcion(){
     cin >> opcion;
 
     while (!opcion_valida(opcion)){
-        cout << "Ingrese una opcion valida : ";
+        cout << "Ingrese una opcion valida: ";
         cin >> opcion;
     }
 
@@ -121,7 +121,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     case RECOLECTAR_RECURSOS:
         if (!recolecto){
                 jugador->sumar_materiales_recolectados();}
-        else{cout << "\nUsted ya recolecto los materiales en este turno.\n";}
+        else{cout << "\nUsted ya recolecto los materiales en este turno.\n" << endl;}
         break;
 
     case MOVERSE:
