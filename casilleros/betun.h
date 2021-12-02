@@ -11,7 +11,7 @@ public:
     //Constructor de Betun
     //PRE: Recibe un entero con la fila y otro con la columna
     //POST: Construye un Betun con nombre = "B".
-    Betun(int fila, int columna);
+    Betun(int fila, int columna, string id_casillero);
 
     //PRE: -
     //POS: muestra por pantalla un mensaje diciendo que que el casillero es un Betun.
@@ -23,7 +23,7 @@ public:
 
     //PRE: Le pide el numero del jugador (indiferente ya q ambos gastan lo mismo).
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int codigo_jugador);
+    int obtener_costo_energia(int id_jugador);
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero transitable, muestra por pantalla un mensaje diciendo

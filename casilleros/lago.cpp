@@ -1,8 +1,9 @@
 #include "lago.h"
 
 
-Lago::Lago(int fila, int columna): Casillero(fila, columna){
+Lago::Lago(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
     this->nombre = "L";
+    this->peso = 0;
 }
 
 string Lago::obtener_nombre(){
@@ -13,8 +14,8 @@ void Lago::mostrar_casillero(){
     cout << " Este es un lago y es un casillero inaccesible. " << endl;
 }
 
-int Lago::obtener_costo_energia(int codigo_jugador){
-    if(codigo_jugador == 1){
+int Lago::obtener_costo_energia(int id_jugador){
+    if(id_jugador == 1){
         return 2;
     } else {return 5;}
 }

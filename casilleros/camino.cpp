@@ -1,8 +1,9 @@
 #include "camino.h"
 
-Camino::Camino(int fila, int columna): Casillero(fila, columna){
+Camino::Camino(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
     this->nombre = "C";
     this->material = 0;
+    this->peso = 4;
 }
 
 void Camino::mostrar_casillero(){
@@ -19,7 +20,7 @@ string Camino::obtener_nombre(){
     return nombre;
 }
 
-int Camino::obtener_costo_energia(int JUGADOR_1){
+int Camino::obtener_costo_energia(int id_jugador){
     return 4;
 }
 

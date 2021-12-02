@@ -10,7 +10,7 @@ public:
     //Constructor de Muelle
     //PRE: Recibe un entero con la fila y otro con la columna
     //POST: Construye un Muelle con nombre = "M".
-    Muelle(int fila, int columna);
+    Muelle(int fila, int columna, string id_casillero);
 
     //PRE: -
     //POS: muestra por pantalla un mensaje diciendo que que el casillero es un Muelle.
@@ -22,7 +22,7 @@ public:
 
     //PRE: Le pido el codigo paras aber que jugador es.
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int codigo_jugador);
+    int obtener_costo_energia(int id_jugador);
     
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un muelle, muestra por pantalla un mensaje diciendo
