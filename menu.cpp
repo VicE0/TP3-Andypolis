@@ -153,7 +153,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
 
         cout<<"\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
 
-        mapa->almacenar_recursos_producidos(jugador);//ver con gian el tema del while
+        mapa->almacenar_recursos_producidos(jugador);
 
         do{
         mostrar_menu_partida();
@@ -178,7 +178,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
         partida(mapa, j1, j2);
 
     }
-
+ 
     else{
     cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
         do {

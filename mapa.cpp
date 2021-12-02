@@ -24,7 +24,6 @@ bool Mapa::carga_incorrecta_archivos(){
 void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
     procesar_archivo_materiales(j1,j2);
-    inicializar_inventario_recoleccion(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
@@ -97,6 +96,8 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
         Material * material_j1;
         Material * material_j2;
+        Material * material_rec_j1;
+        Material * material_rec_j2;
         
         while(archivo >> nombre){
             archivo >> cantidad_1;
@@ -104,10 +105,14 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
             material_j1 = new Material(nombre, stoi(cantidad_1) );
             material_j2 = new Material(nombre, stoi(cantidad_2) );
+            material_rec_j1 = new Material(nombre,0);
+            material_rec_j2 = new Material(nombre,0);
 
             // dependiendo que jugador este , cargo sus datos en sus inventarios :
             j1->agregar_material(material_j1);
             j2->agregar_material(material_j2);
+            j1->agregar_material_inv_recolectar(material_rec_j1);
+            j2->agregar_material_inv_recolectar(material_rec_j2);
         }
 
         archivo.close();
@@ -120,20 +125,6 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     }
 
     archivo.close();
-}
-
-void Mapa::inicializar_inventario_recoleccion(Jugador * j1, Jugador * j2){
-    string nombres_materiales[] = {PIEDRA, MADERA, METAL, COINS};
-   
-    Material * material_j1;
-    Material * material_j2;
-    for ( int i = 0; i < 3; i++){
-        material_j1 = new Material(nombres_materiales[i],0);
-        material_j2 = new Material(nombres_materiales[i],0);
-
-        j1->agregar_material_inv_recolectar(material_j1);
-        j2->agregar_material_inv_recolectar(material_j2);
-    }
 }
 
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){

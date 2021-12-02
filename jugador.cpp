@@ -131,8 +131,6 @@ void Jugador::mostrar_inventario(){
         cout << "Nombre : " << aux->obtener_nombre();
         cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
     }
-    cout << "Nombre : " << ENERGIA;
-    cout << " - Cantidad : " << energia << endl;
 }
 
 void Jugador::mostrar_inventario_recolectar(){
@@ -382,6 +380,7 @@ void Jugador::mostrar_objetivos_jugador()
 
 Jugador::~Jugador(){
     delete inventario;
+    delete inventario_a_recolectar;
     delete objetivos;
     inventario = 0;
     objetivos = 0;

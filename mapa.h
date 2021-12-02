@@ -65,8 +65,6 @@ public:
     //POS: Agrega Edificios/Materiales en sus ubicaciones.
     void procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2);
 
-    void inicializar_inventario_recoleccion(Jugador * j1, Jugador * j2);
-
     //PRE: Utilizando el archivo mapa.txt.
     //POS: Obtiene la cantidad de filas y columnas. Ingresa los valores de los casilleros.
     void procesar_archivo_mapa();
