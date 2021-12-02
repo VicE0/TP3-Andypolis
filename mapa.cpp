@@ -123,11 +123,11 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 }
 
 void Mapa::inicializar_inventario_recoleccion(Jugador * j1, Jugador * j2){
-    string nombres_materiales[] = {PIEDRA, MADERA, METAL, COINS, ENERGIA};
+    string nombres_materiales[] = {PIEDRA, MADERA, METAL, COINS};
    
     Material * material_j1;
     Material * material_j2;
-    for ( int i = 0; i < 4; i++){
+    for ( int i = 0; i < 3; i++){
         material_j1 = new Material(nombres_materiales[i],0);
         material_j2 = new Material(nombres_materiales[i],0);
 
