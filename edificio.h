@@ -117,12 +117,14 @@ public:
     // POS: Devuelve una cierta cantidad de material que brinda el edificio en particular.
     virtual int obtener_cantidad_brindada() = 0;
 
+    //PRE: -
+    //POST: Si lo hay, devuelve el id perteneciente al dueño del edificio.
+    int devolver_id_jugador();
+
     // Destructor
     // PRE: -
     // POS: -
     virtual ~Edificio();
-
-    int obtener_id_jugador();
 
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
 

@@ -383,6 +383,7 @@ Jugador::~Jugador(){
     delete inventario_a_recolectar;
     delete objetivos;
     inventario = 0;
+    inventario_a_recolectar = 0;
     objetivos = 0;
     cantidad_objetivos = 0;
 }

@@ -466,7 +466,7 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
             
             if ( mapa[i][j]->existe_edificio() ){
                 aux = mapa[i][j]->obtener_edificio_construido();
-                codigo_edificio = aux->obtener_id_jugador();
+                codigo_edificio = aux->devolver_id_jugador();
                 
                 if ( id_jugador == codigo_edificio ){
 
@@ -496,7 +496,7 @@ void Mapa::demoler_edificio(Jugador * jugador){
         string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
 
         if ( nombre_edificio != ""){
-            int codigo_edificio = mapa[fila][columna]->obtener_edificio_construido()->obtener_id_jugador();
+            int codigo_edificio = mapa[fila][columna]->obtener_edificio_construido()->devolver_id_jugador();
 
             if ( id_jugador == codigo_edificio ){
                 if ( aceptar_condiciones() ){
@@ -568,7 +568,7 @@ void Mapa::realizar_reparacion(Jugador * jugador){
 
     if ( nombre_edificio != ""){
         Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
-        int codigo_edificio = edificio->obtener_id_jugador();
+        int codigo_edificio = edificio->devolver_id_jugador();
 
         if ( id_jugador == codigo_edificio ){
             if ( aceptar_condiciones() ){
@@ -917,24 +917,54 @@ void Mapa::lluvia_recursos(){
 }
 
 // -------------- FINALIZA PUNTOS DEL MENU -------------------------------
-
-Mapa::~Mapa(){
-
-    if (mapa_bien_cargado && ubicaciones_bien_cargadas){
-        ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
-        for ( int i = 0; i < cantidad_filas; i++){
+void Mapa::guardar_materiales(){
+    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+    for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
-                if (mapa[i][j] ->existe_edificio() ){
-                    archivo_ubicaciones << mapa[i][j] ->obtener_nombre_edificio() << " ("
-                    << i << ", " << j << ")" << endl;
-                }
                 if ( mapa[i][j] -> existe_material() ){ 
                     archivo_ubicaciones << mapa[i][j] -> obtener_nombre_material() <<" ("
                     << i << ", " << j << ")" << endl;
                 }
             }
+    }
+}
+
+void Mapa::guardar_jugador(int id_jugador){
+    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+    for ( int i = 0; i < cantidad_filas; i++){
+            for ( int j = 0; j < cantidad_columnas ; j++){
+                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
+                    archivo_ubicaciones << mapa[i][j] -> devolver_id_jugador() <<" ("
+                    << i << ", " << j << ")" << endl;
+                }
+            }
+    }
+}
+
+void Mapa::guardar_edificios(int id_jugador){
+    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+
+    for ( int i = 0; i < cantidad_filas; i++){
+        for ( int j = 0; j < cantidad_columnas ; j++){
+            if (mapa[i][j] ->existe_edificio() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
+                archivo_ubicaciones << mapa[i][j] ->obtener_nombre_edificio() << " ("
+                << i << ", " << j << ")" << endl;
+            }
         }
     }
+}
+
+Mapa::~Mapa(){
+
+    if (mapa_bien_cargado && ubicaciones_bien_cargadas){
+        ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+        guardar_materiales();
+        guardar_jugador(1);
+        guardar_edificios(1);
+        guardar_jugador(2);
+        guardar_edificios(2);              
+        }
+    
 
     if (mapa_bien_cargado){
         for ( int i = 0; i < cantidad_filas; i++){

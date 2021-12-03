@@ -116,11 +116,11 @@ void Edificio::restar_cantidad(int id_jugador){
     }
 }
 
-Edificio::~Edificio(){}
-
-int Edificio::obtener_id_jugador(){
+int Edificio::devolver_id_jugador(){
     return id_jugador;
 }
+
+Edificio::~Edificio(){}
 
 void Edificio::modificar_cantidad_material(string nombre_material, int nueva_cantidad){
     if (nombre_material == PIEDRA){

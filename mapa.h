@@ -83,6 +83,7 @@ public:
     bool verificar_partida_empezada();
 
     void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+    
 
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
@@ -229,6 +230,12 @@ public:
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
     
+    void guardar_materiales();
+    
+    void guardar_jugador(int id_jugdor);
+
+    void guardar_edificios(int id_jugador);
+
     //Detructor
     //PRE: - 
     //POS: Libero la memoria reservada por el mapa y los casilleros creados , liberando los edificios y materiales 

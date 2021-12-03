@@ -74,6 +74,22 @@ bool Camino::existe_material(){
     return existe;
 }
 
+bool Camino::existe_jugador(){
+    bool existe = false;
+    if (jugador){
+        existe = true;
+    }
+    return existe;
+}
+
+int Camino::devolver_id_jugador(){
+    int id = 0;
+    if (jugador){
+        id = jugador -> obtener_id();
+    }
+    return id;
+}
+
 int Camino::obtener_fila(){
     return fila;
 }
