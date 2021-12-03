@@ -18,12 +18,14 @@ class Grafo
 {
 private:
 
+    int filas;
+    int columnas;
     int ** matriz_adyacente_j1;
     int ** matriz_adyacente_j2;
     Lista<Casillero*> * vertices;
 
 public:
-    Grafo();
+    Grafo(int filas, int columnas);
     void agregar_vertice(Casillero ** nuevo_vertice);
 
     void agrandar_matrices();

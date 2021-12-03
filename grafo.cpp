@@ -1,6 +1,8 @@
 #include "grafo.h"
 
-Grafo::Grafo(){
+Grafo::Grafo(int filas, int columnas){
+    this->filas = filas;
+    this->columnas = columnas;
     this->matriz_adyacente_j1 = 0;
     this->matriz_adyacente_j2 = 0;
     this->vertices = new Lista<Casillero*>;
@@ -92,9 +94,9 @@ void Grafo::mostrar_vertices(){
 void Grafo::mostrar_adyacente(){
     cout << "\nAdyacente 1" << endl;
     int cantidad_elementos = vertices->obtener_cantidad();
-    for ( int i = 0; i < 20; i++ ){
+    for ( int i = 0; i < 30; i++ ){
         cout << endl;
-        for ( int j = 0; j < 20; j ++ ){
+        for ( int j = 0; j < 30; j ++ ){
             if ( matriz_adyacente_j1[i][j] == INFINITO ){
                 cout << "∞";
             } else {
@@ -120,19 +122,61 @@ void Grafo::mostrar_adyacente(){
 }
 
 void Grafo::agregar_caminos(){
-    
-    int peso, fil, col;
+    int i_menos, i_mas, j_menos, j_mas;
+    string origen, destino1, destino2, destino3, destino4, i_s, j_s;
+    int pos_origen, pos_destino1, pos_destino2, pos_destino3, pos_destino4, peso_origen;
+    int cantidad_elementos = vertices->obtener_cantidad();
+    for ( int i = 0; i < filas ; i++ ){ // hasta la cantidad de filas
+        for ( int j = 0; j < columnas ; j++ ){ // hasta la cantidad de columnas
+            i_menos = i - 1;
+            i_mas = i + 1;
+            j_menos = j - 1;
+            j_mas = j + 1;
+            i_s = std::to_string(i);
+            j_s = std::to_string(j);
 
-    for ( int i = 0 ; i < vertices->obtener_cantidad(); i++ ){
+            origen = i_s + j_s; // 0 + 0
+            destino1 = i_s + std::to_string(j_mas); // 0 + 1 
+            destino2 = std::to_string(i_mas) + j_s; // 1 + 0
+            destino3 = i_s + std::to_string(j_menos); // 0 + -1
+            destino4 = std::to_string(i_menos) + j_s; // -1 + 0
 
-        for ( int j = 0; j < vertices->obtener_cantidad(); j++){
+            pos_origen = vertices->obtener_pos(origen);
+            pos_destino1 = vertices->obtener_pos(destino1);
+            pos_destino2 = vertices->obtener_pos(destino2);
+            pos_destino3 = vertices->obtener_pos(destino3);
+            pos_destino4 = vertices->obtener_pos(destino4);
 
-            if ( i != j ) { // cuando i != j entonces veo cuando pesa ir de un casillero al otro
-                cout << "No entiendo nada " << endl;
+            peso_origen = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
+
+            if ( !(pos_destino1 == -1)){
+                int peso_des_1 = (*vertices->obtener_nodo(pos_destino1)->obtener_dato())->obtener_costo_energia(1);
+                matriz_adyacente_j1[pos_origen][pos_destino1] = peso_des_1;
+                matriz_adyacente_j1[pos_destino1][pos_origen] = peso_origen;
             }
 
+            if ( !(pos_destino2 == -1)){
+                int peso_des_2 = (*vertices->obtener_nodo(pos_destino2)->obtener_dato())->obtener_costo_energia(1);
+                matriz_adyacente_j1[pos_origen][pos_destino2] = peso_des_2;
+                matriz_adyacente_j1[pos_destino2][pos_origen] = peso_origen;
+            }
+
+            if ( !(pos_destino3 == -1 )){
+                int peso_des_3 = (*vertices->obtener_nodo(pos_destino3)->obtener_dato())->obtener_costo_energia(1);
+                matriz_adyacente_j1[pos_origen][pos_destino3] = peso_des_3;
+                matriz_adyacente_j1[pos_destino3][pos_origen] = peso_origen;
+            }
+
+            if ( !(pos_destino4 == -1 )){
+                int peso_des_4 = (*vertices->obtener_nodo(pos_destino4)->obtener_dato())->obtener_costo_energia(1);
+                matriz_adyacente_j1[pos_origen][pos_destino4] = peso_des_4;
+                matriz_adyacente_j1[pos_destino4][pos_origen] = peso_origen;
+            }
         }
     }
+
+
+
 
 }
 

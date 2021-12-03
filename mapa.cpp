@@ -31,7 +31,7 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 }
 
 void Mapa::procesar_archivo_mapa(){
-    Grafo * g = new Grafo;
+    Grafo * g;
     ifstream arch;
     arch.open(ARCHIVO_MAPA);
     if(arch.is_open()){
@@ -44,6 +44,7 @@ void Mapa::procesar_archivo_mapa(){
             cantidad_columnas = stoi(columnas);
         }
         string nombre;
+        g = new Grafo(cantidad_filas, cantidad_columnas);
 
         generar_matriz();
 
@@ -72,10 +73,11 @@ void Mapa::procesar_archivo_mapa(){
                 g->agregar_vertice(&mapa[i][j]);
             }
         }
-        cout << "termino de cargar todos los casilleros " << endl;
-        g->mostrar_vertices();
+        cout << "Pruebo agregar camino : " << endl;
         g->mostrar_adyacente();
         g->agregar_caminos();
+
+        cout << "\nAgrego camino : " << endl;
         g->mostrar_adyacente();
         arch.close();
         

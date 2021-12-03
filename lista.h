@@ -20,6 +20,8 @@ public:
 
     Nodo<T> * obtener_nodo(int pos); 
 
+    int obtener_pos(string nombre);
+
     int obtener_cantidad();
 
     void cambiar_cantidad(int nueva_cantidad);
@@ -55,6 +57,26 @@ Nodo<T> * Lista<T>::obtener_nodo(int pos){
         aux = aux->obtener_siguiente();
     }
     return aux;
+}
+
+template <typename T>
+int Lista<T>::obtener_pos(string nombre){
+    bool elemento_encontrado = false;
+    int i = 0;
+    Nodo<T>* auxiliar = primero;
+
+    while(!elemento_encontrado && i < cantidad){
+        if((*auxiliar -> obtener_dato())-> obtener_id_casillero() == nombre){
+            elemento_encontrado = true;
+        }
+        i++;
+        auxiliar = auxiliar -> obtener_siguiente();
+    }
+
+    if(!elemento_encontrado){
+        return -1;
+    }
+    return i - 1;
 }
 
 template <typename T>
