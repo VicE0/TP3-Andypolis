@@ -930,7 +930,9 @@ void Mapa::guardar_materiales(){
 }
 
 void Mapa::guardar_jugador(int id_jugador){
-    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+    ofstream archivo_ubicaciones;
+    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
+
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
                 if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
@@ -942,7 +944,8 @@ void Mapa::guardar_jugador(int id_jugador){
 }
 
 void Mapa::guardar_edificios(int id_jugador){
-    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+    ofstream archivo_ubicaciones;
+    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
@@ -957,7 +960,6 @@ void Mapa::guardar_edificios(int id_jugador){
 Mapa::~Mapa(){
 
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
-        ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
         guardar_materiales();
         guardar_jugador(1);
         guardar_edificios(1);
