@@ -13,6 +13,17 @@
 #include "jugador.h"
 #include "edificio.h"
 #include "ABB/ABB.h"
+#include "Objetivos.h"
+// #include "objetivos/comprar_andypolis.h"
+// #include "objetivos/edad_piedra.h"
+// #include "objetivos/bombardero.h"
+// #include "objetivos/energetico.h"
+// #include "objetivos/letrado.h"
+// #include "objetivos/minero.h"
+// #include "objetivos/cansado.h"
+// #include "objetivos/constructor.h"
+// #include "objetivos/armado.h"
+// #include "objetivos/extremista.h"
 
 using namespace std;
 
@@ -150,7 +161,6 @@ public:
     //PRE: ~
     //POS: Imprime por pantalla los objetivos del jugador correspondiente
     void mostrar_objetivos(Jugador* jugador);
-
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.

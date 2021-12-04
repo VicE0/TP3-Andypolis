@@ -6,18 +6,9 @@ const int ENERGIA_INICIAL = 50;
 
 #include "material.h"
 #include "lista.h"
+#include "listaObjetivos.h"
 #include "edificio.h"
 #include "Objetivos.h"
-#include "objetivos/comprar_andypolis.h"
-#include "objetivos/edad_piedra.h"
-#include "objetivos/bombardero.h"
-#include "objetivos/energetico.h"
-#include "objetivos/letrado.h"
-#include "objetivos/minero.h"
-#include "objetivos/cansado.h"
-#include "objetivos/constructor.h"
-#include "objetivos/armado.h"
-#include "objetivos/extremista.h"
 #include <string>
 
 using std::string;
@@ -32,10 +23,11 @@ class Jugador
         int energia;
         int objetivos_cumplidos;
         int turno;
-        int objetivo_principal;
-        int cantidad_objetivos;
+  
+    
         string diminutivo;
-        Objetivo* objetivos;
+        
+        ListaObjetivos<Objetivo *>  * lista_objetivos;
         Lista<Material> * inventario;
 
 
@@ -54,6 +46,8 @@ class Jugador
 
         Lista<Material> * obtener_inventario();
 
+        //devuelve la lista de objs
+        ListaObjetivos<Objetivo*> * obtener_lista_objetivos();
         // -------------------------------- Funciones jugador --------------------------------
         int obtener_energia();
 
@@ -62,6 +56,8 @@ class Jugador
         void restar_energia(int cantidad);
 
         void agregar_material(Material * material);
+
+        void agregar_objetivo(Objetivo * objetivo);
 
         void mostrar_cantidad_material( string nombre );
 
@@ -77,6 +73,8 @@ class Jugador
 
         void mostrar_inventario();
 
+        void mostrar_objetivos();
+
         bool alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
         void chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza);
@@ -85,11 +83,13 @@ class Jugador
 
         void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
-        void cargar_objetivos();
+       
 
-        void mostrar_objetivos_jugador();
+        // void asignar_objetivos(Objetivo* obj);
 
-        int randomizar_objetivo();
+        // void mostrar_objetivos_jugador();
+
+        // int randomizar_objetivo();
 
 
         ~Jugador();
