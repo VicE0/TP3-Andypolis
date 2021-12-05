@@ -77,6 +77,23 @@ bool Muelle::existe_material(){
     return existe;
 }
 
+bool Muelle::existe_jugador(){
+    bool existe = false;
+    if (jugador){
+        existe = true;
+    }
+    return existe;
+}
+
+int Muelle::devolver_id_jugador(){
+    int id = 0;
+    if (jugador){
+        id = jugador -> obtener_id();
+    }
+    return id;
+}
+
+
 int Muelle::obtener_fila(){
     return fila;
 }

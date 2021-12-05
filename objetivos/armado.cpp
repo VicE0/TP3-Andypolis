@@ -25,7 +25,7 @@ void Armado::mostrar_progreso()
 
 void Armado::mostrar_descripcion()
 {
-    cout << "Armado: tener "<< cantidad << " bombas en el inventario"<<endl;
+    cout << "\nArmado: tener "<< cantidad << " bombas en el inventario"<<endl;
     mostrar_progreso();
 }
 

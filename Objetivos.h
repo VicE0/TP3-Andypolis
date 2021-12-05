@@ -40,9 +40,6 @@ class Objetivo
 
         int obtener_objetivo();
 
-        // bool es_objetivo_principal();
-
-        // bool obelisco_construido(); a jugador?
 
         // ------ Metodos virtuales -----
 
@@ -52,7 +49,7 @@ class Objetivo
 
         virtual void mostrar_progreso() = 0;
 
-        //~Objetivo(); despues vemos los destructores
+        ~Objetivo();
 
 };
 

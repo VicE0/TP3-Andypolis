@@ -25,7 +25,7 @@ void Constructor::mostrar_progreso()
 
 void Constructor::mostrar_descripcion()
 {
-    cout << "Constructor: haber construido un edificio de cada tipo "<<endl;
+    cout << "\nConstructor: haber construido un edificio de cada tipo "<<endl;
     mostrar_progreso();
 }
 

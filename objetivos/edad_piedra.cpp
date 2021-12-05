@@ -24,7 +24,7 @@ void Edad_piedra::mostrar_progreso()
 
 void Edad_piedra::mostrar_descripcion()
 {
-    cout << "Edad de piedra: tener en el inventario " << cantidad << " piedras" <<endl;
+    cout << "\nEdad de piedra: tener en el inventario " << cantidad << " piedras" <<endl;
     mostrar_progreso();
 }
 

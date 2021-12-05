@@ -25,7 +25,7 @@ void Cansado::mostrar_progreso()
 
 void Cansado::mostrar_descripcion()
 {
-    cout << "Cansado: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
+    cout << "\nCansado: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
     mostrar_progreso();
 }
 

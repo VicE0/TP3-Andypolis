@@ -1,7 +1,7 @@
 #ifndef MINERO_H
 #define MINERO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

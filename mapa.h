@@ -14,6 +14,7 @@
 #include "edificio.h"
 #include "ABB/ABB.h"
 
+using std::string;
 using namespace std;
 
 const int ERROR = -1;
@@ -82,9 +83,11 @@ public:
     bool verificar_partida_empezada();
 
     void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+    
 
-    // INGRESO LOS DATOS DE LOS MATERIALES EN CADA JUGADOR:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
+
+    void procesar_objetivos(Jugador * j1, Jugador *  j2);
 
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
@@ -130,8 +133,8 @@ public:
     void obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna);
 
     //PRE: Una ves demolido el edificio.
-    //POS: Muestro por pantalla los materiales obtenidos, y los guardo en el inventario. 
-    void devolver_materiales(Jugador * jugador, int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos);
+    //POS: Muestro por pantalla los materiales obtenidos. 
+    void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
 
     //PRE: Teniendo cargada la matriz dinamica.
     //POS: Recorro la matriz y muestro los nombres de los casilleros. 
@@ -145,9 +148,14 @@ public:
     //POS: Imprime por pantalla las cantidades de los materiales que se poseen.
     void mostrar_inv(Jugador * jugador);
 
+    //PRE: ~
+    //POS: Imprime por pantalla los objetivos del jugador correspondiente
+    void mostrar_objetivos(Jugador* jugador);
+
+
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.
-    void recolectar_recursos_producidos(Jugador * jugador);
+    void almacenar_recursos_producidos(Jugador * jugador);
 
     //PRE: Recibe los eneteros "max_fila" y  "max_col" con los vaores de las maxima columna y la maxima fila que
     //hay en el mapa
@@ -222,6 +230,12 @@ public:
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
     
+    void guardar_materiales();
+    
+    void guardar_jugador(int id_jugdor);
+
+    void guardar_edificios(int id_jugador);
+
     //Detructor
     //PRE: - 
     //POS: Libero la memoria reservada por el mapa y los casilleros creados , liberando los edificios y materiales 
@@ -239,6 +253,9 @@ public:
     void comprar_bombas(Jugador * jugador);
 
     bool verificacion_andycoins(int requerido, int disponible);
+
+    bool vacio(ifstream& pArchivo);
+
 };
 
 

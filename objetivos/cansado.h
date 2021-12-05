@@ -1,7 +1,7 @@
 #ifndef CANSADO_H
 #define CANSADO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

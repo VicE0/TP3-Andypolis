@@ -1,7 +1,7 @@
 #ifndef CONSTRUCTOR_H
 #define CONSTRUCTOR_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 

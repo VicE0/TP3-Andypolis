@@ -25,7 +25,7 @@ void Extremista::mostrar_progreso()
 
 void Extremista::mostrar_descripcion()
 {
-    cout << "Extremista: haber comprado "<< cantidad << " bombas en una partida"<<endl;
+    cout << "\nExtremista: haber comprado "<< cantidad << " bombas en una partida"<<endl;
     mostrar_progreso();
 }
 

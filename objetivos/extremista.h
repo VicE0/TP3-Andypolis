@@ -1,7 +1,7 @@
 #ifndef EXTREMISTA_H
 #define EXTREMISTA_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 
