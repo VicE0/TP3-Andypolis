@@ -25,6 +25,6 @@ void Comprar_andypolis::mostrar_progreso()
 
 void Comprar_andypolis::mostrar_descripcion()
 {
-    cout << "Comprar Andypolis: juntar" << cantidad << " Andycoins a lo largo de la partida"<<endl;
+    cout << "\nComprar Andypolis: juntar" << cantidad << " Andycoins a lo largo de la partida"<<endl;
     mostrar_progreso();
 }

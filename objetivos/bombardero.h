@@ -1,7 +1,7 @@
 #ifndef BOMBARDERO_H
 #define BOMBARDERO_H
 
-#include "Objetivos.h"
+#include "../Objetivos.h"
 
 #include <iostream>
 
