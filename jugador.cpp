@@ -4,8 +4,8 @@ Jugador::Jugador(){
     this -> id_jugador = 0;
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
-    this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
+    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
@@ -16,12 +16,12 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> id_jugador = id_jugador;
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
-    this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
+    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
-    this -> cargar_objetivos();
+ 
 }
 
 int Jugador::dar_numero()
@@ -92,7 +92,6 @@ void Jugador::mostrar_cantidad_material(string nombre){
     aux->mostrar_nombre();
 
 }
-
 
 void Jugador::establecer_turno(int turno){
     this -> turno = turno;
@@ -309,72 +308,20 @@ void Jugador::restar_energia(int cantdiad){
     energia -= cantdiad;
 }
 
-void Jugador::cargar_objetivos()
+
+void Jugador::agregar_objetivo(Objetivo * objetivo)
 {
-
-    int id_objetivo = randomizar_objetivo();
-    int cantidad;
-   
-    switch(id_objetivo)
-    {
-        case COMPRAR_ANDYPOLIS:
-            objetivos = new Comprar_andypolis(id_objetivo, cantidad);
-            break;
-
-        case EDAD_PIEDRA:
-            objetivos = new Edad_piedra(id_objetivo, cantidad);
-            break;
-
-        case BOMBARDERO:
-            objetivos = new Bombardero(id_objetivo, cantidad);
-            break;
-
-        case ENERGETICO:
-            objetivos = new Energetico(id_objetivo, cantidad);
-            break;
-
-        case LETRADO:
-            objetivos = new Letrado(id_objetivo, cantidad);
-            break;
-
-        case MINERO:
-            objetivos = new Minero(id_objetivo, cantidad);
-            break;
-
-        case CANSADO:
-            objetivos = new Cansado(id_objetivo, cantidad);
-            break;
-
-        case CONSTRUCTOR:
-            objetivos = new Constructor(id_objetivo, cantidad);
-            break;
-
-        case ARMADO:
-            objetivos = new Armado(id_objetivo, cantidad);
-            break;
-
-        case EXTREMISTA:
-            objetivos = new Extremista(id_objetivo, cantidad);
-            break;
-
-    }
-    cantidad_objetivos++;
+    this -> lista_objetivos -> insertar_elemento(objetivo);
 }
 
 
-int Jugador::randomizar_objetivo()
+void Jugador::mostrar_objetivos()
 {
-    srand (time(NULL)); //inicializo el random seed
-    int objetivo_dado = 2 + rand() % (12 -2); //El 1 nunca se randomiza porque siempre se asgina (obelisco)
-    return objetivo_dado;
-}
-
-void Jugador::mostrar_objetivos_jugador()
-{
-    for (int i = 0; i < cantidad_objetivos; i++)
+    while(lista_objetivos ->tiene_siguiente())
     {
-        objetivos -> mostrar_descripcion();
+        lista_objetivos -> obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
     }
+    lista_objetivos ->resetear();
 }
 
 
@@ -382,6 +329,7 @@ Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
     delete objetivos;
+    delete lista_objetivos;
     inventario = 0;
     inventario_a_recolectar = 0;
     objetivos = 0;

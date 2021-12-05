@@ -1,7 +1,0 @@
-aserradero (1, 1)
-mina oro (0,0)
-escuela (3, 2)
-metal (2, 2)
-madera (2, 3)
-piedra (5, 5)
-metal (7, 9)
