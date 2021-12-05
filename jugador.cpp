@@ -198,6 +198,7 @@ void Jugador::mostrar_objetivos()
     {
         lista_objetivos -> obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
     }
+    lista_objetivos ->resetear();
 }
 
 
@@ -205,6 +206,5 @@ Jugador::~Jugador(){
     delete inventario;
     delete lista_objetivos;
     inventario = 0;
-
 
 }
