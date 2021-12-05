@@ -927,6 +927,7 @@ void Mapa::guardar_materiales(){
                 }
             }
     }
+    archivo_ubicaciones.close();
 }
 
 void Mapa::guardar_jugador(int id_jugador){
@@ -935,11 +936,7 @@ void Mapa::guardar_jugador(int id_jugador){
 
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
-                cout << "Exsiste jugador " <<  mapa[i][j] -> existe_jugador()<<endl;
-                cout<<"Id jugador: "<<mapa[i][j] -> devolver_id_jugador()<<endl;
-
-                if ( mapa[i][j] -> existe_jugador(  && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
-                    cout << "Holaaa entre a juddddddddddddddg" << mapa[i][j] -> devolver_id_jugador() << endl;
+                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
                     archivo_ubicaciones << mapa[i][j] -> devolver_id_jugador() <<" ("
                     << i << ", " << j << ")" << endl;
                 }
@@ -953,8 +950,8 @@ void Mapa::guardar_edificios(int id_jugador){
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
-            if (mapa[i][j] ->existe_edificio() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
-                archivo_ubicaciones << mapa[i][j] ->obtener_nombre_edificio() << " ("
+            if (mapa[i][j] -> existe_edificio() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
+                archivo_ubicaciones << mapa[i][j] -> obtener_nombre_edificio() << " ("
                 << i << ", " << j << ")" << endl;
             }
         }
