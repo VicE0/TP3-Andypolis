@@ -59,6 +59,14 @@ bool Lago::existe_material(){
     return false;
 }
 
+bool Lago::existe_jugador(){
+    return false;
+}
+
+int Lago::devolver_id_jugador(){
+    return 0;
+}
+
 int Lago::obtener_fila(){
     return fila;
 }
