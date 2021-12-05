@@ -266,6 +266,10 @@ public:
 
     bool vacio(ifstream& pArchivo);
 
+
+    void atacar_edificios(Jugador * jugador);
+
+    void realizar_ataque(Jugador * jugador);
 };
 
 

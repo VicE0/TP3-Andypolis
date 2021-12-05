@@ -95,7 +95,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case ATACAR_EDIFICIO:
-            cout << "Atacar edificio" << endl;
+            mapa -> atacar_edificios(jugador);
         break;
 
     case REPARAR_EDIFICIO:
