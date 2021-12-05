@@ -246,6 +246,10 @@ public:
     void comprar_bombas(Jugador * jugador);
 
     bool verificacion_andycoins(int requerido, int disponible);
+
+    void atacar_edificios(Jugador * jugador);
+
+    void realizar_ataque(Jugador * jugador);
 };
 
 

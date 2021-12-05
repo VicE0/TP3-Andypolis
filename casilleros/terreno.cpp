@@ -151,7 +151,7 @@ Edificio * Terreno::obtener_edificio_construido(){
 }
 
 void Terreno::comprobar_destruccion_edificio(){
-    if (edificio_construido -> devolver_vida() != 0){
+    if (edificio_construido -> devolver_vida() > 0){
         cout << "El edificio todavia esta de pie" <<endl;
     }
     else{

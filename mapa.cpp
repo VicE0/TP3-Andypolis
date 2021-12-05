@@ -540,12 +540,57 @@ void Mapa::devolver_materiales(Jugador * jugador,int piedra_obtenida, int madera
 }
 
 // 4) ATACAR UN EDIFICIO ------------------------------------
-// FALTA []
+void Mapa::atacar_edificios(Jugador * jugador){
+    int energia_jugador = jugador->obtener_energia();
+    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n";
+    
+    if ( verificacion_energia(energia_jugador, 30 )){
+        bool tiene_bombas = jugador->obtener_material(BOMBA)->obtener_cantidad_disponible() > 0;
+        if (tiene_bombas){
+            realizar_ataque(jugador);
+        }else{
+            cout << "\n -> Usted no tiene ninguna bomba para usar. \n" << endl;
+        }
+    }else {
+        cout << "\n -> Usted no cuenta con la cantidad de energia necesaria. \n" << endl;
+    }
+}
+
+void Mapa::realizar_ataque(Jugador * jugador){
+    int fila, columna;
+    int id_jugador = jugador->dar_numero();
+    
+
+    cout << " Ingrese las coordenadas del edificio a atacar : \n" << endl;
+
+    validar_coordenada(fila, columna);
+
+    string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
+
+    if ( nombre_edificio != ""){
+        Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
+        int codigo_edificio = edificio->obtener_id_jugador();
+
+        if ( id_jugador != codigo_edificio ){
+            if ( aceptar_condiciones() ){
+                jugador->obtener_material(BOMBA)->restar_material(1);
+                edificio -> atacar();
+                mapa[fila][columna]->comprobar_destruccion_edificio();
+                jugador->restar_energia(30);
+            }
+        }else {
+                cout << "\n\t -> No se puede atacar a tu propio edificio.\n" << endl;
+        }
+    }else {
+        cout << "\n En la coordenada ingresada no existe ningun edificio ...\n" << endl;
+    }
+}
 
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 25 )){
