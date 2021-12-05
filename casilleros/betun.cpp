@@ -74,6 +74,22 @@ bool Betun::existe_material(){
     return existe;
 }
 
+bool Betun::existe_jugador(){
+    bool existe = false;
+    if (jugador){
+        existe = true;
+    }
+    return existe;
+}
+
+int Betun::devolver_id_jugador(){
+    int id = 0;
+    if (jugador){
+        id = jugador -> obtener_id();
+    }
+    return id;
+}
+
 int Betun::obtener_fila(){
     return fila;
 }

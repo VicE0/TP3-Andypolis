@@ -116,6 +116,10 @@ bool Terreno::existe_material(){
     return false;
 }
 
+bool Terreno::existe_jugador(){
+    return false;
+}
+
 void Terreno::mostrar_coordenadas_edificio(string nombre){
 
     if ( edificio_construido ){
@@ -125,6 +129,15 @@ void Terreno::mostrar_coordenadas_edificio(string nombre){
             cout << " - (" << fila << "," << columna << ") " << endl;
         }
     }
+}
+
+int Terreno::devolver_id_jugador(){
+    int id = 0;
+
+    if (edificio_construido != 0){
+        id = edificio_construido -> devolver_id_jugador();
+    }
+    return id;
 }
 
 Terreno::~Terreno(){

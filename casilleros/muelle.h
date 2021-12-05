@@ -63,8 +63,16 @@ public:
     bool existe_edificio();
 
     //PRE: -
-    //POST: Devulve treu si existe un material en el casillero y false en caso contrario
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
     bool existe_material();
+
+    //PRE: -
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
+    bool existe_jugador();
+
+    //PRE: -
+    //POST:Devuelve el id del jugador.
+    int devolver_id_jugador();
 
     //PRE: -
     //POST: Muestra por pantalla un mensaje diciendo que no existe edificio construido en

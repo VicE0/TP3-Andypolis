@@ -36,7 +36,7 @@ public:
 
     bool existe_edificio(string clave);
 
-    bool supera_maximo(string clave);
+    bool supera_maximo(string clave, int id_jugador);
 
 };
 

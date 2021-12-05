@@ -13,3 +13,4 @@ int Aserradero::obtener_cantidad_brindada(){
 void Aserradero::mostrar_mensaje(){
     cout << " Soy un " << nombre << " brindo : " << brinda << " de madera y me encuentro en el casillero consultado . " << endl;
 }
+

@@ -34,7 +34,9 @@ void Arbol::mostrar_arbol(Nodo_ABB * nodo){
         << nodo->obtener_edificio()->obtener_cantidad_piedra() << " "
         << nodo->obtener_edificio()->obtener_cantidad_madera() << " "
         << nodo->obtener_edificio()->obtener_cantidad_metal() << " "
-        << nodo->obtener_edificio()->obtener_cuantos_puedo_construir() << endl;
+        << nodo->obtener_edificio()->obtener_cantidad_construidos() << " " << "Jugador 1 : " 
+        << nodo->obtener_edificio()->obtener_restantes_j1() << " " << " Jugador 2 : "
+        << nodo->obtener_edificio()->obtener_restantes_j2() << endl;
         cout << "_________________________________________________________________" << endl;
         cout << "\n";
         mostrar_arbol(nodo->obtener_der());
@@ -108,13 +110,13 @@ bool Arbol::existe_edificio(string clave){
     return existe;
 }
 
-bool Arbol::supera_maximo(string clave){
+bool Arbol::supera_maximo(string clave, int id_jugador){
 
     bool supera = true;
     Edificio * dato = encontrar_nodo(root, clave)->obtener_edificio();
 
     int maximo = dato -> obtener_maximo_construir();
-    int construidos = dato -> obtener_cantidad_construidos();
+    int construidos = dato -> obtener_cantidad_construidos(id_jugador);
 
     int restantes = maximo - construidos;
 

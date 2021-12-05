@@ -76,6 +76,14 @@ public:
     //POS:  Devuelve false puesto que no se pueden colocar materiales en casilleros inaccesibles
     bool existe_material();
 
+    //PRE: -
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
+    bool existe_jugador();
+
+    //PRE: -
+    //POST:Devuelve el id del jugador.
+    int devolver_id_jugador();
+
     //Obtener fila
     //PRE:-
     //POST: Devuelve un entero con la fila del casillero
