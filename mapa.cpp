@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
     this -> diccionario = new Arbol;
+    this -> grafo = 0;
 
 }
 
@@ -31,44 +32,47 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 }
 
 void Mapa::procesar_archivo_mapa(){
-
     ifstream arch;
     arch.open(ARCHIVO_MAPA);
     if(arch.is_open()){
-    
-        string filas, columnas;
+        
+        string filas, columnas, id_casillero, i_s, j_s;
         for ( int i = 0 ; i < 1 ; i++){
             arch >> filas; 
             arch >> columnas;
-
             cantidad_filas = stoi(filas);
             cantidad_columnas = stoi(columnas);
         }
         string nombre;
+        grafo = new Grafo(cantidad_filas, cantidad_columnas);
 
         generar_matriz();
 
         for ( int i = 0; i < cantidad_filas; i++){
             for (int j = 0; j < cantidad_columnas; j++){
                 arch >> nombre ;
+                i_s = std::to_string(i);
+                j_s = std::to_string(j);
+                id_casillero = i_s + j_s;
+
                 if ( nombre == "T") {
-                    this->mapa[i][j] = new Terreno(i, j);
+                    this->mapa[i][j] = new Terreno(i, j, id_casillero);
                 } 
                 else if (nombre == "C") {
-                    this->mapa[i][j] = new Camino(i,j);
+                    this->mapa[i][j] = new Camino(i,j, id_casillero);
                 }
                 else if (nombre == "B") {
-                    this->mapa[i][j] = new Betun(i,j);
+                    this->mapa[i][j] = new Betun(i,j, id_casillero);
                 }
                 else if (nombre == "M") {
-                    this->mapa[i][j] = new Muelle(i,j);
+                    this->mapa[i][j] = new Muelle(i,j, id_casillero);
                 }
                 else if (nombre == "L") {
-                    this->mapa[i][j] = new Lago(i,j);
+                    this->mapa[i][j] = new Lago(i,j, id_casillero);
                 }
+                grafo->agregar_vertice(&mapa[i][j]);
             }
         }
-        arch.close();
         
     }else{
         mapa_bien_cargado = false;
@@ -885,28 +889,29 @@ void Mapa::cargar_vector_casilleros_lluvia_con_casileros_permitidos(){
     Camino *camino_aux;
     Muelle *muelle_aux;
     Betun *betun_aux;   
-
+    string id_casillero;
 
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
+            id_casillero = std::to_string(i) + std::to_string(j);
             if (mapa[i][j] -> obtener_nombre() =="C" && !( mapa[i][j] -> existe_material() ) ){    
                 
-                camino_aux  = new Camino (i, j);
+                camino_aux  = new Camino (i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(camino_aux,pos+1, pos);
                 
                 pos+=1;
             }else if (mapa[i][j] -> obtener_nombre() =="M" && !( mapa[i][j] -> existe_material() ) ){    
                 
-                muelle_aux  = new Muelle(i, j);
+                muelle_aux  = new Muelle(i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(muelle_aux,pos+1, pos);
                 
                 pos+=1;
             }else if (mapa[i][j] -> obtener_nombre() =="B" && !( mapa[i][j] -> existe_material() ) ){ 
                 
-                betun_aux  = new Betun(i, j);
+                betun_aux  = new Betun(i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(betun_aux,pos+1, pos);
                 

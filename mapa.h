@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "grafo.h"
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
@@ -46,6 +47,8 @@ private:
     int cantidad_filas;
     int cantidad_columnas;
     Casillero *** mapa;
+
+    Grafo * grafo;
 
     int cantidad_edificios;
 

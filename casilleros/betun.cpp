@@ -1,6 +1,6 @@
 #include "betun.h"
 
-Betun::Betun(int fila, int columna): Casillero(fila, columna){
+Betun::Betun(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
     this->nombre = "B";
     this->material = 0;
 }
@@ -19,7 +19,7 @@ string Betun::obtener_nombre(){
     return nombre;
 }
 
-int Betun::obtener_costo_energia(int JUGADOR_1){
+int Betun::obtener_costo_energia(int id_jugador){
     return 0;
 }
 

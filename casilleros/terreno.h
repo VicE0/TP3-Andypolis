@@ -21,7 +21,7 @@ public:
     // Constructor
     //PRE: -
     //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
-    Terreno(int fila, int columna);
+    Terreno(int fila, int columna, string id_casillero);
 
     //PRE: -
     //POS: Devuelve el nombre del casillero ( getter ).
@@ -29,7 +29,7 @@ public:
     
     //PRE:
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int codigo_jugador);
+    int obtener_costo_energia(int id_jugador);
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.

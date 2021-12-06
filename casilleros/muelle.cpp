@@ -1,6 +1,6 @@
 #include "muelle.h"
 
-Muelle::Muelle(int fila, int columna): Casillero(fila, columna){
+Muelle::Muelle(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
     this->nombre = "M";
     this->material = 0;
 }
@@ -19,8 +19,8 @@ string Muelle::obtener_nombre(){
     return nombre;
 }
 
-int Muelle::obtener_costo_energia(int codigo_jugador){
-    if(codigo_jugador == 1){
+int Muelle::obtener_costo_energia(int id_jugador){
+    if(id_jugador == 1){
         return 5;
     } else {return 2;}
 }
