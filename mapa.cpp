@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
     this -> diccionario = new Arbol;
+    this -> grafo = 0;
 
 }
 
@@ -31,44 +32,47 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 }
 
 void Mapa::procesar_archivo_mapa(){
-
     ifstream arch;
     arch.open(ARCHIVO_MAPA);
     if(arch.is_open()){
-    
-        string filas, columnas;
+        
+        string filas, columnas, id_casillero, i_s, j_s;
         for ( int i = 0 ; i < 1 ; i++){
             arch >> filas; 
             arch >> columnas;
-
             cantidad_filas = stoi(filas);
             cantidad_columnas = stoi(columnas);
         }
         string nombre;
+        grafo = new Grafo(cantidad_filas, cantidad_columnas);
 
         generar_matriz();
 
         for ( int i = 0; i < cantidad_filas; i++){
             for (int j = 0; j < cantidad_columnas; j++){
                 arch >> nombre ;
+                i_s = std::to_string(i);
+                j_s = std::to_string(j);
+                id_casillero = i_s + j_s;
+
                 if ( nombre == "T") {
-                    this->mapa[i][j] = new Terreno(i, j);
+                    this->mapa[i][j] = new Terreno(i, j, id_casillero);
                 } 
                 else if (nombre == "C") {
-                    this->mapa[i][j] = new Camino(i,j);
+                    this->mapa[i][j] = new Camino(i,j, id_casillero);
                 }
                 else if (nombre == "B") {
-                    this->mapa[i][j] = new Betun(i,j);
+                    this->mapa[i][j] = new Betun(i,j, id_casillero);
                 }
                 else if (nombre == "M") {
-                    this->mapa[i][j] = new Muelle(i,j);
+                    this->mapa[i][j] = new Muelle(i,j, id_casillero);
                 }
                 else if (nombre == "L") {
-                    this->mapa[i][j] = new Lago(i,j);
+                    this->mapa[i][j] = new Lago(i,j, id_casillero);
                 }
+                grafo->agregar_vertice(&mapa[i][j]);
             }
         }
-        arch.close();
         
     }else{
         mapa_bien_cargado = false;
@@ -568,7 +572,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
     if ( nombre_edificio != ""){
         Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
-        int codigo_edificio = edificio->obtener_id_jugador();
+        int codigo_edificio = edificio->devolver_id_jugador();
 
         if ( id_jugador != codigo_edificio ){
             if ( aceptar_condiciones() ){
@@ -885,28 +889,29 @@ void Mapa::cargar_vector_casilleros_lluvia_con_casileros_permitidos(){
     Camino *camino_aux;
     Muelle *muelle_aux;
     Betun *betun_aux;   
-
+    string id_casillero;
 
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
+            id_casillero = std::to_string(i) + std::to_string(j);
             if (mapa[i][j] -> obtener_nombre() =="C" && !( mapa[i][j] -> existe_material() ) ){    
                 
-                camino_aux  = new Camino (i, j);
+                camino_aux  = new Camino (i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(camino_aux,pos+1, pos);
                 
                 pos+=1;
             }else if (mapa[i][j] -> obtener_nombre() =="M" && !( mapa[i][j] -> existe_material() ) ){    
                 
-                muelle_aux  = new Muelle(i, j);
+                muelle_aux  = new Muelle(i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(muelle_aux,pos+1, pos);
                 
                 pos+=1;
             }else if (mapa[i][j] -> obtener_nombre() =="B" && !( mapa[i][j] -> existe_material() ) ){ 
                 
-                betun_aux  = new Betun(i, j);
+                betun_aux  = new Betun(i, j,id_casillero);
 
                 agregar_casillero_a_vector_casilleros_lluvia(betun_aux,pos+1, pos);
                 
@@ -962,8 +967,7 @@ void Mapa::lluvia_recursos(){
 }
 
 // -------------- FINALIZA PUNTOS DEL MENU -------------------------------
-void Mapa::guardar_materiales(){
-    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
+void Mapa::guardar_materiales(std::ofstream &archivo_ubicaciones){
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
                 if ( mapa[i][j] -> existe_material() ){ 
@@ -972,16 +976,13 @@ void Mapa::guardar_materiales(){
                 }
             }
     }
-    archivo_ubicaciones.close();
+    
 }
 
-void Mapa::guardar_jugador(int id_jugador){
-    ofstream archivo_ubicaciones;
-    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
-
+void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones,int id_jugador){
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
-                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
+                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador() ){ 
                     archivo_ubicaciones << mapa[i][j] -> devolver_id_jugador() <<" ("
                     << i << ", " << j << ")" << endl;
                 }
@@ -989,15 +990,18 @@ void Mapa::guardar_jugador(int id_jugador){
     }
 }
 
-void Mapa::guardar_edificios(int id_jugador){
-    ofstream archivo_ubicaciones;
-    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
+void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones,int id_jugador){
+    
+    int id_edificio;
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
-            if (mapa[i][j] -> existe_edificio() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
-                archivo_ubicaciones << mapa[i][j] -> obtener_nombre_edificio() << " ("
-                << i << ", " << j << ")" << endl;
+            if (mapa[i][j] -> existe_edificio() ){
+                id_edificio = mapa[i][j]->obtener_edificio_construido() ->devolver_id_jugador();
+                if ( id_edificio == id_jugador ){
+                    archivo_ubicaciones << mapa[i][j] -> obtener_nombre_edificio() << " ("
+                    << i << ", " << j << ")" << endl;
+                }
             }
         }
     }
@@ -1006,11 +1010,15 @@ void Mapa::guardar_edificios(int id_jugador){
 Mapa::~Mapa(){
 
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
-        guardar_materiales();
-        guardar_jugador(1);
-        guardar_edificios(1);
-        guardar_jugador(2);
-        guardar_edificios(2);              
+        ofstream archivo_ubicaciones;
+        archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
+
+        guardar_materiales(archivo_ubicaciones);
+        guardar_jugador(archivo_ubicaciones,1);
+        guardar_edificios(archivo_ubicaciones,1);
+        guardar_jugador(archivo_ubicaciones,2);
+        guardar_edificios(archivo_ubicaciones,2);
+        archivo_ubicaciones.close();          
         }
     
 
