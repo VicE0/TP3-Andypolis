@@ -67,6 +67,14 @@ public:
     bool existe_material();
 
     //PRE: -
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
+    bool existe_jugador();
+
+    //PRE: -
+    //POST:Devuelve el id del jugador.
+    int devolver_id_jugador();
+
+    //PRE: -
     //POST: Muestra por pantalla un mensaje diciendo que no existe edificio construido en
     //el casillero
     void mostrar_coordenadas_edificio(string nombre);

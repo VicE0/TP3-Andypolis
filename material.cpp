@@ -41,7 +41,6 @@ string Material :: obtener_diminutivo(){
 }
 
 int Material :: obtener_cantidad_disponible(){
-  
   return cantidad;
 }
 

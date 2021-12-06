@@ -87,6 +87,15 @@ public:
     // POS: En el casillero_transitable, obtendremos verdadero si hay un material y falso en caso contrario. En casilleros transitables
     //y inaccesibles devolvera false siempre puesto que no se pueden ubicar materiales en ellos.
     virtual bool existe_material() = 0;
+
+    //PRE: -
+    //POST: En el casillero_transitable, obtendremos verdadero si hay un jugador y falso en caso contrario. En casilleros construibles
+    //e inaccesibles devolvera false siempre puesto que no se pueden ubicar jugadores en ellos.
+    virtual bool existe_jugador() = 0;
+
+    //PRE: -
+    //POST: Si lo hay, devuelve el id perteneciente al jugador dueño de lo que haya en dicho casillero.
+    virtual int devolver_id_jugador() = 0;
     
     // PRE: -
     // POS: En el casillero_construible, podremos visualizar por pantalla las coordenadas del casillero donde

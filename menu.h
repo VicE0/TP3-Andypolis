@@ -42,7 +42,7 @@ int elegir_opcion();
 
 // Pre: 0 < opcion < 12 , y la ciudad andynopolis con los archivos ya procesados 
 // Pos: Se dirige a la opcion elegida por el jugador en turno.
-void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador);
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool recolecto);
 
 //Pre : 0 < opcion < 5 
 //Pos : Se dirige a la opcion elegida por los usuarios.
