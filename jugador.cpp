@@ -309,10 +309,78 @@ void Jugador::restar_energia(int cantidad){
 }
 
 
-Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
+// Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
+// {
+//     return lista_objetivos;
+// }
+
+
+void Jugador:: asignar_objetivos()
 {
-    return lista_objetivos;
+    Objetivo ** objetivos;
+    int id_objetivo;
+    for(int i = 0; i < 10; i ++)
+    {
+        agregar_objetivo(objetivos);
+    }
+    for (int i = 0; i < 10; i ++)
+    {
+        id_objetivo = 2 + rand() % (2-12);
+        (lista_objetivos ->insertar(sortear_objetivos(id_objetivo)));
+    }
 }
+
+Objetivo ** Jugador::sortear_objetivos(int id_objetivo)
+{
+    Objetivo** aux = nullptr;
+    int cantidad;
+
+    switch (id_objetivo)
+    {
+        case COMPRAR_ANDYPOLIS:
+
+            *aux = new Comprar_andypolis(id_objetivo, cantidad);
+            break;
+
+        case EDAD_PIEDRA:
+            *aux = new Edad_piedra(id_objetivo, cantidad);
+            break;
+
+        case BOMBARDERO:
+            *aux = new Bombardero(id_objetivo, cantidad);
+            break;
+
+        case ENERGETICO:
+            *aux = new Energetico(id_objetivo, cantidad);
+            break;
+
+        case LETRADO:
+            *aux = new Letrado(id_objetivo, cantidad);
+            break;
+
+        case MINERO:
+            *aux = new Minero(id_objetivo, cantidad);
+            break;
+
+        case CANSADO:
+            *aux = new Cansado(id_objetivo, cantidad);
+            break;
+
+        case CONSTRUCTOR:
+            *aux = new Constructor(id_objetivo, cantidad);
+            break;
+
+        case ARMADO:
+            *aux = new Armado(id_objetivo, cantidad);
+            break;
+
+        case EXTREMISTA:
+            *aux = new Extremista(id_objetivo, cantidad);
+            break;
+    }
+    return aux;
+}
+
 
 void Jugador::agregar_objetivo(Objetivo ** objetivos)
 {
@@ -323,7 +391,7 @@ void Jugador::agregar_objetivo(Objetivo ** objetivos)
 
 void Jugador::mostrar_objetivos()
 {
-    for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
+    for (int i = 0; i < 10; i++)
     {
         (*lista_objetivos ->obtener_nodo(i) ->obtener_dato()) -> mostrar_descripcion();
     }
@@ -333,10 +401,9 @@ void Jugador::mostrar_objetivos()
 Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
-    //delete objetivos;
     delete lista_objetivos;
+    lista_objetivos = 0;
     inventario = 0;
     inventario_a_recolectar = 0;
-    //objetivos = 0;
-    //cantidad_objetivos = 0;
+
 }

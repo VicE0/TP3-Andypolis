@@ -13,6 +13,8 @@ private:
 
     int cantidad;
     Nodo<T> * primero;
+    T** datos;
+    int capacidad;
 
 
 public:
@@ -26,7 +28,9 @@ public:
 
     void cambiar_cantidad(int nueva_cantidad);
 
-    T * consulta(int pos);  
+    T * consulta(int pos); 
+    
+    void insertar(T *d); //lo inserta en la ultima posicion
 
     void alta(T * d, int pos); 
 
@@ -120,6 +124,13 @@ T * Lista<T>::consulta(int pos){
     Nodo<T> * aux = obtener_nodo(pos);
     T * d = aux->obtener_dato();
     return d;
+}
+
+template <typename T>
+void Lista<T>::insertar(T *d)
+{
+    datos[cantidad] = d;
+    cantidad++;
 }
 
 template <typename T>

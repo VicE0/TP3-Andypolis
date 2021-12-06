@@ -41,6 +41,8 @@ private:
 
     Grafo * grafo;
 
+    // Jugador * objetivos_jugador;
+
     int cantidad_edificios;
 
     Arbol * diccionario;
@@ -155,7 +157,7 @@ public:
 
     //PRE: ~
     //POS: Imprime por pantalla los objetivos del jugador correspondiente
-    void mostrar_objetivos(Jugador* jugador);
+    void mostrar_objetivos_jugadores(Jugador* jugador);
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.
