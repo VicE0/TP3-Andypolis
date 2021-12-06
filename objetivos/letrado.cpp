@@ -1,6 +1,6 @@
 #include "letrado.h"
 
-Letrado::Letrado(int id_objetivo, int cantidad)
+Letrado::Letrado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = LETRADO;
     this -> cantidad = 100; //CANTIDAD_MAXIMA ESCUELAS

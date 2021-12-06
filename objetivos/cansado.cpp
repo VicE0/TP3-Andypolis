@@ -1,6 +1,6 @@
 #include "cansado.h"
 
-Cansado::Cansado(int id_objetivo, int cantidad)
+Cansado::Cansado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;

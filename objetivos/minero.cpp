@@ -1,6 +1,6 @@
 #include "minero.h"
 
-Minero::Minero(int id_objetivo, int cantidad)
+Minero::Minero(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = MINERO;
     this -> cantidad = 2;

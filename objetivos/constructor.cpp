@@ -1,6 +1,6 @@
 #include "constructor.h"
 
-Constructor::Constructor(int id_objetivo, int cantidad)
+Constructor::Constructor(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = CONSTRUCTOR;
     this -> cantidad = 6; //cantidad de edificios diferentes (sin contar obelisco)

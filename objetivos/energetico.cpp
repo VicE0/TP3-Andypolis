@@ -1,6 +1,6 @@
 #include "energetico.h"
 
-Energetico::Energetico(int id_objetivo, int cantidad)
+Energetico::Energetico(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = ENERGETICO;
     this -> cantidad = 100;

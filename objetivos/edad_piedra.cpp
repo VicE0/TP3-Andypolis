@@ -1,6 +1,6 @@
 #include "edad_piedra.h"
 
-Edad_piedra::Edad_piedra(int id_objetivo, int cantidad)
+Edad_piedra::Edad_piedra(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = EDAD_PIEDRA;
     this -> cantidad = 50000;

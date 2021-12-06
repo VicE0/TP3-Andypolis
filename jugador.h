@@ -6,9 +6,18 @@ const int ENERGIA_INICIAL = 50;
 
 #include "material.h"
 #include "lista.h"
-#include "listaObjetivos.h"
 #include "edificio.h"
 #include "Objetivos.h"
+#include "objetivos/comprar_andypolis.h"
+#include "objetivos/edad_piedra.h"
+#include "objetivos/bombardero.h"
+#include "objetivos/energetico.h"
+#include "objetivos/letrado.h"
+#include "objetivos/minero.h"
+#include "objetivos/cansado.h"
+#include "objetivos/constructor.h"
+#include "objetivos/armado.h"
+#include "objetivos/extremista.h"
 #include <string>
 
 using std::string;
@@ -28,7 +37,7 @@ class Jugador
     
         string diminutivo;
         
-        ListaObjetivos<Objetivo *>  * lista_objetivos;
+        Lista<Objetivo*> * lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
 
@@ -52,7 +61,7 @@ class Jugador
         Lista<Material> * obtener_inventario();
 
         //devuelve la lista de objs
-        ListaObjetivos<Objetivo*> * obtener_lista_objetivos();
+        Lista<Objetivo*> * obtener_lista_objetivos();
         // -------------------------------- Funciones jugador --------------------------------
         int obtener_id();
 
@@ -66,7 +75,7 @@ class Jugador
 
         void agregar_material_inv_recolectar(Material * material);
 
-        void agregar_objetivo(Objetivo * objetivo);
+        void agregar_objetivo(Objetivo ** objetivos);
 
         void mostrar_cantidad_material( string nombre );
 
@@ -101,14 +110,6 @@ class Jugador
         void coincidir_valores(int *piedra,int *madera,int *metal,int *coins,string nombre,int cantidad);
         
         void sumar_materiales_recolectados();
-
-        void cargar_objetivos();
-
-        // void asignar_objetivos(Objetivo* obj);
-
-        // void mostrar_objetivos_jugador();
-
-        // int randomizar_objetivo();
 
 
         ~Jugador();

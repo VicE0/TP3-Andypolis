@@ -5,7 +5,7 @@ Jugador::Jugador(){
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
@@ -17,7 +17,7 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
@@ -304,24 +304,29 @@ int Jugador::obtener_energia(){
     return energia;
 }
 
-void Jugador::restar_energia(int cantdiad){
-    energia -= cantdiad;
+void Jugador::restar_energia(int cantidad){
+    energia -= cantidad;
 }
 
 
-void Jugador::agregar_objetivo(Objetivo * objetivo)
+Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
 {
-    this -> lista_objetivos -> insertar_elemento(objetivo);
+    return lista_objetivos;
 }
+
+void Jugador::agregar_objetivo(Objetivo ** objetivos)
+{
+    lista_objetivos -> alta(objetivos, lista_objetivos->obtener_cantidad());
+}
+
 
 
 void Jugador::mostrar_objetivos()
 {
-    while(lista_objetivos ->tiene_siguiente())
+    for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
     {
-        lista_objetivos -> obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
+        (*lista_objetivos ->obtener_nodo(i) ->obtener_dato()) -> mostrar_descripcion();
     }
-    lista_objetivos ->resetear();
 }
 
 

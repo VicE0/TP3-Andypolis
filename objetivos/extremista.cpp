@@ -1,6 +1,6 @@
 #include "extremista.h"
 
-Extremista::Extremista(int id_objetivo, int cantidad)
+Extremista::Extremista(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = EXTREMISTA;
     this -> cantidad = 500;

@@ -1,6 +1,6 @@
 #include "armado.h"
 
-Armado::Armado(int id_objetivo, int cantidad)
+Armado::Armado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = ARMADO;
     this -> cantidad = 10;

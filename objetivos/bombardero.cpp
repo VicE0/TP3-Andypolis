@@ -1,6 +1,6 @@
 #include "bombardero.h"
 
-Bombardero::Bombardero(int id_objetivo, int cantidad)
+Bombardero::Bombardero(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = BOMBARDERO;
     this -> cantidad = 5;
