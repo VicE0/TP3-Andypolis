@@ -12,7 +12,6 @@ Mapa::Mapa(){
     this -> ubicaciones_bien_cargadas = true;
     this -> diccionario = new Arbol;
     this -> grafo = 0;
-    // this -> objetivos_jugador = 0;
 
 }
 
@@ -135,8 +134,8 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
 void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
 {   
-    j1 -> asignar_objetivos();
-    j2 -> asignar_objetivos();
+    j1 ->asignar_objetivos();
+    j2 ->asignar_objetivos();
 }
 
 

@@ -38,8 +38,6 @@ class Jugador
     
         string diminutivo;
 
-        Objetivo ** sortear_objetivos(int id_objetivo);
-        
         Lista<Objetivo *>  * lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
@@ -63,8 +61,7 @@ class Jugador
 
         Lista<Material> * obtener_inventario();
 
-        //devuelve la lista de objs
-        ListaObjetivos<Objetivo*> * obtener_lista_objetivos();
+        
         // -------------------------------- Funciones jugador --------------------------------
         int obtener_id();
 
@@ -116,13 +113,7 @@ class Jugador
         
         void sumar_materiales_recolectados();
 
-        void cargar_objetivos();
-
-        // void asignar_objetivos(Objetivo* obj);
-
-        // void mostrar_objetivos_jugador();
-
-        // int randomizar_objetivo();
+        void sortear_objetivos(int id_objetivo);
 
 
         ~Jugador();
