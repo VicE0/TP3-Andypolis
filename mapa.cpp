@@ -572,7 +572,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
     if ( nombre_edificio != ""){
         Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
-        int codigo_edificio = edificio->obtener_id_jugador();
+        int codigo_edificio = edificio->devolver_id_jugador();
 
         if ( id_jugador != codigo_edificio ){
             if ( aceptar_condiciones() ){
@@ -983,10 +983,9 @@ void Mapa::guardar_materiales(){
 void Mapa::guardar_jugador(int id_jugador){
     ofstream archivo_ubicaciones;
     archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
-
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
-                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){ 
+                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador() ){ 
                     archivo_ubicaciones << mapa[i][j] -> devolver_id_jugador() <<" ("
                     << i << ", " << j << ")" << endl;
                 }
@@ -997,12 +996,16 @@ void Mapa::guardar_jugador(int id_jugador){
 void Mapa::guardar_edificios(int id_jugador){
     ofstream archivo_ubicaciones;
     archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
+    int id_edificio;
 
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++){
-            if (mapa[i][j] -> existe_edificio() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
-                archivo_ubicaciones << mapa[i][j] -> obtener_nombre_edificio() << " ("
-                << i << ", " << j << ")" << endl;
+            if (mapa[i][j] -> existe_edificio() ){
+                id_edificio = mapa[i][j]->obtener_edificio_construido() ->devolver_id_jugador();
+                if ( id_edificio == id_jugador ){
+                    archivo_ubicaciones << mapa[i][j] -> obtener_nombre_edificio() << " ("
+                    << i << ", " << j << ")" << endl;
+                }
             }
         }
     }
