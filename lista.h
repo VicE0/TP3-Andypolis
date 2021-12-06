@@ -32,7 +32,7 @@ public:
 
     void baja(int pos); 
 
-    bool vacia(); 
+    bool vacia();
 
     void mostrar();
 

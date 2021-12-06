@@ -11,6 +11,7 @@ Mapa::Mapa(){
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
     this -> diccionario = new Arbol;
+    this -> grafo = 0;
 
 }
 
@@ -31,7 +32,6 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 }
 
 void Mapa::procesar_archivo_mapa(){
-    Grafo * g;
     ifstream arch;
     arch.open(ARCHIVO_MAPA);
     if(arch.is_open()){
@@ -44,7 +44,7 @@ void Mapa::procesar_archivo_mapa(){
             cantidad_columnas = stoi(columnas);
         }
         string nombre;
-        g = new Grafo(cantidad_filas, cantidad_columnas);
+        grafo = new Grafo(cantidad_filas, cantidad_columnas);
 
         generar_matriz();
 
@@ -70,16 +70,9 @@ void Mapa::procesar_archivo_mapa(){
                 else if (nombre == "L") {
                     this->mapa[i][j] = new Lago(i,j, id_casillero);
                 }
-                g->agregar_vertice(&mapa[i][j]);
+                grafo->agregar_vertice(&mapa[i][j]);
             }
         }
-        cout << "Pruebo agregar camino : " << endl;
-        g->mostrar_adyacente();
-        g->agregar_caminos();
-
-        cout << "\nAgrego camino : " << endl;
-        g->mostrar_adyacente();
-        arch.close();
         
     }else{
         mapa_bien_cargado = false;

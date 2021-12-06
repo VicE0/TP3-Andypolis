@@ -121,13 +121,14 @@ void Grafo::mostrar_adyacente(){
     //cout << endl;
 }
 
+// SOLO APLICADO AL JUGADOR 1 , FALTARIA IMPLEMENTAR PARA AMBOS : []
 void Grafo::agregar_caminos(){
     int i_menos, i_mas, j_menos, j_mas;
     string origen, destino1, destino2, destino3, destino4, i_s, j_s;
     int pos_origen, pos_destino1, pos_destino2, pos_destino3, pos_destino4, peso_origen;
     int cantidad_elementos = vertices->obtener_cantidad();
-    for ( int i = 0; i < filas ; i++ ){ // hasta la cantidad de filas
-        for ( int j = 0; j < columnas ; j++ ){ // hasta la cantidad de columnas
+    for ( int i = 0; i < filas ; i++ ){ 
+        for ( int j = 0; j < columnas ; j++ ){ 
             i_menos = i - 1;
             i_mas = i + 1;
             j_menos = j - 1;
@@ -135,11 +136,11 @@ void Grafo::agregar_caminos(){
             i_s = std::to_string(i);
             j_s = std::to_string(j);
 
-            origen = i_s + j_s; // 0 + 0
-            destino1 = i_s + std::to_string(j_mas); // 0 + 1 
-            destino2 = std::to_string(i_mas) + j_s; // 1 + 0
-            destino3 = i_s + std::to_string(j_menos); // 0 + -1
-            destino4 = std::to_string(i_menos) + j_s; // -1 + 0
+            origen = i_s + j_s; 
+            destino1 = i_s + std::to_string(j_mas); 
+            destino2 = std::to_string(i_mas) + j_s; 
+            destino3 = i_s + std::to_string(j_menos);  
+            destino4 = std::to_string(i_menos) + j_s; 
 
             pos_origen = vertices->obtener_pos(origen);
             pos_destino1 = vertices->obtener_pos(destino1);
@@ -174,9 +175,6 @@ void Grafo::agregar_caminos(){
             }
         }
     }
-
-
-
 
 }
 

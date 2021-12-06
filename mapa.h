@@ -36,6 +36,8 @@ private:
     int cantidad_columnas;
     Casillero *** mapa;
 
+    Grafo * grafo;
+
     int cantidad_edificios;
 
     Arbol * diccionario;
