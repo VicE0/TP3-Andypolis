@@ -14,6 +14,7 @@ Casillero::Casillero(int fila, int columna, string id_casillero){
     this->nombre = "";
     this->peso = 0;
     this->id_casillero = id_casillero;
+    this->jugador = 0;
 }
 
 string Casillero::obtener_nombre(){
@@ -29,6 +30,7 @@ int Casillero::obtener_columna(){
 }
 
 void Casillero::agregar_jugador(Jugador * jugador){
+    cout << "agrego a : "<< jugador->dar_numero() << endl;
     this->jugador = jugador;
 }
 
@@ -46,4 +48,20 @@ int Casillero::obtener_peso(){
 
 string Casillero::obtener_id_casillero(){
     return id_casillero;
+}
+
+bool Casillero::existe_jugador(){
+    bool existe = false;
+    if ( jugador ){
+        existe = true;
+    }
+    return existe;
+}
+
+int Casillero::devolver_id_jugador(){
+    int id = 0;
+    if ( jugador ){
+        id = jugador->obtener_id();
+    }
+    return id;
 }
