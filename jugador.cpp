@@ -328,10 +328,7 @@ void Jugador::mostrar_objetivos()
 Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
-    delete objetivos;
     delete lista_objetivos;
     inventario = 0;
     inventario_a_recolectar = 0;
-    objetivos = 0;
-    cantidad_objetivos = 0;
 }
