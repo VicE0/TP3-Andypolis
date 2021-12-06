@@ -1022,7 +1022,7 @@ Mapa::~Mapa(){
 
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
         ofstream archivo_ubicaciones;
-        archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
+        archivo_ubicaciones.open(ARCHIVO_UBICACIONES);
 
         guardar_materiales(archivo_ubicaciones);
         guardar_jugador(archivo_ubicaciones,1);
