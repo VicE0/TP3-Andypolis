@@ -1,15 +1,16 @@
 #include "extremista.h"
 
-Extremista::Extremista(int id_objetivo, int cantidad)
+Extremista::Extremista(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = EXTREMISTA;
     this -> cantidad = 500;
+    this -> bombas_compradas;
 }
 
 bool Extremista::objetivo_cumplido()
 { 
 
-    if (andycoins_totales == cantidad)
+    if (bombas_compradas == cantidad)
     {
         return true;
     }
@@ -18,7 +19,7 @@ bool Extremista::objetivo_cumplido()
 
 void Extremista::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << bombas_compradas << "/" << cantidad << endl;
 
 }
 
