@@ -965,7 +965,8 @@ void Mapa::lluvia_recursos(){
 }
 
 // -------------- FINALIZA PUNTOS DEL MENU -------------------------------
-void Mapa::guardar_materiales(std::ofstream &archivo_ubicaciones){
+void Mapa::guardar_materiales(){
+    ofstream archivo_ubicaciones(ARCHIVO_UBICACIONES);
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
                 if ( mapa[i][j] -> existe_material() ){ 
@@ -974,10 +975,12 @@ void Mapa::guardar_materiales(std::ofstream &archivo_ubicaciones){
                 }
             }
     }
-    
+    archivo_ubicaciones.close();
 }
 
-void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones,int id_jugador){
+void Mapa::guardar_jugador(int id_jugador){
+    ofstream archivo_ubicaciones;
+    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
                 if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador() ){ 
@@ -988,8 +991,9 @@ void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones,int id_jugador){
     }
 }
 
-void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones,int id_jugador){
-    
+void Mapa::guardar_edificios(int id_jugador){
+    ofstream archivo_ubicaciones;
+    archivo_ubicaciones.open(ARCHIVO_UBICACIONES, std::ios_base::app);
     int id_edificio;
 
     for ( int i = 0; i < cantidad_filas; i++){
@@ -1008,15 +1012,11 @@ void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones,int id_jugador){
 Mapa::~Mapa(){
 
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
-        ofstream archivo_ubicaciones;
-        archivo_ubicaciones.open(ARCHIVO_UBICACIONES);
-
-        guardar_materiales(archivo_ubicaciones);
-        guardar_jugador(archivo_ubicaciones,1);
-        guardar_edificios(archivo_ubicaciones,1);
-        guardar_jugador(archivo_ubicaciones,2);
-        guardar_edificios(archivo_ubicaciones,2);
-        archivo_ubicaciones.close();          
+        guardar_materiales();
+        guardar_jugador(1);
+        guardar_edificios(1);
+        guardar_jugador(2);
+        guardar_edificios(2);              
         }
     
 
