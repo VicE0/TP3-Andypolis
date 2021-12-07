@@ -38,7 +38,7 @@ class Jugador
     
         string diminutivo;
 
-        Lista<Objetivo *>  * lista_objetivos;
+        Lista<Objetivo*> * lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
 

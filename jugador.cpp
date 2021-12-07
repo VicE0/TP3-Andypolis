@@ -21,6 +21,7 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
+    // this -> asignar_objetivos();
 
 }
 
@@ -317,79 +318,84 @@ void Jugador::restar_energia(int cantidad){
 
 void Jugador:: asignar_objetivos()
 {
- 
+
     int id_objetivo;
-    for (int i = 0; i < lista_objetivos -> obtener_cantidad(); i ++)
-    {
-        id_objetivo = 2 + rand() % (2-12);
+    id_objetivo = 2 + rand() % (2-12);
+    for (int i = 0; i < 3; i ++)
+    {   
         sortear_objetivos(id_objetivo);
+          
     }
 }
 
 void Jugador::sortear_objetivos(int id_objetivo)
 {
     
-    Objetivo ** aux = nullptr;
+    Objetivo * aux = nullptr;
     int cantidad;
 
     switch (id_objetivo)
     {
         case COMPRAR_ANDYPOLIS:
 
-            *aux = new Comprar_andypolis(id_objetivo, cantidad);
+            aux = new Comprar_andypolis(id_objetivo, cantidad);
             break;
 
         case EDAD_PIEDRA:
-            *aux = new Edad_piedra(id_objetivo, cantidad);
+            aux = new Edad_piedra(id_objetivo, cantidad);
             break;
 
         case BOMBARDERO:
-            *aux = new Bombardero(id_objetivo, cantidad);
+            aux = new Bombardero(id_objetivo, cantidad);
             break;
 
         case ENERGETICO:
-            *aux = new Energetico(id_objetivo, cantidad);
+            aux = new Energetico(id_objetivo, cantidad);
             break;
 
         case LETRADO:
-            *aux = new Letrado(id_objetivo, cantidad);
+            aux = new Letrado(id_objetivo, cantidad);
             break;
 
         case MINERO:
-            *aux = new Minero(id_objetivo, cantidad);
+            aux = new Minero(id_objetivo, cantidad);
             break;
 
         case CANSADO:
-            *aux = new Cansado(id_objetivo, cantidad);
+            aux = new Cansado(id_objetivo, cantidad);
             break;
 
  
         case ARMADO:
-            *aux = new Armado(id_objetivo, cantidad);
+            aux = new Armado(id_objetivo, cantidad);
             break;
 
         case EXTREMISTA:
-            *aux = new Extremista(id_objetivo, cantidad);
+            aux = new Extremista(id_objetivo, cantidad);
             break;
     }
-    agregar_objetivo(aux);
+    agregar_objetivo(&aux);
+
 }
 
 
 void Jugador::agregar_objetivo(Objetivo ** objetivos)
 {
-
+    
     lista_objetivos -> alta(objetivos, lista_objetivos ->obtener_cantidad());
+    
 }
 
 
 
 void Jugador::mostrar_objetivos()
 {
+    
     for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
     {
-       (*lista_objetivos ->obtener_nodo(i) ->obtener_dato()) ->mostrar_descripcion();
-       cout << "los muestra" << endl;
+        cout << "los muestra" << endl;
+       (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
+       
     }
 }
 
@@ -397,8 +403,8 @@ void Jugador::mostrar_objetivos()
 Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
-    // delete lista_objetivos;
-    // lista_objetivos = 0;
+    delete lista_objetivos;
+    lista_objetivos = 0;
     inventario = 0;
     inventario_a_recolectar = 0;
 

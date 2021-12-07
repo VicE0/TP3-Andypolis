@@ -29,4 +29,4 @@ void Minero::mostrar_descripcion()
     mostrar_progreso();
 }
 
-//LINKEAR CON MAPA / EDIFICIOS
+//agregar bool 

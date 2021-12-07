@@ -4,12 +4,13 @@ Armado::Armado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, 
 {
     this -> id_objetivo = ARMADO;
     this -> cantidad = 10;
+    this -> bombas_inventario = 0;
 }
 
 bool Armado::objetivo_cumplido()
 { 
 
-    if (andycoins_totales == cantidad)
+    if (bombas_inventario == cantidad)
     {
         return true;
     }
@@ -18,7 +19,7 @@ bool Armado::objetivo_cumplido()
 
 void Armado::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << bombas_inventario << "/" << cantidad << endl;
 
 }
 
@@ -28,5 +29,3 @@ void Armado::mostrar_descripcion()
     cout << "\nArmado: tener "<< cantidad << " bombas en el inventario"<<endl;
     mostrar_progreso();
 }
-
-//SACAR COINS, puntero a la lista de inventario

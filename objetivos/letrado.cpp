@@ -4,12 +4,13 @@ Letrado::Letrado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad
 {
     this -> id_objetivo = LETRADO;
     this -> cantidad = 100; //CANTIDAD_MAXIMA ESCUELAS
+    this -> escuelas_construidas = 0;
 }
 
 bool Letrado::objetivo_cumplido()
 { 
 
-    if (andycoins_totales == cantidad)
+    if (escuelas_construidas == cantidad)
     {
         return true;
     }
@@ -18,7 +19,7 @@ bool Letrado::objetivo_cumplido()
 
 void Letrado::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << escuelas_construidas << "/" << cantidad << endl;
 
 }
 
@@ -28,5 +29,3 @@ void Letrado::mostrar_descripcion()
     cout << "\nLetrado: haber construido "<< cantidad << " escuelas"<<endl;
     mostrar_progreso();
 }
-
-//SACAR COINS, linkear con max edificios escuela

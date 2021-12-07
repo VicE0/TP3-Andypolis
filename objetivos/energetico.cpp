@@ -29,4 +29,4 @@ void Energetico::mostrar_descripcion()
     mostrar_progreso();
 }
 
-//SACAR COINS, TAL VEX AGREGAR CONTADOR A LA CLASE OBJETIVO?
+//ENERGIA

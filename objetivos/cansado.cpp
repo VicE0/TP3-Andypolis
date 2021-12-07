@@ -4,6 +4,7 @@ Cansado::Cansado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad
 {
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;
+    //energiaa del jugador
 }
 
 bool Cansado::objetivo_cumplido()
@@ -29,4 +30,3 @@ void Cansado::mostrar_descripcion()
     mostrar_progreso();
 }
 
-//SACAR COINS, TAL VEX AGREGAR CONTADOR A LA CLASE OBJETIVO?
