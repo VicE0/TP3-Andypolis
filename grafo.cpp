@@ -193,6 +193,10 @@ void Grafo::agregar_caminos(){
 
 
 Grafo::~Grafo(){
+    liberar_matriz_adyacente(1);
+    matriz_adyacente_j1 = nullptr;
+    liberar_matriz_adyacente(2);
+    matriz_adyacente_j2 = nullptr;
     delete vertices;
     this->vertices = 0;
 }

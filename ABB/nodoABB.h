@@ -23,6 +23,7 @@ public:
     void cambiar_dato(Edificio* d);
     void cambiar_izq(Nodo_ABB * pi);
     void cambiar_der(Nodo_ABB * pd);
+    ~Nodo_ABB();
 };
 
 #endif //NODO_ABB_H

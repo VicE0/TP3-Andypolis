@@ -375,7 +375,6 @@ ifstream nuevo_archivo;
 
                 nuevo_edificio = new Mina_oro(0, 2, piedra, madera, metal, maximo_construir);
             }
-            
             this -> diccionario -> insertar(nuevo_edificio);
             cantidad_edificios++;
 
@@ -1054,6 +1053,12 @@ Mapa::~Mapa(){
     for ( int i = 0; i < total; i++){
         cantidad_edificios--;
     }
+
+    delete grafo;
+    grafo = 0;
+
+    delete diccionario;
+    diccionario = 0;
 }
 
 // ----------------------- MENU PRINCIPAL : -----------------------

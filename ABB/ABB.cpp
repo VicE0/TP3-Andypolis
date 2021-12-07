@@ -22,8 +22,9 @@ Nodo_ABB * Arbol::insertar_nodo(Nodo_ABB * nodo, Edificio * edificio){
 
     // Evaluo si es menor : ( es la ultima opcion que queda )
     else {
-       nodo -> cambiar_izq(insertar_nodo(nodo -> obtener_izq(), edificio));
+        nodo -> cambiar_izq(insertar_nodo(nodo -> obtener_izq(), edificio));
     }
+
     return nodo;
 }
 
@@ -126,4 +127,21 @@ bool Arbol::supera_maximo(string clave, int id_jugador){
 
     return supera;
 
+}
+
+void Arbol::eliminar_arbol(Nodo_ABB * nodo){
+    if ( nodo == NULL ){
+        return;
+    }
+    this->eliminar_arbol(nodo->obtener_der());
+    this->eliminar_arbol(nodo->obtener_izq());
+    delete nodo;
+}
+
+void Arbol::eliminar_arbol(){
+    this->eliminar_arbol(this->root);
+}
+
+Arbol::~Arbol(){
+    this->eliminar_arbol();
 }
