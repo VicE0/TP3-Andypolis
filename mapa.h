@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "grafo.h"
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
@@ -46,6 +47,8 @@ private:
     int cantidad_filas;
     int cantidad_columnas;
     Casillero *** mapa;
+
+    Grafo * grafo;
 
     int cantidad_edificios;
 
@@ -240,11 +243,11 @@ public:
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
     
-    void guardar_materiales();
+    void guardar_materiales(std::ofstream &archivo_ubicaciones);
     
-    void guardar_jugador(int id_jugdor);
+    void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
 
-    void guardar_edificios(int id_jugador);
+    void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
 
     //Detructor
     //PRE: - 
@@ -270,6 +273,10 @@ public:
     void atacar_edificios(Jugador * jugador);
 
     void realizar_ataque(Jugador * jugador);
+
+    int devolver_cantidad_filas();
+
+    int devolver_cantidad_columnas();
 };
 
 

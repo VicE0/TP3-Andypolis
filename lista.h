@@ -6,7 +6,7 @@
 
 using namespace std;
 
-template <class T>
+template <typename T>
 class Lista {
 
 private:
@@ -20,6 +20,8 @@ public:
 
     Nodo<T> * obtener_nodo(int pos); 
 
+    int obtener_pos(string nombre);
+
     int obtener_cantidad();
 
     void cambiar_cantidad(int nueva_cantidad);
@@ -30,7 +32,7 @@ public:
 
     void baja(int pos); 
 
-    bool vacia(); 
+    bool vacia();
 
     void mostrar();
 
@@ -39,7 +41,7 @@ public:
 
 };
 
-template <class T>
+template <typename T>
 Lista<T>::Lista(){
 
     // Primero seria el primer nodo de la lista
@@ -48,7 +50,7 @@ Lista<T>::Lista(){
 
 }
 
-template <class T>
+template <typename T>
 Nodo<T> * Lista<T>::obtener_nodo(int pos){
     Nodo<T> * aux = primero;
     for ( int i = 0 ; i < pos ; i++){
@@ -57,17 +59,37 @@ Nodo<T> * Lista<T>::obtener_nodo(int pos){
     return aux;
 }
 
-template <class T>
+template <typename T>
+int Lista<T>::obtener_pos(string nombre){
+    bool elemento_encontrado = false;
+    int i = 0;
+    Nodo<T>* auxiliar = primero;
+
+    while(!elemento_encontrado && i < cantidad){
+        if((*auxiliar -> obtener_dato())-> obtener_id_casillero() == nombre){
+            elemento_encontrado = true;
+        }
+        i++;
+        auxiliar = auxiliar -> obtener_siguiente();
+    }
+
+    if(!elemento_encontrado){
+        return -1;
+    }
+    return i - 1;
+}
+
+template <typename T>
 int Lista<T>::obtener_cantidad(){
     return cantidad;
 }
 
-template <class T>
+template <typename T>
 void Lista<T>::cambiar_cantidad(int nueva_cantidad){
     cantidad = nueva_cantidad;
 }
 
-template <class T>
+template <typename T>
 void Lista<T>::alta(T * d, int pos){   
 
     Nodo<T> * nuevo = new Nodo<T>(d);
@@ -93,14 +115,14 @@ void Lista<T>::alta(T * d, int pos){
     cantidad++;
 }
 
-template <class T>
+template <typename T>
 T * Lista<T>::consulta(int pos){
     Nodo<T> * aux = obtener_nodo(pos);
     T * d = aux->obtener_dato();
     return d;
 }
 
-template <class T>
+template <typename T>
 void Lista<T>::baja(int pos){
     Nodo<T> * baja = primero;
 
@@ -122,12 +144,12 @@ void Lista<T>::baja(int pos){
     delete baja;
 }
 
-template <class T>
+template <typename T>
 bool Lista<T>::vacia(){
     return (cantidad == 0);
 }
 
-template <class T>
+template <typename T>
 void Lista<T>::mostrar(){
     Nodo<T> * aux = primero;
     for ( int i = 0; i < cantidad; i++){
@@ -136,7 +158,7 @@ void Lista<T>::mostrar(){
     }
 }
 
-template <class T>
+template <typename T>
 Lista<T>::~Lista(){
     int pos = cantidad - 1;
     while( !vacia() ){
