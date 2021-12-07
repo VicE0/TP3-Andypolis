@@ -73,10 +73,12 @@ void Mapa::procesar_archivo_mapa(){
                 grafo->agregar_vertice(&mapa[i][j]);
             }
         }
-        
+        grafo->agregar_caminos();
     }else{
         mapa_bien_cargado = false;
     }
+    arch.close();
+    grafo -> mostrar_adyacente();
 }
 
 void Mapa::generar_matriz(){

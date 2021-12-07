@@ -106,27 +106,28 @@ void Grafo::mostrar_adyacente(){
         }
     }
     cout << endl;
-    //cout << "\nAdyacente 2" << endl;
-    //for ( int i = 0; i < 10; i++ ){
-    //    cout << endl;
-    //    for ( int j = 0; j < 10; j ++ ){
-    //        if ( matriz_adyacente_j2[i][j] == INFINITO ){
-    //            cout << "∞";
-    //        } else {
-    //            cout << matriz_adyacente_j2[i][j];
-    //        }
-    //        cout << "|";
-    //    }
-    //}
-    //cout << endl;
+    cout << "\nAdyacente 2" << endl;
+    for ( int i = 0; i < 30; i++ ){
+        cout << endl;
+        for ( int j = 0; j < 30; j ++ ){
+            if ( matriz_adyacente_j2[i][j] == INFINITO ){
+                cout << "∞";
+           } else {
+                cout << matriz_adyacente_j2[i][j];
+            }
+            cout << "|";
+        }
+    }
+    cout << endl;
 }
 
 // SOLO APLICADO AL JUGADOR 1 , FALTARIA IMPLEMENTAR PARA AMBOS : []
 void Grafo::agregar_caminos(){
     int i_menos, i_mas, j_menos, j_mas;
     string origen, destino1, destino2, destino3, destino4, i_s, j_s;
-    int pos_origen, pos_destino1, pos_destino2, pos_destino3, pos_destino4, peso_origen;
+    int pos_origen, pos_destino1, pos_destino2, pos_destino3, pos_destino4, peso_origen1, peso_origen2;
     int cantidad_elementos = vertices->obtener_cantidad();
+
     for ( int i = 0; i < filas ; i++ ){ 
         for ( int j = 0; j < columnas ; j++ ){ 
             i_menos = i - 1;
@@ -148,34 +149,46 @@ void Grafo::agregar_caminos(){
             pos_destino3 = vertices->obtener_pos(destino3);
             pos_destino4 = vertices->obtener_pos(destino4);
 
-            peso_origen = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
+            peso_origen1 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
+            peso_origen2 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(2);
 
             if ( !(pos_destino1 == -1)){
                 int peso_des_1 = (*vertices->obtener_nodo(pos_destino1)->obtener_dato())->obtener_costo_energia(1);
                 matriz_adyacente_j1[pos_origen][pos_destino1] = peso_des_1;
-                matriz_adyacente_j1[pos_destino1][pos_origen] = peso_origen;
+                matriz_adyacente_j1[pos_destino1][pos_origen] = peso_origen1;
+                peso_des_1 = (*vertices->obtener_nodo(pos_destino1)->obtener_dato())->obtener_costo_energia(2);
+                matriz_adyacente_j2[pos_origen][pos_destino1] = peso_des_1;
+                matriz_adyacente_j2[pos_destino1][pos_origen] = peso_origen2;
             }
 
             if ( !(pos_destino2 == -1)){
                 int peso_des_2 = (*vertices->obtener_nodo(pos_destino2)->obtener_dato())->obtener_costo_energia(1);
                 matriz_adyacente_j1[pos_origen][pos_destino2] = peso_des_2;
-                matriz_adyacente_j1[pos_destino2][pos_origen] = peso_origen;
+                matriz_adyacente_j1[pos_destino2][pos_origen] = peso_origen1;
+                peso_des_2 = (*vertices->obtener_nodo(pos_destino2)->obtener_dato())->obtener_costo_energia(2);
+                matriz_adyacente_j2[pos_origen][pos_destino2] = peso_des_2;
+                matriz_adyacente_j2[pos_destino2][pos_origen] = peso_origen2;
             }
 
             if ( !(pos_destino3 == -1 )){
                 int peso_des_3 = (*vertices->obtener_nodo(pos_destino3)->obtener_dato())->obtener_costo_energia(1);
                 matriz_adyacente_j1[pos_origen][pos_destino3] = peso_des_3;
-                matriz_adyacente_j1[pos_destino3][pos_origen] = peso_origen;
+                matriz_adyacente_j1[pos_destino3][pos_origen] = peso_origen1;
+                peso_des_3 = (*vertices->obtener_nodo(pos_destino3)->obtener_dato())->obtener_costo_energia(2);
+                matriz_adyacente_j2[pos_origen][pos_destino3] = peso_des_3;
+                matriz_adyacente_j2[pos_destino3][pos_origen] = peso_origen2;
             }
 
             if ( !(pos_destino4 == -1 )){
                 int peso_des_4 = (*vertices->obtener_nodo(pos_destino4)->obtener_dato())->obtener_costo_energia(1);
                 matriz_adyacente_j1[pos_origen][pos_destino4] = peso_des_4;
-                matriz_adyacente_j1[pos_destino4][pos_origen] = peso_origen;
+                matriz_adyacente_j1[pos_destino4][pos_origen] = peso_origen1;
+                peso_des_4 = (*vertices->obtener_nodo(pos_destino4)->obtener_dato())->obtener_costo_energia(2);
+                matriz_adyacente_j2[pos_origen][pos_destino4] = peso_des_4;
+                matriz_adyacente_j2[pos_destino4][pos_origen] = peso_origen2;
             }
         }
     }
-
 }
 
 
