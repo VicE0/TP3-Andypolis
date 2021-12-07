@@ -11,7 +11,7 @@ public:
     //Constructor de casillero inaccesible
     //PRE: Recibe un entero con la fila y otro con la columna
     //POST: Construye un casillero inaccesible con nombre = "L".
-    Lago(int fila, int columna);
+    Lago(int fila, int columna, string id_casillero);
 
     //PRE: -
     //POS: muestra por pantalla un mensaje diciendo que que el casillero es un lago y es inaccesible
@@ -19,7 +19,7 @@ public:
 
     //PRE: Le pido el codigo paras aber que jugador es.
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int codigo_jugador);
+    int obtener_costo_energia(int id_jugador);
     
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un casillero inaccesible, muestra por pantalla un mensaje diciendo
@@ -75,14 +75,6 @@ public:
     //PRE: -
     //POS:  Devuelve false puesto que no se pueden colocar materiales en casilleros inaccesibles
     bool existe_material();
-
-    //PRE: -
-    //POST: Devulve true si existe un material en el casillero y false en caso contrario
-    bool existe_jugador();
-
-    //PRE: -
-    //POST:Devuelve el id del jugador.
-    int devolver_id_jugador();
 
     //Obtener fila
     //PRE:-
