@@ -163,7 +163,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
 
                         insertar_jugador_mapa(id_jugador, j1, j2, stoi(fila), stoi(columna));
 
-                    } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  ) { // EVALUO SI ES UN MATERIAL
+                    } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  || nombre == COINS ) { // EVALUO SI ES UN MATERIAL
 
                         getline(archivo, barra, '(');
                         getline(archivo, fila, ',');
@@ -183,8 +183,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
 
                         if ( nombre == "mina"){
                             getline(archivo,segundo_nombre,'(');
-                            if (segundo_nombre == " oro "){ //ver si hay q poner espacio o no
-                                //getline(archivo, barra, '(');
+                            if (segundo_nombre == " oro "){ 
                                 getline(archivo, fila, ',');
                                 getline(archivo, barra, ' ');
                                 getline(archivo, columna, ')');
@@ -193,7 +192,6 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                                 getline(archivo, fila, ',');
                                 getline(archivo, barra, ' ');
                                 getline(archivo, columna, ')');
-                                cout << nombre << fila << columna << endl;
                             }
                         } else {
                             getline(archivo, barra, '(');

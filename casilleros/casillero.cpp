@@ -30,7 +30,6 @@ int Casillero::obtener_columna(){
 }
 
 void Casillero::agregar_jugador(Jugador * jugador){
-    cout << "agrego a : "<< jugador->dar_numero() << endl;
     this->jugador = jugador;
 }
 
