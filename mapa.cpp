@@ -28,6 +28,7 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
+    // procesar_objetivos(j1,j2);
 
 }
 
@@ -130,6 +131,13 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
     archivo.close();
 }
+
+// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
+// {   
+//     j1 ->asignar_objetivos();
+//     j2 ->asignar_objetivos();
+// }
+
 
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
     if ( id_jugador == "1" ){
@@ -698,7 +706,10 @@ void Mapa::mostrar_inv(Jugador * jugador){
 }
 
 // 9) MOSTRAR OBJETIVOS
-// FALTA []
+void Mapa::mostrar_objetivos_jugadores(Jugador * jugador)
+{
+    jugador -> mostrar_objetivos();
+}
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
 void Mapa::almacenar_recursos_producidos(Jugador * jugador){
