@@ -83,8 +83,6 @@ void Mapa::procesar_archivo_mapa(){
             }
         }
         grafo->agregar_caminos();
-        grafo->mostrar_adyacente();
-        
     }else{
         mapa_bien_cargado = false;
     }
@@ -479,8 +477,9 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
     int codigo_edificio;
     string nombre_edificio;
     Edificio * aux = nullptr;
-
-    cout << "\n";
+    cout << "\n - Orden de los elementos : \n";
+    cout << " -> Nombre del edificio : coordenada \n" << endl;
+    cout << "\n ----------------------------------------------- " << endl;
     for ( int i = 0; i < cantidad_filas; i++){
         for ( int j = 0; j < cantidad_columnas ; j++ ){
             
@@ -491,12 +490,12 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
                 if ( id_jugador == codigo_edificio ){
 
                     nombre_edificio = aux->obtener_nombre();
-                    cout << "Edificio construido : " << nombre_edificio << " (" << i << ", "<< j << ") " << endl;
+                    cout << "\n -> " << nombre_edificio << " : (" << i << ", "<< j << ") " << endl;
                 }
             }
         }
     }
-    cout << "\n";
+    cout << "\n ----------------------------------------------- \n " << endl;
 }
 
 // 3) DEMOLER UN EDIFICIO ------------------------------------
@@ -552,6 +551,7 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
     jugador-> imprimir_materiales(mitad_piedra, mitad_madera, mitad_metal, 0, 0);
     jugador->devolver_materiales(mitad_piedra, mitad_madera, mitad_metal,0,0);
 
+    edificio->restar_cantidad(jugador->obtener_id());
     mapa[fila][columna]->eliminar_edificio();
 }
 
@@ -560,7 +560,7 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
 // 4) ATACAR UN EDIFICIO ------------------------------------
 void Mapa::atacar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 30 )){
@@ -595,7 +595,6 @@ void Mapa::realizar_ataque(Jugador * jugador){
                 jugador->obtener_material(BOMBA)->restar_material(1);
                 edificio -> atacar();
                 mapa[fila][columna]->comprobar_destruccion_edificio();
-                jugador->restar_energia(30);
             }
         }else {
                 cout << "\n\t -> No se puede atacar a tu propio edificio.\n" << endl;
@@ -608,7 +607,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 25 )){
@@ -672,15 +671,17 @@ void Mapa::comprar_bombas(Jugador * jugador){
     int cantidad_requerida, precio_total;
     int cantidad_andycoins = jugador->obtener_material(COINS)->obtener_cantidad_disponible();
     if ( verificacion_energia(jugador->obtener_energia(), 5) ){
-        cout << "Ingrese la cantidad que desea comprar : ";
+        cout << "\n Ingrese la cantidad que desea comprar : ";
         cin >> cantidad_requerida;
 
-        precio_total *= COSTO_BOMBA * cantidad_requerida;
+        precio_total = COSTO_BOMBA * cantidad_requerida;
         if ( verificacion_andycoins(precio_total, cantidad_andycoins) ){
             // Sumo la cantidad de bombas compradas al inventario: 
             jugador->obtener_material(BOMBA)->sumar_material(cantidad_requerida);
+            cout << "\n -> " << cantidad_requerida << " BOMBAS COMPRADAS \n" << endl;
             // Resto los andycoins utilizados: 
             jugador->obtener_material(COINS)->restar_material(precio_total);
+            cout << " - se gasto : " << precio_total << " andycoins.\n" << endl;
         } else {
             cout << "\n -> No tenes la cantidad necesaria de Andycoins para comprar tantas bombas.\n" << endl;
         }

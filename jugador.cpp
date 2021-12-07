@@ -126,11 +126,13 @@ void Jugador::restar_cantidad_material(string nombre, int cantidad,bool recolect
 
 void Jugador::mostrar_inventario(){
     int cantidad = inventario->obtener_cantidad();
+    cout << "\n ----------------------------------------------- \n " << endl;
     for ( int i = 0; i < cantidad; i++){
         Material * aux = inventario->obtener_nodo(i)->obtener_dato();
-        cout << "Nombre : " << aux->obtener_nombre();
-        cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
+        cout << "\n -> " << aux->obtener_nombre();
+        cout << " : " << aux->obtener_cantidad_disponible() << endl;
     }
+    cout << "\n ----------------------------------------------- \n " << endl;
 }
 
 void Jugador::mostrar_inventario_recolectar(){

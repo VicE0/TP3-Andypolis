@@ -152,11 +152,12 @@ Edificio * Terreno::obtener_edificio_construido(){
 
 void Terreno::comprobar_destruccion_edificio(){
     if (edificio_construido -> devolver_vida() > 0){
-        cout << "El edificio todavia esta de pie" <<endl;
+        cout << " \n Edificio atacado : " << edificio_construido->obtener_nombre() << endl;
+        cout << " El edificio todavia esta de pie ! \n" <<endl;
     }
     else{
+        cout << "\n\t -> El edificio : " << edificio_construido->obtener_nombre() << " fue destruido exitosamente \n" <<endl;
         eliminar_edificio();
-        cout << "El edificio fue destruido exitosamente" <<endl;
     }
 }
 
