@@ -110,9 +110,9 @@ void Edificio::sumar_cantidad(int id_jugador){
 
 void Edificio::restar_cantidad(int id_jugador){
     if ( id_jugador == 1 ){
-        construidos_j1 += 1;
+        construidos_j1 -= 1;
     } else {
-        construidos_j2 += 1;
+        construidos_j2 -= 1;
     }
 }
 

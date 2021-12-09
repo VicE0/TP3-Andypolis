@@ -23,7 +23,6 @@ private:
 public:
     Arbol();
 
-    // crear nodo con el dato edificio para luego insertarlo en el arbol
     void insertar(Edificio* edificio);
 
     void mostrar_arbol(Nodo_ABB * arbol);
@@ -37,6 +36,12 @@ public:
     bool existe_edificio(string clave);
 
     bool supera_maximo(string clave, int id_jugador);
+
+    void eliminar_arbol(Nodo_ABB * nodo);
+
+    void eliminar_arbol();
+
+    ~Arbol();
 
 };
 

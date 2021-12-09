@@ -172,10 +172,11 @@ void Lista<T>::mostrar(){
 
 template <typename T>
 Lista<T>::~Lista(){
-    int pos = cantidad - 1;
-    while( !vacia() ){
-        baja(pos);
-        pos--;
+    Nodo<T> * siguiente;
+    while ( primero != nullptr ){
+        siguiente = primero->obtener_siguiente();
+        delete primero;
+        primero = siguiente;
     }
 }
 

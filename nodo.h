@@ -18,6 +18,8 @@ public:
 
     void cambiar_dato(T d);
 
+    ~Nodo();
+
 };  
 
 template <typename T>
@@ -46,6 +48,11 @@ void Nodo<T>::cambiar_siguiente(Nodo * pn){
 template <typename T>
 void Nodo<T>::cambiar_dato(T d){
     dato = d;
+}
+
+template <typename T>
+Nodo<T>::~Nodo(){
+    delete dato;
 }
 
 #endif
