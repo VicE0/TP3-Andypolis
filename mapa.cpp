@@ -22,12 +22,21 @@ bool Mapa::carga_incorrecta_archivos(){
 
 }
 
+int Mapa::devolver_cantidad_columnas(){
+    return cantidad_columnas;
+}
+
+int Mapa::devolver_cantidad_filas(){
+    return cantidad_filas;
+}
+
 void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
     procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
-    procesar_archivo_ubicaciones(j1, j2);
+    procesar_archivo_ubicaciones( j1, j2);
+    // procesar_objetivos(j1,j2);
 
 }
 
@@ -74,11 +83,11 @@ void Mapa::procesar_archivo_mapa(){
             }
         }
         grafo->agregar_caminos();
+        grafo->mostrar_adyacente();
+        
     }else{
         mapa_bien_cargado = false;
     }
-    arch.close();
-    grafo -> mostrar_adyacente();
 }
 
 void Mapa::generar_matriz(){
@@ -133,6 +142,13 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
+// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
+// {   
+//     j1 ->asignar_objetivos();
+//     j2 ->asignar_objetivos();
+// }
+
+
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
     if ( id_jugador == "1" ){
         mapa[fila][columna]->agregar_jugador(j1);
@@ -165,7 +181,8 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
 
                         insertar_jugador_mapa(id_jugador, j1, j2, stoi(fila), stoi(columna));
 
-                    } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL || nombre == COINS ) { // EVALUO SI ES UN MATERIAL
+                    } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  || nombre == COINS ) { // EVALUO SI ES UN MATERIAL
+
                         getline(archivo, barra, '(');
                         getline(archivo, fila, ',');
                         getline(archivo, barra, ' ');
@@ -184,7 +201,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
 
                         if ( nombre == "mina"){
                             getline(archivo,segundo_nombre,'(');
-                            if (segundo_nombre == " oro "){
+                            if (segundo_nombre == " oro "){ 
                                 getline(archivo, fila, ',');
                                 getline(archivo, barra, ' ');
                                 getline(archivo, columna, ')');
@@ -193,7 +210,6 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                                 getline(archivo, fila, ',');
                                 getline(archivo, barra, ' ');
                                 getline(archivo, columna, ')');
-                                cout << nombre << fila << columna << endl;
                             }
                         } else {
                             getline(archivo, barra, '(');
@@ -698,7 +714,10 @@ void Mapa::mostrar_inv(Jugador * jugador){
 }
 
 // 9) MOSTRAR OBJETIVOS
-// FALTA []
+void Mapa::mostrar_objetivos_jugadores(Jugador * jugador)
+{
+    jugador -> mostrar_objetivos();
+}
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
 void Mapa::almacenar_recursos_producidos(Jugador * jugador){
@@ -976,10 +995,9 @@ void Mapa::guardar_materiales(std::ofstream &archivo_ubicaciones){
                 }
             }
     }
-    
 }
 
-void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones,int id_jugador){
+void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugador){
     for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
                 if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador() ){ 
@@ -990,8 +1008,7 @@ void Mapa::guardar_jugador(std::ofstream &archivo_ubicaciones,int id_jugador){
     }
 }
 
-void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones,int id_jugador){
-    
+void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador){
     int id_edificio;
 
     for ( int i = 0; i < cantidad_filas; i++){
@@ -1012,15 +1029,13 @@ Mapa::~Mapa(){
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
         ofstream archivo_ubicaciones;
         archivo_ubicaciones.open(ARCHIVO_UBICACIONES);
-
         guardar_materiales(archivo_ubicaciones);
-        guardar_jugador(archivo_ubicaciones,1);
-        guardar_edificios(archivo_ubicaciones,1);
-        guardar_jugador(archivo_ubicaciones,2);
-        guardar_edificios(archivo_ubicaciones,2);
-        archivo_ubicaciones.close();          
-        }
-    
+        guardar_jugador(archivo_ubicaciones, 1);
+        guardar_edificios(archivo_ubicaciones, 1);
+        guardar_jugador(archivo_ubicaciones, 2);
+        guardar_edificios(archivo_ubicaciones, 2);    
+        archivo_ubicaciones.close();            
+    }
 
     if (mapa_bien_cargado){
         for ( int i = 0; i < cantidad_filas; i++){
@@ -1080,15 +1095,6 @@ void Mapa::mostrar_mapa(){
     cout << " -------------------------------------------------------------------------- " << endl;
     cout << "\n";
 
-}
-
-
-int Mapa::devolver_cantidad_filas(){
-    return cantidad_filas;
-}
-
-int Mapa::devolver_cantidad_columnas(){
-    return cantidad_columnas;
 }
 
 // COMENZAR PARTIDA 4)
