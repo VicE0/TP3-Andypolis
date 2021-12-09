@@ -6,6 +6,7 @@ Grafo::Grafo(int filas, int columnas){
     this->matriz_adyacente_j1 = 0;
     this->matriz_adyacente_j2 = 0;
     this->vertices = new Lista<Casillero*>;
+    this->camino_minimo = nullptr;
 
 }
 
@@ -191,12 +192,37 @@ void Grafo::agregar_caminos(){
     }
 }
 
+void Grafo::usar_camino_minimo(string origen, string destino, int id){
+    int pos_origen = vertices->obtener_pos(origen);
+    int pos_destino = vertices->obtener_pos(destino);
+
+    if ( pos_origen == -1){
+        cout << " El vertice " << origen << " no existe en el grafo." << endl;
+    }
+
+    if ( pos_destino == -1){
+        cout << " El vertice " << destino << " no existe en el grafo." << endl;
+    }
+
+    usar_camino_minimo(pos_origen, pos_destino, id);
+}
+
+void Grafo::usar_camino_minimo(int origen, int destino, int id){
+    if ( id == 1){
+        camino_minimo = new Dijkstra(vertices, matriz_adyacente_j1);
+    } else {
+        camino_minimo = new Dijkstra(vertices, matriz_adyacente_j2);
+    }
+    camino_minimo->camino_minimo(origen, destino);
+
+    delete camino_minimo;
+}
+
 
 Grafo::~Grafo(){
     liberar_matriz_adyacente(1);
     matriz_adyacente_j1 = nullptr;
     liberar_matriz_adyacente(2);
     matriz_adyacente_j2 = nullptr;
-    delete vertices;
     this->vertices = 0;
 }

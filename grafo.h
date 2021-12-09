@@ -11,11 +11,9 @@
 #include "casilleros/muelle.h"
 #include "jugador.h"
 #include "edificio.h"
+#include "Dijkstra.h"
 
-const int INFINITO = 99999999;
-
-class Grafo
-{
+class Grafo {
 private:
 
     int filas;
@@ -24,8 +22,12 @@ private:
     int ** matriz_adyacente_j2;
     Lista<Casillero*> * vertices;
 
+    // probando camino_minimo
+    CaminoMinimo * camino_minimo;
+
 public:
     Grafo(int filas, int columnas);
+
     void agregar_vertice(Casillero ** nuevo_vertice);
 
     void agrandar_matrices();
@@ -41,6 +43,10 @@ public:
     void liberar_matriz_adyacente(int id);
 
     void agregar_caminos();
+
+    void usar_camino_minimo(string origen, string destino, int id);
+
+    void usar_camino_minimo(int origen, int destino, int id);
 
     ~Grafo();
 };
