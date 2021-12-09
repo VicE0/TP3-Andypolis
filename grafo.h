@@ -24,6 +24,18 @@ private:
     int ** matriz_adyacente_j2;
     Lista<Casillero*> * vertices;
 
+    void copiar_matriz_adyacente(int ** matriz_aux ,int id);
+
+    void inicializar_nuevo_vertice( int ** matriz_aux );
+
+    void liberar_matriz_adyacente(int id);
+
+    void actualizar_matrices_de_adyacencia(int posicion_origen, int posicion_destino, int peso_origen_j1, int peso_origen_j2);
+
+    void actualizar_matriz_de_adyacencia_j1(int posicion_origen, int posicion_destino, int peso_origen_j1);
+
+    void actualizar_matriz_de_adyacencia_j2(int posicion_origen, int posicion_destino, int peso_origen_j2);
+
 public:
     Grafo(int filas, int columnas);
     void agregar_vertice(Casillero ** nuevo_vertice);
@@ -33,12 +45,6 @@ public:
     void mostrar_adyacente();
 
     void mostrar_vertices();
-
-    void copiar_matriz_adyacente(int ** matriz_aux ,int id);
-
-    void inicializar_nuevo_vertice( int ** matriz_aux );
-
-    void liberar_matriz_adyacente(int id);
 
     void agregar_caminos();
 

@@ -73,7 +73,6 @@ void Grafo::liberar_matriz_adyacente(int id){
         }
         delete [] matriz_adyacente_j2;
     }
-
 }
 
 void Grafo::agregar_vertice(Casillero ** nuevo_casillero){
@@ -123,74 +122,60 @@ void Grafo::mostrar_adyacente(){
 
 // SOLO APLICADO AL JUGADOR 1 , FALTARIA IMPLEMENTAR PARA AMBOS : []
 void Grafo::agregar_caminos(){
-    int i_menos, i_mas, j_menos, j_mas;
-    string origen, destino1, destino2, destino3, destino4, i_s, j_s;
-    int pos_origen, pos_destino1, pos_destino2, pos_destino3, pos_destino4, peso_origen1, peso_origen2;
-    int cantidad_elementos = vertices->obtener_cantidad();
+    int fila_anterior, fila_siguiente, columna_anterior, columna_siguiente;
+    string origen, casillero_derecho, casillero_inferior, casillero_superior, casillero_izquierdo, fila_string, columna_string;
+    int pos_origen, pos_casillero_derecho, pos_casillero_inferior, pos_casillero_superior, pos_casillero_izquierdo, peso_origen_j1, peso_origen_j2;
 
-    for ( int i = 0; i < filas ; i++ ){ 
-        for ( int j = 0; j < columnas ; j++ ){ 
-            i_menos = i - 1;
-            i_mas = i + 1;
-            j_menos = j - 1;
-            j_mas = j + 1;
-            i_s = std::to_string(i);
-            j_s = std::to_string(j);
+    for ( int fila = 0; fila < filas ; fila++ ){ 
+        for ( int columna = 0; columna < columnas ; columna++ ){ 
+            fila_anterior = fila - 1;
+            fila_siguiente = fila + 1;
+            columna_anterior = columna - 1;
+            columna_siguiente = columna + 1;
+            fila_string = std::to_string(fila);
+            columna_string = std::to_string(columna);
 
-            origen = i_s + j_s; 
-            destino1 = i_s + std::to_string(j_mas); 
-            destino2 = std::to_string(i_mas) + j_s; 
-            destino3 = i_s + std::to_string(j_menos);  
-            destino4 = std::to_string(i_menos) + j_s; 
+            origen = fila_string + columna_string; 
+            casillero_derecho = fila_string + std::to_string(columna_siguiente); 
+            casillero_inferior = std::to_string(fila_siguiente) + columna_string; 
+            casillero_superior = fila_string + std::to_string(columna_anterior);  
+            casillero_izquierdo = std::to_string(fila_anterior) + columna_string; 
 
             pos_origen = vertices->obtener_pos(origen);
-            pos_destino1 = vertices->obtener_pos(destino1);
-            pos_destino2 = vertices->obtener_pos(destino2);
-            pos_destino3 = vertices->obtener_pos(destino3);
-            pos_destino4 = vertices->obtener_pos(destino4);
+            pos_casillero_derecho = vertices->obtener_pos(casillero_derecho);
+            pos_casillero_inferior = vertices->obtener_pos(casillero_inferior);
+            pos_casillero_superior = vertices->obtener_pos(casillero_superior);
+            pos_casillero_izquierdo = vertices->obtener_pos(casillero_izquierdo);
 
-            peso_origen1 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
-            peso_origen2 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(2);
+            peso_origen_j1 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
+            peso_origen_j2 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(2);
 
-            if ( !(pos_destino1 == -1)){
-                int peso_des_1 = (*vertices->obtener_nodo(pos_destino1)->obtener_dato())->obtener_costo_energia(1);
-                matriz_adyacente_j1[pos_origen][pos_destino1] = peso_des_1;
-                matriz_adyacente_j1[pos_destino1][pos_origen] = peso_origen1;
-                peso_des_1 = (*vertices->obtener_nodo(pos_destino1)->obtener_dato())->obtener_costo_energia(2);
-                matriz_adyacente_j2[pos_origen][pos_destino1] = peso_des_1;
-                matriz_adyacente_j2[pos_destino1][pos_origen] = peso_origen2;
-            }
-
-            if ( !(pos_destino2 == -1)){
-                int peso_des_2 = (*vertices->obtener_nodo(pos_destino2)->obtener_dato())->obtener_costo_energia(1);
-                matriz_adyacente_j1[pos_origen][pos_destino2] = peso_des_2;
-                matriz_adyacente_j1[pos_destino2][pos_origen] = peso_origen1;
-                peso_des_2 = (*vertices->obtener_nodo(pos_destino2)->obtener_dato())->obtener_costo_energia(2);
-                matriz_adyacente_j2[pos_origen][pos_destino2] = peso_des_2;
-                matriz_adyacente_j2[pos_destino2][pos_origen] = peso_origen2;
-            }
-
-            if ( !(pos_destino3 == -1 )){
-                int peso_des_3 = (*vertices->obtener_nodo(pos_destino3)->obtener_dato())->obtener_costo_energia(1);
-                matriz_adyacente_j1[pos_origen][pos_destino3] = peso_des_3;
-                matriz_adyacente_j1[pos_destino3][pos_origen] = peso_origen1;
-                peso_des_3 = (*vertices->obtener_nodo(pos_destino3)->obtener_dato())->obtener_costo_energia(2);
-                matriz_adyacente_j2[pos_origen][pos_destino3] = peso_des_3;
-                matriz_adyacente_j2[pos_destino3][pos_origen] = peso_origen2;
-            }
-
-            if ( !(pos_destino4 == -1 )){
-                int peso_des_4 = (*vertices->obtener_nodo(pos_destino4)->obtener_dato())->obtener_costo_energia(1);
-                matriz_adyacente_j1[pos_origen][pos_destino4] = peso_des_4;
-                matriz_adyacente_j1[pos_destino4][pos_origen] = peso_origen1;
-                peso_des_4 = (*vertices->obtener_nodo(pos_destino4)->obtener_dato())->obtener_costo_energia(2);
-                matriz_adyacente_j2[pos_origen][pos_destino4] = peso_des_4;
-                matriz_adyacente_j2[pos_destino4][pos_origen] = peso_origen2;
-            }
+            actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_derecho, peso_origen_j1, peso_origen_j2);
+            actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_inferior, peso_origen_j1, peso_origen_j2);
+            actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_superior, peso_origen_j1, peso_origen_j2);
+            actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_izquierdo, peso_origen_j1, peso_origen_j2);
         }
     }
 }
 
+void Grafo::actualizar_matrices_de_adyacencia(int posicion_origen, int posicion_destino, int peso_origen_j1, int peso_origen_j2){
+    if (posicion_destino != NO_ENCONTRADO){
+        actualizar_matriz_de_adyacencia_j1(posicion_origen, posicion_destino, peso_origen_j1);
+        actualizar_matriz_de_adyacencia_j2(posicion_origen, posicion_destino, peso_origen_j2);        
+    }
+}
+
+void Grafo::actualizar_matriz_de_adyacencia_j1(int posicion_origen, int posicion_destino, int peso_origen_j1){
+    int peso_destino = (*vertices->obtener_nodo(posicion_destino)->obtener_dato())->obtener_costo_energia(1);
+    matriz_adyacente_j1[posicion_origen][posicion_destino] = peso_destino;
+    matriz_adyacente_j1[posicion_destino][posicion_origen] = peso_origen_j1;
+}
+
+void Grafo::actualizar_matriz_de_adyacencia_j2(int posicion_origen, int posicion_destino, int peso_origen_j2){
+    int peso_destino = (*vertices->obtener_nodo(posicion_destino)->obtener_dato())->obtener_costo_energia(2);
+    matriz_adyacente_j2[posicion_origen][posicion_destino] = peso_destino;
+    matriz_adyacente_j2[posicion_destino][posicion_origen] = peso_origen_j2;
+}
 
 Grafo::~Grafo(){
     delete vertices;

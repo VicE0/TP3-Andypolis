@@ -83,15 +83,15 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
-            mapa->construir_edificio_nombre(jugador);
+            mapa -> construir_edificio_nombre(jugador);
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
-            mapa->listar_edificios_construidos(jugador);
+            mapa -> listar_edificios_construidos(jugador);
         break;
 
     case DEMOLER_EDIFICIO:
-            mapa->demoler_edificio(jugador);
+            mapa -> demoler_edificio(jugador);
         break;
 
     case ATACAR_EDIFICIO:
@@ -107,11 +107,11 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case CONSULTAR_COORDENADA:
-            mapa->consultar_coordenada();
+            mapa -> consultar_coordenada();
         break;
 
     case MOSTRAR_INVENTARIO:
-            mapa->mostrar_inv(jugador);
+            mapa -> mostrar_inv(jugador);
         break;
 
     case MOSTRAR_OBJETIVOS:
@@ -140,64 +140,20 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     }
 }
 
-bool verificador_de_limite(int maximo,int posicion){
-    if (posicion < 0 || posicion > maximo){
-        cout << "ERROR: Fuera del mapa" << endl;
-        return false;
-    }
-    else{
-        return true;
-    }
-}
+
 
 void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     int fila1, columna1, fila2, columna2;
-    bool coordenada_correcta;
-    
-    int max_filas = mapa -> devolver_cantidad_filas();
-    int max_columnas = mapa -> devolver_cantidad_columnas();
-
-    do{
-        cout << "Jugador 1, en que posicion x quiere empezar? ";
-        cin >> fila1;
-        coordenada_correcta = verificador_de_limite(max_filas,fila1);
-    }while (!coordenada_correcta);
-    
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna1;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna1);
-    }
-    while (!coordenada_correcta);
-    
-    do{
-        cout << "Jugador 2, en que posicion x quiere empezar? ";
-        cin >> fila2;
-        coordenada_correcta = verificador_de_limite(max_filas,fila2);
-    }while (!coordenada_correcta);
-            
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna2;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-    }while (!coordenada_correcta); 
+    mapa -> validar_coordenada(fila1, columna1);
+    mapa -> validar_coordenada(fila2, columna2);
 
     while (fila1 == fila2 && columna1 == columna2){
-        do{
-            cout << "Jugador 2, en que posicion x quiere empezar? ";
-            cin >> fila2;
-            coordenada_correcta = verificador_de_limite(max_filas,fila2);
-        }while (!coordenada_correcta);
-            
-        do{
-            cout << "Y en que posicion y quiere empezar? ";
-            cin >> columna2;
-            coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-        }while (!coordenada_correcta); 
+        cout << "Error: No podes poner al jugador 2 en las mismas coordenadas que el jugador 1" << endl;
+        mapa -> validar_coordenada(fila2, columna2);
     }
 
-    mapa -> insertar_jugador_mapa("1",j1,j2, fila1, columna1);
-    mapa -> insertar_jugador_mapa("2",j1,j2, fila2, columna2);
+    mapa -> insertar_jugador_mapa(j1 -> obtener_id(),j1,j2, fila1, columna1);
+    mapa -> insertar_jugador_mapa(j2 -> obtener_id(),j1,j2, fila2, columna2);
     partida(mapa, j1 , j2);
 }
 
@@ -218,12 +174,12 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
         mapa->almacenar_recursos_producidos(jugador);
 
         do{
-        mostrar_menu_partida();
-        opcion = elegir_opcion();
-        procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
-        if (opcion == 10){
-            recolecto = true;
-        }
+            mostrar_menu_partida();
+            opcion = elegir_opcion();
+            procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
+            if (opcion == 10){
+                recolecto = true;
+            }
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
         

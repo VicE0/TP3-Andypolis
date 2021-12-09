@@ -6,6 +6,7 @@
 
 using namespace std;
 
+const int NO_ENCONTRADO = -1;
 template <typename T>
 class Lista {
 
@@ -78,7 +79,7 @@ int Lista<T>::obtener_pos(string nombre){
     }
 
     if(!elemento_encontrado){
-        return -1;
+        return NO_ENCONTRADO;
     }
     return i - 1;
 }

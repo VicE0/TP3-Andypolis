@@ -149,11 +149,11 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 // }
 
 
-void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
-    if ( id_jugador == "1" ){
-        mapa[fila][columna]->agregar_jugador(j1);
+void Mapa::insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
+    if ( id_jugador == 1 ){
+        mapa[fila][columna] -> agregar_jugador(j1);
     } else {
-        mapa[fila][columna]->agregar_jugador(j2);
+        mapa[fila][columna] -> agregar_jugador(j2);
     }
 }
 
@@ -179,7 +179,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                         id_jugador = nombre;
                         id = stoi(id_jugador);
 
-                        insertar_jugador_mapa(id_jugador, j1, j2, stoi(fila), stoi(columna));
+                        insertar_jugador_mapa(id, j1, j2, stoi(fila), stoi(columna));
 
                     } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  || nombre == COINS ) { // EVALUO SI ES UN MATERIAL
 
@@ -560,7 +560,7 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
 // 4) ATACAR UN EDIFICIO ------------------------------------
 void Mapa::atacar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 30 )){
@@ -584,17 +584,17 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
     validar_coordenada(fila, columna);
 
-    string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
+    string nombre_edificio = mapa[fila][columna] -> obtener_nombre_edificio();
 
     if ( nombre_edificio != ""){
-        Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
-        int codigo_edificio = edificio->devolver_id_jugador();
+        Edificio * edificio = mapa[fila][columna] -> obtener_edificio_construido();
+        int codigo_edificio = edificio -> devolver_id_jugador();
 
         if ( id_jugador != codigo_edificio ){
             if ( aceptar_condiciones() ){
-                jugador->obtener_material(BOMBA)->restar_material(1);
+                jugador -> obtener_material(BOMBA) -> restar_material(1);
                 edificio -> atacar();
-                mapa[fila][columna]->comprobar_destruccion_edificio();
+                mapa[fila][columna] -> comprobar_destruccion_edificio();
                 jugador->restar_energia(30);
             }
         }else {
@@ -607,8 +607,8 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
-    int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
+    int energia_jugador = jugador -> obtener_energia();
+    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 25 )){
@@ -622,7 +622,7 @@ void Mapa::reparar_edificios(Jugador * jugador){
 
 void Mapa::realizar_reparacion(Jugador * jugador){
     int fila, columna;
-    int id_jugador = jugador->dar_numero();
+    int id_jugador = jugador -> dar_numero();
     
 
     cout << " Ingrese las coordenadas del edificio a reparar : \n" << endl;
@@ -702,7 +702,7 @@ bool Mapa::verificacion_andycoins(int requerido, int disponible){
 void Mapa::consultar_coordenada(){
     int fila , columna;
 
-    validar_coordenada( fila, columna);
+    validar_coordenada(fila, columna);
 
     mapa[fila][columna]->mostrar_casillero() ;
     cout << "\n";
