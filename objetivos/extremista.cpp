@@ -1,6 +1,6 @@
 #include "extremista.h"
 
-Extremista::Extremista(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Extremista::Extremista(int id_objetivo,int posicion ,int cantidad) : Objetivo(id_objetivo, posicion ,cantidad, andycoins_totales)
 {
     this -> id_objetivo = EXTREMISTA;
     this -> cantidad = 500;
@@ -28,6 +28,10 @@ void Extremista::mostrar_descripcion()
 {
     cout << "\nExtremista: haber comprado "<< cantidad << " bombas en una partida"<<endl;
     mostrar_progreso();
+}
+int Extremista::obtener_id()
+{
+    return id_objetivo;
 }
 
 //SACAR COINS, puntero a inventario. Las bombas se resetean?

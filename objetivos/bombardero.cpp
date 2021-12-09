@@ -1,6 +1,6 @@
 #include "bombardero.h"
 
-Bombardero::Bombardero(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Bombardero::Bombardero(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo, posicion ,cantidad, andycoins_totales)
 {
     this -> id_objetivo = BOMBARDERO;
     this -> cantidad = 5;
@@ -28,4 +28,9 @@ void Bombardero::mostrar_descripcion()
 {
     cout << "\nBombardero: haber usado "<< cantidad << " bombas"<<endl;
     mostrar_progreso();
+}
+
+int Bombardero::obtener_id()
+{
+    return id_objetivo;
 }

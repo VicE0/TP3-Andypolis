@@ -38,7 +38,9 @@ class Jugador
     
         string diminutivo;
 
-        Lista<Objetivo*> * lista_objetivos;
+        Objetivo * obj;
+
+        ListaObjetivos<Objetivo*>  *lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
 
@@ -60,6 +62,7 @@ class Jugador
         Material * obtener_material_recolectar(string nombre);
 
         Lista<Material> * obtener_inventario();
+        Lista<Objetivo*> * obtener_lista_objetivos();
 
         
         // -------------------------------- Funciones jugador --------------------------------
@@ -75,7 +78,7 @@ class Jugador
 
         void agregar_material_inv_recolectar(Material * material);
 
-        void agregar_objetivo(Objetivo ** objetivo);
+        void agregar_objetivo(Objetivo * objetivo);
 
         void asignar_objetivos();
 
@@ -113,7 +116,7 @@ class Jugador
         
         void sumar_materiales_recolectados();
 
-        void sortear_objetivos(int id_objetivo);
+        Objetivo* sortear_objetivos(int id_objetivo);
 
 
         ~Jugador();

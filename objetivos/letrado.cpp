@@ -1,6 +1,6 @@
 #include "letrado.h"
 
-Letrado::Letrado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Letrado::Letrado(int id_objetivo, int posicion ,int cantidad) : Objetivo(id_objetivo, posicion ,cantidad, andycoins_totales)
 {
     this -> id_objetivo = LETRADO;
     this -> cantidad = 100; //CANTIDAD_MAXIMA ESCUELAS
@@ -28,4 +28,9 @@ void Letrado::mostrar_descripcion()
 {
     cout << "\nLetrado: haber construido "<< cantidad << " escuelas"<<endl;
     mostrar_progreso();
+}
+
+int Letrado::obtener_id()
+{
+    return id_objetivo;
 }

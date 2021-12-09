@@ -1,6 +1,6 @@
 #include "minero.h"
 
-Minero::Minero(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Minero::Minero(int id_objetivo, int posicion ,int cantidad) : Objetivo(id_objetivo, posicion,cantidad, andycoins_totales)
 {
     this -> id_objetivo = MINERO;
     this -> cantidad = 2;
@@ -28,5 +28,8 @@ void Minero::mostrar_descripcion()
     cout << "\nMinero: haber construido una mina de cada tipo"<<endl;
     mostrar_progreso();
 }
-
+int Minero::obtener_id()
+{
+    return id_objetivo;
+}
 //agregar bool 

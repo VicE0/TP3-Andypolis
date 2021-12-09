@@ -28,6 +28,7 @@ class Objetivo
     protected:
         int id_objetivo;
         int cantidad;
+        int posicion;
         int andycoins_totales; 
         int bombas_inventario;
         int bombas_usadas;
@@ -45,7 +46,7 @@ class Objetivo
 
         // PRE: ~
         // POST: Carga los valores 
-        Objetivo(int id_objetivo, int cantidad, int andycoins_totales);
+        Objetivo(int id_objetivo, int posicion, int cantidad, int andycoins_totales);
 
         //------ Getters ---------
 
@@ -63,6 +64,8 @@ class Objetivo
         virtual void mostrar_descripcion() = 0;
 
         virtual void mostrar_progreso() = 0;
+
+        virtual int obtener_id() = 0;
 
         ~Objetivo();
 

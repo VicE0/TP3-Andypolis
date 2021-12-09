@@ -117,22 +117,6 @@ void ListaObjetivos<Data>::insertar_elemento(Data o)
     cantidad_elementos++;
 }
 
-// template <typename Data>
-// void Lista<Data>::erase(int pos) {
-
-//     Nodo<Data>* erased = first;
-
-//     if (pos == 1)
-//         first = erased->getNext();
-//     else {
-//         Nodo<Data>* previous = getNodo(pos - 1);
-//         erased = previous->getNext();
-//         previous->changeNext(erased->getNext());
-//     }
-//     length--;
-
-//     delete erased;
-// }
 
 template <typename Data>
 bool ListaObjetivos<Data>::esta_vacia() 

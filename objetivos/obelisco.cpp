@@ -1,6 +1,6 @@
 #include "obelisco.h"
 
-Obelisco::Obelisco(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Obelisco::Obelisco(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo, posicion,cantidad, andycoins_totales)
 {
     this -> id_objetivo = OBJETIVO_OBELISCO;
     this -> cantidad = 1;

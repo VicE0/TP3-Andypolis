@@ -1,6 +1,6 @@
 #include "cansado.h"
 
-Cansado::Cansado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Cansado::Cansado(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo, posicion ,cantidad, andycoins_totales)
 {
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;
@@ -28,5 +28,10 @@ void Cansado::mostrar_descripcion()
 {
     cout << "\nCansado: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
     mostrar_progreso();
+}
+
+int Cansado::obtener_id()
+{
+    return id_objetivo;
 }
 

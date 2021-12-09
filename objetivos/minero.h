@@ -10,13 +10,15 @@ using namespace std;
 class Minero: public Objetivo
 {
     public:
-        Minero(int id_objetivo, int cantidad);
+        Minero(int id_objetivo, int posicion,int cantidad);
 
         bool objetivo_cumplido();
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
+
+        int obtener_id();
 
 };
 

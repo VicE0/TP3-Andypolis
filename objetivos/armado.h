@@ -10,9 +10,11 @@ using namespace std;
 class Armado : public Objetivo
 {
     public:
-        Armado(int id_objetivo, int cantidad);
+        Armado(int id_objetivo,int posicion,int cantidad);
 
         bool objetivo_cumplido();
+
+        int obtener_id();
 
         void mostrar_descripcion();
 

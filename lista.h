@@ -30,8 +30,6 @@ public:
 
     T * consulta(int pos); 
     
-    void insertar(T *d); //lo inserta en la ultima posicion
-
     void alta(T * d, int pos); 
 
     void baja(int pos); 
@@ -126,12 +124,6 @@ T * Lista<T>::consulta(int pos){
     return d;
 }
 
-template <typename T>
-void Lista<T>::insertar(T *d)
-{
-    datos[cantidad] = d;
-    cantidad++;
-}
 
 template <typename T>
 void Lista<T>::baja(int pos){

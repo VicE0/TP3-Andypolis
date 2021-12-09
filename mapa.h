@@ -38,10 +38,11 @@ private:
     int cantidad_filas;
     int cantidad_columnas;
     Casillero *** mapa;
+    Objetivo ** obj;
 
     Grafo * grafo;
 
-    // Jugador * objetivos_jugador;
+    Jugador * objetivos_jugador;
 
     int cantidad_edificios;
 
@@ -139,7 +140,7 @@ public:
     //     restando 1 a la cantidad de edificios y sumando los materiales obtenidos al inventario.
     void obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna);
 
-    //PRE: Una ves demolido el edificio.
+    //PRE: Una vez demolido el edificio.
     //POS: Muestro por pantalla los materiales obtenidos. 
     void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
 
@@ -154,6 +155,7 @@ public:
     //PRE: - 
     //POS: Imprime por pantalla las cantidades de los materiales que se poseen.
     void mostrar_inv(Jugador * jugador);
+
 
     //PRE: ~
     //POS: Imprime por pantalla los objetivos del jugador correspondiente

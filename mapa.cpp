@@ -36,7 +36,7 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
-    // procesar_objetivos(j1,j2);
+    procesar_objetivos(j1,j2);
 
 }
 
@@ -83,7 +83,8 @@ void Mapa::procesar_archivo_mapa(){
             }
         }
         grafo->agregar_caminos();
-        grafo->mostrar_adyacente();
+        // grafo->mostrar_adyacente();
+        grafo -> mostrar_vertices();
         
     }else{
         mapa_bien_cargado = false;
@@ -142,11 +143,28 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
-// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
-// {   
-//     j1 ->asignar_objetivos();
-//     j2 ->asignar_objetivos();
-// }
+
+void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
+{
+    // int id_objetivo;
+
+    // for (int i = 0; i < 3; i++)
+    // {   
+    //     id_objetivo = rand() %10;
+    //     j1 -> sortear_objetivos(id_objetivo);
+    // }
+    
+    // for (int i = 0; i < 3; i++)
+    // {   
+    //     id_objetivo = rand() %10;
+    //     j2 -> sortear_objetivos(id_objetivo);
+    // }
+    j1 -> asignar_objetivos();
+
+    j2 -> asignar_objetivos();
+   
+   
+}
 
 
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
