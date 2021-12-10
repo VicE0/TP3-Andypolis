@@ -6,12 +6,16 @@ Muelle::Muelle(int fila, int columna, string id_casillero): Casillero(fila, colu
 }
 
 void Muelle::mostrar_casillero(){
-    if (!material){
-        cout << " Soy un muelle y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\nSoy un muelle y me encuentro vacio" << endl;
     }
+    
     else{
-        cout << " Soy un muelle y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\nSoy un muelle y no me encuentro vacio" << endl;
+        if (material)
+            material -> saludar();
+        else
+            jugador -> saludar();
     }
 }
 

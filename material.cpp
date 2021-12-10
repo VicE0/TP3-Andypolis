@@ -74,5 +74,5 @@ void Material :: mostrar_cantidad(){
 }
 
 void Material :: saludar(){
-  cout << " Soy un/a "<< nombre << " y estoy en un casillero transitable" <<endl;
+  cout << " Soy un/a "<< nombre << " y estoy en el casillero consultado" <<endl;
 }

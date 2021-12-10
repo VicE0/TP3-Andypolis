@@ -126,7 +126,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case MOVERSE:
-            cout << "moverse a una coordenada" << endl;
+            mapa -> moverse(jugador);
         break;
 
     case FINALIZAR_TURNO:

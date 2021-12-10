@@ -7,12 +7,20 @@ Camino::Camino(int fila, int columna, string id_casillero): Casillero(fila, colu
 }
 
 void Camino::mostrar_casillero(){
-    if (!material){
-        cout << "\nSoy un camino y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\n Soy un camino y me encuentro vacio" << endl;
     }
+
     else{
-        cout << "\nSoy un camino y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\n Soy un camino y no me encuentro vacio" << endl;
+        if (material && !jugador)
+            material -> saludar();
+        else if (!material && jugador)
+            jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 

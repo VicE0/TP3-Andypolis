@@ -121,7 +121,6 @@ void Grafo::mostrar_adyacente(){
     cout << endl;
 }
 
-// SOLO APLICADO AL JUGADOR 1 , FALTARIA IMPLEMENTAR PARA AMBOS : []
 void Grafo::agregar_caminos(){
     int fila_anterior, fila_siguiente, columna_anterior, columna_siguiente;
     string origen, casillero_derecho, casillero_inferior, casillero_superior, casillero_izquierdo, fila_string, columna_string;
@@ -163,11 +162,13 @@ void Grafo::usar_camino_minimo(string origen, string destino, int id){
     int pos_origen = vertices->obtener_pos(origen);
     int pos_destino = vertices->obtener_pos(destino);
 
-    if ( pos_origen == -1){
+    agregar_caminos();
+
+    if ( pos_origen == NO_ENCONTRADO){
         cout << " El vertice " << origen << " no existe en el grafo." << endl;
     }
 
-    if ( pos_destino == -1){
+    if ( pos_destino == NO_ENCONTRADO){
         cout << " El vertice " << destino << " no existe en el grafo." << endl;
     }
 

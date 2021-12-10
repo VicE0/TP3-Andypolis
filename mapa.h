@@ -269,6 +269,8 @@ public:
     int devolver_cantidad_filas();
 
     int devolver_cantidad_columnas();
+
+    void moverse(Jugador * jugador);
 };
 
 

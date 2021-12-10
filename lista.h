@@ -2,6 +2,7 @@
 #define LISTA_H
 
 #include <iostream>
+#include <string>
 #include "nodo.h"
 
 using namespace std;
@@ -40,6 +41,8 @@ public:
     bool vacia();
 
     void mostrar();
+
+    string obtener_nombre(int posicion);
 
     ~Lista();
 
@@ -168,6 +171,22 @@ void Lista<T>::mostrar(){
         cout << aux->obtener_dato() << endl;
         aux = aux->obtener_siguiente();
     }
+}
+
+template<typename Tipo>
+string Lista<Tipo>::obtener_nombre(int posicion) {
+    int i = 0;
+    Nodo<Tipo>* auxiliar = primero;
+
+    if(posicion > cantidad){
+        return "";
+    }
+
+    while(i != posicion - 1){
+        auxiliar = auxiliar -> obtener_siguiente();
+        i++;
+    }
+    return (*auxiliar -> obtener_dato()) -> obtener_id_casillero();
 }
 
 template <typename T>

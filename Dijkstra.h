@@ -2,6 +2,7 @@
 #define DIJKSTRA_H
 
 #include "CaminoMinimo.h"
+#include "listaObjetivos.h"
 
 class Dijkstra: public CaminoMinimo {
 
@@ -10,6 +11,7 @@ private:
     bool * vertices_visitados;
     int * distancia;
     int * recorrido;
+    ListaObjetivos<string> * camino_recorrido;
 
     // METODOS : 
     void inicializar_visitados(int origen);
@@ -22,14 +24,12 @@ private:
 
     void actualizar_distancia(int vertice);
 
-    void mostrar_recorrido(int origen, int distancia);
-
-    void mostrar_iteracion(int iteracion);
+    bool mostrar_recorrido(int origen, int distancia);
 
 public:
     Dijkstra(Lista<Casillero*> * vertices, int ** matriz_adyacente);
 
-    void camino_minimo(int origen, int destino) override;
+    bool camino_minimo(int origen, int destino);
 
     ~Dijkstra() override;
 
