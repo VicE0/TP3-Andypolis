@@ -1,11 +1,11 @@
 #ifndef NODO_H
 #define NODO_H
 
-template <typename T>
+template <class T>
 class Nodo {
 private:
     T * dato;
-    Nodo<T> * siguiente;
+    Nodo * siguiente;
 
 public:
     Nodo<T>(T * d);
@@ -20,7 +20,7 @@ public:
 
 };  
 
-template <typename T>
+template <class T>
 Nodo<T>::Nodo(T * d){
 
     this->dato = d;
@@ -28,22 +28,22 @@ Nodo<T>::Nodo(T * d){
 
 }
 
-template <typename T>
+template <class T>
 T * Nodo<T>::obtener_dato(){
     return dato;
 }
 
-template <typename T>
+template <class T>
 Nodo<T> * Nodo<T>::obtener_siguiente(){
     return siguiente;
 }
 
-template <typename T>
+template <class T>
 void Nodo<T>::cambiar_siguiente(Nodo * pn){
     siguiente = pn;
 }
 
-template <typename T>
+template <class T>
 void Nodo<T>::cambiar_dato(T d){
     dato = d;
 }

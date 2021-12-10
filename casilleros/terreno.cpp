@@ -1,6 +1,6 @@
 #include "terreno.h"
 
-Terreno::Terreno(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
+Terreno::Terreno(int fila, int columna): Casillero(fila, columna){
     this->nombre = "T";
     this->edificio_construido = 0;
 }
@@ -9,7 +9,7 @@ string Terreno::obtener_nombre(){
     return nombre;
 }
 
-int Terreno::obtener_costo_energia(int id_jugador){
+int Terreno::obtener_costo_energia(int JUGADOR_1){
     return 25;
 }
 
@@ -25,7 +25,7 @@ void Terreno::mostrar_casillero(){
 
 void Terreno::agregar_edificio(string nombre,int id_jugador, int vida, int piedra, int madera, int metal, int maximo){
     if ( ! edificio_construido ){
-        if (nombre == ASERRADERO){
+        if (nombre == "aserradero"){
 
             this->edificio_construido = new Aserradero(id_jugador, vida, piedra, madera, metal, maximo);
 
@@ -116,6 +116,10 @@ bool Terreno::existe_material(){
     return false;
 }
 
+bool Terreno::existe_jugador(){
+    return false;
+}
+
 void Terreno::mostrar_coordenadas_edificio(string nombre){
 
     if ( edificio_construido ){
@@ -125,6 +129,15 @@ void Terreno::mostrar_coordenadas_edificio(string nombre){
             cout << " - (" << fila << "," << columna << ") " << endl;
         }
     }
+}
+
+int Terreno::devolver_id_jugador(){
+    int id = 0;
+
+    if (edificio_construido != 0){
+        id = edificio_construido -> devolver_id_jugador();
+    }
+    return id;
 }
 
 Terreno::~Terreno(){
@@ -151,7 +164,7 @@ Edificio * Terreno::obtener_edificio_construido(){
 }
 
 void Terreno::comprobar_destruccion_edificio(){
-    if (edificio_construido -> devolver_vida() > 0){
+    if (edificio_construido -> devolver_vida() != 0){
         cout << "El edificio todavia esta de pie" <<endl;
     }
     else{

@@ -1,6 +1,6 @@
 #include "betun.h"
 
-Betun::Betun(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
+Betun::Betun(int fila, int columna): Casillero(fila, columna){
     this->nombre = "B";
     this->material = 0;
 }
@@ -19,7 +19,7 @@ string Betun::obtener_nombre(){
     return nombre;
 }
 
-int Betun::obtener_costo_energia(int id_jugador){
+int Betun::obtener_costo_energia(int JUGADOR_1){
     return 0;
 }
 
@@ -72,6 +72,22 @@ bool Betun::existe_material(){
         existe = true;
     }
     return existe;
+}
+
+bool Betun::existe_jugador(){
+    bool existe = false;
+    if (jugador){
+        existe = true;
+    }
+    return existe;
+}
+
+int Betun::devolver_id_jugador(){
+    int id = 0;
+    if (jugador){
+        id = jugador -> obtener_id();
+    }
+    return id;
 }
 
 int Betun::obtener_fila(){

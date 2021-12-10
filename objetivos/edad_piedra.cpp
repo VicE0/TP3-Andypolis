@@ -1,16 +1,15 @@
 #include "edad_piedra.h"
 
-Edad_piedra::Edad_piedra(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Edad_piedra::Edad_piedra(int id_objetivo, int cantidad)
 {
     this -> id_objetivo = EDAD_PIEDRA;
     this -> cantidad = 50000;
-    this -> piedras_inventario = 0;
 }
 
 bool Edad_piedra::objetivo_cumplido()
 { 
 
-    if (piedras_inventario == cantidad)
+    if (andycoins_totales == cantidad)
     {
         return true;
     }
@@ -19,7 +18,7 @@ bool Edad_piedra::objetivo_cumplido()
 
 void Edad_piedra::mostrar_progreso()
 {
-    cout << "Progreso: " << piedras_inventario << "/" << cantidad << endl;
+    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
 
 }
 
@@ -29,3 +28,4 @@ void Edad_piedra::mostrar_descripcion()
     mostrar_progreso();
 }
 
+//LINKEAR CON INVENTARIO, SACAR LAS COINS

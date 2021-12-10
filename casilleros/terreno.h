@@ -21,7 +21,7 @@ public:
     // Constructor
     //PRE: -
     //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
-    Terreno(int fila, int columna, string id_casillero);
+    Terreno(int fila, int columna);
 
     //PRE: -
     //POS: Devuelve el nombre del casillero ( getter ).
@@ -29,7 +29,7 @@ public:
     
     //PRE:
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int id_jugador);
+    int obtener_costo_energia(int codigo_jugador);
 
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
@@ -77,6 +77,14 @@ public:
     //PRE: -
     //POS:  Devuelve false puesto que no se pueden colocar materiales en casilleros construibles
     bool existe_material();
+
+    //PRE: -
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
+    bool existe_jugador();
+
+    //PRE: -
+    //POST:Devuelve el id del jugador.
+    int devolver_id_jugador();
 
     // Destructor
     //PRE: En caso de que el casillero contenga un edificio. 

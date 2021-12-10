@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "../edificio.h"
-#include "../material.h"
 #include "../jugador.h"
 
 using namespace std;
@@ -14,20 +13,19 @@ const int JUGADOR_2 = 2;
 class Casillero
 {
 protected:
-    string id_casillero; // "ij"
     Material * material;
+    string id_casillero; // "ij"
     int fila;
     int columna;
     string nombre;
     Jugador * jugador;
-    int peso;
 
 public:
     // Constructor
     // PRE: - 
     // POS: Inicializo los valores en con los valores de fila y columna correspondientes,
     //      y nombre vacio.
-    Casillero(int fila, int columna, string id_casillero);
+    Casillero(int fila, int columna);
     
     // Constructor
     // PRE: - 
@@ -49,7 +47,7 @@ public:
 
     //PRE: -
     //POST: Devuelve la cantidad de energia necesaria para transitar un determinado casillero.
-    virtual int obtener_costo_energia(int id_jugador) = 0;
+    virtual int obtener_costo_energia(int codigo_jugador) = 0;
 
     // PRE: -
     // POS: Se obtiene el nombre del casillero solicitado siendo estos = T,C,L.
@@ -91,11 +89,11 @@ public:
     //PRE: -
     //POST: En el casillero_transitable, obtendremos verdadero si hay un jugador y falso en caso contrario. En casilleros construibles
     //e inaccesibles devolvera false siempre puesto que no se pueden ubicar jugadores en ellos.
-    bool existe_jugador();
+    virtual bool existe_jugador() = 0;
 
     //PRE: -
     //POST: Si lo hay, devuelve el id perteneciente al jugador dueño de lo que haya en dicho casillero.
-    int devolver_id_jugador();
+    virtual int devolver_id_jugador() = 0;
     
     // PRE: -
     // POS: En el casillero_construible, podremos visualizar por pantalla las coordenadas del casillero donde
@@ -123,11 +121,7 @@ public:
 
     void agregar_jugador(Jugador * jugador);
 
-    int obtener_peso();
-
     string obtener_diminutivo_jugador();
-
-    string obtener_id_casillero();
 
 };
 

@@ -1,6 +1,6 @@
 #include "comprar_andypolis.h"
 
-Comprar_andypolis::Comprar_andypolis(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Comprar_andypolis::Comprar_andypolis(int id_objetivo, int cantidad)
 {
     this -> id_objetivo = COMPRAR_ANDYPOLIS;
     this -> cantidad = 100000;

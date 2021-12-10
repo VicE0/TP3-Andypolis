@@ -1,9 +1,8 @@
 #include "camino.h"
 
-Camino::Camino(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
+Camino::Camino(int fila, int columna): Casillero(fila, columna){
     this->nombre = "C";
     this->material = 0;
-    this->peso = 4;
 }
 
 void Camino::mostrar_casillero(){
@@ -20,7 +19,7 @@ string Camino::obtener_nombre(){
     return nombre;
 }
 
-int Camino::obtener_costo_energia(int id_jugador){
+int Camino::obtener_costo_energia(int JUGADOR_1){
     return 4;
 }
 
@@ -73,6 +72,22 @@ bool Camino::existe_material(){
         existe = true;
     }
     return existe;
+}
+
+bool Camino::existe_jugador(){
+    bool existe = false;
+    if (jugador){
+        existe = true;
+    }
+    return existe;
+}
+
+int Camino::devolver_id_jugador(){
+    int id = 0;
+    if (jugador){
+        id = jugador -> obtener_id();
+    }
+    return id;
 }
 
 int Camino::obtener_fila(){

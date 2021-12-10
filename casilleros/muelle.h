@@ -2,15 +2,18 @@
 #define MUELLE_H
 
 #include "casillero.h"
+#include "../material.h"
 
 
 class Muelle : public Casillero {
+private:
+    Material * material;
 public:
 
     //Constructor de Muelle
     //PRE: Recibe un entero con la fila y otro con la columna
     //POST: Construye un Muelle con nombre = "M".
-    Muelle(int fila, int columna, string id_casillero);
+    Muelle(int fila, int columna);
 
     //PRE: -
     //POS: muestra por pantalla un mensaje diciendo que que el casillero es un Muelle.
@@ -22,7 +25,7 @@ public:
 
     //PRE: Le pido el codigo paras aber que jugador es.
     //POST: Devuelve un int con el costo de energia para transitar por este casillero.
-    int obtener_costo_energia(int id_jugador);
+    int obtener_costo_energia(int codigo_jugador);
     
     //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
     //POS: Al ser un muelle, muestra por pantalla un mensaje diciendo
@@ -65,6 +68,14 @@ public:
     //PRE: -
     //POST: Devulve true si existe un material en el casillero y false en caso contrario
     bool existe_material();
+
+    //PRE: -
+    //POST: Devulve true si existe un material en el casillero y false en caso contrario
+    bool existe_jugador();
+
+    //PRE: -
+    //POST:Devuelve el id del jugador.
+    int devolver_id_jugador();
 
     //PRE: -
     //POST: Muestra por pantalla un mensaje diciendo que no existe edificio construido en

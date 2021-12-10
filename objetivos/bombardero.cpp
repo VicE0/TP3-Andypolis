@@ -1,16 +1,15 @@
 #include "bombardero.h"
 
-Bombardero::Bombardero(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Bombardero::Bombardero(int id_objetivo, int cantidad)
 {
     this -> id_objetivo = BOMBARDERO;
     this -> cantidad = 5;
-    this -> bombas_usadas = 0;
 }
 
 bool Bombardero::objetivo_cumplido()
 { 
 
-    if (bombas_usadas == cantidad)
+    if (andycoins_totales == cantidad)
     {
         return true;
     }
@@ -19,7 +18,7 @@ bool Bombardero::objetivo_cumplido()
 
 void Bombardero::mostrar_progreso()
 {
-    cout << "Progreso: " << bombas_usadas << "/" << cantidad << endl;
+    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
 
 }
 
@@ -29,3 +28,5 @@ void Bombardero::mostrar_descripcion()
     cout << "\nBombardero: haber usado "<< cantidad << " bombas"<<endl;
     mostrar_progreso();
 }
+
+//SACAR COINS, TAL VEX AGREGAR CONTADOR A LA CLASE OBJETIVO?

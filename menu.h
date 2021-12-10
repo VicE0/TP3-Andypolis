@@ -57,7 +57,3 @@ void verificar_lluvia_de_materiales(int turno, Mapa * mapa);
 void randomizador_de_turnos(Jugador * j1, Jugador * j2);
 
 Jugador * verificar_turno_jugador(int turno, Jugador * j1, Jugador * j2);
-
-void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2);
-
-bool verificador_de_limite(Mapa * mapa, int posicion, int verificacion_columna_fila);

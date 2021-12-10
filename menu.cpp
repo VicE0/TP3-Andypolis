@@ -68,7 +68,7 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
         break;
     
     case P_COMENZAR_PARTIDA:
-            empezar_partida(mapa, j1, j2);
+            partida(mapa, j1, j2);
         break;
     
     case P_GUARDAR_SALIR:
@@ -95,7 +95,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case ATACAR_EDIFICIO:
-            mapa -> atacar_edificios(jugador);
+            cout << "Atacar edificio" << endl;
         break;
 
     case REPARAR_EDIFICIO:
@@ -115,8 +115,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
         break;
 
     case MOSTRAR_OBJETIVOS:
-            cout << "Objetivos jugador (En proceso!)" << endl;
-            //Se carga y se da de alta, pero pincha al mostrar!
+            jugador -> mostrar_objetivos_jugador();
         break;
 
     case RECOLECTAR_RECURSOS:
@@ -138,67 +137,6 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
             cout << "Guardar y Salir" << endl;
         break;
     }
-}
-
-bool verificador_de_limite(int maximo,int posicion){
-    if (posicion < 0 || posicion > maximo){
-        cout << "ERROR: Fuera del mapa" << endl;
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-
-void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2){
-    int fila1, columna1, fila2, columna2;
-    bool coordenada_correcta;
-    
-    int max_filas = mapa -> devolver_cantidad_filas();
-    int max_columnas = mapa -> devolver_cantidad_columnas();
-
-    do{
-        cout << "Jugador 1, en que posicion x quiere empezar? ";
-        cin >> fila1;
-        coordenada_correcta = verificador_de_limite(max_filas,fila1);
-    }while (!coordenada_correcta);
-    
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna1;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna1);
-    }
-    while (!coordenada_correcta);
-    
-    do{
-        cout << "Jugador 2, en que posicion x quiere empezar? ";
-        cin >> fila2;
-        coordenada_correcta = verificador_de_limite(max_filas,fila2);
-    }while (!coordenada_correcta);
-            
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna2;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-    }while (!coordenada_correcta); 
-
-    while (fila1 == fila2 && columna1 == columna2){
-        do{
-            cout << "Jugador 2, en que posicion x quiere empezar? ";
-            cin >> fila2;
-            coordenada_correcta = verificador_de_limite(max_filas,fila2);
-        }while (!coordenada_correcta);
-            
-        do{
-            cout << "Y en que posicion y quiere empezar? ";
-            cin >> columna2;
-            coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-        }while (!coordenada_correcta); 
-    }
-
-    mapa -> insertar_jugador_mapa("1",j1,j2, fila1, columna1);
-    mapa -> insertar_jugador_mapa("2",j1,j2, fila2, columna2);
-    partida(mapa, j1 , j2);
 }
 
 void partida(Mapa * mapa, Jugador * j1, Jugador * j2){

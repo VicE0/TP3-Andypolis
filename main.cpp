@@ -22,9 +22,10 @@ int main(){
         cout <<"Uno o varios archivos no se pudieron abrir correctamente";
     }
 
-    delete mapa;
     delete j1;
     delete j2;
+    delete mapa;
+    // delete partida_jugador;
 
     cout << "\n Muchas gracias por visitar la ciudad , nos vemos pronto ! \n" << endl; 
 

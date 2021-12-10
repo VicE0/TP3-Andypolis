@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "grafo.h"
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
 #include "casilleros/lago.h"
@@ -14,8 +13,6 @@
 #include "jugador.h"
 #include "edificio.h"
 #include "ABB/ABB.h"
-#include "Objetivos.h"
-
 
 using std::string;
 using namespace std;
@@ -38,10 +35,6 @@ private:
     int cantidad_filas;
     int cantidad_columnas;
     Casillero *** mapa;
-
-    Grafo * grafo;
-
-    // Jugador * objetivos_jugador;
 
     int cantidad_edificios;
 
@@ -157,7 +150,8 @@ public:
 
     //PRE: ~
     //POS: Imprime por pantalla los objetivos del jugador correspondiente
-    void mostrar_objetivos_jugadores(Jugador* jugador);
+    void mostrar_objetivos(Jugador* jugador);
+
 
     //PRE: En caso de tener edificios construidos que brinden materiales.
     //POS: Obtengo los materiales que brindan los edificios y se guardan en el inventario.
@@ -236,11 +230,11 @@ public:
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
     
-    void guardar_materiales(std::ofstream &archivo_ubicaciones);
+    void guardar_materiales();
     
-    void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
+    void guardar_jugador(int id_jugdor);
 
-    void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
+    void guardar_edificios(int id_jugador);
 
     //Detructor
     //PRE: - 
@@ -262,14 +256,6 @@ public:
 
     bool vacio(ifstream& pArchivo);
 
-
-    void atacar_edificios(Jugador * jugador);
-
-    void realizar_ataque(Jugador * jugador);
-
-    int devolver_cantidad_filas();
-
-    int devolver_cantidad_columnas();
 };
 
 
