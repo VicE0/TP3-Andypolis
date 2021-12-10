@@ -89,8 +89,7 @@ public:
 
     bool verificar_partida_empezada();
 
-    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
-    
+    void insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
 
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
@@ -270,6 +269,8 @@ public:
     int devolver_cantidad_filas();
 
     int devolver_cantidad_columnas();
+
+    void moverse(Jugador * jugador);
 };
 
 

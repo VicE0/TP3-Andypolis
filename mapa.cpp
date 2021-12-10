@@ -147,11 +147,18 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 // }
 
 
-void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
-    if ( id_jugador == "1" ){
-        mapa[fila][columna]->agregar_jugador(j1);
+void Mapa::insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
+    string fila_string = std::to_string(fila);
+    string columna_string = std::to_string(columna);
+
+    string codigo_posicion = fila_string + columna_string;
+    
+    if ( id_jugador == 1 ){
+        j1 -> agregar_codigo_posicion(codigo_posicion);
+        mapa[fila][columna] -> agregar_jugador(j1);
     } else {
-        mapa[fila][columna]->agregar_jugador(j2);
+        j2 -> agregar_codigo_posicion(codigo_posicion);
+        mapa[fila][columna] -> agregar_jugador(j2);
     }
 }
 
@@ -177,7 +184,7 @@ void Mapa::procesar_archivo_ubicaciones(Jugador * j1, Jugador * j2){
                         id_jugador = nombre;
                         id = stoi(id_jugador);
 
-                        insertar_jugador_mapa(id_jugador, j1, j2, stoi(fila), stoi(columna));
+                        insertar_jugador_mapa(id, j1, j2, stoi(fila), stoi(columna));
 
                     } else if ( nombre == PIEDRA || nombre == MADERA || nombre == METAL  || nombre == COINS ) { // EVALUO SI ES UN MATERIAL
 
@@ -583,17 +590,18 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
     validar_coordenada(fila, columna);
 
-    string nombre_edificio = mapa[fila][columna]->obtener_nombre_edificio();
+    string nombre_edificio = mapa[fila][columna] -> obtener_nombre_edificio();
 
     if ( nombre_edificio != ""){
-        Edificio * edificio = mapa[fila][columna]->obtener_edificio_construido();
-        int codigo_edificio = edificio->devolver_id_jugador();
+        Edificio * edificio = mapa[fila][columna] -> obtener_edificio_construido();
+        int codigo_edificio = edificio -> devolver_id_jugador();
 
         if ( id_jugador != codigo_edificio ){
             if ( aceptar_condiciones() ){
-                jugador->obtener_material(BOMBA)->restar_material(1);
+                jugador -> obtener_material(BOMBA) -> restar_material(1);
                 edificio -> atacar();
-                mapa[fila][columna]->comprobar_destruccion_edificio();
+                mapa[fila][columna] -> comprobar_destruccion_edificio();
+                jugador->restar_energia(30);
             }
         }else {
                 cout << "\n\t -> No se puede atacar a tu propio edificio.\n" << endl;
@@ -620,7 +628,7 @@ void Mapa::reparar_edificios(Jugador * jugador){
 
 void Mapa::realizar_reparacion(Jugador * jugador){
     int fila, columna;
-    int id_jugador = jugador->dar_numero();
+    int id_jugador = jugador -> dar_numero();
     
 
     cout << " Ingrese las coordenadas del edificio a reparar : \n" << endl;
@@ -702,7 +710,7 @@ bool Mapa::verificacion_andycoins(int requerido, int disponible){
 void Mapa::consultar_coordenada(){
     int fila , columna;
 
-    validar_coordenada( fila, columna);
+    validar_coordenada(fila, columna);
 
     mapa[fila][columna]->mostrar_casillero() ;
     cout << "\n";
@@ -758,6 +766,22 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
         }
     }
     jugador -> devolver_materiales_recolectar(piedra, madera, metal, andycoin, energia_rec);
+}
+
+// 11) MOVERSE A UNA COORDENADA ------------------------------------
+void Mapa::moverse(Jugador * jugador){
+    string posicion_origen = jugador -> obtener_codigo_posicion();
+    string fila_destino, columna_destino, posicion_destino;
+    int id_jugador = jugador -> obtener_id();
+
+    cout << "\n Fila destino: ";
+    cin >> fila_destino;
+    cout << " Columna destino: ";
+    cin >> columna_destino;
+
+    posicion_destino = fila_destino + columna_destino;
+
+    grafo -> usar_camino_minimo(posicion_origen,posicion_destino, id_jugador);
 }
 
 int Mapa::generar_numero_random(int min, int max){

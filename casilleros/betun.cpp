@@ -6,12 +6,16 @@ Betun::Betun(int fila, int columna, string id_casillero): Casillero(fila, column
 }
 
 void Betun::mostrar_casillero(){
-    if (!material){
-        cout << " Soy un betun y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\nSoy un Betun y me encuentro vacio" << endl;
     }
+    
     else{
-        cout << " Soy un betun y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\nSoy un Betun y no me encuentro vacio" << endl;
+        if (material)
+            material -> saludar();
+        else
+            jugador -> saludar();
     }
 }
 

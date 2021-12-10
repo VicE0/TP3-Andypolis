@@ -9,6 +9,7 @@ Jugador::Jugador(){
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
+    this -> codigo_posicion = "";
 }
 
 Jugador::Jugador(int id_jugador, string diminutivo)
@@ -21,6 +22,7 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
+    this -> codigo_posicion = "";
     // this -> asignar_objetivos();
 
 }
@@ -401,6 +403,17 @@ void Jugador::mostrar_objetivos()
     }
 }
 
+void Jugador::saludar(){
+    cout << " Soy el jugador n" << id_jugador << " y estoy en el casillero consultado" << endl;
+}
+
+void Jugador::agregar_codigo_posicion(string codigo_posicion){
+    this -> codigo_posicion = codigo_posicion;
+}
+
+string Jugador::obtener_codigo_posicion(){
+    return codigo_posicion;
+}
 
 Jugador::~Jugador(){
     delete inventario;

@@ -11,6 +11,8 @@ using namespace std;
 const int JUGADOR_1 = 1;
 const int JUGADOR_2 = 2;
 
+const int INFINITO = 99999999;
+
 class Casillero
 {
 protected:

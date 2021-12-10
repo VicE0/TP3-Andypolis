@@ -34,7 +34,7 @@ class Jugador
         int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
-  
+        string codigo_posicion;
     
         string diminutivo;
 
@@ -115,6 +115,11 @@ class Jugador
 
         void sortear_objetivos(int id_objetivo);
 
+        void saludar();
+
+        void agregar_codigo_posicion(string codigo_posicion);
+
+        string obtener_codigo_posicion();
 
         ~Jugador();
 

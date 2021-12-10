@@ -3,6 +3,7 @@
 Terreno::Terreno(int fila, int columna, string id_casillero): Casillero(fila, columna, id_casillero){
     this->nombre = "T";
     this->edificio_construido = 0;
+    this -> peso = 25;
 }
 
 string Terreno::obtener_nombre(){
@@ -10,16 +11,19 @@ string Terreno::obtener_nombre(){
 }
 
 int Terreno::obtener_costo_energia(int id_jugador){
-    return 25;
+    return peso;
 }
 
 void Terreno::mostrar_casillero(){
-    if ( ! edificio_construido ){
+    if ( !edificio_construido && !jugador){
         cout << " Soy un terreno y me encuentro vacio" << endl;
     }
     else{
         cout << " Soy un terreno y no me encuentro vacio" << endl;
-        edificio_construido->mostrar_mensaje();
+        if (edificio_construido)
+            edificio_construido->mostrar_mensaje();
+        else
+            jugador -> saludar();   
     }
 }
 
@@ -60,6 +64,9 @@ void Terreno::agregar_edificio(string nombre,int id_jugador, int vida, int piedr
             this->edificio_construido = new Mina_oro( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
+        
+        peso = INFINITO;
+
     } else {
         cout << "\n El casillero ya esta ocupado.\n" << endl;
     }
@@ -101,7 +108,7 @@ string Terreno::obtener_diminutivo_material(){
 void Terreno::eliminar_edificio(){
     delete edificio_construido;
     edificio_construido = 0;
-
+    peso = 25;
 }
 
 bool Terreno::existe_edificio(){

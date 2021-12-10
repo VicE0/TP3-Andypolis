@@ -5,7 +5,6 @@
 #include "casilleros/casillero.h"
 #include <iostream>
 
-const int INFINITO = 99999999;
 
 class CaminoMinimo {
 protected:
@@ -15,7 +14,7 @@ protected:
 public:
     CaminoMinimo(Lista<Casillero*> * vertices, int ** matriz_adyacente);
 
-    virtual void camino_minimo(int origen, int destino) = 0;
+    virtual bool camino_minimo(int origen, int destino) = 0;
 
     virtual ~CaminoMinimo() = default;
 };
