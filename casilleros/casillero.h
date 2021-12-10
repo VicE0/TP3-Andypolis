@@ -18,13 +18,14 @@ protected:
     int columna;
     string nombre;
     Jugador * jugador;
+    int peso;
 
 public:
     // Constructor
     // PRE: - 
     // POS: Inicializo los valores en con los valores de fila y columna correspondientes,
     //      y nombre vacio.
-    Casillero(int fila, int columna);
+    Casillero(int fila, int columna, string id_casillero);
     
     // Constructor
     // PRE: - 
@@ -46,7 +47,7 @@ public:
 
     //PRE: -
     //POST: Devuelve la cantidad de energia necesaria para transitar un determinado casillero.
-    virtual int obtener_costo_energia(int codigo_jugador) = 0;
+    virtual int obtener_costo_energia(int id_jugador) = 0;
 
     // PRE: -
     // POS: Se obtiene el nombre del casillero solicitado siendo estos = T,C,L.
@@ -88,11 +89,11 @@ public:
     //PRE: -
     //POST: En el casillero_transitable, obtendremos verdadero si hay un jugador y falso en caso contrario. En casilleros construibles
     //e inaccesibles devolvera false siempre puesto que no se pueden ubicar jugadores en ellos.
-    virtual bool existe_jugador() = 0;
+    bool existe_jugador();
 
     //PRE: -
     //POST: Si lo hay, devuelve el id perteneciente al jugador dueño de lo que haya en dicho casillero.
-    virtual int devolver_id_jugador() = 0;
+    int devolver_id_jugador();
     
     // PRE: -
     // POS: En el casillero_construible, podremos visualizar por pantalla las coordenadas del casillero donde
@@ -120,7 +121,11 @@ public:
 
     void agregar_jugador(Jugador * jugador);
 
+    int obtener_peso();
+
     string obtener_diminutivo_jugador();
+
+    string obtener_id_casillero();
 
 };
 

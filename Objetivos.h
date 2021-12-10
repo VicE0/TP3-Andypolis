@@ -4,6 +4,7 @@
 #include <string>
 using std::string;
 
+const int OBJETIVO_OBELISCO = 0;
 const int CONSTRUIR_OBELISCO = 1;
 const int COMPRAR_ANDYPOLIS = 2;
 const int EDAD_PIEDRA= 3;
@@ -16,6 +17,11 @@ const int CONSTRUCTOR = 9;
 const int ARMADO = 10;
 const int EXTREMISTA = 11;
 
+// #include "material.h";
+// #include "edificio.h";
+// #include "jugador.h"
+
+
 
 class Objetivo
 {
@@ -23,6 +29,11 @@ class Objetivo
         int id_objetivo;
         int cantidad;
         int andycoins_totales; 
+        int bombas_inventario;
+        int bombas_usadas;
+        int piedras_inventario;
+        int bombas_compradas;
+        int escuelas_construidas;
         // bool obelisco_construido;
         
 
@@ -39,6 +50,10 @@ class Objetivo
         //------ Getters ---------
 
         int obtener_objetivo();
+
+        bool mina_construida();
+
+        bool mina_oro_construida();
 
 
         // ------ Metodos virtuales -----

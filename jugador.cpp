@@ -4,8 +4,8 @@ Jugador::Jugador(){
     this -> id_jugador = 0;
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
-    this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
@@ -16,12 +16,13 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> id_jugador = id_jugador;
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
-    this -> cantidad_objetivos = 0;
     this -> inventario = new Lista<Material>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
-    this -> cargar_objetivos();
+    // this -> asignar_objetivos();
+
 }
 
 int Jugador::dar_numero()
@@ -92,7 +93,6 @@ void Jugador::mostrar_cantidad_material(string nombre){
     aux->mostrar_nombre();
 
 }
-
 
 void Jugador::establecer_turno(int turno){
     this -> turno = turno;
@@ -305,75 +305,97 @@ int Jugador::obtener_energia(){
     return energia;
 }
 
-void Jugador::restar_energia(int cantdiad){
-    energia -= cantdiad;
+void Jugador::restar_energia(int cantidad){
+    energia -= cantidad;
 }
 
-void Jugador::cargar_objetivos()
+
+// Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
+// {
+//     return lista_objetivos;
+// }
+
+
+void Jugador:: asignar_objetivos()
 {
 
-    int id_objetivo = randomizar_objetivo();
+    int id_objetivo;
+    id_objetivo = 2 + rand() % (2-12);
+    for (int i = 0; i < 3; i ++)
+    {   
+        sortear_objetivos(id_objetivo);
+          
+    }
+}
+
+void Jugador::sortear_objetivos(int id_objetivo)
+{
+    
+    Objetivo * aux = nullptr;
     int cantidad;
-   
-    switch(id_objetivo)
+
+    switch (id_objetivo)
     {
         case COMPRAR_ANDYPOLIS:
-            objetivos = new Comprar_andypolis(id_objetivo, cantidad);
+
+            aux = new Comprar_andypolis(id_objetivo, cantidad);
             break;
 
         case EDAD_PIEDRA:
-            objetivos = new Edad_piedra(id_objetivo, cantidad);
+            aux = new Edad_piedra(id_objetivo, cantidad);
             break;
 
         case BOMBARDERO:
-            objetivos = new Bombardero(id_objetivo, cantidad);
+            aux = new Bombardero(id_objetivo, cantidad);
             break;
 
         case ENERGETICO:
-            objetivos = new Energetico(id_objetivo, cantidad);
+            aux = new Energetico(id_objetivo, cantidad);
             break;
 
         case LETRADO:
-            objetivos = new Letrado(id_objetivo, cantidad);
+            aux = new Letrado(id_objetivo, cantidad);
             break;
 
         case MINERO:
-            objetivos = new Minero(id_objetivo, cantidad);
+            aux = new Minero(id_objetivo, cantidad);
             break;
 
         case CANSADO:
-            objetivos = new Cansado(id_objetivo, cantidad);
+            aux = new Cansado(id_objetivo, cantidad);
             break;
 
-        case CONSTRUCTOR:
-            objetivos = new Constructor(id_objetivo, cantidad);
-            break;
-
+ 
         case ARMADO:
-            objetivos = new Armado(id_objetivo, cantidad);
+            aux = new Armado(id_objetivo, cantidad);
             break;
 
         case EXTREMISTA:
-            objetivos = new Extremista(id_objetivo, cantidad);
+            aux = new Extremista(id_objetivo, cantidad);
             break;
-
     }
-    cantidad_objetivos++;
+    agregar_objetivo(&aux);
+
 }
 
 
-int Jugador::randomizar_objetivo()
+void Jugador::agregar_objetivo(Objetivo ** objetivos)
 {
-    srand (time(NULL)); //inicializo el random seed
-    int objetivo_dado = 2 + rand() % (12 -2); //El 1 nunca se randomiza porque siempre se asgina (obelisco)
-    return objetivo_dado;
+    
+    lista_objetivos -> alta(objetivos, lista_objetivos ->obtener_cantidad());
+    
 }
 
-void Jugador::mostrar_objetivos_jugador()
+
+
+void Jugador::mostrar_objetivos()
 {
-    for (int i = 0; i < cantidad_objetivos; i++)
+    
+    for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
     {
-        objetivos -> mostrar_descripcion();
+        cout << "los muestra" << endl;
+       (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
+       
     }
 }
 
@@ -381,9 +403,9 @@ void Jugador::mostrar_objetivos_jugador()
 Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
-    delete objetivos;
+    delete lista_objetivos;
+    lista_objetivos = 0;
     inventario = 0;
     inventario_a_recolectar = 0;
-    objetivos = 0;
-    cantidad_objetivos = 0;
+
 }
