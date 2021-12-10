@@ -7,12 +7,10 @@
 
 using namespace std;
 
-class Obelisco: public Objetivo
+class Objetivo_obelisco: public Objetivo
 {
     public:
-        Obelisco(int id_objetivo,int posicion ,int cantidad);
-
-        bool objetivo_cumplido();
+        Objetivo_obelisco(int id_objetivo,int cantidad);
 
         void mostrar_descripcion();
 

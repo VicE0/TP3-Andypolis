@@ -28,23 +28,23 @@ public:
     ListaObjetivos();
 
     // PRE: -
-    // POST: inserta un nuevo elemento en la Listaa
+    // POST: inserta un nuevo elemento en la lista
     void insertar_elemento(Data o);
 
     // PRE: -
-    // POST: elimina el elemento de la posicion pos de la Listaa
+    // POST: elimina el elemento de la posicion posicion dada de la Listaa
     void eliminar_elemento(int posicion);
 
     // PRE: -
-    // POST: devuelve true si la Lista está vacia
+    // POST: devuelve true si la lista está vacia
     bool esta_vacia();
 
     // PRE: -
-    // POST: devuelve el elemento que se encuentra en la posicion pos
+    // POST: devuelve el elemento que se encuentra en la posicion pedida
     Data obtener_datos(int posicion);
 
     // PRE: -
-    // POST: devuelve la cantidad de elementos de la Listaa
+    // POST: devuelve la cantidad de elementos de la lista
     int obtener_cantidad_elementos();
 
     // PRE: -
@@ -55,9 +55,7 @@ public:
     // POST: devuelve true si el puntero anterior no es null
     bool tiene_anterior();
 
-    // PRE: -
-    // POST: apunta el puntero actual al primer elemento de la Listaa
-    void resetear();
+ 
 
     // PRE: -
     // POST: devuelve el nodo actual y avanza
@@ -71,9 +69,6 @@ public:
     // POST: devuelve el nodo actual
     NodoObjetivos<Data>* obtener_actual();
 
-    // PRE: -
-    // POST: avanza
-    void avanzar();
 
 
     // DESTRUCTOR
@@ -128,7 +123,7 @@ template <typename Data>
 Data ListaObjetivos<Data>::obtener_datos(int posicion) 
 {
     NodoObjetivos<Data> * aux = obtener_nodo(posicion);
-    return aux->obtener_Data();
+    return aux->obtener_data();
 }
 
 template <typename Data>
@@ -152,13 +147,6 @@ bool ListaObjetivos<Data>::tiene_anterior()
 }
 
 template <typename Data>
-void ListaObjetivos<Data>::resetear() 
-{
-    actual = primero;
-    anterior = nullptr;
-}
-
-template <typename Data>
 NodoObjetivos<Data>* ListaObjetivos<Data>::obtener_siguiente() 
 {
     anterior = actual;
@@ -172,13 +160,6 @@ template <typename Data>
 NodoObjetivos<Data>* ListaObjetivos<Data>::obtener_actual() 
 {
     return actual;
-}
-
-template <typename Data>
-void ListaObjetivos<Data>::avanzar() 
-{
-    anterior = actual;
-    actual = actual->obtener_siguiente();
 }
 
 template <typename Data>

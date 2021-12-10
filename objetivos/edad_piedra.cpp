@@ -1,21 +1,12 @@
 #include "edad_piedra.h"
 
-Edad_piedra::Edad_piedra(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo, posicion,cantidad, andycoins_totales)
+Edad_piedra::Edad_piedra(int id_objetivo,int cantidad) : Objetivo(id_objetivo,cantidad)
 {
     this -> id_objetivo = EDAD_PIEDRA;
     this -> cantidad = 50000;
     this -> piedras_inventario = 0;
 }
 
-bool Edad_piedra::objetivo_cumplido()
-{ 
-
-    if (piedras_inventario == cantidad)
-    {
-        return true;
-    }
-    return false;
-}
 
 void Edad_piedra::mostrar_progreso()
 {
@@ -29,7 +20,4 @@ void Edad_piedra::mostrar_descripcion()
     mostrar_progreso();
 }
 
-int Edad_piedra::obtener_id()
-{
-    return id_objetivo;
-}
+

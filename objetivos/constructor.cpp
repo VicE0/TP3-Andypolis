@@ -1,19 +1,9 @@
 #include "constructor.h"
 
-Constructor::Constructor(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo, posicion ,cantidad, andycoins_totales)
+Constructor::Constructor(int id_objetivo,int cantidad) :Objetivo(id_objetivo,cantidad)
 {
     this -> id_objetivo = CONSTRUCTOR;
     this -> cantidad = 6; //cantidad de edificios diferentes (sin contar obelisco)
-}
-
-bool Constructor::objetivo_cumplido()
-{ 
-
-    if (andycoins_totales == cantidad)
-    {
-        return true;
-    }
-    return false;
 }
 
 void Constructor::mostrar_progreso()
@@ -22,16 +12,12 @@ void Constructor::mostrar_progreso()
 
 }
 
-
 void Constructor::mostrar_descripcion()
 {
     cout << "\nConstructor: haber construido un edificio de cada tipo "<<endl;
     mostrar_progreso();
 }
 
-int Constructor::obtener_id()
-{
-    return id_objetivo;
-}
+
 
 //linkear con edificios ;-;

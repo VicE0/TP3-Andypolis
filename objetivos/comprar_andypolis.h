@@ -10,15 +10,12 @@ using namespace std;
 class Comprar_andypolis : public Objetivo
 {
     public:
-        Comprar_andypolis(int id_objetivo, int posicion,int cantidad);
-
-        bool objetivo_cumplido();
+        Comprar_andypolis(int id_objetivo,int cantidad);
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
 
-        int obtener_id();
 
 };
 

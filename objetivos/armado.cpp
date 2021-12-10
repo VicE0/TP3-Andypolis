@@ -1,21 +1,12 @@
 #include "armado.h"
 
-Armado::Armado(int id_objetivo, int posicion,int cantidad) : Objetivo(id_objetivo,posicion ,cantidad, andycoins_totales)
+Armado::Armado(int id_objetivo,int cantidad) : Objetivo(id_objetivo,cantidad)
 {
     this -> id_objetivo = ARMADO;
     this -> cantidad = 10;
     this -> bombas_inventario = 0;
 }
 
-bool Armado::objetivo_cumplido()
-{ 
-
-    if (bombas_inventario == cantidad)
-    {
-        return true;
-    }
-    return false;
-}
 
 void Armado::mostrar_progreso()
 {
@@ -30,7 +21,4 @@ void Armado::mostrar_descripcion()
     mostrar_progreso();
 }
 
-int Armado::obtener_id()
-{
-    return id_objetivo;
-}
+

@@ -84,7 +84,7 @@ void Mapa::procesar_archivo_mapa(){
         }
         grafo->agregar_caminos();
         // grafo->mostrar_adyacente();
-        grafo -> mostrar_vertices();
+        // grafo -> mostrar_vertices();
         
     }else{
         mapa_bien_cargado = false;
@@ -143,27 +143,76 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
-
-void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
+void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 {
-    // int id_objetivo;
-
-    // for (int i = 0; i < 3; i++)
-    // {   
-    //     id_objetivo = rand() %10;
-    //     j1 -> sortear_objetivos(id_objetivo);
-    // }
     
-    // for (int i = 0; i < 3; i++)
-    // {   
-    //     id_objetivo = rand() %10;
-    //     j2 -> sortear_objetivos(id_objetivo);
-    // }
-    j1 -> asignar_objetivos();
+    int id_objetivo;
+    for (int i = 0; i < 3; i++)
+    {   
+        id_objetivo = rand() %10;
+        j1 ->agregar_objetivo(sortear_objetivos(id_objetivo));
+    }
 
-    j2 -> asignar_objetivos();
-   
-   
+    for (int i = 0; i < 3; i++)
+    {   
+        id_objetivo = rand() %10;
+        j2 ->agregar_objetivo(sortear_objetivos(id_objetivo));
+    }
+
+}
+
+Objetivo* Mapa::sortear_objetivos(int id_objetivo)
+{
+    int cantidad;
+    for(int i = 0; i < 9; i ++)
+    {
+        switch (id_objetivo)
+        {
+            case COMPRAR_ANDYPOLIS:
+
+                obj = new Comprar_andypolis(id_objetivo,cantidad);
+                break;
+
+            case EDAD_PIEDRA:
+                obj = new Edad_piedra(id_objetivo,cantidad);
+                break;
+
+            case BOMBARDERO:
+                obj = new Bombardero(id_objetivo,cantidad);
+                break;
+
+            case ENERGETICO:
+                obj= new Energetico(id_objetivo ,cantidad);
+                break;
+
+            case LETRADO:
+                obj = new Letrado(id_objetivo,cantidad);
+                break;
+
+            case MINERO:
+                obj = new Minero(id_objetivo,cantidad);
+                break;
+
+            case CANSADO:
+                obj = new Cansado(id_objetivo,cantidad);
+                break;
+
+    
+            case ARMADO:
+                obj = new Armado(id_objetivo ,cantidad);
+                break;
+
+            case EXTREMISTA:
+                obj = new Extremista(id_objetivo,cantidad);
+                break;
+
+            case CONSTRUCTOR:
+               obj = new Constructor(id_objetivo,cantidad);
+        }
+    }
+
+    return obj;
+    
 }
 
 

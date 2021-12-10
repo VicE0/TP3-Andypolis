@@ -300,6 +300,7 @@ void Jugador::sumar_materiales_recolectados(){
     energia_recolectada = 0;
 }
 
+
 int Jugador::obtener_energia(){
     return energia;
 }
@@ -309,86 +310,11 @@ void Jugador::restar_energia(int cantidad){
 }
 
 
-// Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
-// {
-//     return lista_objetivos;
-// }
-
-
-void Jugador:: asignar_objetivos()
-{
-    
-    int id_objetivo;
-    for (int i = 0; i < 3; i++)
-    {   
-        id_objetivo = rand() %10;
-        agregar_objetivo(sortear_objetivos(id_objetivo));
-    }
-
-}
-
-Objetivo* Jugador::sortear_objetivos(int id_objetivo)
-{
-    int cantidad;
-    for(int i = 0; i < 9; i ++)
-    {
-        switch (id_objetivo)
-        {
-            case COMPRAR_ANDYPOLIS:
-
-                obj = new Comprar_andypolis(id_objetivo, i,cantidad);
-                break;
-
-            case EDAD_PIEDRA:
-                obj = new Edad_piedra(id_objetivo, i,cantidad);
-                break;
-
-            case BOMBARDERO:
-                obj = new Bombardero(id_objetivo,i ,cantidad);
-                break;
-
-            case ENERGETICO:
-                obj= new Energetico(id_objetivo,i ,cantidad);
-                break;
-
-            case LETRADO:
-                obj = new Letrado(id_objetivo,i ,cantidad);
-                break;
-
-            case MINERO:
-                obj = new Minero(id_objetivo,i ,cantidad);
-                break;
-
-            case CANSADO:
-                obj = new Cansado(id_objetivo, i,cantidad);
-                break;
-
-    
-            case ARMADO:
-                obj = new Armado(id_objetivo,i ,cantidad);
-                break;
-
-            case EXTREMISTA:
-                obj = new Extremista(id_objetivo, i,cantidad);
-                break;
-
-            case CONSTRUCTOR:
-               obj = new Constructor(id_objetivo, i,cantidad);
-        }
-    }
-
-    return obj;
-    
-}
-
-
 void Jugador::agregar_objetivo(Objetivo * objetivos)
 {
     lista_objetivos ->insertar_elemento(objetivos);
 
 }
-
-
 
 void Jugador::mostrar_objetivos()
 {
@@ -403,11 +329,26 @@ void Jugador::mostrar_objetivos()
 }
 
 
+bool Jugador::objetivos_secundarios_cumplidos()
+{
+    int objetivos_cumplidos = 0;
+
+    for (int i = 0; i < 9; i++)
+    {
+        if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())
+        {
+            objetivos_cumplidos++;
+        }
+    }
+
+    return (objetivos_cumplidos == 2);
+}
+
 Jugador::~Jugador(){
     delete inventario;
     delete inventario_a_recolectar;
-    // delete lista_objetivos;
-    // lista_objetivos = 0;
+    delete lista_objetivos;
+    lista_objetivos = 0;
     inventario = 0;
     inventario_a_recolectar = 0;
 

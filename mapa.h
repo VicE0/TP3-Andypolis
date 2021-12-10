@@ -15,6 +15,17 @@
 #include "edificio.h"
 #include "ABB/ABB.h"
 #include "Objetivos.h"
+#include "objetivos/comprar_andypolis.h"
+#include "objetivos/edad_piedra.h"
+#include "objetivos/bombardero.h"
+#include "objetivos/energetico.h"
+#include "objetivos/letrado.h"
+#include "objetivos/minero.h"
+#include "objetivos/cansado.h"
+#include "objetivos/constructor.h"
+#include "objetivos/armado.h"
+#include "objetivos/extremista.h"
+#include "objetivos/obelisco.h"
 
 
 using std::string;
@@ -38,11 +49,10 @@ private:
     int cantidad_filas;
     int cantidad_columnas;
     Casillero *** mapa;
-    Objetivo ** obj;
 
     Grafo * grafo;
 
-    Jugador * objetivos_jugador;
+    Objetivo * obj;;
 
     int cantidad_edificios;
 
@@ -86,18 +96,33 @@ public:
     //     a pedir al usuario ingresar las coordenadas.
     void validar_coordenada(int &fila, int &columna);
 
+    //PRE:
+    //POS:
     bool aceptar_condiciones();
 
+    //PRE:
+    //POS:
     bool verificar_partida_empezada();
 
+    //PRE:
+    //POS:
     void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
     
-
+    //PRE:
+    //POS:
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
+    //PRE:
+    //POS:
     void procesar_objetivos(Jugador * j1, Jugador *  j2);
 
+    //PRE:
+    //POS:
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
+
+    //PRE:
+    //POS:
+    Objetivo* sortear_objetivos(int id_objetivo);
 
     //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
 
@@ -237,12 +262,58 @@ public:
     //vector casilleros lluvia
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
-    
+    //PRE:
+    //POS:
     void guardar_materiales(std::ofstream &archivo_ubicaciones);
     
+    //PRE:
+    //POS:
     void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
 
+    //PRE:
+    //POS:
     void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
+
+
+    //PRE:
+    //POS:
+    void modificar_edificios();
+
+    //PRE:
+    //POS:
+    void reparar_edificios(Jugador * jugador);
+
+    //PRE:
+    //POS:
+    void realizar_reparacion(Jugador * jugador);
+
+    //PRE:
+    //POS:
+    void comprar_bombas(Jugador * jugador);
+
+    //PRE:
+    //POS:
+    bool verificacion_andycoins(int requerido, int disponible);
+
+    //PRE:
+    //POS:
+    bool vacio(ifstream& pArchivo);
+
+    //PRE:
+    //POS:
+    void atacar_edificios(Jugador * jugador);
+
+    //PRE:
+    //POS:
+    void realizar_ataque(Jugador * jugador);
+
+    //PRE:
+    //POS:
+    int devolver_cantidad_filas();
+
+    //PRE:
+    //POS:
+    int devolver_cantidad_columnas();
 
     //Detructor
     //PRE: - 
@@ -251,27 +322,6 @@ public:
     //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
     //     Se vuelve a setear todos los valores en 0.
     ~Mapa();
-
-    void modificar_edificios();
-
-    void reparar_edificios(Jugador * jugador);
-
-    void realizar_reparacion(Jugador * jugador);
-
-    void comprar_bombas(Jugador * jugador);
-
-    bool verificacion_andycoins(int requerido, int disponible);
-
-    bool vacio(ifstream& pArchivo);
-
-
-    void atacar_edificios(Jugador * jugador);
-
-    void realizar_ataque(Jugador * jugador);
-
-    int devolver_cantidad_filas();
-
-    int devolver_cantidad_columnas();
 };
 
 

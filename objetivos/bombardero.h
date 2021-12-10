@@ -10,7 +10,7 @@ using namespace std;
 class Bombardero : public Objetivo
 {
     public:
-        Bombardero(int id_objetivo, int posicion,int cantidad);
+        Bombardero(int id_objetivo,int cantidad);
 
         bool objetivo_cumplido();
 

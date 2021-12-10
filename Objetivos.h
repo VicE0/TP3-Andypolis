@@ -4,7 +4,10 @@
 #include <string>
 using std::string;
 
-const int OBJETIVO_OBELISCO = 0;
+#include "material.h"
+#include "edificio.h"
+
+
 const int CONSTRUIR_OBELISCO = 1;
 const int COMPRAR_ANDYPOLIS = 2;
 const int EDAD_PIEDRA= 3;
@@ -17,25 +20,20 @@ const int CONSTRUCTOR = 9;
 const int ARMADO = 10;
 const int EXTREMISTA = 11;
 
-// #include "material.h";
-// #include "edificio.h";
-// #include "jugador.h"
-
-
 
 class Objetivo
 {
     protected:
         int id_objetivo;
         int cantidad;
-        int posicion;
+        bool cumplido;
+      
         int andycoins_totales; 
         int bombas_inventario;
         int bombas_usadas;
         int piedras_inventario;
         int bombas_compradas;
         int escuelas_construidas;
-        // bool obelisco_construido;
         
 
     public:
@@ -46,26 +44,29 @@ class Objetivo
 
         // PRE: ~
         // POST: Carga los valores 
-        Objetivo(int id_objetivo, int posicion, int cantidad, int andycoins_totales);
+        Objetivo(int id_objetivo, int cantidad);
 
         //------ Getters ---------
 
+        //PRE: ~
+        //POS: Devuelve el numero que le representa el objetivo
         int obtener_objetivo();
 
         bool mina_construida();
 
         bool mina_oro_construida();
 
+        //PRE: ~
+        //POS: Devuelve el atributo cumplido
+        bool objetivo_cumplido();
+
 
         // ------ Metodos virtuales -----
-
-        virtual bool objetivo_cumplido() = 0;
 
         virtual void mostrar_descripcion() = 0;
 
         virtual void mostrar_progreso() = 0;
 
-        virtual int obtener_id() = 0;
 
         ~Objetivo();
 

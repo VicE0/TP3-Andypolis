@@ -10,15 +10,12 @@ using namespace std;
 class Edad_piedra : public Objetivo
 {
     public:
-        Edad_piedra(int id_objetivo, int posicion,int cantidad);
-
-        bool objetivo_cumplido();
+        Edad_piedra(int id_objetivo,int cantidad);
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
 
-        int obtener_id();
 
 };
 
