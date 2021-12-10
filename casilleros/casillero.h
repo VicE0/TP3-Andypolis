@@ -13,7 +13,6 @@ const int JUGADOR_2 = 2;
 class Casillero
 {
 protected:
-    Material * material;
     string id_casillero; // "ij"
     int fila;
     int columna;
