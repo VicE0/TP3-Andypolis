@@ -2,9 +2,12 @@
 #define MUELLE_H
 
 #include "casillero.h"
+#include "../material.h"
 
 
 class Muelle : public Casillero {
+private:
+    Material * material;
 public:
 
     //Constructor de Muelle

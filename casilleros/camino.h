@@ -2,9 +2,12 @@
 #define CAMINO_H
 
 #include "casillero.h"
+#include "../material.h"
 
 
 class Camino : public Casillero {
+private:
+    Material * material;
 public:
 
     //Constructor de camino
@@ -81,6 +84,8 @@ public:
 
     Edificio * obtener_edificio_construido();
 
+    // PRE: -
+    // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.
     void comprobar_destruccion_edificio();
     
     //Destructor de camino
