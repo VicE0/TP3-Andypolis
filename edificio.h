@@ -37,8 +37,16 @@ protected:
     int vida;
     int vida_max;
 
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de piedra con la nueva cantidad ingresada
     void modificar_cantidad_piedra(int nueva_cantidad);
+
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de metal con la nueva cantidad ingresada
     void modificar_cantidad_metal(int nueva_cantidad);
+
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de madera con la nueva cantidad ingresada 
     void modificar_cantidad_madera(int nueva_cantidad);
 
 public:
@@ -133,19 +141,27 @@ public:
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
 
     // PRE: -
-    // POS: Retorna la vida de un jugador.
+    // POS: Retorna la vida de un edificio.
     int devolver_vida();
 
     // PRE: -
     // POS: Retorna la vida maxima como entero.
     int devolver_vida_max();
 
+    // PRE: -
+    // POS:Le suma uno a la vide del edificio.
     void reparar();
 
+    // PRE: -
+    // POS: Le resta la vida al edificio
     void atacar();
 
+    // PRE: -
+    // POS: Devuelve el numero de construcciones restantes antes de llegar al maximo de dicho edifico del j1
     int obtener_restantes_j1();
-
+    
+    // PRE: -
+    // POS: Devuelve el numero de construcciones restantes antes de llegar al maximo de dicho edifico del j2
     int obtener_restantes_j2();
 };
 

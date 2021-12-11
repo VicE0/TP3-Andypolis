@@ -63,42 +63,80 @@ class Jugador
 
         
         // -------------------------------- Funciones jugador --------------------------------
+        //PRE: ~
+        //POST:Devuelve el id del jugador seleccionado
         int obtener_id();
 
+        //PRE: ~
+        //POST: Devuelve la energia de dicho jugador
         int obtener_energia();
 
+        //PRE: Le paso un entero de la cantidad a sumar de energia
+        //POST: Le suma la energia ingresada al jugador.
         void sumar_energia(int cantidad);
 
+        //PRE: Le paso un entero de la cantidad de energia a restar
+        //POST: Le resto la cnatidad brindada de energia
         void restar_energia(int cantidad);
 
+        //PRE: Paso el puntero material paa pasarle la informacion del mismo y poder agregarlo al inventario
+        //POST:Doy de alta un material en el inventario del jugador
         void agregar_material(Material * material);
 
+        //PRE: Paso el puntero material paa pasarle la informacion del mismo y poder agregarlo al inventario de recoleccion
+        //POST:Doy de alta un material en el inventario del jugador
         void agregar_material_inv_recolectar(Material * material);
 
+        //PRE: Paso el doble puntero objetivo para pasarle la informacion del mismo y poder agregarlo al jugador
+        //POST:Doy de alta un objetivo en la lista d eobjetivos del jugador
         void agregar_objetivo(Objetivo ** objetivo);
 
+        //PRE: -
+        //POST: Asigno los tres objetivos aleatorios a la lista de objetivos del jugador.
         void asignar_objetivos();
 
+        //PRE: Le paso el string del nombre del material a buscar
+        //POST: Imprime por pantalla la cantidad de dicho material.
         void mostrar_cantidad_material( string nombre );
 
+        //PRE: -
+        //POST: Obtengo el diminutivo del jugador.
         string obtener_diminutivo();
 
+        //PRE: Le paso el entero del turno
+        //POST: Establezco el turno en la informacion del jugador
         void establecer_turno(int turno);
 
+        //PRE: -
+        //POST: Me devuleve el turno del jugador
         int obtener_turno();
   
+        //PRE: Le pido el nombre del material a modificar, la cantidad a sumar y el booleano para ver en que inventario almacenar.
+        //POST: Me suma la cantidad pedida del material pedido. Si recolectar es verdadero, modifica la cantidad del inventario; de lo contrario, lo almacena en el inventario que no fue recolectado
         void sumar_cantidad_material(string nombre, int cantidad,bool recolectar);
 
+        //PRE: Le pido el nombre del material a modificar, la cantidad a restar y el booleano para ver en que inventario almacenar.
+        //POST: Me Resta la cantidad pedida del material pedido. Si recolectar es verdadero, modifica la cantidad del inventario; de lo contrario, lo almacena en el inventario que no fue recolectado 
         void restar_cantidad_material(string nombre, int cantidad,bool recolectar);
 
+        //PRE: -
+        //POST: Muetsra por pantalla el inventario.
         void mostrar_inventario();
 
+        //PRE: -
+        //POST: Muestra por pantalla los objetivos del jugador
         void mostrar_objetivos();
 
+        //PRE: -
+        //POST: Muestra por pantalla el inventario a recolectar.
         void mostrar_inventario_recolectar();
 
+        //PRE: Le paso las cantidades de los materiales necesarios para la construccion de dicho edificio
+        //POST: Devuelve un bool para verificar si se puede construir dicho edificio con los materiales actuales
         bool alcanzan_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
+        //PRE: Le paso el entero de la cantidad disponible, y la necesaria y un puntero del booleano que cambia si no alcanzan.
+        //POST: Verifica si la cantidad disponible es mayor a la necesitada y modifica el booleano en base a eso
         void chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza);
 
         void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
