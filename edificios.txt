@@ -1,6 +1,0 @@
-escuela 152 298 45 2
-fabrica 100 100 258 1
-aserradero 100 58 50 1
-planta electrica 100 50 12 1
-mina oro 20 20 20 1
-mina 20 20 20 1
