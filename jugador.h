@@ -139,21 +139,35 @@ class Jugador
         //POST: Verifica si la cantidad disponible es mayor a la necesitada y modifica el booleano en base a eso
         void chequear_material(int cantidad_disponible, int cantidad_material_nec, bool &alcanza);
 
+        //PRE: Le ingreso las cantidades a restar de los materiales para la construccion
+        //POST: Me modifica las cantidades de los materiales en el inventario en base a los parametros ingresados
         void utilizar_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec);
 
+        //PRE: Le ingreso las cantidades a sumar de los materiales recolectados
+        //POST: Me modifica las cantidades de los materiales en el inventario en base a los parametros ingresados
         void devolver_materiales(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec,int cantidad_coins_nec,int cantidad_energia_nec);
 
+        //PRE: Le ingreso las cantidades a sumar de los materiales recolectados
+        //POST: Me modifica las cantidades de los materiales en el inventario a recolectar en base a los parametros ingresados
         void devolver_materiales_recolectar(int cantidad_piedra_nec, int cantidad_madera_nec, int cantidad_metal_nec,int cantidad_coins_nec, int cantidad_energia_nec);
 
+        //PRE: Le paso como parametro las cantidades obtenidas de los materiales
+        //POST: Imprime por pantalla los materiales con las cantidades ingresadas
         void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
-        
+
+        //PRE: Le paso un puntero de cada material para pasarle la cantidad a dicho puntero en base al nombre ingresado
+        //POST: Relaciono las cantidades con el nombre y las almaceno en los punteros recibidos
         void coincidir_valores(int *piedra,int *madera,int *metal,int *coins,string nombre,int cantidad);
-        
+
+        //PRE: -
+        //POST: Sumo los materiales del inventario a recolectar al inventario del jugador y dejo el inventario a recolectar en 0.
         void sumar_materiales_recolectados();
 
+        //PRE: Le paso el id el objetivo que le toco aleatoriamente
+        //POST: Inicializo el objetivo asignado al jugador en la lista de objetivos
         void sortear_objetivos(int id_objetivo);
 
-
+        //Destructor de jugador
         ~Jugador();
 
         
