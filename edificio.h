@@ -73,6 +73,8 @@ public:
     // POS: Devuelve la cantidad de metal necesaria para construir.
     int obtener_cantidad_metal();
 
+    //PRE> -
+    //POST: Devuelve la cantidad de edificios construidos de un determinado jugador.
     int obtener_cantidad_construidos();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
@@ -126,10 +128,16 @@ public:
     // POS: -
     virtual ~Edificio();
 
+    // PRE: Recibe el nombre del material a modificar y la nueva cantidad para modificar.
+    // POS: Cambia el valor almacenado del material otorgado por la nueva cantidad brindada.
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
 
+    // PRE: -
+    // POS: Retorna la vida de un jugador.
     int devolver_vida();
 
+    // PRE: -
+    // POS: Retorna la vida maxima como entero.
     int devolver_vida_max();
 
     void reparar();
