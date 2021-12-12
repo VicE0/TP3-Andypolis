@@ -19,6 +19,7 @@ void Objetivo_obelisco::mostrar_descripcion()
     cout << "PRINCIPAL:" << endl;
     cout << "\nMas alto que las nubes: construir el obelisco"<<endl;
     mostrar_progreso();
+    cout << "-------------------------------------" << endl;
 }
 
 

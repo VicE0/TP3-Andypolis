@@ -387,8 +387,6 @@ ListaObjetivos<Objetivo*> * Jugador::obtener_lista_objetivos()
 
 void Jugador::mostrar_objetivos()
 {
-    cout << "OBJETIVOS SECUNDARIOS: "<< endl;
-
     while (lista_objetivos ->tiene_siguiente())
     {
         // lista_objetivos ->obtener_siguiente() -> obtener_data() ->progreso(inventario, energia);
