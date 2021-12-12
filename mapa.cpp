@@ -148,17 +148,17 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
     int id_objetivo;
 
     j1 -> agregar_objetivo( j1 ->asignar_principal(1));
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {   
-        id_objetivo = rand() %10;
-        j1 ->agregar_objetivo( j1 -> sortear_objetivos(id_objetivo));
+        id_objetivo = 5;
+        j1 ->agregar_objetivo(j1 -> sortear_objetivos(id_objetivo));
     }
 
     j2 -> agregar_objetivo(j2 ->asignar_principal(1));
     for (int i = 0; i < 3; i++)
     {   
-        id_objetivo = rand() %10;
-        j2 ->agregar_objetivo(j2 -> sortear_objetivos(id_objetivo));
+        id_objetivo = 5;
+        j2 ->agregar_objetivo(j2 ->sortear_objetivos(id_objetivo));
     }
 
 }

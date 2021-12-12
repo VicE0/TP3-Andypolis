@@ -23,6 +23,12 @@ void Edad_piedra::mostrar_descripcion()
 
 
 void Edad_piedra::progreso(Lista <Material> * inventario, int &energia)
- {
-     cout << endl;
- }
+{
+    for (int i = 0; i < inventario ->obtener_cantidad(); i++)
+    {
+        if (inventario -> obtener_nodo(i) ->obtener_dato() ->obtener_nombre() == PIEDRA)
+        {
+            this -> piedras_inventario += inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
+        }
+    } 
+} 

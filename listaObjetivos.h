@@ -31,7 +31,6 @@ public:
     // POST: inserta un nuevo elemento en la lista
     void insertar_elemento(Data o);
 
-    void alta(Data o, int posicion);
 
     // PRE: -
     // POST: elimina el elemento de la posicion posicion dada de la Listaa
@@ -57,8 +56,6 @@ public:
     // POST: devuelve true si el puntero anterior no es null
     bool tiene_anterior();
 
- 
-
     // PRE: -
     // POST: devuelve el nodo actual y avanza
     NodoObjetivos<Data>* obtener_siguiente();
@@ -70,7 +67,6 @@ public:
     // PRE: -
     // POST: devuelve el nodo actual
     NodoObjetivos<Data>* obtener_actual();
-
 
 
     // DESTRUCTOR
@@ -170,8 +166,6 @@ NodoObjetivos<Data>* ListaObjetivos<Data>::obtener_anterior()
     return anterior->obtener_anterior();
 }
 
-template <typename Data>
-ListaObjetivos<Data>::~ListaObjetivos(){}
 
 template <typename Data>
 NodoObjetivos<Data>* ListaObjetivos<Data>::obtener_nodo(int obtener_anterior)
@@ -184,5 +178,8 @@ NodoObjetivos<Data>* ListaObjetivos<Data>::obtener_nodo(int obtener_anterior)
         
     return aux;
 }
+
+template <typename Data>
+ListaObjetivos<Data>::~ListaObjetivos(){}
 
 #endif //LISTA_OBJETIVOS_H

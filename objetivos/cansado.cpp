@@ -5,13 +5,13 @@ Cansado::Cansado(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_obje
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;
     this ->cumplido = false;
-    //energiaa del jugador
+    this ->energia_jugador = 0;
 }
 
 
 void Cansado::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << energia_jugador << "/" << cantidad << endl;
 
 }
 
@@ -22,7 +22,7 @@ void Cansado::mostrar_descripcion()
     mostrar_progreso();
 }
 
- void Cansado::progreso(Lista <Material> * inventario, int &energia)
- {
-     cout << endl;
- }
+void Cansado::progreso(Lista <Material> * inventario, int &energia)
+{
+    this -> energia_jugador = energia;
+}

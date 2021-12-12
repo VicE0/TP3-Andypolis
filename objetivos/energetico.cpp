@@ -5,11 +5,12 @@ Energetico::Energetico(int id_objetivo, int cantidad, bool cumplido) :  Objetivo
     this -> id_objetivo = ENERGETICO;
     this -> cantidad = 100;
     this ->cumplido = false;
+    this -> energia_jugador = 0;
 }
 
 void Energetico::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << energia_jugador << "/" << cantidad << endl;
 
 }
 
@@ -22,6 +23,6 @@ void Energetico::mostrar_descripcion()
 
 
 void Energetico::progreso(Lista <Material> * inventario, int &energia)
- {
-     cout << endl;
- }
+{
+    this ->energia_jugador = energia;
+}

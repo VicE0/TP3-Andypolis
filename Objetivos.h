@@ -35,6 +35,7 @@ class Objetivo
         int piedras_inventario;
         int bombas_compradas;
         int escuelas_construidas;
+        int energia_jugador;
         
 
     public:
