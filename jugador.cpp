@@ -318,11 +318,14 @@ void Jugador::agregar_objetivo(Objetivo * objetivos)
 
 void Jugador::mostrar_objetivos()
 {
-    cout << "OBJETIVOS: "<< endl;
+    cout << "OBJETIVOS SECUNDARIOS: "<< endl;
     while (lista_objetivos ->tiene_siguiente())
     {
-        lista_objetivos ->obtener_siguiente() ->obtener_data() ->mostrar_descripcion();
+        // lista_objetivos ->obtener_siguiente() -> obtener_data() ->progreso(inventario, energia);
+        //FUNCA PERO CORE DUMPED
+        lista_objetivos ->obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
     }
+    //FUNCA PERO CORE DUMPED
    
     
     cout << "\n" <<endl;

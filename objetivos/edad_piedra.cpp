@@ -1,10 +1,11 @@
 #include "edad_piedra.h"
 
-Edad_piedra::Edad_piedra(int id_objetivo,int cantidad) : Objetivo(id_objetivo,cantidad)
+Edad_piedra::Edad_piedra(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = EDAD_PIEDRA;
     this -> cantidad = 50000;
     this -> piedras_inventario = 0;
+    this -> cumplido = false;
 }
 
 
@@ -21,3 +22,7 @@ void Edad_piedra::mostrar_descripcion()
 }
 
 
+void Edad_piedra::progreso(Lista <Material> * inventario, int &energia)
+ {
+     cout << endl;
+ }

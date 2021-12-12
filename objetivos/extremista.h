@@ -10,11 +10,13 @@ using namespace std;
 class Extremista : public Objetivo
 {
     public:
-        Extremista(int id_objetivo,int cantidad);
+        Extremista(int id_objetivo,int cantidad, bool cumplido);
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
+
+        void progreso(Lista <Material> * inventario, int &energia);
 
 
 };

@@ -12,11 +12,11 @@ Objetivo::Objetivo()
     this -> cumplido = false;
 }
 
-Objetivo::Objetivo(int id_objetivo, int cantidad)
+Objetivo::Objetivo(int id_objetivo, int cantidad, bool cumplido)
 {
     this -> id_objetivo = id_objetivo;
     this -> cantidad = cantidad;
-    this -> cumplido = false; //parametro
+    this -> cumplido = cumplido;
 }
 
 

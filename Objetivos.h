@@ -6,6 +6,7 @@ using std::string;
 
 #include "material.h"
 #include "edificio.h"
+#include "lista.h"
 
 
 const int CONSTRUIR_OBELISCO = 1;
@@ -44,7 +45,7 @@ class Objetivo
 
         // PRE: ~
         // POST: Carga los valores 
-        Objetivo(int id_objetivo, int cantidad);
+        Objetivo(int id_objetivo, int cantidad, bool cumplido);
 
         //------ Getters ---------
 
@@ -52,9 +53,6 @@ class Objetivo
         //POS: Devuelve el numero que le representa el objetivo
         int obtener_objetivo();
 
-        bool mina_construida();
-
-        bool mina_oro_construida();
 
         //PRE: ~
         //POS: Devuelve el atributo cumplido
@@ -66,6 +64,8 @@ class Objetivo
         virtual void mostrar_descripcion() = 0;
 
         virtual void mostrar_progreso() = 0;
+
+        virtual void progreso(Lista <Material> * inventario, int &energia) = 0;
 
 
         ~Objetivo();

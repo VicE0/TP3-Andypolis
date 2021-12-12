@@ -1,9 +1,10 @@
 #include "cansado.h"
 
-Cansado::Cansado(int id_objetivo,int cantidad) : Objetivo(id_objetivo,cantidad)
+Cansado::Cansado(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;
+    this ->cumplido = false;
     //energiaa del jugador
 }
 
@@ -21,3 +22,7 @@ void Cansado::mostrar_descripcion()
     mostrar_progreso();
 }
 
+ void Cansado::progreso(Lista <Material> * inventario, int &energia)
+ {
+     cout << endl;
+ }

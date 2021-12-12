@@ -1,10 +1,11 @@
 #include "bombardero.h"
 
-Bombardero::Bombardero(int id_objetivo, int cantidad) : Objetivo(id_objetivo,cantidad)
+Bombardero::Bombardero(int id_objetivo, int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = BOMBARDERO;
     this -> cantidad = 5;
     this -> bombas_usadas = 0;
+    this ->cumplido = false;
 }
 
 void Bombardero::mostrar_progreso()
@@ -20,3 +21,7 @@ void Bombardero::mostrar_descripcion()
     mostrar_progreso();
 }
 
+void Bombardero::progreso(Lista <Material> * inventario, int &energia)
+ {
+     cout << endl;
+ }

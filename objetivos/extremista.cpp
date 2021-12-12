@@ -1,10 +1,11 @@
 #include "extremista.h"
 
-Extremista::Extremista(int id_objetivo,int cantidad) : Objetivo(id_objetivo,cantidad)
+Extremista::Extremista(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = EXTREMISTA;
     this -> cantidad = 500;
     this -> bombas_compradas;
+    this ->cumplido = false;
 }
 
 
@@ -21,3 +22,8 @@ void Extremista::mostrar_descripcion()
     mostrar_progreso();
 }
 
+
+void Extremista::progreso(Lista <Material> * inventario, int &energia)
+ {
+     cout << endl;
+ }

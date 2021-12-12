@@ -1,9 +1,10 @@
 #include "constructor.h"
 
-Constructor::Constructor(int id_objetivo,int cantidad) :Objetivo(id_objetivo,cantidad)
+Constructor::Constructor(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = CONSTRUCTOR;
     this -> cantidad = 6; //cantidad de edificios diferentes (sin contar obelisco)
+    this -> cumplido = false;
 }
 
 void Constructor::mostrar_progreso()
@@ -18,6 +19,9 @@ void Constructor::mostrar_descripcion()
     mostrar_progreso();
 }
 
-
+void Constructor::progreso(Lista <Material> *inventario, int &energia)
+ {
+     cout << endl;
+ }
 
 //linkear con edificios ;-;
