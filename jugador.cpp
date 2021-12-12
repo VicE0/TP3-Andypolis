@@ -312,29 +312,96 @@ void Jugador::restar_energia(int cantidad){
 
 void Jugador::agregar_objetivo(Objetivo * objetivos)
 {
-    lista_objetivos ->insertar_elemento(objetivos);
-
+    lista_objetivos -> insertar_elemento(objetivos);
 }
+
+Objetivo* Jugador::asignar_principal(int id_objetivo)
+{
+    int cantidad;
+    objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
+    return objetivo_principal;
+}
+
+
+Objetivo* Jugador::sortear_objetivos(int id_objetivo)
+{
+    Objetivo * obj = nullptr;
+
+    int cantidad; // al jugador
+    for(int i = 0; i < 9; i ++)
+    {
+        switch (id_objetivo)
+        {
+            case COMPRAR_ANDYPOLIS:
+
+                obj = new Comprar_andypolis(id_objetivo,cantidad, false);
+                break;
+
+            case EDAD_PIEDRA:
+                obj = new Edad_piedra(id_objetivo,cantidad,false);
+                break;
+
+            case BOMBARDERO:
+                obj = new Bombardero(id_objetivo,cantidad,false);
+                break;
+
+            case ENERGETICO:
+                obj= new Energetico(id_objetivo ,cantidad,false);
+                break;
+
+            case LETRADO:
+                obj = new Letrado(id_objetivo,cantidad,false);
+                break;
+
+            case MINERO:
+                obj = new Minero(id_objetivo,cantidad,false);
+                break;
+
+            case CANSADO:
+                obj = new Cansado(id_objetivo,cantidad,false);
+                break;
+
+    
+            case ARMADO:
+                obj = new Armado(id_objetivo ,cantidad,false);
+                break;
+
+            case EXTREMISTA:
+                obj = new Extremista(id_objetivo,cantidad,false);
+                break;
+
+            case CONSTRUCTOR:
+               obj = new Constructor(id_objetivo,cantidad,false);
+        }
+    }
+
+    return obj;
+    
+}
+
+ListaObjetivos<Objetivo*> * Jugador::obtener_lista_objetivos()
+{
+    return lista_objetivos;
+}
+
 
 void Jugador::mostrar_objetivos()
 {
     cout << "OBJETIVOS SECUNDARIOS: "<< endl;
+
     while (lista_objetivos ->tiene_siguiente())
     {
         // lista_objetivos ->obtener_siguiente() -> obtener_data() ->progreso(inventario, energia);
         //FUNCA PERO CORE DUMPED
-        lista_objetivos ->obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
+        lista_objetivos -> obtener_siguiente() -> obtener_data() ->mostrar_descripcion();
     }
-    //FUNCA PERO CORE DUMPED
    
-    
     cout << "\n" <<endl;
 }
 
 
 bool Jugador::objetivos_secundarios_cumplidos()
 {
-    int objetivos_cumplidos = 0;
 
     for (int i = 0; i < 9; i++)
     {
@@ -346,6 +413,24 @@ bool Jugador::objetivos_secundarios_cumplidos()
 
     return (objetivos_cumplidos == 2);
 }
+
+bool Jugador::objetivo_princiapal_cumplido()
+{
+    return objetivo_principal ->objetivo_cumplido();
+}
+
+bool Jugador::gano_juego()
+{
+    bool ganador = false;
+    
+    if(objetivo_princiapal_cumplido()|| objetivos_secundarios_cumplidos())
+    {
+        ganador = true;
+    }
+
+    return ganador;
+}
+
 
 Jugador::~Jugador(){
     delete inventario;

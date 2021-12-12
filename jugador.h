@@ -9,6 +9,17 @@ const int ENERGIA_INICIAL = 50;
 #include "listaObjetivos.h"
 #include "edificio.h"
 #include "Objetivos.h"
+#include "objetivos/comprar_andypolis.h"
+#include "objetivos/edad_piedra.h"
+#include "objetivos/bombardero.h"
+#include "objetivos/energetico.h"
+#include "objetivos/letrado.h"
+#include "objetivos/minero.h"
+#include "objetivos/cansado.h"
+#include "objetivos/constructor.h"
+#include "objetivos/armado.h"
+#include "objetivos/extremista.h"
+#include "objetivos/objetivo_obelisco.h"
 #include <string>
 
 
@@ -25,12 +36,16 @@ class Jugador
         int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
+        Objetivo* objetivo_principal;
     
         string diminutivo;
 
         ListaObjetivos<Objetivo*>  *lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
+
+       
+
 
 
     public:
@@ -59,6 +74,10 @@ class Jugador
         //PRE: ~
         //POS: Devuelve el inventario(lista de materiales) del jugador
         Lista<Material> * obtener_inventario();
+
+        //PRE: ~
+        //POS: Devuelve la lista de objetivos del jugador
+        ListaObjetivos<Objetivo*> *obtener_lista_objetivos();
 
         //PRE: ~
         //POS: Devuelve el numero del jugador (1/2)
@@ -156,9 +175,23 @@ class Jugador
         //POS:      
         void sumar_materiales_recolectados();
 
+
+        //PRE: ~
+        //POS: Crea el array con los objetivos
+        Objetivo * sortear_objetivos(int id_objetivo);
+
+        //PRE: ~
+        //POS: Crea el array con el obelisco
+        Objetivo * asignar_principal(int id_objetivo);
+
         //PRE: ~
         //POS: Retorna TRUE si el jugador cumplió 2 de sus 3 objetivos secundarios
         bool objetivos_secundarios_cumplidos();
+
+        bool objetivo_princiapal_cumplido();
+
+        bool gano_juego();
+
 
         //DESTRUCTOR
         ~Jugador();

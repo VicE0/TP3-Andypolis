@@ -1,5 +1,5 @@
-#ifndef OBELISCO
-#define OBELISCO_H
+#ifndef OBJETIVO_OBELISCO_H
+#define OBJETIVO_OBELISCO_H
 
 #include "../Objetivos.h"
 
@@ -20,4 +20,4 @@ class Objetivo_obelisco: public Objetivo
 
 };
 
-#endif //OBELISCO_H
+#endif //OBJETIVO_OBELISCO_H

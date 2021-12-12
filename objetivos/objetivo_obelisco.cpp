@@ -1,4 +1,4 @@
-#include "obelisco.h"
+#include "objetivo_obelisco.h"
 
 Objetivo_obelisco::Objetivo_obelisco(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {

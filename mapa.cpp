@@ -32,12 +32,12 @@ int Mapa::devolver_cantidad_filas(){
 
 void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
+    procesar_objetivos(j1,j2);
     procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
-    procesar_objetivos(j1,j2);
-
+    
 }
 
 void Mapa::procesar_archivo_mapa(){
@@ -146,72 +146,21 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 {
     
     int id_objetivo;
+
+    j1 -> agregar_objetivo( j1 ->asignar_principal(1));
     for (int i = 0; i < 3; i++)
     {   
-        id_objetivo = 10;
-        j1 ->agregar_objetivo(sortear_objetivos(id_objetivo));
+        id_objetivo = rand() %10;
+        j1 ->agregar_objetivo( j1 -> sortear_objetivos(id_objetivo));
     }
 
+    j2 -> agregar_objetivo(j2 ->asignar_principal(1));
     for (int i = 0; i < 3; i++)
     {   
-        id_objetivo = 10;
-        j2 ->agregar_objetivo(sortear_objetivos(id_objetivo));
+        id_objetivo = rand() %10;
+        j2 ->agregar_objetivo(j2 -> sortear_objetivos(id_objetivo));
     }
 
-}
-
-Objetivo* Mapa::sortear_objetivos(int id_objetivo)
-{
-    int cantidad; // al jugador
-    for(int i = 0; i < 9; i ++)
-    {
-        switch (id_objetivo)
-        {
-            case COMPRAR_ANDYPOLIS:
-
-                obj = new Comprar_andypolis(id_objetivo,cantidad, false);
-                break;
-
-            case EDAD_PIEDRA:
-                obj = new Edad_piedra(id_objetivo,cantidad,false);
-                break;
-
-            case BOMBARDERO:
-                obj = new Bombardero(id_objetivo,cantidad,false);
-                break;
-
-            case ENERGETICO:
-                obj= new Energetico(id_objetivo ,cantidad,false);
-                break;
-
-            case LETRADO:
-                obj = new Letrado(id_objetivo,cantidad,false);
-                break;
-
-            case MINERO:
-                obj = new Minero(id_objetivo,cantidad,false);
-                break;
-
-            case CANSADO:
-                obj = new Cansado(id_objetivo,cantidad,false);
-                break;
-
-    
-            case ARMADO:
-                obj = new Armado(id_objetivo ,cantidad,false);
-                break;
-
-            case EXTREMISTA:
-                obj = new Extremista(id_objetivo,cantidad,false);
-                break;
-
-            case CONSTRUCTOR:
-               obj = new Constructor(id_objetivo,cantidad,false);
-        }
-    }
-
-    return obj;
-    
 }
 
 
@@ -434,7 +383,7 @@ ifstream nuevo_archivo;
             }
             else if ( nombre_edificio == OBELISCO){
 
-                nuevo_edificio = new Obelisco(0, 1, piedra, madera, metal, maximo_construir);
+                nuevo_edificio = new Obelisco(0, 2, piedra, madera, metal, maximo_construir);
 
             }
             else if ( nombre_edificio == PLANTA_ELECTRICA){
@@ -778,7 +727,7 @@ void Mapa::consultar_coordenada(){
 
 // 8) MOSTRAR INVENTARIO ------------------------------------
 void Mapa::mostrar_inv(Jugador * jugador){
-    jugador->mostrar_inventario();
+    jugador -> mostrar_inventario();
 }
 
 // 9) MOSTRAR OBJETIVOS

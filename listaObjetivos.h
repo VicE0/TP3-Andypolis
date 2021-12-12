@@ -31,6 +31,8 @@ public:
     // POST: inserta un nuevo elemento en la lista
     void insertar_elemento(Data o);
 
+    void alta(Data o, int posicion);
+
     // PRE: -
     // POST: elimina el elemento de la posicion posicion dada de la Listaa
     void eliminar_elemento(int posicion);
