@@ -133,11 +133,10 @@ void Arbol::eliminar_arbol(std::ofstream &archivo_edificios,Nodo_ABB * nodo){
     if ( nodo == NULL ){
         return;
     }
-    archivo_edificios << nodo -> obtener_edificio() -> obtener_nombre();
-    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_piedra();
-    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_madera();
-    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_metal();
-    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_construidos();
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_nombre() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_piedra() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_madera() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_metal() << " ";
     archivo_edificios << nodo -> obtener_edificio() -> obtener_maximo_construir() << endl;
 
     this->eliminar_arbol(archivo_edificios, nodo->obtener_der());

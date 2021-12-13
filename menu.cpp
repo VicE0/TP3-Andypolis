@@ -1,28 +1,28 @@
 #include "menu.h"
 
 void mostrar_menu_principal(){
-    cout << " 1.Modificar edificio por nombre." << endl;
-    cout << " 2.Listar todos los edificios." << endl;
-    cout << " 3.Mostrar mapa." << endl;
-    cout << " 4.Comenzar partida." << endl;
-    cout << " 5.Guardar y salir." << endl;
+    cout << WHITE << " 1.Modificar edificio por nombre." << endl;
+    cout << WHITE << " 2.Listar todos los edificios." << endl;
+    cout << WHITE << " 3.Mostrar mapa." << endl;
+    cout << WHITE << " 4.Comenzar partida." << endl;
+    cout << WHITE << " 5.Guardar y salir." << endl;
 }
 
 void mostrar_menu_partida(){
-
-    cout << " 1.Construir edificio por nombre." << endl;
-    cout << " 2.Listar los edificios construidos." << endl;
-    cout << " 3.Demoler un edificio por coordenada." << endl;
-    cout << " 4.Atacar un edificio por coordenada" << endl;
-    cout << " 5.Reparar un edificio por coordenada." << endl;
-    cout << " 6.Comprar bombas." << endl;
-    cout << " 7.Consultar coordenada." << endl;
-    cout << " 8.Mostrar inventario." << endl;
-    cout << " 9.Mostrar objetivos." << endl;
-    cout << " 10.Recolectar recursos producidos." << endl;
-    cout << " 11.Moverse a una coordenada." << endl;
-    cout << " 12.Finalizar turno." << endl;
-    cout << " 13.Guardar y salir." << endl;
+    
+    cout <<  WHITE << " 1.Construir edificio por nombre." << endl;
+    cout <<  WHITE << " 2.Listar los edificios construidos." << endl;
+    cout <<  WHITE << " 3.Demoler un edificio por coordenada." << endl;
+    cout <<  WHITE << " 4.Atacar un edificio por coordenada" << endl;
+    cout <<  WHITE << " 5.Reparar un edificio por coordenada." << endl;
+    cout <<  WHITE << " 6.Comprar bombas." << endl;
+    cout <<  WHITE << " 7.Consultar coordenada." << endl;
+    cout <<  WHITE << " 8.Mostrar inventario." << endl;
+    cout <<  WHITE << " 9.Mostrar objetivos." << endl;
+    cout <<  WHITE << " 10.Recolectar recursos producidos." << endl;
+    cout <<  WHITE << " 11.Moverse a una coordenada." << endl;
+    cout <<  WHITE << " 12.Finalizar turno." << endl;
+    cout <<  WHITE << " 13.Guardar y salir." << endl;
 
 }
 
@@ -50,7 +50,6 @@ int elegir_opcion(){
 
     return opcion;
 }
-
 
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
 
@@ -84,49 +83,60 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : CONSTRUIR EDIFICIO \n" << endl;
             mapa -> construir_edificio_nombre(jugador);
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
+            cout << LGREEN << "\n\t SECCION : LISTAR EDIFICIOS CONSTRUIDOS \n" << endl;
             mapa -> listar_edificios_construidos(jugador);
         break;
 
     case DEMOLER_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : DEMOLER EDIFICIO \n" << endl;
             mapa -> demoler_edificio(jugador);
         break;
 
     case ATACAR_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : DEMOLER EDIFICIO \n" << endl;
             mapa -> atacar_edificios(jugador);
         break;
 
     case REPARAR_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : REPARAR EDIFICIO \n" << endl;
             mapa -> reparar_edificios(jugador);
         break;
 
     case COMPRAR_BOMBAS:
+            cout << LGREEN << "\n\t SECCION : COMPRAR BOMBAS \n" << endl;
             mapa -> comprar_bombas(jugador);
         break;
 
     case CONSULTAR_COORDENADA:
+            cout << LGREEN << "\n\t SECCION : CONSULTAR COORDENADA \n" << endl;
             mapa -> consultar_coordenada();
         break;
 
     case MOSTRAR_INVENTARIO:
+            cout << LGREEN << "\n\t SECCION : MOSTRAR INVENTARIO \n" << endl;
             mapa -> mostrar_inv(jugador);
         break;
 
     case MOSTRAR_OBJETIVOS:
+            cout << LGREEN << "\n\t SECCION : MOSTRAR OBJETIVOS \n" << endl;
             cout << "Objetivos jugador (En proceso!)" << endl;
             //Se carga y se da de alta, pero pincha al mostrar!
         break;
 
     case RECOLECTAR_RECURSOS:
-        if (!recolecto){
-                jugador->sumar_materiales_recolectados();}
-        else{cout << "\nUsted ya recolecto los materiales en este turno.\n" << endl;}
+            cout << LGREEN << "\n\t SECCION : RECOLECTAR RECURSOS \n" << endl;
+            if (!recolecto){
+                    jugador->sumar_materiales_recolectados();}
+            else{cout << "\nUsted ya recolecto los materiales en este turno.\n" << endl;}
         break;
 
     case MOVERSE:
+            cout << LGREEN << "\n\t SECCION : MOVERSE \n" << WHITE << endl;
             mapa -> moverse(jugador);
         break;
 
@@ -141,11 +151,15 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     }
 }
 
-
-
 void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2){
-    int fila1, columna1, fila2, columna2;
+    int fila1, columna1, fila2, columna2, opcion_jugador;
+    cout << "\n\t ### SECCION PARA INGRESAR JUGADORES Y SUS COORDENADAS ###" << endl;
+    cout << "\n Ingrese el jugador que desea ser ( opciones : 1 o 2 ) -> ";
+    cin >> opcion_jugador;
+    cout << "\n INGRESEN JUGADORES SUS POSICIONES DONDE INICIARAN LA PARTIDA . " << endl;
+    cout << "\n Jugador 1 : " << endl;
     mapa -> validar_coordenada(fila1, columna1);
+    cout << "\n Jugador 2 : " << endl;
     mapa -> validar_coordenada(fila2, columna2);
 
     while (fila1 == fila2 && columna1 == columna2){
@@ -172,7 +186,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
 
         Jugador * jugador = verificar_turno_jugador(turno, j1, j2);
 
-        cout<<"\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
+        cout << ORANGE << "\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
 
         mapa->almacenar_recursos_producidos(jugador);
 
@@ -195,13 +209,14 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
-        cout << "\n ¡ BIENVENIDOS DE VUELTA A ANDYPOLIS ! \n" << endl;
+        
+        cout << CYAN << "\n ¡ BIENVENIDOS DE VUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
 
     }
- 
+
     else{
-    cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
+    cout << CYAN << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
         do {
             
             mostrar_menu_principal();

@@ -234,12 +234,10 @@ Grafo::~Grafo(){
     matriz_adyacente_j1 = nullptr;
     liberar_matriz_adyacente(2);
     matriz_adyacente_j2 = nullptr;
-    
-    if (vertices ->vacia()){
-        delete vertices;
-        this->vertices = 0;
-    }
-    
+
+    delete vertices;
+    vertices = nullptr;
+
     if (camino_minimo){
         delete camino_minimo;
         camino_minimo = nullptr;

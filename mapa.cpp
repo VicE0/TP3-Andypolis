@@ -11,7 +11,7 @@ Mapa::Mapa(){
     this -> mapa_bien_cargado = true;
     this -> ubicaciones_bien_cargadas = true;
     this -> diccionario = new Arbol;
-    this -> grafo = 0;
+    this -> grafo = nullptr;
 
 }
 
@@ -395,13 +395,15 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
 
     int energia_jugador = jugador->obtener_energia();
     string nombre_nuevo;
+    bool existe_edificio;
+
     cout << "\n -> Ingrese el nombre del nuevo edificio que desea construir : ";
     cin.ignore();
     getline(cin , nombre_nuevo);
 
     if ( verificacion_energia( energia_jugador, 15) ){
 
-        bool existe_edificio = diccionario->existe_edificio(nombre_nuevo);
+        existe_edificio = diccionario->existe_edificio(nombre_nuevo);
         if ( existe_edificio ){
 
             realizar_construccion(nombre_nuevo, jugador);
@@ -500,8 +502,6 @@ void Mapa::demoler_edificio(Jugador * jugador){
 
     int id_jugador = jugador->dar_numero();
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra DEMOLER un EDIFICIO :   ###" << endl;
-    cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 15 )){
         int fila, columna;
@@ -552,13 +552,9 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
     mapa[fila][columna]->eliminar_edificio();
 }
 
-
-
 // 4) ATACAR UN EDIFICIO ------------------------------------
 void Mapa::atacar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
-    cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 30 )){
         bool tiene_bombas = jugador->obtener_material(BOMBA)->obtener_cantidad_disponible() > 0;
@@ -605,9 +601,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
-    cout << "\n";
-    
+
     if ( verificacion_energia(energia_jugador, 25 )){
             realizar_reparacion(jugador);
         }
@@ -662,7 +656,6 @@ void Mapa::realizar_reparacion(Jugador * jugador){
         cout << "\n En la coordenada ingresada no existe ningun edificio ...\n" << endl;
     }
 }
-
 
 // 6) COMPRAR BOMBAS ------------------------------------
 void Mapa::comprar_bombas(Jugador * jugador){
@@ -1019,7 +1012,7 @@ void Mapa::lluvia_recursos(){
     
     int tot_materiales_gen = cant_gen_piedras + cant_gen_maderas + cant_gen_metales + cant_gen_coins;
     
-    cout << "\n\t.:Lluvia de materiales:. \n" << endl;
+    cout << WHITE << "\n\t.:Lluvia de materiales:. \n" << endl;
 
     cout << "\nHan llovido los siguientes articulos en el mapa: \n" <<endl
     <<cant_gen_piedras * UNIDADES_POR_PACK_PIEDRA <<" unidades de piedra"<<endl
@@ -1086,8 +1079,8 @@ void Mapa::guardar_inventario(){
 
     ofstream archivo(ARCHIVO_MATERIALES);
     for (int i = 0; i < inventario_j1 -> obtener_cantidad(); i++){
-        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_nombre();
-        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_cantidad_disponible();
+        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_nombre() << " ";
+        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_cantidad_disponible() << " ";
         archivo << inventario_j2 -> obtener_nodo(i) -> obtener_dato() -> obtener_cantidad_disponible();
         archivo << endl;
     }
@@ -1124,7 +1117,6 @@ Mapa::~Mapa(){
     if (mapa_bien_cargado){
         for ( int i = 0; i < cantidad_filas; i++){
             for ( int j = 0; j < cantidad_columnas ; j++){
-                
                 delete mapa[i][j];
             }
             delete [] mapa[i];
@@ -1133,13 +1125,15 @@ Mapa::~Mapa(){
         this->mapa = 0;
     }
 
+    delete grafo;
+    grafo = nullptr;
+
     int total = cantidad_edificios;
     for ( int i = 0; i < total; i++){
         cantidad_edificios--;
     }
 
-    delete grafo;
-    grafo = 0;
+
     delete diccionario;
     diccionario = 0;
 }
@@ -1157,7 +1151,6 @@ void Mapa::modificar_edificios(){
 // LISTAR TODOS LOS EDIFICIOS 2)
 void Mapa::listar_todos_edificios(){
     cout << "\n";
-    cout << "\t\t###   Listado de todos los edificios :   ###" << endl;
     cout << "\nOrden de los elementos :  " << endl;
     cout << "\n -> nombre / piedra / madera / metal / cuantos puedo construir " << endl;
     cout << "_________________________________________________________________" << endl;
@@ -1190,4 +1183,4 @@ void Mapa::mostrar_mapa(){
 // SE REALIZA DESDE EL MENU
 
 // GUARDAR SALIR 5)
-// SE REALIZA DESDE EL MENU 
+// SE REALIZA DESDE EL MENU

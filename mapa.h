@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
 #include "grafo.h"
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
@@ -16,6 +15,7 @@
 #include "edificio.h"
 #include "ABB/ABB.h"
 #include "Objetivos.h"
+#include "colors.h"
 
 
 using std::string;
@@ -24,7 +24,6 @@ using namespace std;
 const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
-const string ARCHIVO_EDIFICIO = "edificios.txt";
 const string ARCHIVO_MATERIALES = "materiales.txt";
 const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
