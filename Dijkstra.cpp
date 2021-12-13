@@ -5,9 +5,10 @@ Dijkstra::Dijkstra(Lista<Casillero*> * vertices, int ** matriz_adyacente) : Cami
     this->distancia = new int [ canitdad_vertices ];
     this->recorrido = new int [ canitdad_vertices ];
     this->camino_recorrido = new ListaObjetivos<string>;
+    this->energia_gastada = INFINITO;
 }
 
-bool Dijkstra::camino_minimo(int origen, int destino){
+void Dijkstra::camino_minimo(int origen, int destino){
     inicializar_visitados(origen);
     inicializar_distancia(matriz_adyacente[origen]);
     inicializar_recorrido(origen);
@@ -29,8 +30,7 @@ bool Dijkstra::camino_minimo(int origen, int destino){
         vertice_recorrido++;
     }
 
-    bool camino_posible = mostrar_recorrido(origen, destino);
-    return camino_posible;
+    mostrar_recorrido(origen, destino);
 }
 
 int Dijkstra::vertice_minima_distancia(){
@@ -74,36 +74,38 @@ void Dijkstra::actualizar_distancia(int vertice){
         }
     }
 }
-bool Dijkstra::mostrar_recorrido(int origen, int destino) {
-    bool camino_posible;
+void Dijkstra::mostrar_recorrido(int origen, int destino) {
     if(distancia[destino] == INFINITO){
-        cout << "No hay un camino que conecte " <<  vertices->obtener_nombre(origen + 1) << " con " << vertices->obtener_nombre(destino + 1);
-        camino_posible = false;
+        cout << " No hay un camino que conecte " <<  vertices->obtener_nombre(origen + 1) << " con " << vertices->obtener_nombre(destino + 1);
+
     }else{
-        cout << "El camino minimo que une " <<  vertices->obtener_nombre(origen + 1) << " con " << vertices->obtener_nombre(destino + 1);
+        cout << " El camino minimo que une " <<  vertices->obtener_nombre(origen + 1) << " con " << vertices->obtener_nombre(destino + 1);
         cout << " tiene un costo de: " << distancia[destino] << " y es el siguiente: ";
         cout << vertices->obtener_nombre(destino + 1);
-        camino_recorrido -> insertar_elemento(vertices -> obtener_nombre(destino + 1));      
+        camino_recorrido -> insertar_elemento(vertices -> obtener_nombre(destino + 1));   
+
+        energia_gastada = distancia[destino];
         do{
             destino = recorrido[destino];
             camino_recorrido -> insertar_elemento(vertices -> obtener_nombre(destino + 1));
             cout << " <- " << vertices->obtener_nombre(destino + 1);
         }while(origen != destino);
-        camino_posible = true;
     }
-    for (int i = camino_recorrido ->obtener_cantidad_elementos(); i <= 0; i--)
-    {
-        cout << camino_recorrido -> obtener_datos(i) << endl;
-    }
-    
     cout << endl;
-    return camino_posible;
 }
 
+ListaObjetivos<string> * Dijkstra::obtener_camino_recorrido(){
+    return camino_recorrido;
+}
+
+int Dijkstra::obtener_energia_gastada(){
+    return energia_gastada;
+}
 
 Dijkstra::~Dijkstra(){
     delete [] vertices_visitados;
     delete [] recorrido;
     delete [] distancia;
     delete camino_recorrido;
+    energia_gastada = INFINITO;
 }

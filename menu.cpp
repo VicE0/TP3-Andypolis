@@ -79,7 +79,6 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
 
 void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool recolecto){
 
-
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:

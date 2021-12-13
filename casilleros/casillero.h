@@ -131,6 +131,8 @@ public:
 
     string obtener_id_casillero();
 
+    void eliminar_jugador();
+
 };
 
 

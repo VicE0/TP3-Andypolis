@@ -771,9 +771,9 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
 // 11) MOVERSE A UNA COORDENADA ------------------------------------
 void Mapa::moverse(Jugador * jugador){
     string posicion_origen = jugador -> obtener_codigo_posicion();
-    string fila_destino, columna_destino, posicion_destino;
+    string fila_destino, columna_destino, posicion_destino, s_casillero;
     int id_jugador = jugador -> obtener_id();
-
+    Casillero * origen, * destino;
     cout << "\n Fila destino: ";
     cin >> fila_destino;
     cout << " Columna destino: ";
@@ -781,9 +781,25 @@ void Mapa::moverse(Jugador * jugador){
 
     posicion_destino = fila_destino + columna_destino;
 
-    grafo -> usar_camino_minimo(posicion_origen,posicion_destino, id_jugador);
+    grafo->usar_camino_minimo(posicion_origen, posicion_destino, id_jugador);
+
+    ListaObjetivos<string> * recorrido = grafo->obtener_recorrido();
+
+    if ( grafo->obtener_energia_camino() <= jugador->obtener_energia() ){
+        s_casillero = recorrido->obtener_datos(1);
+        origen = grafo->obtener_casillero(posicion_origen);
+        destino = grafo->obtener_casillero(s_casillero);
+        if ( aceptar_condiciones() ){
+            destino->agregar_jugador(jugador);
+            origen->eliminar_jugador();
+            jugador->agregar_codigo_posicion(s_casillero);
+        }
+    } else if ( grafo->obtener_energia_camino() != INFINITO ) {
+        cout << " No alcanza la energia necesaria . " << endl;
+    }
 }
 
+// LLUVIA DE MATERIALES : 
 int Mapa::generar_numero_random(int min, int max){
     int range = max + 1  - min;  
     return min + ( rand() % range);
@@ -1080,7 +1096,6 @@ Mapa::~Mapa(){
 
     delete grafo;
     grafo = 0;
-
     delete diccionario;
     diccionario = 0;
 }

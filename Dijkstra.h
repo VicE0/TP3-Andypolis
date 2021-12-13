@@ -11,6 +11,7 @@ private:
     bool * vertices_visitados;
     int * distancia;
     int * recorrido;
+    int energia_gastada;
     ListaObjetivos<string> * camino_recorrido;
 
     // METODOS : 
@@ -24,12 +25,16 @@ private:
 
     void actualizar_distancia(int vertice);
 
-    bool mostrar_recorrido(int origen, int distancia);
+    void mostrar_recorrido(int origen, int distancia);
 
 public:
     Dijkstra(Lista<Casillero*> * vertices, int ** matriz_adyacente);
 
-    bool camino_minimo(int origen, int destino);
+    void camino_minimo(int origen, int destino);
+
+    ListaObjetivos<string> * obtener_camino_recorrido();
+
+    int obtener_energia_gastada();
 
     ~Dijkstra() override;
 

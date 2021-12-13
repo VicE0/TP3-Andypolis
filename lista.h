@@ -34,7 +34,7 @@ public:
     
     void insertar(T *d); //lo inserta en la ultima posicion
 
-    void alta(T * d, int pos); 
+    void alta(T * d, int pos);
 
     void baja(int pos); 
 

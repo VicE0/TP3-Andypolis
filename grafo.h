@@ -40,6 +40,8 @@ private:
 public:
     Grafo(int filas, int columnas);
 
+    CaminoMinimo * obtener_camino();
+
     void agregar_vertice(Casillero ** nuevo_vertice);
 
     void agrandar_matrices();
@@ -53,6 +55,12 @@ public:
     void usar_camino_minimo(string origen, string destino, int id);
 
     void usar_camino_minimo(int origen, int destino, int id);
+
+    ListaObjetivos<string> * obtener_recorrido();
+
+    Casillero * obtener_casillero(string pos);
+
+    int obtener_energia_camino();
 
     ~Grafo();
 };

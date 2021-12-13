@@ -90,6 +90,8 @@ public:
 
     void comprobar_destruccion_edificio();
 
+    ~Lago();
+
 };
 
 
