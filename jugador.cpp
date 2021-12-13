@@ -324,7 +324,6 @@ Objetivo* Jugador::asignar_principal(int id_objetivo)
     return objetivo_principal;
 }
 
-
 Objetivo* Jugador::sortear_objetivos(int id_objetivo)
 {
     Objetivo * obj = nullptr;
@@ -437,7 +436,6 @@ bool Jugador::gano_juego()
 
     return ganador;
 }
-
 
 Jugador::~Jugador(){
     delete inventario;

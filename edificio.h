@@ -37,8 +37,16 @@ protected:
     int vida;
     int vida_max;
 
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de piedra con la nueva cantidad ingresada
     void modificar_cantidad_piedra(int nueva_cantidad);
+
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de metal con la nueva cantidad ingresada
     void modificar_cantidad_metal(int nueva_cantidad);
+
+    // PRE: Le paso como parametro la nueva cantidad a modificar.
+    // POS: Modifica la cantidad de madera con la nueva cantidad ingresada 
     void modificar_cantidad_madera(int nueva_cantidad);
 
 public:
@@ -73,6 +81,8 @@ public:
     // POS: Devuelve la cantidad de metal necesaria para construir.
     int obtener_cantidad_metal();
 
+    //PRE> -
+    //POST: Devuelve la cantidad de edificios construidos de un determinado jugador.
     int obtener_cantidad_construidos();
 
     // PRE: En caso de haberse creado un edificio, se tomaran los valores predeterminados en el edificio selecto.
@@ -126,18 +136,32 @@ public:
     // POS: -
     virtual ~Edificio();
 
+    // PRE: Recibe el nombre del material a modificar y la nueva cantidad para modificar.
+    // POS: Cambia el valor almacenado del material otorgado por la nueva cantidad brindada.
     void modificar_cantidad_material(string nombre_material, int nueva_cantidad);
 
+    // PRE: -
+    // POS: Retorna la vida de un edificio.
     int devolver_vida();
 
+    // PRE: -
+    // POS: Retorna la vida maxima como entero.
     int devolver_vida_max();
 
+    // PRE: -
+    // POS:Le suma uno a la vide del edificio.
     void reparar();
 
+    // PRE: -
+    // POS: Le resta la vida al edificio
     void atacar();
 
+    // PRE: -
+    // POS: Devuelve el numero de construcciones restantes antes de llegar al maximo de dicho edifico del j1
     int obtener_restantes_j1();
-
+    
+    // PRE: -
+    // POS: Devuelve el numero de construcciones restantes antes de llegar al maximo de dicho edifico del j2
     int obtener_restantes_j2();
 };
 

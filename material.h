@@ -87,6 +87,8 @@ public:
 
     void sumar_andycoins_totales(int cantidad);
     
+    //PRE:-
+    //POST: Le muestra por pantalla un mensaje al jugador explicando que es.
     virtual void saludar();
 
 };

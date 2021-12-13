@@ -84,31 +84,31 @@ public:
     //     a pedir al usuario ingresar las coordenadas.
     void validar_coordenada(int &fila, int &columna);
 
-    //PRE:
-    //POS:
-    bool aceptar_condiciones();
 
-    //PRE:
-    //POS:
-    bool verificar_partida_empezada();
-
-    //PRE:
-    //POS:
-    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
-    
-    //PRE:
-    //POS:
-    void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
-
-    //PRE:
-    //POS:
-    void procesar_objetivos(Jugador * j1, Jugador *  j2);
-
-    
     void procesar_objetivo_principal(Jugador * j1, Jugador *  j2);
 
-    //PRE:
-    //POS:
+    //PRE: -
+    //POS: Devuelve un booleano que confirma (o no) la decision del usuario con una pregunta
+    bool aceptar_condiciones();
+
+    //PRE: -
+    //POS: Devuelve un bool en base a si la partida esta empezada o no. (parametro del mapa)
+    bool verificar_partida_empezada();
+
+    //PRE: Necesito ya preguntarle al usuario donde desea insertar el jugador, y pasarle las posiciones, su id y su informacion
+    //POS: Inserta el jugador en la posicion previamente elegida por el usuario
+    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+
+    //PRE: Necesito que haya un archivo materiales, de lo contrario, imprimira error.
+    //POS: Almacena los materiales de dichos jugadores en sus respectivos inventarios
+    void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
+
+    //PRE: -
+    //POS: Realiza el random de los objetivos y asigna tres aleatorios al jugador. Tambien asigna el objetivo principal
+    void procesar_objetivos(Jugador * j1, Jugador *  j2);
+
+    //PRE: Le paso la cantidad disponible de energia y la que necesito
+    //POS: Verifica si la cantidad pedida es menor a la disponible y devuelve true o false
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
 
     //PRE:
@@ -253,62 +253,61 @@ public:
     //vector casilleros lluvia
     Casillero* obtener_casillero_vector_casilleros_lluvia( int pos);
 
-    //PRE:
-    //POS:
+    
+    // PRE: Necesito que exsiste el archivo ubicaciones
+    // POST: Imprimo en el archivio los materiales que estan en el mapa
     void guardar_materiales(std::ofstream &archivo_ubicaciones);
     
-    //PRE:
-    //POS:
+    // PRE: Necesito que exsiste el archivo ubicaciones
+    // POST: Imprimo en el archivio las posiciones de los jugadores en el mapa
     void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
 
-    //PRE:
-    //POS:
+    // PRE: Necesito que exsiste el archivo ubicaciones
+    // POST: Imprimo en el archivio los edificios que estan en el mapa
     void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
 
 
-    //PRE:
-    //POS:
+    //PRE: -
+    //POS: Le pregunta al usuario el edificio a modificar y en base a eso ejecuta las funciones correspondientes
     void modificar_edificios();
 
-    //PRE:
-    //POS:
+    //PRE: Necesito el jugador  
+    //POS: Verifica que tenga la energia necesraia para realizar la reparacion. En caso de tenerla ejecuta la funcion para reparar el edifico
     void reparar_edificios(Jugador * jugador);
 
-    //PRE:
-    //POS:
+    //PRE: Necesita que el jugador tenga la energia necesaria para realizar la reparacion
+    //POS: Repara el edificio mencionado en caso de ser posible
     void realizar_reparacion(Jugador * jugador);
 
-    //PRE:
-    //POS:
+    //PRE: Necesito la informacion del jugador
+    //POS: Le permite al jugador comprar las bombas y guardarlas en caso de tener los requisitos necesarios
     void comprar_bombas(Jugador * jugador);
 
-    //PRE:
-    //POS:
+    //PRE: Le paso la cantidad disponible de monedas y la que necesito
+    //POS: Verifica si la cantidad pedida es menor a la disponible y devuelve true o false
     bool verificacion_andycoins(int requerido, int disponible);
 
-    //PRE:
-    //POS:
+    //PRE: Le paso la informacion del archivo
+    //POS: DEvuelve un booleano verificando si el archivo esta vacio o no
     bool vacio(ifstream& pArchivo);
 
-    //PRE:
-    //POS:
+    //PRE: Necesito el jugador  
+    //POS: Verifica que tenga la energia necesraia para realizar el ataque. En caso de tenerla ejecuta la funcion para atacar el edifico
     void atacar_edificios(Jugador * jugador);
 
-    //PRE:
-    //POS:
+    //PRE: Necesita que el jugador tenga la energia necesaria para realizar el ataque
+    //POS: Repara el edificio mencionado en caso de ser posible
     void realizar_ataque(Jugador * jugador);
 
-    //PRE:
-    //POS:
-    void actualiza_progreso_objetivos(Jugador * jugador);
-
-    //PRE:
-    //POS:
+    //PRE: -
+    //POS: Devuelve la cantidad de filas del mapa
     int devolver_cantidad_filas();
 
-    //PRE:
-    //POS:
+    //PRE: -
+    //POS: Devuelve la cantidad de columnas del mapa
     int devolver_cantidad_columnas();
+
+    void actualiza_progreso_objetivos(Jugador *jugador);
 
     bool ganar_partida(Jugador * jugador);
 

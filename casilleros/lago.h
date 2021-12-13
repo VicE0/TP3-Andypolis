@@ -86,8 +86,12 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
 
+    //PRE: -
+    //POST: Devuelve un puntero vacio ya que no se puede construir aca.
     Edificio * obtener_edificio_construido();
 
+    //PRE: -
+    //POST: -
     void comprobar_destruccion_edificio();
 
 };

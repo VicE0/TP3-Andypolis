@@ -48,18 +48,34 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
 //Pos : Se dirige a la opcion elegida por los usuarios.
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2);
 
+//PRE: Necesito que el archivo ubicaciones este procesado ya que en base a eso decide si el programa esta comenzado o no
+//POST: Verifica si la partida esta empezada o no y ejecuta las funciones correspondientes para que comienze el juego en ambos casos
 void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2);
 
+//PRE: Necesito que este procesado el mapa y creado los jugadores para comenzar
+//POST: Ejecuta las funciones en orden para jugar la partida.
 void partida(Mapa * mapa, Jugador * j1, Jugador * j2);
 
+//PRE: Necesito que ya esten creados los turnos para pasarlo y en base a eso verificar si hay quee hacer la lluvia o no
+//POST: Si el numero es par ejecuta la lluvia de materiales
 void verificar_lluvia_de_materiales(int turno, Mapa * mapa);
 
+//PRE: Necesito tener creados los jugadores y pasarlos como parametro
+//POST: Hago un random y asigno los turnos en base a ese random que define quien comienza
 void randomizador_de_turnos(Jugador * j1, Jugador * j2);
 
+//PRE:Necesito que me pasen un turno para verificar a quien le toca
+//POST: Verifica de quien es el turno y retorna el jugador a utilizar
 Jugador * verificar_turno_jugador(int turno, Jugador * j1, Jugador * j2);
 
+//PRE: Tienen que estar creados los jugadores y el mapa
+//POST: Le pregunta a los jugadores donde desean comenzar y pasa esos datos al mapa para ponerlos en el mismo y comenzar el juego
 void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2);
 
 bool verificador_de_limite(Mapa * mapa, int posicion, int verificacion_columna_fila);
 
 void mensaje_ganador(Jugador * jugador);
+
+//PRE: Necesito que el usuario haya ingresado una posicion en el mapa
+//POST: Verifica que la posicion elegida por el usuario sea valida
+bool verificador_de_limite(int posicion, int verificacion_columna_fila);
