@@ -36,8 +36,6 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
-    // procesar_objetivos(j1,j2);
-
 }
 
 void Mapa::procesar_archivo_mapa(){
@@ -140,16 +138,9 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
-// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
-// {   
-//     j1 ->asignar_objetivos();
-//     j2 ->asignar_objetivos();
-// }
-
-
 void Mapa::insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
-    string fila_string = std::to_string(fila);
     string columna_string = std::to_string(columna);
+    string fila_string = std::to_string(fila);
 
     string codigo_posicion = fila_string + columna_string;
     

@@ -2,10 +2,13 @@
 #define BETUN_H
 
 #include "casillero.h"
+#include "../material.h"
 
 
 
 class Betun : public Casillero {
+private:
+    Material * material;
 public:
 
     //Constructor de Betun
@@ -81,8 +84,12 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
 
+    //PRE: -
+    //POST: Devuelve un puntero vacio ya que no se puede construir aca.
     Edificio * obtener_edificio_construido();
 
+    // PRE: -
+    // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.
     void comprobar_destruccion_edificio();
 
     //Destructor de Betun

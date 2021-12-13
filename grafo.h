@@ -25,10 +25,15 @@ private:
     // probando camino_minimo
     CaminoMinimo * camino_minimo;
 
+    //PRE: -
+    //POST: Crea una copia de la matriz adyacente y la llena en el doble puntero de la matriz auxiliar
     void copiar_matriz_adyacente(int ** matriz_aux ,int id);
 
+    //PRE: Necesito el doble puntero de la matriz a la cual le voy a inicializar un nuevo vertice
+    //POST: Inicializa un nuevo vertice en la matriz que le ingrso por parametro
     void inicializar_nuevo_vertice( int ** matriz_aux );
 
+    //Destructor matriz adyacencia del jugador ingresado
     void liberar_matriz_adyacente(int id);
 
     void actualizar_matrices_de_adyacencia(int posicion_origen, int posicion_destino, int peso_origen_j1, int peso_origen_j2);
@@ -38,23 +43,29 @@ private:
     void actualizar_matriz_de_adyacencia_j2(int posicion_origen, int posicion_destino, int peso_origen_j2);
 
 public:
+    //Constructor
     Grafo(int filas, int columnas);
 
     CaminoMinimo * obtener_camino();
 
+
+    //PRE: Le paso el doble puntero del vertice del casillero
+    //POST: Da de alta un nuevo vertice en el grafo.
     void agregar_vertice(Casillero ** nuevo_vertice);
 
+    //PRE: -
+    //POST: Crea una matriz auxiliar para poder agrandar una posicion a la matriz
     void agrandar_matrices();
 
+    //PRE: -
+    //POST: Muestra por pantalla la matriz adyacente
     void mostrar_adyacente();
 
+    //PRE: -
+    //POST: Muestra por pantalla los vertices
     void mostrar_vertices();
 
-    void agregar_caminos();
-
-    void usar_camino_minimo(string origen, string destino, int id);
-
-    void usar_camino_minimo(int origen, int destino, int id);
+    
 
     ListaObjetivos<string> * obtener_recorrido();
 
@@ -62,6 +73,7 @@ public:
 
     int obtener_energia_camino();
 
+    //Destructor del grafo
     ~Grafo();
 };
 
