@@ -210,7 +210,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
-
+    
     do {
         bool recolecto = false;
         verificar_lluvia_de_materiales(turno, mapa);
@@ -222,12 +222,22 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
         mapa->almacenar_recursos_producidos(jugador);
 
         do{
+        
         mostrar_menu_partida();
         opcion = elegir_opcion();
         procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
         if (opcion == 10){
             recolecto = true;
         }
+                
+        if(mapa -> ganar_partida(jugador))
+        {
+            mensaje_ganador(jugador);
+            opcion = GUARDAR_SALIR;
+        }
+
+ 
+
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
         
@@ -282,10 +292,10 @@ void mensaje_ganador(Jugador * jugador)
 {
     if (jugador -> dar_numero() == 1)
     {
-        cout << "¡FELICIDADES JUGADOR 1, HAS GANADO EL JUEGO!" << endl;
+        cout << "\n¡FELICIDADES JUGADOR 1, HAS GANADO EL JUEGO!\n" << endl;
     }
     else {
-        cout << "¡FELICIDADES JUGADOR 2, HAS GANADO EL JUEGO!" << endl;
+        cout << "\n¡FELICIDADES JUGADOR 2, HAS GANADO EL JUEGO!\n" << endl;
     }
 }
 

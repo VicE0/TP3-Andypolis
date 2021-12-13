@@ -433,6 +433,7 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
         if ( existe_edificio ){
 
             realizar_construccion(nombre_nuevo, jugador);
+            actualiza_progreso_objetivos(jugador);
 
         } else {
             cout << "\n El edificio buscado NO existe . \n" << endl;
@@ -476,6 +477,7 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                             jugador->utilizar_materiales(piedra_necesaria, madera_necesaria, metal_necesario);
 
                             cout << "\n ¡ FELICITACIONES : El edificio " << nombre_nuevo << " fue creado exitosamente ! \n" << endl;
+                            
                         }else{
                             cout << "\n El casillero ya contiene un edificio .\n" << endl;
                         }
@@ -591,6 +593,7 @@ void Mapa::atacar_edificios(Jugador * jugador){
         bool tiene_bombas = jugador->obtener_material(BOMBA)->obtener_cantidad_disponible() > 0;
         if (tiene_bombas){
             realizar_ataque(jugador);
+            actualiza_progreso_objetivos(jugador);
         }else{
             cout << "\n -> Usted no tiene ninguna bomba para usar. \n" << endl;
         }
@@ -627,6 +630,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 
                 mapa[fila][columna]->comprobar_destruccion_edificio();
                 jugador->restar_energia(30);
+                
             }
         }else {
                 cout << "\n\t -> No se puede atacar a tu propio edificio.\n" << endl;
@@ -783,7 +787,6 @@ void Mapa::actualiza_progreso_objetivos(Jugador * jugador)
 // 9) MOSTRAR OBJETIVOS
 void Mapa::mostrar_objetivos_jugadores(Jugador * jugador)
 {
-    actualiza_progreso_objetivos(jugador);
     jugador -> mostrar_objetivos();
 }
 

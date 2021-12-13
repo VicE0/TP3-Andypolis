@@ -45,7 +45,7 @@ void Terreno::agregar_edificio(string nombre,int id_jugador, int vida, int piedr
             this->edificio_construido = new Mina( id_jugador, vida,piedra, madera, metal, maximo);
 
         }
-        else if ( nombre == MINA){
+        else if ( nombre == OBELISCO){
 
             this->edificio_construido = new Obelisco( id_jugador, vida, piedra, madera, metal, maximo);
 
