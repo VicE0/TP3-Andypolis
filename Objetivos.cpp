@@ -9,23 +9,20 @@ Objetivo::Objetivo()
 {
     this -> id_objetivo = 0;
     this -> cantidad = 0;
-    this -> cumplido = false;
+    // this -> obelisco_construido = false;
+    this -> andycoins_totales = 0;
 }
 
-Objetivo::Objetivo(int id_objetivo, int cantidad, bool cumplido)
+Objetivo::Objetivo(int id_objetivo, int cantidad, int andycoins_totales)
 {
     this -> id_objetivo = id_objetivo;
     this -> cantidad = cantidad;
-    this -> cumplido = cumplido;
+    // this -> obelisco_construido = false;
+    this -> andycoins_totales = 0;
 }
 
 
 int Objetivo::obtener_objetivo()
 {
     return id_objetivo;
-}
-
-bool Objetivo::objetivo_cumplido()
-{
-    return cumplido;
 }

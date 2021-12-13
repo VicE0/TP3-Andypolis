@@ -92,6 +92,16 @@ public:
     //POST: -
     void comprobar_destruccion_edificio();
 
+    //PRE: -
+    //POST: Devuelve el material incluido, sino hay nada lo devuelve vacio
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: Elimina el material del casillero
+    void sacar_material();
+
+    void eliminar_jugador();
+    
     //Destructor de Muelle
     ~Muelle();
 };

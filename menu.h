@@ -2,8 +2,17 @@
 
 #include "mapa.h"
 #include "jugador.h"
+#include "colors.h"
 
 using namespace std;
+
+#ifdef __linux__
+#define CLR_SCREEN "clear"
+#endif // __linux__
+
+#ifdef __MINGW32__
+#define CLR_SCREEN "CLS"
+#endif // __MINGW32__
 
 // MENU PRINCIPAL
 int const P_MODIFICAR_EDIFICIO = 1;
@@ -42,7 +51,7 @@ int elegir_opcion();
 
 // Pre: 0 < opcion < 12 , y la ciudad andynopolis con los archivos ya procesados 
 // Pos: Se dirige a la opcion elegida por el jugador en turno.
-void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool recolecto);
+void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador, bool recolecto);
 
 //Pre : 0 < opcion < 5 
 //Pos : Se dirige a la opcion elegida por los usuarios.
@@ -71,10 +80,6 @@ Jugador * verificar_turno_jugador(int turno, Jugador * j1, Jugador * j2);
 //PRE: Tienen que estar creados los jugadores y el mapa
 //POST: Le pregunta a los jugadores donde desean comenzar y pasa esos datos al mapa para ponerlos en el mismo y comenzar el juego
 void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2);
-
-bool verificador_de_limite(Mapa * mapa, int posicion, int verificacion_columna_fila);
-
-void mensaje_ganador(Jugador * jugador);
 
 //PRE: Necesito que el usuario haya ingresado una posicion en el mapa
 //POST: Verifica que la posicion elegida por el usuario sea valida

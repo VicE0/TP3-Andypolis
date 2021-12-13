@@ -94,6 +94,19 @@ public:
     //POST: -
     void comprobar_destruccion_edificio();
 
+    //PRE: -
+    //POST: Devuelve un nullptr ya que no puede tener materiales
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: -
+    void sacar_material();
+
+    void eliminar_jugador();
+    
+    //Destructor
+    ~Lago();
+
 };
 
 

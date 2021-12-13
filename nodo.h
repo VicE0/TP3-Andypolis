@@ -1,14 +1,17 @@
 #ifndef NODO_H
 #define NODO_H
 
+#include <string>
+
+using namespace std;
+
 template <typename T>
 class Nodo {
 private:
-    T * dato;
+    T * pdato;
     Nodo<T> * siguiente;
 
 public:
-
     // CONSTRUCTOR
     Nodo<T>(T * d);
 
@@ -28,19 +31,19 @@ public:
     // POST: Cambia el dato en el nodo ingresado
     void cambiar_dato(T d);
 
+    ~Nodo();
+
 };  
 
 template <typename T>
-Nodo<T>::Nodo(T * d){
-
-    this->dato = d;
+Nodo<T>::Nodo(T * pd){
+    this->pdato = pd;
     this->siguiente = nullptr;
-
 }
 
 template <typename T>
 T * Nodo<T>::obtener_dato(){
-    return dato;
+    return pdato;
 }
 
 template <typename T>
@@ -55,7 +58,13 @@ void Nodo<T>::cambiar_siguiente(Nodo * pn){
 
 template <typename T>
 void Nodo<T>::cambiar_dato(T d){
-    dato = d;
+    pdato = d;
+}
+
+template <typename T>
+Nodo<T>::~Nodo(){
+    delete pdato;
+    pdato = nullptr;
 }
 
 #endif

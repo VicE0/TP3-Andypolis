@@ -2,9 +2,12 @@
 #define ARBOL_H
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "nodoABB.h"
 
 using namespace std;
+
+const string ARCHIVO_EDIFICIO = "edificios.txt";
 
 class Arbol
 {
@@ -25,6 +28,7 @@ private:
     //POST: Modifica el material necesario para construir dicho edificio
     void modificar_material(Edificio * edificio, string nombre_material);
 
+    void eliminar_arbol(std::ofstream &archivo_ubicaciones,Nodo_ABB * nodo);
     
 public:
 
@@ -59,6 +63,10 @@ public:
     //PRE: Necesito el edificio a buscar y el id del jugador
     //POST: DEvuelvo un bool en base a si se supera la cantidad maxima de construidos o no
     bool supera_maximo(string clave, int id_jugador);
+
+    void eliminar_arbol(std::ofstream &archivo_ubicaciones);
+
+    ~Arbol();
 
 };
 

@@ -5,11 +5,11 @@ Jugador::Jugador(){
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
-    this -> ganador = false;
+    this -> codigo_posicion = "";
 }
 
 Jugador::Jugador(int id_jugador, string diminutivo)
@@ -18,12 +18,11 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new ListaObjetivos<Objetivo*>;
+    this -> lista_objetivos = new Lista<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
-    this -> ganador = false;
-
+    this -> codigo_posicion = "";
 }
 
 int Jugador::dar_numero()
@@ -127,11 +126,13 @@ void Jugador::restar_cantidad_material(string nombre, int cantidad,bool recolect
 
 void Jugador::mostrar_inventario(){
     int cantidad = inventario->obtener_cantidad();
+    cout << "\n ----------------------------------------------- \n " << endl;
     for ( int i = 0; i < cantidad; i++){
         Material * aux = inventario->obtener_nodo(i)->obtener_dato();
-        cout << "Nombre : " << aux->obtener_nombre();
-        cout << " - Cantidad : " << aux->obtener_cantidad_disponible() << endl;
+        cout << "\n -> " << aux->obtener_nombre();
+        cout << " : " << aux->obtener_cantidad_disponible() << endl;
     }
+    cout << "\n ----------------------------------------------- \n " << endl;
 }
 
 void Jugador::mostrar_inventario_recolectar(){
@@ -302,7 +303,6 @@ void Jugador::sumar_materiales_recolectados(){
     energia_recolectada = 0;
 }
 
-
 int Jugador::obtener_energia(){
     return energia;
 }
@@ -311,138 +311,110 @@ void Jugador::restar_energia(int cantidad){
     energia -= cantidad;
 }
 
-
-void Jugador::agregar_objetivo(Objetivo * objetivos)
+void Jugador:: asignar_objetivos()
 {
-    lista_objetivos -> insertar_elemento(objetivos);
-}
 
-Objetivo* Jugador::asignar_principal(int id_objetivo)
-{
-    int cantidad;
-    objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
-    return objetivo_principal;
-}
-
-Objetivo* Jugador::sortear_objetivos(int id_objetivo)
-{
-    Objetivo * obj = nullptr;
-
-    int cantidad;
-    for(int i = 0; i < 9; i ++)
-    {
-        switch (id_objetivo)
-        {
-            case COMPRAR_ANDYPOLIS:
-
-                obj = new Comprar_andypolis(id_objetivo,cantidad, false);
-                break;
-
-            case EDAD_PIEDRA:
-                obj = new Edad_piedra(id_objetivo,cantidad,false);
-                break;
-
-            case BOMBARDERO:
-                obj = new Bombardero(id_objetivo,cantidad,false);
-                break;
-
-            case ENERGETICO:
-                obj= new Energetico(id_objetivo ,cantidad,false);
-                break;
-
-            case LETRADO:
-                obj = new Letrado(id_objetivo,cantidad,false);
-                break;
-
-            case MINERO:
-                obj = new Minero(id_objetivo,cantidad,false);
-                break;
-
-            case CANSADO:
-                obj = new Cansado(id_objetivo,cantidad,false);
-                break;
-
-    
-            case ARMADO:
-                obj = new Armado(id_objetivo ,cantidad,false);
-                break;
-
-            case EXTREMISTA:
-                obj = new Extremista(id_objetivo,cantidad,false);
-                break;
-
-            case CONSTRUCTOR:
-               obj = new Constructor(id_objetivo,cantidad,false);
-        }
-    }
-
-    return obj;
-    
-}
-
-ListaObjetivos<Objetivo*> * Jugador::obtener_lista_objetivos()
-{
-    return lista_objetivos;
-}
-
-
-
-void Jugador::actualizar_progreso_objetivos(Edificio * edificio_objetivo)
-{
-    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos(); i++)
-    {
-        lista_objetivos -> obtener_datos(i) -> progreso(inventario, energia, edificio_objetivo);
+    int id_objetivo;
+    id_objetivo = 2 + rand() % (2-12);
+    for (int i = 0; i < 3; i ++)
+    {   
+        sortear_objetivos(id_objetivo);
+          
     }
 }
 
+void Jugador::sortear_objetivos(int id_objetivo)
+{
+    
+    Objetivo * aux = nullptr;
+    int cantidad;
+
+    switch (id_objetivo)
+    {
+        case COMPRAR_ANDYPOLIS:
+
+            aux = new Comprar_andypolis(id_objetivo, cantidad);
+            break;
+
+        case EDAD_PIEDRA:
+            aux = new Edad_piedra(id_objetivo, cantidad);
+            break;
+
+        case BOMBARDERO:
+            aux = new Bombardero(id_objetivo, cantidad);
+            break;
+
+        case ENERGETICO:
+            aux = new Energetico(id_objetivo, cantidad);
+            break;
+
+        case LETRADO:
+            aux = new Letrado(id_objetivo, cantidad);
+            break;
+
+        case MINERO:
+            aux = new Minero(id_objetivo, cantidad);
+            break;
+
+        case CANSADO:
+            aux = new Cansado(id_objetivo, cantidad);
+            break;
+
+ 
+        case ARMADO:
+            aux = new Armado(id_objetivo, cantidad);
+            break;
+
+        case EXTREMISTA:
+            aux = new Extremista(id_objetivo, cantidad);
+            break;
+    }
+    agregar_objetivo(&aux);
+
+}
+
+void Jugador::agregar_objetivo(Objetivo ** objetivos)
+{
+    
+    lista_objetivos -> alta(objetivos, lista_objetivos ->obtener_cantidad());
+    
+}
 
 void Jugador::mostrar_objetivos()
 {
-     
-    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos();i++)
+    
+    for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
     {
-        lista_objetivos -> obtener_datos(i) -> mostrar_descripcion();
+        cout << "los muestra" << endl;
+        (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
     }
-
-    cout << "\n" <<endl;
 }
 
-
-bool Jugador::objetivos_secundarios_cumplidos()
-{
-    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos()-1; i++)
-    {
-        if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())
-        {
-            objetivos_cumplidos++;
-        }
-    }
-
-    return (objetivos_cumplidos == 2);
+void Jugador::saludar(){
+    cout << " Soy el jugador n" << id_jugador << " y estoy en el casillero consultado" << endl;
 }
 
-bool Jugador::objetivo_principal_cumplido()
-{
-    return objetivo_principal -> objetivo_cumplido();
+void Jugador::agregar_codigo_posicion(string codigo_posicion){
+    this -> codigo_posicion = codigo_posicion;
 }
 
-bool Jugador::gano_juego()
-{
-   
-    if(objetivo_principal_cumplido()|| objetivos_secundarios_cumplidos())
-    {
-        ganador = true;
-    }
+string Jugador::obtener_codigo_posicion(){
+    return codigo_posicion;
+}
 
-    return ganador;
+void Jugador::vaciar_inventario(){
+    for (int i = 0; i < inventario -> obtener_cantidad(); i++){
+        inventario -> obtener_nodo(i) -> obtener_dato() -> vaciar();
+    }
 }
 
 Jugador::~Jugador(){
     delete inventario;
-    delete inventario_a_recolectar;
-    delete lista_objetivos;
-    lista_objetivos = 0;
     inventario = 0;
+
+    delete inventario_a_recolectar;
     inventario_a_recolectar = 0;
 
+    delete lista_objetivos;
+    lista_objetivos = 0;
 }

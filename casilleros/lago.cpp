@@ -11,13 +11,22 @@ string Lago::obtener_nombre(){
 }
 
 void Lago::mostrar_casillero(){
-    cout << " Este es un lago y es un casillero inaccesible. " << endl;
+    if (!jugador){
+        cout << "\n Este es un lago y me encuentro vacio." << endl;
+    }
+    
+    else{
+        cout << "\n Este es un lago y no me encuentro vacio" << endl;
+        jugador -> saludar();
+    }
 }
 
 int Lago::obtener_costo_energia(int id_jugador){
-    if(id_jugador == 1){
+    if(id_jugador == 1 && peso != INFINITO){
         return 2;
-    } else {return 5;}
+    } else if (id_jugador == 2 && peso != INFINITO){
+        return 5;
+    } else {return peso;}
 }
 
 void Lago::agregar_edificio(string nombre,int id_jugador, int vida, int piedra, int madera, int metal, int maximo){
@@ -73,3 +82,23 @@ Edificio * Lago::obtener_edificio_construido(){
     return aux;
 }
 void Lago::comprobar_destruccion_edificio(){}
+
+Material * Lago::devolver_material(){
+    return nullptr;
+}
+
+void Lago::sacar_material(){}
+
+void Lago::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 0;
+    }
+}
+
+Lago::~Lago(){
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
+}

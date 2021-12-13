@@ -15,9 +15,6 @@ private:
     string nombre;
     int cantidad;
     string diminutivo;
-    int bombas_compradas;
-    int bombas_usadas;
-    int andycoins_totales;
 
 public:
 
@@ -74,22 +71,14 @@ public:
     //PRE:-
     //POST: Muestra la cantiad del material
     void mostrar_cantidad();
-
-    int obtener_bombas_compradas();
-
-    void sumar_bombas_compradas(int cantidad);
-
-    int obtener_bombas_usadas();
-
-    void sumar_bombas_usadas(int cantidad);
-
-    int obtener_andycoins_totales();
-
-    void sumar_andycoins_totales(int cantidad);
     
     //PRE:-
     //POST: Le muestra por pantalla un mensaje al jugador explicando que es.
-    virtual void saludar();
+    void saludar();
+
+    //PRE:-
+    //POST: Reduce la cantidad del material a 0.
+    void vaciar();
 
 };
 

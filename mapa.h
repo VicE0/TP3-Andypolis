@@ -15,7 +15,7 @@
 #include "edificio.h"
 #include "ABB/ABB.h"
 #include "Objetivos.h"
-
+#include "colors.h"
 
 
 using std::string;
@@ -24,7 +24,6 @@ using namespace std;
 const int ERROR = -1;
 const string ARCHIVO_MAPA = "mapa.txt";
 const string ARCHIVO_UBICACIONES = "ubicaciones.txt";
-const string ARCHIVO_EDIFICIO = "edificios.txt";
 const string ARCHIVO_MATERIALES = "materiales.txt";
 const int UNIDADES_POR_PACK_PIEDRA = 100;
 const int UNIDADES_POR_PACK_MADERA = 50;
@@ -84,9 +83,6 @@ public:
     //     a pedir al usuario ingresar las coordenadas.
     void validar_coordenada(int &fila, int &columna);
 
-
-    void procesar_objetivo_principal(Jugador * j1, Jugador *  j2);
-
     //PRE: -
     //POS: Devuelve un booleano que confirma (o no) la decision del usuario con una pregunta
     bool aceptar_condiciones();
@@ -97,7 +93,7 @@ public:
 
     //PRE: Necesito ya preguntarle al usuario donde desea insertar el jugador, y pasarle las posiciones, su id y su informacion
     //POS: Inserta el jugador en la posicion previamente elegida por el usuario
-    void insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
+    void insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna);
 
     //PRE: Necesito que haya un archivo materiales, de lo contrario, imprimira error.
     //POS: Almacena los materiales de dichos jugadores en sus respectivos inventarios
@@ -110,10 +106,6 @@ public:
     //PRE: Le paso la cantidad disponible de energia y la que necesito
     //POS: Verifica si la cantidad pedida es menor a la disponible y devuelve true o false
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);
-
-    //PRE:
-    //POS:
-    Objetivo* sortear_objetivos(int id_objetivo);
 
     //--------------- DICCIONARIO : EDIFICIOS ----------------------------------------------------
 
@@ -156,7 +148,7 @@ public:
     //     restando 1 a la cantidad de edificios y sumando los materiales obtenidos al inventario.
     void obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_edificio, int fila, int columna);
 
-    //PRE: Una vez demolido el edificio.
+    //PRE: Una ves demolido el edificio.
     //POS: Muestro por pantalla los materiales obtenidos. 
     void imprimir_materiales(int piedra_obtenida, int madera_obtenida, int metal_obtenida, int coins_obtenidos,int energia_obtenidos);
 
@@ -171,7 +163,6 @@ public:
     //PRE: - 
     //POS: Imprime por pantalla las cantidades de los materiales que se poseen.
     void mostrar_inv(Jugador * jugador);
-
 
     //PRE: ~
     //POS: Imprime por pantalla los objetivos del jugador correspondiente
@@ -255,17 +246,24 @@ public:
 
     
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio los materiales que estan en el mapa
+    // POST: Guarda en el archivo ubicaciones los materiales que estan en el mapa
     void guardar_materiales(std::ofstream &archivo_ubicaciones);
     
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio las posiciones de los jugadores en el mapa
+    // POST: Guarda en el archivo ubicaciones las posiciones de los jugadores en el mapa
     void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
 
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio los edificios que estan en el mapa
+    // POST: Guarda en el archivo ubicaciones los edificios que estan en el mapa
     void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
 
+    //Detructor
+    //PRE: - 
+    //POS: Libero la memoria reservada por el mapa y los casilleros creados , liberando los edificios y materiales 
+    //     que se encuentran en los casilleros y se guarda la informacion en el archivo ubicaciones.txt,
+    //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
+    //     Se vuelve a setear todos los valores en 0.
+    ~Mapa();
 
     //PRE: -
     //POS: Le pregunta al usuario el edificio a modificar y en base a eso ejecuta las funciones correspondientes
@@ -307,17 +305,21 @@ public:
     //POS: Devuelve la cantidad de columnas del mapa
     int devolver_cantidad_columnas();
 
-    void actualiza_progreso_objetivos(Jugador *jugador);
+    //PRE: Necesita un jugador
+    //POS: Mueve al jugador de posicion
+    void moverse(Jugador * jugador);
 
-    bool ganar_partida(Jugador * jugador);
+    //PRE: Necesita un jugador y una lista de strings con al menos 1 elemento
+    //POS: Levanta los materiales de los casilleros que recorrio si es que tiene
+    void recoger_materiales(Jugador * jugador, ListaSP<string> * recorrido);
 
-    //Detructor
-    //PRE: - 
-    //POS: Libero la memoria reservada por el mapa y los casilleros creados , liberando los edificios y materiales 
-    //     que se encuentran en los casilleros y se guarda la informacion en el archivo ubicaciones.txt,
-    //     tambien se libera la memoria reservada por el inventario y las caracteristicas_edificios.
-    //     Se vuelve a setear todos los valores en 0.
-    ~Mapa();
+    //PRE: Necesita el id del jugador que quiere buscar
+    //POS: Devuelve el casillero donde se encuentra ese jugador
+    Casillero * buscar_posicion_jugador(int id_jugador);
+
+    //PRE: -
+    //POS: Guarda en el archivo inventario el inventario de ambos jugadores
+    void guardar_inventario();
 };
 
 

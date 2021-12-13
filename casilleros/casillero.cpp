@@ -31,6 +31,7 @@ int Casillero::obtener_columna(){
 
 void Casillero::agregar_jugador(Jugador * jugador){
     this->jugador = jugador;
+    peso = INFINITO;
 }
 
 string Casillero::obtener_diminutivo_jugador(){
@@ -63,4 +64,8 @@ int Casillero::devolver_id_jugador(){
         id = jugador->obtener_id();
     }
     return id;
+}
+
+Jugador * Casillero::obtener_jugador(){
+    return jugador;
 }

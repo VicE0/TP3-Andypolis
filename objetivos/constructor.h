@@ -10,15 +10,13 @@ using namespace std;
 class Constructor : public Objetivo
 {
     public:
-        Constructor(int id_objetivo, int cantidad,  bool cumplido);
+        Constructor(int id_objetivo, int cantidad);
+
+        bool objetivo_cumplido();
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
-
-        void progreso(Lista <Material>  *inventario, int &energia, Edificio * edificio_objetivo);
-
-
 
 };
 

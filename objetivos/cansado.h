@@ -10,14 +10,13 @@ using namespace std;
 class Cansado : public Objetivo
 {
     public:
-        Cansado(int id_objetivo, int cantidad,  bool cumplido);
+        Cansado(int id_objetivo, int cantidad);
+
+        bool objetivo_cumplido();
 
         void mostrar_descripcion();
 
         void mostrar_progreso();
-
-        void progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo);
-
 
 };
 

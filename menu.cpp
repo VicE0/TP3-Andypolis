@@ -1,28 +1,28 @@
 #include "menu.h"
 
 void mostrar_menu_principal(){
-    cout << "1.Modificar edificio por nombre." << endl;
-    cout << "2.Listar todos los edificios." << endl;
-    cout << "3.Mostrar mapa." << endl;
-    cout << "4.Comenzar partida." << endl;
-    cout << "5.Guardar y salir." << endl;
+    cout << WHITE << " 1.Modificar edificio por nombre." << endl;
+    cout << WHITE << " 2.Listar todos los edificios." << endl;
+    cout << WHITE << " 3.Mostrar mapa." << endl;
+    cout << WHITE << " 4.Comenzar partida." << endl;
+    cout << WHITE << " 5.Guardar y salir." << endl;
 }
 
 void mostrar_menu_partida(){
-
-    cout << "1.Construir edificio por nombre." << endl;
-    cout << "2.Listar los edificios construidos." << endl;
-    cout << "3.Demoler un edificio por coordenada." << endl;
-    cout << "4.Atacar un edificio por coordenada" << endl;
-    cout << "5.Reparar un edificio por coordenada." << endl;
-    cout << "6.Comprar bombas." << endl;
-    cout << "7.Consultar coordenada." << endl;
-    cout << "8.Mostrar inventario." << endl;
-    cout << "9.Mostrar objetivos." << endl;
-    cout << "10.Recolectar recursos producidos." << endl;
-    cout << "11.Moverse a una coordenada." << endl;
-    cout << "12.Finalizar turno." << endl;
-    cout << "13.Guardar y salir." << endl;
+    
+    cout <<  WHITE << " 1.Construir edificio por nombre." << endl;
+    cout <<  WHITE << " 2.Listar los edificios construidos." << endl;
+    cout <<  WHITE << " 3.Demoler un edificio por coordenada." << endl;
+    cout <<  WHITE << " 4.Atacar un edificio por coordenada" << endl;
+    cout <<  WHITE << " 5.Reparar un edificio por coordenada." << endl;
+    cout <<  WHITE << " 6.Comprar bombas." << endl;
+    cout <<  WHITE << " 7.Consultar coordenada." << endl;
+    cout <<  WHITE << " 8.Mostrar inventario." << endl;
+    cout <<  WHITE << " 9.Mostrar objetivos." << endl;
+    cout <<  WHITE << " 10.Recolectar recursos producidos." << endl;
+    cout <<  WHITE << " 11.Moverse a una coordenada." << endl;
+    cout <<  WHITE << " 12.Finalizar turno." << endl;
+    cout <<  WHITE << " 13.Guardar y salir." << endl;
 
 }
 
@@ -46,9 +46,10 @@ int elegir_opcion(){
         cin >> opcion;
     }
 
+    system(CLR_SCREEN);
+
     return opcion;
 }
-
 
 void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * j2){
 
@@ -79,63 +80,69 @@ void procesar_opcion_principal(int opcion, Mapa * mapa, Jugador * j1, Jugador * 
 
 void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool recolecto){
 
-
     switch (opcion)
     {
     case CONSTRUIR_EDIFICIO:
-            mapa->construir_edificio_nombre(jugador);
+            cout << LGREEN << "\n\t SECCION : CONSTRUIR EDIFICIO \n" << endl;
+            mapa -> construir_edificio_nombre(jugador);
         break;
 
     case LISTAR_EDIFICIOS_CONSTRUIDOS:
-            mapa->listar_edificios_construidos(jugador);
+            cout << LGREEN << "\n\t SECCION : LISTAR EDIFICIOS CONSTRUIDOS \n" << endl;
+            mapa -> listar_edificios_construidos(jugador);
         break;
 
     case DEMOLER_EDIFICIO:
-            mapa->demoler_edificio(jugador);
+            cout << LGREEN << "\n\t SECCION : DEMOLER EDIFICIO \n" << endl;
+            mapa -> demoler_edificio(jugador);
         break;
 
     case ATACAR_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : DEMOLER EDIFICIO \n" << endl;
             mapa -> atacar_edificios(jugador);
         break;
 
     case REPARAR_EDIFICIO:
+            cout << LGREEN << "\n\t SECCION : REPARAR EDIFICIO \n" << endl;
             mapa -> reparar_edificios(jugador);
         break;
 
     case COMPRAR_BOMBAS:
+            cout << LGREEN << "\n\t SECCION : COMPRAR BOMBAS \n" << endl;
             mapa -> comprar_bombas(jugador);
         break;
 
     case CONSULTAR_COORDENADA:
-            mapa->consultar_coordenada();
+            cout << LGREEN << "\n\t SECCION : CONSULTAR COORDENADA \n" << endl;
+            mapa -> consultar_coordenada();
         break;
 
     case MOSTRAR_INVENTARIO:
-            mapa->mostrar_inv(jugador);
+            cout << LGREEN << "\n\t SECCION : MOSTRAR INVENTARIO \n" << endl;
+            mapa -> mostrar_inv(jugador);
         break;
 
     case MOSTRAR_OBJETIVOS:
-            mapa->mostrar_objetivos_jugadores(jugador);
-            
+            cout << LGREEN << "\n\t SECCION : MOSTRAR OBJETIVOS \n" << endl;
+            cout << "Objetivos jugador (En proceso!)" << endl;
+            //Se carga y se da de alta, pero pincha al mostrar!
         break;
 
     case RECOLECTAR_RECURSOS:
-        if (!recolecto){
-                jugador->sumar_materiales_recolectados();}
-        else{cout << "\nUsted ya recolecto los materiales en este turno.\n" << endl;}
+            cout << LGREEN << "\n\t SECCION : RECOLECTAR RECURSOS \n" << endl;
+            if (!recolecto){
+                    jugador->sumar_materiales_recolectados();}
+            else{cout << "\nUsted ya recolecto los materiales en este turno.\n" << endl;}
         break;
 
     case MOVERSE:
-            cout << "moverse a una coordenada" << endl;
+            cout << LGREEN << "\n\t SECCION : MOVERSE \n" << WHITE << endl;
+            mapa -> moverse(jugador);
         break;
 
     case FINALIZAR_TURNO:
             jugador->sumar_energia(20);
             cout << "\n\tSu turno ha finalizado.\n" << endl;
-            if(mapa -> ganar_partida(jugador))
-            {
-                mensaje_ganador(jugador);
-            }
         break;
     
     case GUARDAR_SALIR:
@@ -144,64 +151,26 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     }
 }
 
-bool verificador_de_limite(int maximo,int posicion){
-    if (posicion < 0 || posicion > maximo){
-        cout << "ERROR: Fuera del mapa" << endl;
-        return false;
-    }
-    else{
-        return true;
-    }
-}
-
 void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2){
-    int fila1, columna1, fila2, columna2;
-    bool coordenada_correcta;
-    
-    int max_filas = mapa -> devolver_cantidad_filas();
-    int max_columnas = mapa -> devolver_cantidad_columnas();
-
-    do{
-        cout << "Jugador 1, en que posicion x quiere empezar? ";
-        cin >> fila1;
-        coordenada_correcta = verificador_de_limite(max_filas,fila1);
-    }while (!coordenada_correcta);
-    
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna1;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna1);
-    }
-    while (!coordenada_correcta);
-    
-    do{
-        cout << "Jugador 2, en que posicion x quiere empezar? ";
-        cin >> fila2;
-        coordenada_correcta = verificador_de_limite(max_filas,fila2);
-    }while (!coordenada_correcta);
-            
-    do{
-        cout << "Y en que posicion y quiere empezar? ";
-        cin >> columna2;
-        coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-    }while (!coordenada_correcta); 
+    int fila1, columna1, fila2, columna2, opcion_jugador;
+    cout << "\n\t ### SECCION PARA INGRESAR JUGADORES Y SUS COORDENADAS ###" << endl;
+    cout << "\n Ingrese el jugador que desea ser ( opciones : 1 o 2 ) -> ";
+    cin >> opcion_jugador;
+    cout << "\n INGRESEN JUGADORES SUS POSICIONES DONDE INICIARAN LA PARTIDA . " << endl;
+    cout << "\n Jugador 1 : " << endl;
+    mapa -> validar_coordenada(fila1, columna1);
+    cout << "\n Jugador 2 : " << endl;
+    mapa -> validar_coordenada(fila2, columna2);
 
     while (fila1 == fila2 && columna1 == columna2){
-        do{
-            cout << "Jugador 2, en que posicion x quiere empezar? ";
-            cin >> fila2;
-            coordenada_correcta = verificador_de_limite(max_filas,fila2);
-        }while (!coordenada_correcta);
-            
-        do{
-            cout << "Y en que posicion y quiere empezar? ";
-            cin >> columna2;
-            coordenada_correcta = verificador_de_limite(max_columnas,columna2);
-        }while (!coordenada_correcta); 
+        cout << "Error: No podes poner al jugador 2 en las mismas coordenadas que el jugador 1" << endl;
+        mapa -> validar_coordenada(fila2, columna2);
     }
 
-    mapa -> insertar_jugador_mapa("1",j1,j2, fila1, columna1);
-    mapa -> insertar_jugador_mapa("2",j1,j2, fila2, columna2);
+    j1 -> vaciar_inventario();
+    j2 -> vaciar_inventario();
+    mapa -> insertar_jugador_mapa(j1 -> obtener_id(),j1,j2, fila1, columna1);
+    mapa -> insertar_jugador_mapa(j2 -> obtener_id(),j1,j2, fila2, columna2);
     partida(mapa, j1 , j2);
 }
 
@@ -210,34 +179,24 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
     int opcion;
     int turno = 1;
     randomizador_de_turnos(j1,j2);
-    
+
     do {
         bool recolecto = false;
         verificar_lluvia_de_materiales(turno, mapa);
 
         Jugador * jugador = verificar_turno_jugador(turno, j1, j2);
 
-        cout<<"\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
+        cout << ORANGE << "\n\t .: Es el turno del jugador : "<< jugador ->dar_numero() << " :. \n" <<endl;
 
         mapa->almacenar_recursos_producidos(jugador);
 
         do{
-        
-        mostrar_menu_partida();
-        opcion = elegir_opcion();
-        procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
-        if (opcion == 10){
-            recolecto = true;
-        }
-                
-        if(mapa -> ganar_partida(jugador))
-        {
-            mensaje_ganador(jugador);
-            opcion = GUARDAR_SALIR;
-        }
-
- 
-
+            mostrar_menu_partida();
+            opcion = elegir_opcion();
+            procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
+            if (opcion == RECOLECTAR_RECURSOS){
+                recolecto = true;
+            }
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
         
@@ -250,18 +209,18 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
-        cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
+        
+        cout << CYAN << "\n ¡ BIENVENIDOS DE VUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
 
     }
- 
-    else{
-    cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
-        do {
 
+    else{
+    cout << CYAN << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
+        do {
+            
             mostrar_menu_principal();
             opcion = elegir_opcion();
-
             procesar_opcion_principal(opcion, mapa, j1, j2);
 
         }while ( opcion != P_GUARDAR_SALIR );
@@ -279,23 +238,12 @@ void randomizador_de_turnos(Jugador * j1, Jugador * j2){
     int jugador_que_empieza = rand() % 2 + 1;
 
     if (jugador_que_empieza == 1){
-        j1 -> establecer_turno(1);
-        j2 -> establecer_turno(2);
+        j1 -> establecer_turno(JUGADOR_1);
+        j2 -> establecer_turno(JUGADOR_2);
     }
     else{
-        j1 -> establecer_turno(2);
-        j2 -> establecer_turno(1);
-    }
-}
-
-void mensaje_ganador(Jugador * jugador)
-{
-    if (jugador -> dar_numero() == 1)
-    {
-        cout << "\n¡FELICIDADES JUGADOR 1, HAS GANADO EL JUEGO!\n" << endl;
-    }
-    else {
-        cout << "\n¡FELICIDADES JUGADOR 2, HAS GANADO EL JUEGO!\n" << endl;
+        j1 -> establecer_turno(JUGADOR_2);
+        j2 -> establecer_turno(JUGADOR_1);
     }
 }
 

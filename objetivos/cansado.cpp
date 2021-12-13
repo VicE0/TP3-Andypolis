@@ -1,17 +1,25 @@
 #include "cansado.h"
 
-Cansado::Cansado(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
+Cansado::Cansado(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
 {
     this -> id_objetivo = CANSADO;
     this -> cantidad = 0;
-    this ->cumplido = false;
-    this ->energia_jugador = 0;
+    //energiaa del jugador
 }
 
+bool Cansado::objetivo_cumplido()
+{ 
+
+    if (andycoins_totales == cantidad)
+    {
+        return true;
+    }
+    return false;
+}
 
 void Cansado::mostrar_progreso()
 {
-    cout << "Progreso: " << energia_jugador << "/" << cantidad << endl;
+    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
 
 }
 
@@ -19,22 +27,6 @@ void Cansado::mostrar_progreso()
 void Cansado::mostrar_descripcion()
 {
     cout << "\nCansado: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
-
-    if (cumplido)
-    {
-        cout << "OBJETIVO CUMPLIDO!" << endl;
-    }
-    else{
-        mostrar_progreso();
-    }
+    mostrar_progreso();
 }
 
-void Cansado::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
-{
-    this -> energia_jugador = energia;
-
-    if (energia_jugador == cantidad)
-    {
-        cumplido = true;
-    }
-}

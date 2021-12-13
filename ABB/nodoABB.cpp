@@ -34,3 +34,7 @@ void Nodo_ABB::cambiar_izq(Nodo_ABB * pi){
 void Nodo_ABB::cambiar_der(Nodo_ABB * pd){
     derecho = pd;
 }
+
+Nodo_ABB::~Nodo_ABB(){
+    delete edificio;
+}

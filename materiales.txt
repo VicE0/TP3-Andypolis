@@ -1,0 +1,5 @@
+madera 0 0
+metal 0 0
+piedra 0 0
+andycoins 0 0
+bombas 0 0

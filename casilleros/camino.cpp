@@ -7,12 +7,20 @@ Camino::Camino(int fila, int columna, string id_casillero): Casillero(fila, colu
 }
 
 void Camino::mostrar_casillero(){
-    if (!material){
-        cout << "\nSoy un camino y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\n Soy un camino y me encuentro vacio" << endl;
     }
+
     else{
-        cout << "\nSoy un camino y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\n Soy un camino y no me encuentro vacio" << endl;
+        if (material && !jugador)
+            material -> saludar();
+        else if (!material && jugador)
+            jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 
@@ -21,11 +29,11 @@ string Camino::obtener_nombre(){
 }
 
 int Camino::obtener_costo_energia(int id_jugador){
-    return 4;
+    return peso;
 }
 
 void Camino::agregar_edificio(string nombre,int id_jugador, int vida,int piedra, int madera, int metal, int maximo){
-    cout << "\nEste es un camino no se podran construir edificios en el. \n" << endl;
+    cout << "\n Este es un camino no se podran construir edificios en el. \n" << endl;
 }
 
 void Camino::agregar_material(string nombre, int cantidad){
@@ -35,11 +43,11 @@ void Camino::agregar_material(string nombre, int cantidad){
 }
 
 void Camino::mostrar_coordenadas_edificio(string nombre){
-    cout << "\nNo existe edificio construido\n" << endl;
+    cout << "\n No existe edificio construido\n" << endl;
 }
 
 void Camino::eliminar_edificio(){
-    cout << "\nNo existe edificio en este casillero\n" << endl;
+    cout << "\n No existe edificio en este casillero\n" << endl;
 }
 
 string Camino::obtener_nombre_edificio(){
@@ -90,9 +98,32 @@ Edificio * Camino::obtener_edificio_construido(){
 
 void Camino::comprobar_destruccion_edificio(){}
 
+Material * Camino::devolver_material(){
+    return material;
+}
+
+void Camino::sacar_material(){
+    if (existe_material()){
+        delete material;
+        material = 0;
+    }
+}
+
+void Camino::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 4;
+    }
+}
+
 Camino::~Camino(){
     if ( material ){
         delete material;
     }
     material = 0;
+
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }

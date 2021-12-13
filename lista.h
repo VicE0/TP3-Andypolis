@@ -2,10 +2,12 @@
 #define LISTA_H
 
 #include <iostream>
+#include <string>
 #include "nodo.h"
 
 using namespace std;
 
+const int NO_ENCONTRADO = -1;
 template <typename T>
 class Lista {
 
@@ -42,6 +44,10 @@ public:
     //POST: Devuelve el puntero del dato del nodo pedido.
     T * consulta(int pos); 
     
+    //PRE: -
+    //POST: Inserta un dato en la ultima posicion
+    void insertar(T *d); 
+
     //PRE: Le pido un entero que va a ser la posicion
     //POST: Da de alta un nuevo nodo en la lista en la posicion pedida
     void alta(T * d, int pos); 
@@ -57,6 +63,8 @@ public:
     //PRE: -
     //POST: Muestra por pantalla todos los datos almacenados en la lista
     void mostrar();
+
+    string obtener_nombre(int posicion);
 
     //Destructor de lista
     ~Lista();
@@ -97,7 +105,7 @@ int Lista<T>::obtener_pos(string nombre){
     }
 
     if(!elemento_encontrado){
-        return -1;
+        return NO_ENCONTRADO;
     }
     return i - 1;
 }
@@ -145,6 +153,12 @@ T * Lista<T>::consulta(int pos){
     return d;
 }
 
+template <typename T>
+void Lista<T>::insertar(T *d)
+{
+    datos[cantidad] = d;
+    cantidad++;
+}
 
 template <typename T>
 void Lista<T>::baja(int pos){
@@ -182,12 +196,29 @@ void Lista<T>::mostrar(){
     }
 }
 
+template<typename Tipo>
+string Lista<Tipo>::obtener_nombre(int posicion) {
+    int i = 0;
+    Nodo<Tipo>* auxiliar = primero;
+
+    if(posicion > cantidad){
+        return "";
+    }
+
+    while(i != posicion - 1){
+        auxiliar = auxiliar -> obtener_siguiente();
+        i++;
+    }
+    return (*auxiliar -> obtener_dato()) -> obtener_id_casillero();
+}
+
 template <typename T>
 Lista<T>::~Lista(){
-    int pos = cantidad - 1;
-    while( !vacia() ){
-        baja(pos);
-        pos--;
+    Nodo<T> * siguiente;
+    while ( primero != nullptr ){
+        siguiente = primero->obtener_siguiente();
+        delete primero;
+        primero = siguiente;
     }
 }
 

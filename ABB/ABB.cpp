@@ -22,8 +22,9 @@ Nodo_ABB * Arbol::insertar_nodo(Nodo_ABB * nodo, Edificio * edificio){
 
     // Evaluo si es menor : ( es la ultima opcion que queda )
     else {
-       nodo -> cambiar_izq(insertar_nodo(nodo -> obtener_izq(), edificio));
+        nodo -> cambiar_izq(insertar_nodo(nodo -> obtener_izq(), edificio));
     }
+
     return nodo;
 }
 
@@ -126,4 +127,29 @@ bool Arbol::supera_maximo(string clave, int id_jugador){
 
     return supera;
 
+}
+
+void Arbol::eliminar_arbol(std::ofstream &archivo_edificios,Nodo_ABB * nodo){
+    if ( nodo == NULL ){
+        return;
+    }
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_nombre() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_piedra() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_madera() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_cantidad_metal() << " ";
+    archivo_edificios << nodo -> obtener_edificio() -> obtener_maximo_construir() << endl;
+
+    this->eliminar_arbol(archivo_edificios, nodo->obtener_der());
+    this->eliminar_arbol(archivo_edificios, nodo->obtener_izq());
+    delete nodo;
+}
+
+void Arbol::eliminar_arbol(std::ofstream &archivo_edificios){
+    this->eliminar_arbol(archivo_edificios,this->root);
+}
+
+Arbol::~Arbol(){
+    ofstream archivo(ARCHIVO_EDIFICIO);
+    this->eliminar_arbol(archivo);
+    archivo.close();
 }

@@ -8,7 +8,6 @@
 #include "../edificios/obelisco.h"
 #include "../edificios/planta_electrica.h"
 #include "../edificios/mina_oro.h"
-#include "../edificios/obelisco.h"
 #include "casillero.h"
 
 
@@ -97,6 +96,16 @@ public:
     //PRE: -
     //POST: Devuelve el puntero del edificio  pedido en caso de que haya uno.
     Edificio * obtener_edificio_construido();
+
+    //PRE: -
+    //POST: Devuelve un nullptr ya que no puede tener materiales
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: -
+    void sacar_material();
+
+    void eliminar_jugador();
 
     // PRE: -
     // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.

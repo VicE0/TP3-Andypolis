@@ -1,5 +1,5 @@
-#ifndef EXTREMISTA_H
-#define EXTREMISTA_H
+#ifndef OBELISCO
+#define OBELISCO_H
 
 #include "../Objetivos.h"
 
@@ -7,10 +7,10 @@
 
 using namespace std;
 
-class Extremista : public Objetivo
+class Obelisco: public Objetivo
 {
     public:
-        Extremista(int id_objetivo, int cantidad);
+        Obelisco(int id_objetivo, int cantidad);
 
         bool objetivo_cumplido();
 
@@ -20,4 +20,4 @@ class Extremista : public Objetivo
 
 };
 
-#endif //EXTREMISTA_H
+#endif //OBELISCO_H

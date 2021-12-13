@@ -6,12 +6,20 @@ Betun::Betun(int fila, int columna, string id_casillero): Casillero(fila, column
 }
 
 void Betun::mostrar_casillero(){
-    if (!material){
-        cout << " Soy un betun y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\n Soy un Betun y me encuentro vacio" << endl;
     }
+    
     else{
-        cout << " Soy un betun y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\n Soy un Betun y no me encuentro vacio" << endl;
+        if (material && !jugador)
+            material -> saludar();
+        else if (!material && jugador)
+            jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 
@@ -20,7 +28,7 @@ string Betun::obtener_nombre(){
 }
 
 int Betun::obtener_costo_energia(int id_jugador){
-    return 0;
+    return peso;
 }
 
 void Betun::agregar_edificio(string nombre, int id_jugador, int vida,int piedra, int madera, int metal, int maximo){
@@ -89,10 +97,33 @@ Edificio * Betun::obtener_edificio_construido(){
 
 void Betun::comprobar_destruccion_edificio(){}
 
+Material * Betun::devolver_material(){
+    return material;
+}
+
+void Betun::sacar_material(){
+    if (existe_material()){
+        delete material;
+        material = 0;
+    }
+}
+
+void Betun::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 0;
+    }
+}
+
 Betun::~Betun(){
     if ( material ){
         delete material;
     }
     material = 0;
+
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }
 

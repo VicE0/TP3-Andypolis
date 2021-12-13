@@ -6,9 +6,10 @@ const int ENERGIA_INICIAL = 50;
 
 #include "material.h"
 #include "lista.h"
-#include "listaObjetivos.h"
 #include "edificio.h"
 #include "Objetivos.h"
+#include <string>
+#include <fstream>
 #include "objetivos/comprar_andypolis.h"
 #include "objetivos/edad_piedra.h"
 #include "objetivos/bombardero.h"
@@ -19,9 +20,6 @@ const int ENERGIA_INICIAL = 50;
 #include "objetivos/constructor.h"
 #include "objetivos/armado.h"
 #include "objetivos/extremista.h"
-#include "objetivos/objetivo_obelisco.h"
-#include <string>
-
 
 using std::string;
 
@@ -36,18 +34,13 @@ class Jugador
         int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
-        bool ganador;
-        Objetivo* objetivo_principal;
-
+        string codigo_posicion;
+    
         string diminutivo;
 
-        ListaObjetivos<Objetivo*>  *lista_objetivos;
-
+        Lista<Objetivo*> * lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
-
-       
-
 
 
     public:
@@ -66,35 +59,6 @@ class Jugador
         //PRE: ~
         //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
-
-
-        //PRE: ~
-        //POS: Devuelve la lista de objetivos del jugador
-        ListaObjetivos<Objetivo*> *obtener_lista_objetivos();
-
- 
-        //PRE: ~
-        //POS: Muestra el inventario del jugador
-        void mostrar_inventario();
-
-        //PRE: ~
-        //POS: Muestra los objetivos del jugador
-        void mostrar_objetivos();
-
-
-        //PRE: ~
-        //POS: Crea el array con el obelisco
-        Objetivo * asignar_principal(int id_objetivo);
-
-        void actualizar_progreso_objetivos(Edificio* edificio_objetivo);
-
-
-        bool objetivos_secundarios_cumplidos();
-
-
-        bool objetivo_principal_cumplido();
-
-        bool gano_juego();
 
         //PRE: Le paso el nombre del material a buscar
         //POST: Devuelve el puntero del material buscado
@@ -134,9 +98,13 @@ class Jugador
         //POST:Doy de alta un material en el inventario del jugador
         void agregar_material_inv_recolectar(Material * material);
 
-        //PRE: Paso el untero objetivo para pasarle la informacion del mismo y poder agregarlo al jugador
+        //PRE: Paso el doble puntero objetivo para pasarle la informacion del mismo y poder agregarlo al jugador
         //POST:Doy de alta un objetivo en la lista d eobjetivos del jugador
-        void agregar_objetivo(Objetivo * objetivo);
+        void agregar_objetivo(Objetivo ** objetivo);
+
+        //PRE: -
+        //POST: Asigno los tres objetivos aleatorios a la lista de objetivos del jugador.
+        void asignar_objetivos();
 
         //PRE: Le paso el string del nombre del material a buscar
         //POST: Imprime por pantalla la cantidad de dicho material.
@@ -208,7 +176,15 @@ class Jugador
 
         //PRE: Le paso el id el objetivo que le toco aleatoriamente
         //POST: Inicializo el objetivo asignado al jugador en la lista de objetivos
-        Objetivo* sortear_objetivos(int id_objetivo);
+        void sortear_objetivos(int id_objetivo);
+
+        void saludar();
+
+        void agregar_codigo_posicion(string codigo_posicion);
+
+        string obtener_codigo_posicion();
+
+        void vaciar_inventario();
 
         //Destructor de jugador
         ~Jugador();

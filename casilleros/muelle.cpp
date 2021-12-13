@@ -6,12 +6,20 @@ Muelle::Muelle(int fila, int columna, string id_casillero): Casillero(fila, colu
 }
 
 void Muelle::mostrar_casillero(){
-    if (!material){
-        cout << " Soy un muelle y me encuentro vacio" << endl;
+    if (!material && !jugador){
+        cout << "\n Soy un muelle y me encuentro vacio" << endl;
     }
+    
     else{
-        cout << " Soy un muelle y no me encuentro vacio" << endl;
-        material -> saludar();
+        cout << "\n Soy un muelle y no me encuentro vacio" << endl;
+        if (material && !jugador)
+            material -> saludar();
+        else if (!material && jugador)
+            jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 
@@ -20,9 +28,11 @@ string Muelle::obtener_nombre(){
 }
 
 int Muelle::obtener_costo_energia(int id_jugador){
-    if(id_jugador == 1){
+    if(id_jugador == 1 && peso != INFINITO){
         return 5;
-    } else {return 2;}
+    } else if (id_jugador == 2 && peso != INFINITO){
+        return 2;
+    } else {return peso;}
 }
 
 
@@ -93,9 +103,32 @@ Edificio * Muelle::obtener_edificio_construido(){
 
 void Muelle::comprobar_destruccion_edificio(){}
 
+Material * Muelle::devolver_material(){
+    return material;
+}
+
+void Muelle::sacar_material(){
+    if (existe_material()){
+        delete material;
+        material = 0;
+    }
+}
+
+void Muelle::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 0;
+    }
+}
+
+
 Muelle::~Muelle(){
     if ( material ){
         delete material;
     }
     material = 0;
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }
