@@ -1,7 +1,7 @@
 #ifndef CAMINO_MINIMO_H
 #define CAMINO_MINIMO_H
 
-#include "lista.h"
+#include "listaSP.h"
 #include "casilleros/casillero.h"
 #include <iostream>
 

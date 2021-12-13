@@ -386,8 +386,7 @@ void Jugador::mostrar_objetivos()
     for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
     {
         cout << "los muestra" << endl;
-       (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
-       
+        (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
     }
 }
 
