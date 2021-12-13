@@ -144,7 +144,7 @@ template <typename Data>
 Data ListaObjetivos<Data>::obtener_datos(int posicion) 
 {
     NodoObjetivos<Data> * aux = obtener_nodo(posicion);
-    return aux->obtener_Data();
+    return aux->obtener_data();
 }
 
 template <typename Data>

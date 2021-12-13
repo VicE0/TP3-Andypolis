@@ -134,13 +134,6 @@ void Terreno::mostrar_coordenadas_edificio(string nombre){
     }
 }
 
-Terreno::~Terreno(){
-    if ( edificio_construido ){
-        delete edificio_construido;
-    }
-    edificio_construido = 0;
-}
-
 int Terreno::obtener_fila(){
     return fila;
 }
@@ -168,3 +161,13 @@ void Terreno::comprobar_destruccion_edificio(){
     }
 }
 
+Terreno::~Terreno(){
+    if ( edificio_construido ){
+        delete edificio_construido;
+    }
+    edificio_construido = 0;
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
+}

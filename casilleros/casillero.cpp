@@ -64,3 +64,7 @@ int Casillero::devolver_id_jugador(){
     }
     return id;
 }
+
+void Casillero::eliminar_jugador(){
+    jugador = nullptr;
+}

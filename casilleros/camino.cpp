@@ -103,4 +103,9 @@ Camino::~Camino(){
         delete material;
     }
     material = 0;
+
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }

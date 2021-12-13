@@ -23,8 +23,6 @@ int main(){
     }
 
     delete mapa;
-    delete j1;
-    delete j2;
 
     cout << "\n Muchas gracias por visitar la ciudad , nos vemos pronto ! \n" << endl; 
 

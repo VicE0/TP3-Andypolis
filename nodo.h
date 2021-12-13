@@ -8,11 +8,11 @@ using namespace std;
 template <typename T>
 class Nodo {
 private:
-    T * dato;
+    T * pdato;
     Nodo<T> * siguiente;
 
 public:
-    Nodo<T>(T * d);
+    Nodo<T>(T * pd);
 
     T * obtener_dato();
 
@@ -20,23 +20,21 @@ public:
 
     void cambiar_siguiente(Nodo<T> * pn);
 
-    void cambiar_dato(T d);
+    void pcambiar_dato(T d);
 
     ~Nodo();
 
 };  
 
 template <typename T>
-Nodo<T>::Nodo(T * d){
-
-    this->dato = d;
+Nodo<T>::Nodo(T * pd){
+    this->pdato = pd;
     this->siguiente = nullptr;
-
 }
 
 template <typename T>
 T * Nodo<T>::obtener_dato(){
-    return dato;
+    return pdato;
 }
 
 template <typename T>
@@ -50,13 +48,13 @@ void Nodo<T>::cambiar_siguiente(Nodo * pn){
 }
 
 template <typename T>
-void Nodo<T>::cambiar_dato(T d){
-    dato = d;
+void Nodo<T>::pcambiar_dato(T d){
+    pdato = d;
 }
 
 template <typename T>
 Nodo<T>::~Nodo(){
-    delete dato;
+    delete pdato;
 }
 
 #endif

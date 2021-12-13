@@ -12,11 +12,11 @@ string Lago::obtener_nombre(){
 
 void Lago::mostrar_casillero(){
     if (!jugador){
-        cout << "\nEste es un lago y me encuentro vacio." << endl;
+        cout << "\n Este es un lago y me encuentro vacio." << endl;
     }
     
     else{
-        cout << "\nEste es un lago y no me encuentro vacio" << endl;
+        cout << "\n Este es un lago y no me encuentro vacio" << endl;
         jugador -> saludar();
     }
 }
@@ -80,3 +80,10 @@ Edificio * Lago::obtener_edificio_construido(){
     return aux;
 }
 void Lago::comprobar_destruccion_edificio(){}
+
+Lago::~Lago(){
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
+}

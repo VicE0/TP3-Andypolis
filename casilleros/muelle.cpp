@@ -7,15 +7,19 @@ Muelle::Muelle(int fila, int columna, string id_casillero): Casillero(fila, colu
 
 void Muelle::mostrar_casillero(){
     if (!material && !jugador){
-        cout << "\nSoy un muelle y me encuentro vacio" << endl;
+        cout << "\n Soy un muelle y me encuentro vacio" << endl;
     }
     
     else{
-        cout << "\nSoy un muelle y no me encuentro vacio" << endl;
-        if (material)
+        cout << "\n Soy un muelle y no me encuentro vacio" << endl;
+        if (material && !jugador)
             material -> saludar();
-        else
+        else if (!material && jugador)
             jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 
@@ -98,8 +102,13 @@ Edificio * Muelle::obtener_edificio_construido(){
 void Muelle::comprobar_destruccion_edificio(){}
 
 Muelle::~Muelle(){
+    cout << " destructor de muelle " << endl;
     if ( material ){
         delete material;
     }
     material = 0;
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }

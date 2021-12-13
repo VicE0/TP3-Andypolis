@@ -10,6 +10,18 @@ Grafo::Grafo(int filas, int columnas){
 
 }
 
+CaminoMinimo * Grafo::obtener_camino(){
+    return camino_minimo;
+}
+
+Casillero * Grafo::obtener_casillero(string pos){
+    Casillero * aux = nullptr;
+    int posicion = vertices->obtener_pos(pos);
+    aux = (*vertices->obtener_nodo(posicion)->obtener_dato());
+
+    return aux;
+}
+
 void Grafo::agrandar_matrices(){
     int ** matriz_aux;
     int nueva_cantidad_vertices = vertices->obtener_cantidad() + 1;
@@ -159,6 +171,9 @@ void Grafo::agregar_caminos(){
 }
 
 void Grafo::usar_camino_minimo(string origen, string destino, int id){
+    if ( camino_minimo ){
+        delete camino_minimo;
+    }
     int pos_origen = vertices->obtener_pos(origen);
     int pos_destino = vertices->obtener_pos(destino);
 
@@ -183,7 +198,6 @@ void Grafo::usar_camino_minimo(int origen, int destino, int id){
     }
     camino_minimo->camino_minimo(origen, destino);
 
-    delete camino_minimo;
 }
 
 
@@ -206,10 +220,22 @@ void Grafo::actualizar_matriz_de_adyacencia_j2(int posicion_origen, int posicion
     matriz_adyacente_j2[posicion_destino][posicion_origen] = peso_origen_j2;
 }
 
+ListaObjetivos<string> * Grafo::obtener_recorrido(){
+    return camino_minimo->obtener_camino_recorrido();
+}
+
+int Grafo::obtener_energia_camino(){
+    return camino_minimo->obtener_energia_gastada();
+}
+
 Grafo::~Grafo(){
     liberar_matriz_adyacente(1);
     matriz_adyacente_j1 = nullptr;
     liberar_matriz_adyacente(2);
     matriz_adyacente_j2 = nullptr;
+
+    delete vertices;
     this->vertices = 0;
+    delete camino_minimo;
+    camino_minimo = nullptr;
 }

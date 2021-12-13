@@ -7,15 +7,19 @@ Betun::Betun(int fila, int columna, string id_casillero): Casillero(fila, column
 
 void Betun::mostrar_casillero(){
     if (!material && !jugador){
-        cout << "\nSoy un Betun y me encuentro vacio" << endl;
+        cout << "\n Soy un Betun y me encuentro vacio" << endl;
     }
     
     else{
-        cout << "\nSoy un Betun y no me encuentro vacio" << endl;
-        if (material)
+        cout << "\n Soy un Betun y no me encuentro vacio" << endl;
+        if (material && !jugador)
             material -> saludar();
-        else
+        else if (!material && jugador)
             jugador -> saludar();
+        else{
+            jugador -> saludar();
+            material -> saludar();
+        }
     }
 }
 
@@ -94,9 +98,15 @@ Edificio * Betun::obtener_edificio_construido(){
 void Betun::comprobar_destruccion_edificio(){}
 
 Betun::~Betun(){
+    cout << " destructor de betun " << endl;
     if ( material ){
         delete material;
     }
     material = 0;
+
+    if ( jugador ){
+        delete jugador;
+    }
+    jugador = nullptr;
 }
 

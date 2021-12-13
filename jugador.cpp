@@ -416,6 +416,7 @@ string Jugador::obtener_codigo_posicion(){
 }
 
 Jugador::~Jugador(){
+    cout << " Muere el jugador " << endl;
     delete inventario;
     inventario = 0;
     delete inventario_a_recolectar;

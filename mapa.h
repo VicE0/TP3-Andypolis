@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstring>
 #include "grafo.h"
 #include "casilleros/casillero.h"
 #include "casilleros/terreno.h"
