@@ -5,11 +5,13 @@ Jugador::Jugador(){
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new Lista<Objetivo*>;
+    this -> lista_objetivos = new ListaSP<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
     this -> codigo_posicion = "";
+    this -> ganador = false;
+    this -> objetivo_principal = nullptr;
 }
 
 Jugador::Jugador(int id_jugador, string diminutivo)
@@ -18,11 +20,13 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> energia = 50;
     this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
-    this -> lista_objetivos = new Lista<Objetivo*>;
+    this -> lista_objetivos = new ListaSP<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
     this -> codigo_posicion = "";
+    this -> ganador = false;
+    this -> objetivo_principal = nullptr;
 }
 
 int Jugador::dar_numero()
@@ -311,83 +315,121 @@ void Jugador::restar_energia(int cantidad){
     energia -= cantidad;
 }
 
-void Jugador:: asignar_objetivos()
+Objetivo* Jugador::asignar_principal(int id_objetivo)
 {
-
-    int id_objetivo;
-    id_objetivo = 2 + rand() % (2-12);
-    for (int i = 0; i < 3; i ++)
-    {   
-        sortear_objetivos(id_objetivo);
-          
-    }
-}
-
-void Jugador::sortear_objetivos(int id_objetivo)
-{
-    
-    Objetivo * aux = nullptr;
     int cantidad;
-
-    switch (id_objetivo)
-    {
-        case COMPRAR_ANDYPOLIS:
-
-            aux = new Comprar_andypolis(id_objetivo, cantidad);
-            break;
-
-        case EDAD_PIEDRA:
-            aux = new Edad_piedra(id_objetivo, cantidad);
-            break;
-
-        case BOMBARDERO:
-            aux = new Bombardero(id_objetivo, cantidad);
-            break;
-
-        case ENERGETICO:
-            aux = new Energetico(id_objetivo, cantidad);
-            break;
-
-        case LETRADO:
-            aux = new Letrado(id_objetivo, cantidad);
-            break;
-
-        case MINERO:
-            aux = new Minero(id_objetivo, cantidad);
-            break;
-
-        case CANSADO:
-            aux = new Cansado(id_objetivo, cantidad);
-            break;
-
- 
-        case ARMADO:
-            aux = new Armado(id_objetivo, cantidad);
-            break;
-
-        case EXTREMISTA:
-            aux = new Extremista(id_objetivo, cantidad);
-            break;
-    }
-    agregar_objetivo(&aux);
-
+    objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
+    return objetivo_principal;
 }
 
-void Jugador::agregar_objetivo(Objetivo ** objetivos)
+Objetivo* Jugador::sortear_objetivos(int id_objetivo)
 {
+    Objetivo * obj = nullptr;
+
+    int cantidad;
+    for(int i = 0; i < 9; i ++)
+    {
+        switch (id_objetivo)
+        {
+            case COMPRAR_ANDYPOLIS:
+
+                obj = new Comprar_andypolis(id_objetivo,cantidad, false);
+                break;
+
+            case EDAD_PIEDRA:
+                obj = new Edad_piedra(id_objetivo,cantidad,false);
+                break;
+
+            case BOMBARDERO:
+                obj = new Bombardero(id_objetivo,cantidad,false);
+                break;
+
+            case ENERGETICO:
+                obj= new Energetico(id_objetivo ,cantidad,false);
+                break;
+
+            case LETRADO:
+                obj = new Letrado(id_objetivo,cantidad,false);
+                break;
+
+            case MINERO:
+                obj = new Minero(id_objetivo,cantidad,false);
+                break;
+
+            case CANSADO:
+                obj = new Cansado(id_objetivo,cantidad,false);
+                break;
+
     
-    lista_objetivos -> alta(objetivos, lista_objetivos ->obtener_cantidad());
+            case ARMADO:
+                obj = new Armado(id_objetivo ,cantidad,false);
+                break;
+
+            case EXTREMISTA:
+                obj = new Extremista(id_objetivo,cantidad,false);
+                break;
+
+            case CONSTRUCTOR:
+               obj = new Constructor(id_objetivo,cantidad,false);
+        }
+    }
+
+    return obj;
     
+}
+
+void Jugador::actualizar_progreso_objetivos(Edificio * edificio_objetivo)
+{
+    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos(); i++)
+    {
+        lista_objetivos -> obtener_datos(i) -> progreso(inventario, energia, edificio_objetivo);
+    }
+}
+
+void Jugador::agregar_objetivo(Objetivo * objetivos)
+{
+    lista_objetivos -> insertar_elemento(objetivos);
 }
 
 void Jugador::mostrar_objetivos()
 {
-    
-    for (int i = 0; i < lista_objetivos ->obtener_cantidad(); i++)
+     
+    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos();i++)
     {
-        cout << "los muestra" << endl;
-        (*lista_objetivos ->obtener_nodo(i) -> obtener_dato()) ->mostrar_descripcion();
+        lista_objetivos -> obtener_datos(i) -> mostrar_descripcion();
     }
+
+    cout << "\n" <<endl;
+}
+
+
+bool Jugador::objetivos_secundarios_cumplidos()
+{
+    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos()-1; i++)
+    {
+        if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())
+        {
+            objetivos_cumplidos++;
+        }
+    }
+
+    return (objetivos_cumplidos == 2);
+}
+
+bool Jugador::objetivo_principal_cumplido()
+{
+    return objetivo_principal -> objetivo_cumplido();
+}
+
+bool Jugador::gano_juego()
+{
+   
+    if(objetivo_principal_cumplido()|| objetivos_secundarios_cumplidos())
+    {
+        ganador = true;
+    }
+
+    return ganador;
 }
 
 void Jugador::saludar(){

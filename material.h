@@ -15,6 +15,9 @@ private:
     string nombre;
     int cantidad;
     string diminutivo;
+    int bombas_compradas;
+    int bombas_usadas;
+    int andycoins_totales;
 
 public:
 
@@ -79,6 +82,30 @@ public:
     //PRE:-
     //POST: Reduce la cantidad del material a 0.
     void vaciar();
+
+    //PRE:-
+    //POST: obtiene el atributo bombas compradas.
+    int obtener_bombas_compradas();
+
+    //PRE: recibe un entero cantidad
+    //POST: suma las bombas compradas.
+    void sumar_bombas_compradas(int cantidad);
+
+    //PRE:-
+    //POST: obtiene el atributo bombas usadas.
+    int obtener_bombas_usadas();
+
+    //PRE: recibe un entero cantidad
+    //POST: suma las bombas usadas
+    void sumar_bombas_usadas(int cantidad);
+
+    //PRE:-
+    //POST: obtiene el atributo andycoins totales.
+    int obtener_andycoins_totales();
+
+    //PRE:recibe una cantidad
+    //POST: suma las andycoins.
+    void sumar_andycoins_totales(int cantidad);
 
 };
 

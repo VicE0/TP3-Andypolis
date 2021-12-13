@@ -6,6 +6,7 @@ const int ENERGIA_INICIAL = 50;
 
 #include "material.h"
 #include "lista.h"
+#include "listaSP.h"
 #include "edificio.h"
 #include "Objetivos.h"
 #include <string>
@@ -20,6 +21,7 @@ const int ENERGIA_INICIAL = 50;
 #include "objetivos/constructor.h"
 #include "objetivos/armado.h"
 #include "objetivos/extremista.h"
+#include "objetivos/objetivo_obelisco.h"
 
 using std::string;
 
@@ -34,11 +36,12 @@ class Jugador
         int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
+        bool ganador;
         string codigo_posicion;
-    
+        Objetivo* objetivo_principal;
         string diminutivo;
 
-        Lista<Objetivo*> * lista_objetivos;
+        ListaSP<Objetivo*> * lista_objetivos;
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
 
@@ -72,7 +75,11 @@ class Jugador
         //POST: Me devuelve la lista del inventario principal
         Lista<Material> * obtener_inventario();
 
-        
+        //PRE: ~
+        //POS: Devuelve la lista de objetivos del jugador
+        ListaSP<Objetivo*> *obtener_lista_objetivos();
+
+       
         // -------------------------------- Funciones jugador --------------------------------
         //PRE: ~
         //POST:Devuelve el id del jugador seleccionado
@@ -98,9 +105,9 @@ class Jugador
         //POST:Doy de alta un material en el inventario del jugador
         void agregar_material_inv_recolectar(Material * material);
 
-        //PRE: Paso el doble puntero objetivo para pasarle la informacion del mismo y poder agregarlo al jugador
+        //PRE: Paso el puntero objetivo para pasarle la informacion del mismo y poder agregarlo al jugador
         //POST:Doy de alta un objetivo en la lista d eobjetivos del jugador
-        void agregar_objetivo(Objetivo ** objetivo);
+        void agregar_objetivo(Objetivo * objetivo);
 
         //PRE: -
         //POST: Asigno los tres objetivos aleatorios a la lista de objetivos del jugador.
@@ -176,15 +183,43 @@ class Jugador
 
         //PRE: Le paso el id el objetivo que le toco aleatoriamente
         //POST: Inicializo el objetivo asignado al jugador en la lista de objetivos
-        void sortear_objetivos(int id_objetivo);
+        Objetivo* sortear_objetivos(int id_objetivo);
 
+        //PRE:
+        //POS: Muestra los saludos del jugador
         void saludar();
 
+        //PRE: Recibe un string correspondiente al codigo de posicion
+        //POS: Lo agrega a la lista
         void agregar_codigo_posicion(string codigo_posicion);
 
+        //PRE: ~
+        //POS: Devuelve el codigo posicion
         string obtener_codigo_posicion();
 
+        //PRE: ~
+        //POS: Borra el inventario
         void vaciar_inventario();
+
+        //PRE: ~
+        //POS: Crea el array con el obelisco
+        Objetivo * asignar_principal(int id_objetivo);
+
+        //PRE: Recibe un puntero de clase edificio
+        //POS: Recorre la lista y verifica el progreso de los objetivos
+        void actualizar_progreso_objetivos(Edificio* edificio_objetivo);
+
+        //PRE:
+        //POS: Veridica si se cumplio 2 o mas objetivos, si es asi, devuelve true
+        bool objetivos_secundarios_cumplidos();
+
+        //PRE: ~
+        //POS: Verifica si el objetiv principal esta cumplido
+        bool objetivo_principal_cumplido();
+
+        //PRE: Verifica si se cumplio el objetivo principal o 2 objetivos secundarios
+        //POS: Retorna True en caso que lo anterior se haya hecho
+        bool gano_juego();
 
         //Destructor de jugador
         ~Jugador();

@@ -1,24 +1,16 @@
 #include "energetico.h"
 
-Energetico::Energetico(int id_objetivo, int cantidad) : Objetivo(id_objetivo, cantidad, andycoins_totales)
+Energetico::Energetico(int id_objetivo, int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = ENERGETICO;
     this -> cantidad = 100;
-}
-
-bool Energetico::objetivo_cumplido()
-{ 
-
-    if (andycoins_totales == cantidad)
-    {
-        return true;
-    }
-    return false;
+    this ->cumplido = false;
+    this -> energia_jugador = 0;
 }
 
 void Energetico::mostrar_progreso()
 {
-    cout << "Progreso: " << andycoins_totales << "/" << cantidad << endl;
+    cout << "Progreso: " << energia_jugador << "/" << cantidad << endl;
 
 }
 
@@ -26,7 +18,23 @@ void Energetico::mostrar_progreso()
 void Energetico::mostrar_descripcion()
 {
     cout << "\nEnergetico: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
-    mostrar_progreso();
+
+    if (cumplido)
+    {
+        cout << "OBJETIVO CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
 }
 
-//ENERGIA
+
+void Energetico::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
+{
+    this ->energia_jugador = energia;
+
+    if (energia_jugador == cantidad)
+    {
+        cumplido = true;
+    }
+}

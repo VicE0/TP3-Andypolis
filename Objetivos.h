@@ -4,7 +4,6 @@
 #include <string>
 using std::string;
 
-const int OBJETIVO_OBELISCO = 0;
 const int CONSTRUIR_OBELISCO = 1;
 const int COMPRAR_ANDYPOLIS = 2;
 const int EDAD_PIEDRA= 3;
@@ -17,25 +16,36 @@ const int CONSTRUCTOR = 9;
 const int ARMADO = 10;
 const int EXTREMISTA = 11;
 
-// #include "material.h";
-// #include "edificio.h";
-// #include "jugador.h"
-
-
+#include "material.h"
+#include "edificio.h"
+#include "lista.h"
 
 class Objetivo
 {
     protected:
         int id_objetivo;
         int cantidad;
-        int andycoins_totales; 
-        int bombas_inventario;
-        int bombas_usadas;
-        int piedras_inventario;
-        int bombas_compradas;
-        int escuelas_construidas;
-        // bool obelisco_construido;
         
+        bool cumplido;
+      
+        bool mina_construida;
+        bool mina_oro_construida;
+        bool obelisco_construido;
+        bool aserradero_construido;
+        bool escuela_construida;
+        bool fabrica_construida;
+        bool planta_electrica_construida;
+
+        int minas_construidas;
+        int edificios_construidos;
+        int energia_jugador;
+        int bombas_inventario;
+        int piedras_inventario;
+        int escuelas_construidas;
+
+        int andycoins_totales; 
+        int bombas_usadas;
+        int bombas_compradas;
 
     public:
         //  ----- Constructores ------
@@ -45,24 +55,34 @@ class Objetivo
 
         // PRE: ~
         // POST: Carga los valores 
-        Objetivo(int id_objetivo, int cantidad, int andycoins_totales);
+        Objetivo(int id_objetivo, int cantidad, bool cumplido);
 
         //------ Getters ---------
 
+        //PRE: ~
+        //POS: Devuelve el numero que le representa el objetivo
         int obtener_objetivo();
 
-        bool mina_construida();
 
-        bool mina_oro_construida();
+        //PRE: ~
+        //POS: Devuelve el atributo cumplido
+        bool objetivo_cumplido();
 
 
         // ------ Metodos virtuales -----
 
-        virtual bool objetivo_cumplido() = 0;
-
+        //PRE: -
+        //POS: Muestra la descripcion del objetivo
         virtual void mostrar_descripcion() = 0;
 
+        //PRE:
+        //POS: Muestra como va el progreso del objetivo
         virtual void mostrar_progreso() = 0;
+
+        //PRE: Recibe la lista, la energia y un puntero de edificio del jugador
+        //POS: Evalua como va el progresp y si se cumplió el objetivo o no
+        virtual void progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo) = 0;
+
 
         ~Objetivo();
 

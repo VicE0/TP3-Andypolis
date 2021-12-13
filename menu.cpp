@@ -197,6 +197,10 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
             if (opcion == RECOLECTAR_RECURSOS){
                 recolecto = true;
             }
+            if(mapa -> ganar_partida(jugador))
+            {
+                mensaje_ganador(jugador);
+            }
         }
         while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
         
@@ -252,4 +256,15 @@ Jugador * verificar_turno_jugador(int turno, Jugador * j1, Jugador * j2){
         return j1;
     else
         return j2;
+}
+
+void mensaje_ganador(Jugador * jugador)
+{
+    if (jugador -> dar_numero() == 1)
+    {
+        cout << "\n¡FELICIDADES JUGADOR 1, HAS GANADO EL JUEGO!\n" << endl;
+    }
+    else {
+        cout << "\n¡FELICIDADES JUGADOR 2, HAS GANADO EL JUEGO!\n" << endl;
+    }
 }

@@ -183,14 +183,6 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 }
 
 
-void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
-    if ( id_jugador == "1" ){
-        mapa[fila][columna]->agregar_jugador(j1);
-    } else {
-        mapa[fila][columna]->agregar_jugador(j2);
-    }
-}
-
 bool Mapa::vacio(ifstream& pArchivo) { 
     return pArchivo.peek() == ifstream::traits_type::eof(); 
 } 
@@ -1243,7 +1235,7 @@ Mapa::~Mapa(){
     }
 
     delete grafo;
-    grafo = nullptr
+    grafo = nullptr;
     int total = cantidad_edificios;
     for ( int i = 0; i < total; i++){
         cantidad_edificios--;

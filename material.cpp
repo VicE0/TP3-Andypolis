@@ -80,3 +80,35 @@ void Material :: saludar(){
 void Material :: vaciar(){
   cantidad = 0;
 }
+
+int Material::obtener_bombas_compradas()
+{
+    return bombas_compradas;
+}
+
+void Material::sumar_bombas_compradas(int cantidad)
+{
+    bombas_compradas += cantidad;
+}
+
+int Material::obtener_bombas_usadas()
+{
+    return bombas_usadas;
+}
+
+void Material::sumar_bombas_usadas(int cantidad)
+{
+    bombas_usadas += cantidad;
+}
+
+
+
+int Material::obtener_andycoins_totales()
+{
+    return andycoins_totales;
+}
+
+void Material::sumar_andycoins_totales(int cantidad)
+{
+  andycoins_totales += cantidad;
+}

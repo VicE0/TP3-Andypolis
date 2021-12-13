@@ -99,6 +99,10 @@ public:
     //POS: Almacena los materiales de dichos jugadores en sus respectivos inventarios
     void procesar_archivo_materiales(Jugador * j1, Jugador * j2);
 
+    //PRE: recibe a los jugadores
+    //POS: llama a la funcion sortear objetivos pero el ID del objetivo es 1 en este caso
+    void procesar_objetivo_principal(Jugador * j1, Jugador *  j2);
+
     //PRE: -
     //POS: Realiza el random de los objetivos y asigna tres aleatorios al jugador. Tambien asigna el objetivo principal
     void procesar_objetivos(Jugador * j1, Jugador *  j2);
@@ -320,6 +324,14 @@ public:
     //PRE: -
     //POS: Guarda en el archivo inventario el inventario de ambos jugadores
     void guardar_inventario();
+
+    //PRE: Recibe el jugador y su funcion de actualizar progreso de los objetivos
+    //POS: Recorre el mapa para verificar si algun edificio construido coincide con el de algun objetivo asignado
+    void actualiza_progreso_objetivos(Jugador *jugador);
+
+    //PRE: Recibe el jugador y verifica si se cumplio
+    //POS: Retorna true si se cumple las condiciones
+    bool ganar_partida(Jugador * jugador);
 };
 
 

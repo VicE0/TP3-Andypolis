@@ -84,3 +84,7 @@ void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2);
 //PRE: Necesito que el usuario haya ingresado una posicion en el mapa
 //POST: Verifica que la posicion elegida por el usuario sea valida
 bool verificador_de_limite(int posicion, int verificacion_columna_fila);
+
+//PRE: Recibe el jugador y valuea si es el Jugador1 o el Jugador2
+//POS: Muestra un mensajen para el jugador ganador
+void mensaje_ganador(Jugador * jugador);

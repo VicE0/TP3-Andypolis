@@ -1,5 +1,5 @@
-#ifndef MINERO_H
-#define MINERO_H
+#ifndef OBJETIVO_OBELISCO_H
+#define OBJETIVO_OBELISCO_H
 
 #include "../Objetivos.h"
 
@@ -7,10 +7,11 @@
 
 using namespace std;
 
-class Minero: public Objetivo
+class Objetivo_obelisco: public Objetivo
 {
     public:
-        Minero(int id_objetivo,int cantidad,  bool cumplido);
+        //CONSTRUCTOR
+        Objetivo_obelisco(int id_objetivo,int cantidad, bool cumplido);
 
         //PRE: -
         //POS: Muestra la descripcion del objetivo
@@ -24,7 +25,6 @@ class Minero: public Objetivo
         //POS: Evalua como va el progresp y si se cumplió el objetivo o no
         void progreso(Lista <Material> *inventario, int &energia, Edificio * edificio_objetivo);
 
-
 };
 
-#endif //MINERO_H
+#endif //OBJETIVO_OBELISCO_H
