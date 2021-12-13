@@ -2,9 +2,12 @@
 #define MUELLE_H
 
 #include "casillero.h"
+#include "../material.h"
 
 
 class Muelle : public Casillero {
+private:
+    Material * material;
 public:
 
     //Constructor de Muelle
@@ -81,10 +84,24 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     int obtener_columna();
 
+    //PRE: -
+    //POST: Devuelve un puntero vacio ya que no se puede construir aca.
     Edificio * obtener_edificio_construido();
 
+    //PRE: -
+    //POST: -
     void comprobar_destruccion_edificio();
 
+    //PRE: -
+    //POST: Devuelve el material incluido, sino hay nada lo devuelve vacio
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: Elimina el material del casillero
+    void sacar_material();
+
+    void eliminar_jugador();
+    
     //Destructor de Muelle
     ~Muelle();
 };

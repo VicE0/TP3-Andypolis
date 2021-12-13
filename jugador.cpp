@@ -23,8 +23,6 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> turno = 0;
     this -> diminutivo = diminutivo;
     this -> codigo_posicion = "";
-    // this -> asignar_objetivos();
-
 }
 
 int Jugador::dar_numero()
@@ -313,13 +311,6 @@ void Jugador::restar_energia(int cantidad){
     energia -= cantidad;
 }
 
-
-// Lista<Objetivo*> * Jugador::obtener_lista_objetivos()
-// {
-//     return lista_objetivos;
-// }
-
-
 void Jugador:: asignar_objetivos()
 {
 
@@ -382,15 +373,12 @@ void Jugador::sortear_objetivos(int id_objetivo)
 
 }
 
-
 void Jugador::agregar_objetivo(Objetivo ** objetivos)
 {
     
     lista_objetivos -> alta(objetivos, lista_objetivos ->obtener_cantidad());
     
 }
-
-
 
 void Jugador::mostrar_objetivos()
 {
@@ -415,13 +403,19 @@ string Jugador::obtener_codigo_posicion(){
     return codigo_posicion;
 }
 
+void Jugador::vaciar_inventario(){
+    for (int i = 0; i < inventario -> obtener_cantidad(); i++){
+        inventario -> obtener_nodo(i) -> obtener_dato() -> vaciar();
+    }
+}
+
 Jugador::~Jugador(){
-    cout << " Muere el jugador " << endl;
     delete inventario;
     inventario = 0;
+
     delete inventario_a_recolectar;
     inventario_a_recolectar = 0;
+
     delete lista_objetivos;
     lista_objetivos = 0;
-
 }

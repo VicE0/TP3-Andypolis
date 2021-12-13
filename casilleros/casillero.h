@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "../edificio.h"
-#include "../material.h"
 #include "../jugador.h"
 
 using namespace std;
@@ -17,7 +16,6 @@ class Casillero
 {
 protected:
     string id_casillero; // "ij"
-    Material * material;
     int fila;
     int columna;
     string nombre;
@@ -90,6 +88,10 @@ public:
     //y inaccesibles devolvera false siempre puesto que no se pueden ubicar materiales en ellos.
     virtual bool existe_material() = 0;
 
+    virtual Material * devolver_material() = 0;
+
+    virtual void sacar_material() = 0;
+
     //PRE: -
     //POST: En el casillero_transitable, obtendremos verdadero si hay un jugador y falso en caso contrario. En casilleros construibles
     //e inaccesibles devolvera false siempre puesto que no se pueden ubicar jugadores en ellos.
@@ -119,19 +121,37 @@ public:
     //POST: Devuelve un entero con la columna del casillero
     virtual int obtener_columna() = 0;
 
+    //PRE: -
+    //POST: Devuelve el puntero del edificio  pedido en caso de que haya uno.
     virtual Edificio * obtener_edificio_construido() = 0;
 
+    // PRE: -
+    // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.
     virtual void comprobar_destruccion_edificio() = 0;
 
+    // PRE: -
+    // POS: Agrega el punter jugador al casillero.
     void agregar_jugador(Jugador * jugador);
 
+    // PRE: -
+    // POS: Devuelve el peso de dicho casillero.
     int obtener_peso();
 
+    // PRE: -
+    // POS: Devuelve el diminutivo del jugador que se encuentre en ese casillero en caso de que haya alguno, sino lo devuelve vacio.
     string obtener_diminutivo_jugador();
 
+    // PRE: -
+    // POS: Devuelve el id del casillero 
     string obtener_id_casillero();
-
-    void eliminar_jugador();
+    
+    // PRE: -
+    // POS: Saca al jugador del casillero
+    virtual void eliminar_jugador() = 0;
+    
+    // PRE: -
+    // POS: Devuelve al jugador incluido en el casillero
+    Jugador * obtener_jugador();
 
 };
 

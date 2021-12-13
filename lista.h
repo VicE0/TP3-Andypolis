@@ -20,30 +20,53 @@ private:
 
 
 public:
+    //PRE: -
+    //POST: Inicializa la lista
     Lista();
 
+    //PRE: Le ingreso el entero de la posicion a buscar
+    //POST: Obtengo el nodo buscado
     Nodo<T> * obtener_nodo(int pos); 
 
+    //PRE: Le ingreso el string del nombre a buscar
+    //POST: Devuelve la posicion del elemento buscado en caso de encontrarlo
     int obtener_pos(string nombre);
 
+    //PRE: -
+    //POST: Devuelve la cantidad almacenada en dicho nodo
     int obtener_cantidad();
 
+    //PRE: -
+    //POST: Cambia la cantidad de dicho nodo
     void cambiar_cantidad(int nueva_cantidad);
 
+    //PRE: -
+    //POST: Devuelve el puntero del dato del nodo pedido.
     T * consulta(int pos); 
     
-    void insertar(T *d); //lo inserta en la ultima posicion
+    //PRE: -
+    //POST: Inserta un dato en la ultima posicion
+    void insertar(T *d); 
 
-    void alta(T * d, int pos);
+    //PRE: Le pido un entero que va a ser la posicion
+    //POST: Da de alta un nuevo nodo en la lista en la posicion pedida
+    void alta(T * d, int pos); 
 
+    //PRE: Le pido un entero que va a ser la posicion a eliminar
+    //POST: Da de baja un nodo en la lista en la posicion pedida
     void baja(int pos); 
 
+    //PRE: -
+    //POST: Me devuelve un booleano al verificar si la canrtidad esta vacia o no
     bool vacia();
 
+    //PRE: -
+    //POST: Muestra por pantalla todos los datos almacenados en la lista
     void mostrar();
 
     string obtener_nombre(int posicion);
 
+    //Destructor de lista
     ~Lista();
 
 

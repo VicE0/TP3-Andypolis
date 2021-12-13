@@ -36,8 +36,6 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
-    // procesar_objetivos(j1,j2);
-
 }
 
 void Mapa::procesar_archivo_mapa(){
@@ -140,16 +138,9 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
     archivo.close();
 }
 
-// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
-// {   
-//     j1 ->asignar_objetivos();
-//     j2 ->asignar_objetivos();
-// }
-
-
 void Mapa::insertar_jugador_mapa(int id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
-    string fila_string = std::to_string(fila);
     string columna_string = std::to_string(columna);
+    string fila_string = std::to_string(fila);
 
     string codigo_posicion = fila_string + columna_string;
     
@@ -771,7 +762,7 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
 // 11) MOVERSE A UNA COORDENADA ------------------------------------
 void Mapa::moverse(Jugador * jugador){
     string posicion_origen = jugador -> obtener_codigo_posicion();
-    string fila_destino, columna_destino, posicion_destino, s_casillero;
+    string fila_destino, columna_destino, posicion_destino, codigo_casillero_destino;
     int id_jugador = jugador -> obtener_id();
     Casillero * origen, * destino;
     cout << "\n Fila destino: ";
@@ -786,16 +777,19 @@ void Mapa::moverse(Jugador * jugador){
     ListaObjetivos<string> * recorrido = grafo->obtener_recorrido();
 
     if ( grafo->obtener_energia_camino() <= jugador->obtener_energia() ){
-        s_casillero = recorrido->obtener_datos(1);
+        codigo_casillero_destino = recorrido->obtener_datos(1);
         origen = grafo->obtener_casillero(posicion_origen);
-        destino = grafo->obtener_casillero(s_casillero);
+        destino = grafo->obtener_casillero(codigo_casillero_destino);
+
         if ( aceptar_condiciones() ){
             destino->agregar_jugador(jugador);
             origen->eliminar_jugador();
-            jugador->agregar_codigo_posicion(s_casillero);
+            jugador->agregar_codigo_posicion(codigo_casillero_destino);
+            recoger_materiales(jugador, recorrido);
+            jugador -> restar_energia(grafo->obtener_energia_camino());
         }
     } else if ( grafo->obtener_energia_camino() != INFINITO ) {
-        cout << " No alcanza la energia necesaria . " << endl;
+        cout << " No alcanza la energia para hacer este camino. " << endl;
     }
 }
 
@@ -804,6 +798,22 @@ int Mapa::generar_numero_random(int min, int max){
     int range = max + 1  - min;  
     return min + ( rand() % range);
 
+}
+
+void Mapa::recoger_materiales(Jugador * jugador, ListaObjetivos<string> * recorrido){
+    string codigo_casillero;
+    Casillero * casillero;
+    Material * material;
+
+    for (int i = 1; i <= recorrido -> obtener_cantidad_elementos(); i++){
+        codigo_casillero = recorrido -> obtener_datos(i);
+        casillero = grafo -> obtener_casillero(codigo_casillero);
+        if (casillero -> existe_material()){
+            material = casillero -> devolver_material();
+            jugador -> sumar_cantidad_material(material -> obtener_nombre(), material -> obtener_cantidad_disponible(), true);
+            casillero -> sacar_material();
+        }
+    }
 }
 
 void Mapa::consultar_material_a_colocar(int &cant_gen_piedras, int &cant_gen_maderas, int &cant_gen_metales, int &cant_gen_coins,string &material_a_colocar ){
@@ -1064,6 +1074,38 @@ void Mapa::guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador)
     }
 }
 
+void Mapa::guardar_inventario(){
+    Casillero * casillero_j1, * casillero_j2;
+    Lista<Material> * inventario_j1, * inventario_j2;
+
+    casillero_j1 = buscar_posicion_jugador(1);
+    casillero_j2 = buscar_posicion_jugador(2);
+
+    inventario_j1 = casillero_j1 -> obtener_jugador() -> obtener_inventario();
+    inventario_j2 = casillero_j2 -> obtener_jugador() -> obtener_inventario();
+
+    ofstream archivo(ARCHIVO_MATERIALES);
+    for (int i = 0; i < inventario_j1 -> obtener_cantidad(); i++){
+        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_nombre();
+        archivo << inventario_j1 -> obtener_nodo(i) -> obtener_dato() -> obtener_cantidad_disponible();
+        archivo << inventario_j2 -> obtener_nodo(i) -> obtener_dato() -> obtener_cantidad_disponible();
+        archivo << endl;
+    }
+    archivo.close();
+}
+
+Casillero * Mapa::buscar_posicion_jugador(int id_jugador){
+    Casillero * casillero;
+    for ( int i = 0; i < cantidad_filas; i++){
+            for ( int j = 0; j < cantidad_columnas ; j++){
+                if ( mapa[i][j] -> existe_jugador() && id_jugador == mapa[i][j] -> devolver_id_jugador()){
+                    casillero = mapa[i][j];
+                }
+        }
+    }
+    return casillero;
+}      
+
 Mapa::~Mapa(){
 
     if (mapa_bien_cargado && ubicaciones_bien_cargadas){
@@ -1076,6 +1118,8 @@ Mapa::~Mapa(){
         guardar_edificios(archivo_ubicaciones, 2);    
         archivo_ubicaciones.close();            
     }
+    
+    guardar_inventario();
 
     if (mapa_bien_cargado){
         for ( int i = 0; i < cantidad_filas; i++){

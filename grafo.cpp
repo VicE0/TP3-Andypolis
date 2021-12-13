@@ -14,9 +14,9 @@ CaminoMinimo * Grafo::obtener_camino(){
     return camino_minimo;
 }
 
-Casillero * Grafo::obtener_casillero(string pos){
+Casillero * Grafo::obtener_casillero(string codigo_posicion){
     Casillero * aux = nullptr;
-    int posicion = vertices->obtener_pos(pos);
+    int posicion = vertices->obtener_pos(codigo_posicion);
     aux = (*vertices->obtener_nodo(posicion)->obtener_dato());
 
     return aux;
@@ -159,8 +159,8 @@ void Grafo::agregar_caminos(){
             pos_casillero_superior = vertices->obtener_pos(casillero_superior);
             pos_casillero_izquierdo = vertices->obtener_pos(casillero_izquierdo);
 
-            peso_origen_j1 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(1);
-            peso_origen_j2 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(2);
+            peso_origen_j1 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(JUGADOR_1);
+            peso_origen_j2 = (*vertices->obtener_nodo(pos_origen)->obtener_dato())->obtener_costo_energia(JUGADOR_2);
 
             actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_derecho, peso_origen_j1, peso_origen_j2);
             actualizar_matrices_de_adyacencia(pos_origen, pos_casillero_inferior, peso_origen_j1, peso_origen_j2);
@@ -183,11 +183,12 @@ void Grafo::usar_camino_minimo(string origen, string destino, int id){
         cout << " El vertice " << origen << " no existe en el grafo." << endl;
     }
 
-    if ( pos_destino == NO_ENCONTRADO){
+    else if ( pos_destino == NO_ENCONTRADO){
         cout << " El vertice " << destino << " no existe en el grafo." << endl;
     }
-
-    usar_camino_minimo(pos_origen, pos_destino, id);
+    
+    else
+        usar_camino_minimo(pos_origen, pos_destino, id);
 }
 
 void Grafo::usar_camino_minimo(int origen, int destino, int id){
@@ -233,9 +234,14 @@ Grafo::~Grafo(){
     matriz_adyacente_j1 = nullptr;
     liberar_matriz_adyacente(2);
     matriz_adyacente_j2 = nullptr;
-
-    delete vertices;
-    this->vertices = 0;
-    delete camino_minimo;
-    camino_minimo = nullptr;
+    
+    if (vertices ->vacia()){
+        delete vertices;
+        this->vertices = 0;
+    }
+    
+    if (camino_minimo){
+        delete camino_minimo;
+        camino_minimo = nullptr;
+    }
 }

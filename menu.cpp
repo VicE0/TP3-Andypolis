@@ -46,6 +46,8 @@ int elegir_opcion(){
         cin >> opcion;
     }
 
+    system(CLR_SCREEN);
+
     return opcion;
 }
 
@@ -151,6 +153,8 @@ void empezar_partida(Mapa * mapa, Jugador * j1, Jugador * j2){
         mapa -> validar_coordenada(fila2, columna2);
     }
 
+    j1 -> vaciar_inventario();
+    j2 -> vaciar_inventario();
     mapa -> insertar_jugador_mapa(j1 -> obtener_id(),j1,j2, fila1, columna1);
     mapa -> insertar_jugador_mapa(j2 -> obtener_id(),j1,j2, fila2, columna2);
     partida(mapa, j1 , j2);
@@ -176,7 +180,7 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
             mostrar_menu_partida();
             opcion = elegir_opcion();
             procesar_opcion_jugador(opcion, mapa, jugador,recolecto);
-            if (opcion == 10){
+            if (opcion == RECOLECTAR_RECURSOS){
                 recolecto = true;
             }
         }
@@ -191,7 +195,7 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
 
     int opcion;
     if (mapa -> verificar_partida_empezada()){
-        cout << "\n ¡ BIENVENIDOS DEVUELTA A ANDYPOLIS ! \n" << endl;
+        cout << "\n ¡ BIENVENIDOS DE VUELTA A ANDYPOLIS ! \n" << endl;
         partida(mapa, j1, j2);
 
     }
@@ -199,10 +203,9 @@ void selector_de_menu(Mapa * mapa, Jugador * j1, Jugador * j2){
     else{
     cout << "\n ¡ BIENVENIDOS A ANDYPOLIS ! \n" << endl;
         do {
-
+            
             mostrar_menu_principal();
             opcion = elegir_opcion();
-
             procesar_opcion_principal(opcion, mapa, j1, j2);
 
         }while ( opcion != P_GUARDAR_SALIR );
@@ -220,12 +223,12 @@ void randomizador_de_turnos(Jugador * j1, Jugador * j2){
     int jugador_que_empieza = rand() % 2 + 1;
 
     if (jugador_que_empieza == 1){
-        j1 -> establecer_turno(1);
-        j2 -> establecer_turno(2);
+        j1 -> establecer_turno(JUGADOR_1);
+        j2 -> establecer_turno(JUGADOR_2);
     }
     else{
-        j1 -> establecer_turno(2);
-        j2 -> establecer_turno(1);
+        j1 -> establecer_turno(JUGADOR_2);
+        j2 -> establecer_turno(JUGADOR_1);
     }
 }
 

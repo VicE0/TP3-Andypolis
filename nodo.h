@@ -12,15 +12,24 @@ private:
     Nodo<T> * siguiente;
 
 public:
-    Nodo<T>(T * pd);
+    // CONSTRUCTOR
+    Nodo<T>(T * d);
 
+    // PRE: -
+    // POST: devuelve el dato que contiene el nodo
     T * obtener_dato();
 
+    // PRE: -
+    // POST: devuelve el nodo siguiente
     Nodo<T> * obtener_siguiente();
 
+    // PRE: Necesito darle un nodo 
+    // POST: Cambio el nodo siguiente con el nuevo nodo pasado
     void cambiar_siguiente(Nodo<T> * pn);
 
-    void pcambiar_dato(T d);
+    // PRE: Necesito apsarle un nodo 
+    // POST: Cambia el dato en el nodo ingresado
+    void cambiar_dato(T d);
 
     ~Nodo();
 
@@ -48,7 +57,7 @@ void Nodo<T>::cambiar_siguiente(Nodo * pn){
 }
 
 template <typename T>
-void Nodo<T>::pcambiar_dato(T d){
+void Nodo<T>::cambiar_dato(T d){
     pdato = d;
 }
 

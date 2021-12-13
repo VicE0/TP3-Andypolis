@@ -72,7 +72,13 @@ public:
     //POST: Muestra la cantiad del material
     void mostrar_cantidad();
     
-    virtual void saludar();
+    //PRE:-
+    //POST: Le muestra por pantalla un mensaje al jugador explicando que es.
+    void saludar();
+
+    //PRE:-
+    //POST: Reduce la cantidad del material a 0.
+    void vaciar();
 
 };
 

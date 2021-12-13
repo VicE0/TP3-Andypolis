@@ -28,7 +28,7 @@ string Betun::obtener_nombre(){
 }
 
 int Betun::obtener_costo_energia(int id_jugador){
-    return 0;
+    return peso;
 }
 
 void Betun::agregar_edificio(string nombre, int id_jugador, int vida,int piedra, int madera, int metal, int maximo){
@@ -96,6 +96,24 @@ Edificio * Betun::obtener_edificio_construido(){
 }
 
 void Betun::comprobar_destruccion_edificio(){}
+
+Material * Betun::devolver_material(){
+    return material;
+}
+
+void Betun::sacar_material(){
+    if (existe_material()){
+        delete material;
+        material = 0;
+    }
+}
+
+void Betun::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 0;
+    }
+}
 
 Betun::~Betun(){
     cout << " destructor de betun " << endl;

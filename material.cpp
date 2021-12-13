@@ -76,3 +76,7 @@ void Material :: mostrar_cantidad(){
 void Material :: saludar(){
   cout << " Soy un/a "<< nombre << " y estoy en el casillero consultado" <<endl;
 }
+
+void Material :: vaciar(){
+  cantidad = 0;
+}
