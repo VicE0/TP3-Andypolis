@@ -27,15 +27,31 @@ class Objetivo
     protected:
         int id_objetivo;
         int cantidad;
+        
         bool cumplido;
       
-        int andycoins_totales; 
-        int bombas_inventario;
-        int bombas_usadas;
-        int piedras_inventario;
-        int bombas_compradas;
-        int escuelas_construidas;
+        bool mina_construida;
+        bool mina_oro_construida;
+        bool obelisco_construido;
+        bool aserradero_construido;
+        bool escuela_construida;
+        bool fabrica_construida;
+        bool planta_electrica_construida;
+
+        int minas_construidas;
+        int edificios_construidos;
         int energia_jugador;
+        int bombas_inventario;
+        int piedras_inventario;
+        int escuelas_construidas;
+
+        int andycoins_totales; 
+        int bombas_usadas;
+        int bombas_compradas;
+        
+        
+        
+        
         
 
     public:
@@ -66,7 +82,7 @@ class Objetivo
 
         virtual void mostrar_progreso() = 0;
 
-        virtual void progreso(Lista <Material> * inventario, int &energia) = 0;
+        virtual void progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo) = 0;
 
 
         ~Objetivo();

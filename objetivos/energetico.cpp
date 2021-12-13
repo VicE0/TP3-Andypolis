@@ -18,11 +18,23 @@ void Energetico::mostrar_progreso()
 void Energetico::mostrar_descripcion()
 {
     cout << "\nEnergetico: haber terminado un turno con "<< cantidad << " puntos de energia"<<endl;
-    mostrar_progreso();
+
+    if (cumplido)
+    {
+        cout << "OBJETIVO CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
 }
 
 
-void Energetico::progreso(Lista <Material> * inventario, int &energia)
+void Energetico::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
 {
     this ->energia_jugador = energia;
+
+    if (energia_jugador == cantidad)
+    {
+        cumplido = true;
+    }
 }

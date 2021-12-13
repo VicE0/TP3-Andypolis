@@ -3,7 +3,7 @@
 Letrado::Letrado(int id_objetivo,int cantidad,  bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = LETRADO;
-    this -> cantidad = 100; //CANTIDAD_MAXIMA ESCUELAS
+    this -> cantidad = 0;
     this -> escuelas_construidas = 0;
     this -> cumplido = false;
 }
@@ -18,12 +18,30 @@ void Letrado::mostrar_progreso()
 void Letrado::mostrar_descripcion()
 {
     cout << "\nLetrado: haber construido "<< cantidad << " escuelas"<<endl;
-    mostrar_progreso();
+    if(cumplido)
+    {
+        cout << "¡OBJETIVO CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
+    
 }
 
 
 
-void Letrado::progreso(Lista <Material> * inventario, int &energia)
- {
-     cout << endl;
- }
+void Letrado::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
+{
+    this -> cantidad = edificio_objetivo ->obtener_maximo_construir();
+
+    if (edificio_objetivo -> obtener_nombre() == ESCUELA)
+    {
+        escuelas_construidas++;
+    }
+
+    if (escuelas_construidas == cantidad)
+    {
+        cumplido = true;
+    }
+
+}

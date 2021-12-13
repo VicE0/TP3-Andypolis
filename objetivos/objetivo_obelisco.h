@@ -16,7 +16,7 @@ class Objetivo_obelisco: public Objetivo
 
         void mostrar_progreso();
 
-        void progreso(Lista <Material> *inventario, int &energia);
+        void progreso(Lista <Material> *inventario, int &energia, Edificio * edificio_objetivo);
 
 };
 

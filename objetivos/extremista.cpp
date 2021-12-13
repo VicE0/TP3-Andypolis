@@ -19,11 +19,17 @@ void Extremista::mostrar_progreso()
 void Extremista::mostrar_descripcion()
 {
     cout << "\nExtremista: haber comprado "<< cantidad << " bombas en una partida"<<endl;
-    mostrar_progreso();
+    if (cumplido)
+    {
+        cout << "OBJETIVO CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
 }
 
 
-void Extremista::progreso(Lista <Material> * inventario, int &energia)
+void Extremista::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
  {
      cout << endl;
  }

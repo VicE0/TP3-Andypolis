@@ -37,7 +37,9 @@ class Jugador
         int objetivos_cumplidos;
         int turno;
         Objetivo* objetivo_principal;
-    
+
+        Edificio* edificio_objetivo;
+
         string diminutivo;
 
         ListaObjetivos<Objetivo*>  *lista_objetivos;
@@ -63,8 +65,7 @@ class Jugador
         //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
 
-        //PRE: Recibe el nombre respectivo del matrerial
-        //POS: Devuelve un puntero del material al que le pertenece el nombre
+
         Material * obtener_material(string nombre);
 
         //PRE: Recibe el nombre respectivo del matrerial que se desea recolectar
@@ -184,9 +185,12 @@ class Jugador
         //POS: Crea el array con el obelisco
         Objetivo * asignar_principal(int id_objetivo);
 
+        void actualizar_progreso_objetivos(Edificio* edificio_objetivo);
+
         //PRE: ~
         //POS: Retorna TRUE si el jugador cumplió 2 de sus 3 objetivos secundarios
         bool objetivos_secundarios_cumplidos();
+
 
         bool objetivo_princiapal_cumplido();
 

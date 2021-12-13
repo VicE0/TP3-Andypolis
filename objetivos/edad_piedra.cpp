@@ -18,11 +18,18 @@ void Edad_piedra::mostrar_progreso()
 void Edad_piedra::mostrar_descripcion()
 {
     cout << "\nEdad de piedra: tener en el inventario " << cantidad << " piedras" <<endl;
-    mostrar_progreso();
+    
+    if (cumplido)
+    {
+        cout << "OBJETIVO_CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
 }
 
 
-void Edad_piedra::progreso(Lista <Material> * inventario, int &energia)
+void Edad_piedra::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
 {
     for (int i = 0; i < inventario ->obtener_cantidad(); i++)
     {
@@ -31,4 +38,10 @@ void Edad_piedra::progreso(Lista <Material> * inventario, int &energia)
             this -> piedras_inventario += inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
         }
     } 
+
+    if (piedras_inventario == cantidad)
+    {
+        cumplido = true;
+    }
 } 
+

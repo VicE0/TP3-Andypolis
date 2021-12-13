@@ -21,7 +21,7 @@ void Bombardero::mostrar_descripcion()
     mostrar_progreso();
 }
 
-void Bombardero::progreso(Lista <Material> * inventario, int &energia)
+void Bombardero::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
  {
      cout << endl;
  }

@@ -297,11 +297,17 @@ public:
 
     //PRE:
     //POS:
+    void actualiza_progreso_objetivos(Jugador * jugador);
+
+    //PRE:
+    //POS:
     int devolver_cantidad_filas();
 
     //PRE:
     //POS:
     int devolver_cantidad_columnas();
+
+    bool ganar_partida(Jugador * jugador);
 
     //Detructor
     //PRE: - 

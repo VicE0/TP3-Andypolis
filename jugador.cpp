@@ -385,24 +385,30 @@ ListaObjetivos<Objetivo*> * Jugador::obtener_lista_objetivos()
 }
 
 
+
+void Jugador::actualizar_progreso_objetivos(Edificio * edificio_objetivo)
+{
+    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos(); i++)
+    {
+        lista_objetivos -> obtener_datos(i) -> progreso(inventario, energia, edificio_objetivo);
+    }
+}
+
+
 void Jugador::mostrar_objetivos()
 {
   
-    // lista_objetivos ->obtener_siguiente() -> obtener_data() ->progreso(inventario, energia);
-
     for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos();i++)
     {
-        lista_objetivos -> obtener_datos(i) ->progreso(inventario, energia);
-        lista_objetivos ->obtener_datos(i) ->mostrar_descripcion();
+        lista_objetivos -> obtener_datos(i) -> mostrar_descripcion();
     }
-   
+
     cout << "\n" <<endl;
 }
 
 
 bool Jugador::objetivos_secundarios_cumplidos()
 {
-
     for (int i = 0; i < 9; i++)
     {
         if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())

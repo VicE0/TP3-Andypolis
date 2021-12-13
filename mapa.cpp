@@ -32,11 +32,12 @@ int Mapa::devolver_cantidad_filas(){
 
 void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
 
-    procesar_objetivos(j1,j2);
+    
     procesar_archivo_materiales(j1,j2);
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
+    procesar_objetivos(j1,j2);
     
 }
 
@@ -147,19 +148,24 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
     
     int id_objetivo;
 
-    j1 -> agregar_objetivo( j1 ->asignar_principal(1));
+    j1 -> agregar_objetivo(j1 -> asignar_principal(1));
+    j2 -> agregar_objetivo(j2 -> asignar_principal(1));
+   
     for (int i = 0; i < 4; i++)
     {   
-        id_objetivo = 5;
-        j1 ->agregar_objetivo(j1 -> sortear_objetivos(id_objetivo));
+        id_objetivo = rand() % 10;
+        j1 -> agregar_objetivo(j1-> sortear_objetivos(id_objetivo));
+    
     }
+    
 
-    j2 -> agregar_objetivo(j2 ->asignar_principal(1));
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {   
-        id_objetivo = 5;
-        j2 ->agregar_objetivo(j2 ->sortear_objetivos(id_objetivo));
+        id_objetivo = rand() % 10;
+        j2 -> agregar_objetivo(j2 ->sortear_objetivos(id_objetivo));
+        
     }
+    
 
 }
 
@@ -513,6 +519,7 @@ void Mapa::listar_edificios_construidos(Jugador * jugador){
             }
         }
     }
+
     cout << "\n";
 }
 
@@ -730,10 +737,52 @@ void Mapa::mostrar_inv(Jugador * jugador){
     jugador -> mostrar_inventario();
 }
 
+
+void Mapa::actualiza_progreso_objetivos(Jugador * jugador)
+{
+    int id_jugador = jugador->dar_numero();
+   ;
+    int codigo_edificio;
+
+    string nombre_edificio;
+
+    Edificio * aux = nullptr;
+
+    cout << "\n";
+    for ( int i = 0; i < cantidad_filas; i++)
+    {
+        for ( int j = 0; j < cantidad_columnas ; j++)
+        {
+            
+            if ( mapa[i][j]->existe_edificio() )
+            {
+
+                aux = mapa[i][j]->obtener_edificio_construido();
+
+                codigo_edificio = aux->devolver_id_jugador();
+                
+                if ( id_jugador == codigo_edificio)
+                {
+                    nombre_edificio = aux->obtener_nombre();
+                    jugador -> actualizar_progreso_objetivos(aux); 
+                }
+            }
+           
+        }
+        
+    }
+    
+}
+
+
 // 9) MOSTRAR OBJETIVOS
 void Mapa::mostrar_objetivos_jugadores(Jugador * jugador)
 {
+
+    actualiza_progreso_objetivos(jugador);
+
     jugador -> mostrar_objetivos();
+
 }
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
@@ -1001,6 +1050,14 @@ void Mapa::lluvia_recursos(){
 
     cout <<endl;
 }
+
+bool Mapa::ganar_partida(Jugador* jugador)
+{
+    bool partida_ganada = false;
+
+    return partida_ganada = jugador -> gano_juego();
+}
+
 
 // -------------- FINALIZA PUNTOS DEL MENU -------------------------------
 void Mapa::guardar_materiales(std::ofstream &archivo_ubicaciones){

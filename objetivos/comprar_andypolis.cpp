@@ -18,10 +18,16 @@ void Comprar_andypolis::mostrar_progreso()
 void Comprar_andypolis::mostrar_descripcion()
 {
     cout << "\nComprar Andypolis: juntar" << cantidad << " Andycoins a lo largo de la partida"<<endl;
-    mostrar_progreso();
+    if (cumplido)
+    {
+        cout << "OBJETIVO CUMPLIDO!" << endl;
+    }
+    else{
+        mostrar_progreso();
+    }
 }
 
-void Comprar_andypolis::progreso(Lista <Material> * inventario, int &energia)
+void Comprar_andypolis::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
  {
      cout << endl;
  }
