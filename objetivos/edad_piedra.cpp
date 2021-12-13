@@ -35,11 +35,11 @@ void Edad_piedra::progreso(Lista <Material> * inventario, int &energia, Edificio
     {
         if (inventario -> obtener_nodo(i) ->obtener_dato() ->obtener_nombre() == PIEDRA)
         {
-            this -> piedras_inventario += inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
+            this -> piedras_inventario = inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
         }
     } 
 
-    if (piedras_inventario == cantidad)
+    if (piedras_inventario >= cantidad)
     {
         cumplido = true;
     }

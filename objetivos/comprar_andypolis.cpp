@@ -4,7 +4,8 @@ Comprar_andypolis::Comprar_andypolis(int id_objetivo,int cantidad, bool cumplido
 {
     this -> id_objetivo = COMPRAR_ANDYPOLIS;
     this -> cantidad = 100000;
-    this ->cumplido = false;
+    this -> andycoins_totales = 0;
+    this -> cumplido = false;
 }
 
 
@@ -17,7 +18,7 @@ void Comprar_andypolis::mostrar_progreso()
 
 void Comprar_andypolis::mostrar_descripcion()
 {
-    cout << "\nComprar Andypolis: juntar" << cantidad << " Andycoins a lo largo de la partida"<<endl;
+    cout << "\nComprar Andypolis: juntar " << cantidad << " Andycoins a lo largo de la partida"<<endl;
     if (cumplido)
     {
         cout << "OBJETIVO CUMPLIDO!" << endl;
@@ -28,6 +29,16 @@ void Comprar_andypolis::mostrar_descripcion()
 }
 
 void Comprar_andypolis::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
- {
-     cout << endl;
- }
+{
+    for (int i = 0; i < inventario ->obtener_cantidad(); i++)
+    {
+
+        this -> andycoins_totales = inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_andycoins_totales();
+
+    }
+
+    if (andycoins_totales >= cantidad)
+    {
+        cumplido = true;
+    }
+}

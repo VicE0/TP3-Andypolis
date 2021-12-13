@@ -9,6 +9,7 @@ Jugador::Jugador(){
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = "";
+    this -> ganador = false;
 }
 
 Jugador::Jugador(int id_jugador, string diminutivo)
@@ -21,6 +22,7 @@ Jugador::Jugador(int id_jugador, string diminutivo)
     this -> inventario_a_recolectar = new Lista<Material>;
     this -> turno = 0;
     this -> diminutivo = diminutivo;
+    this -> ganador = false;
 
 }
 
@@ -327,7 +329,7 @@ Objetivo* Jugador::sortear_objetivos(int id_objetivo)
 {
     Objetivo * obj = nullptr;
 
-    int cantidad; // al jugador
+    int cantidad;
     for(int i = 0; i < 9; i ++)
     {
         switch (id_objetivo)
@@ -397,7 +399,7 @@ void Jugador::actualizar_progreso_objetivos(Edificio * edificio_objetivo)
 
 void Jugador::mostrar_objetivos()
 {
-  
+     
     for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos();i++)
     {
         lista_objetivos -> obtener_datos(i) -> mostrar_descripcion();
@@ -409,7 +411,7 @@ void Jugador::mostrar_objetivos()
 
 bool Jugador::objetivos_secundarios_cumplidos()
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos()-1; i++)
     {
         if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())
         {
@@ -420,16 +422,15 @@ bool Jugador::objetivos_secundarios_cumplidos()
     return (objetivos_cumplidos == 2);
 }
 
-bool Jugador::objetivo_princiapal_cumplido()
+bool Jugador::objetivo_principal_cumplido()
 {
-    return objetivo_principal ->objetivo_cumplido();
+    return objetivo_principal -> objetivo_cumplido();
 }
 
 bool Jugador::gano_juego()
 {
-    bool ganador = false;
-    
-    if(objetivo_princiapal_cumplido()|| objetivos_secundarios_cumplidos())
+   
+    if(objetivo_principal_cumplido()|| objetivos_secundarios_cumplidos())
     {
         ganador = true;
     }

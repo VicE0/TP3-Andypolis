@@ -36,13 +36,13 @@ class Jugador
         int energia_recolectada;
         int objetivos_cumplidos;
         int turno;
+        bool ganador;
         Objetivo* objetivo_principal;
-
-        Edificio* edificio_objetivo;
 
         string diminutivo;
 
         ListaObjetivos<Objetivo*>  *lista_objetivos;
+
         Lista<Material> * inventario;
         Lista<Material> * inventario_a_recolectar;
 
@@ -187,12 +187,11 @@ class Jugador
 
         void actualizar_progreso_objetivos(Edificio* edificio_objetivo);
 
-        //PRE: ~
-        //POS: Retorna TRUE si el jugador cumplió 2 de sus 3 objetivos secundarios
+
         bool objetivos_secundarios_cumplidos();
 
 
-        bool objetivo_princiapal_cumplido();
+        bool objetivo_principal_cumplido();
 
         bool gano_juego();
 

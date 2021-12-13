@@ -150,10 +150,10 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 
     j1 -> agregar_objetivo(j1 -> asignar_principal(1));
     j2 -> agregar_objetivo(j2 -> asignar_principal(1));
-   
+
     for (int i = 0; i < 4; i++)
     {   
-        id_objetivo = rand() % 10;
+        id_objetivo = rand()%10;
         j1 -> agregar_objetivo(j1-> sortear_objetivos(id_objetivo));
     
     }
@@ -161,7 +161,7 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 
     for (int i = 0; i < 4; i++)
     {   
-        id_objetivo = rand() % 10;
+        id_objetivo = rand()%10;
         j2 -> agregar_objetivo(j2 ->sortear_objetivos(id_objetivo));
         
     }
@@ -617,7 +617,14 @@ void Mapa::realizar_ataque(Jugador * jugador){
         if ( id_jugador != codigo_edificio ){
             if ( aceptar_condiciones() ){
                 jugador->obtener_material(BOMBA)->restar_material(1);
+
                 edificio -> atacar();
+
+                for(int i = 0; i < jugador ->obtener_inventario() ->obtener_cantidad(); i++)
+                {
+                    jugador ->obtener_inventario()->obtener_nodo(i) ->obtener_dato() ->sumar_bombas_usadas(1);
+                }
+
                 mapa[fila][columna]->comprobar_destruccion_edificio();
                 jugador->restar_energia(30);
             }
@@ -705,6 +712,11 @@ void Mapa::comprar_bombas(Jugador * jugador){
             jugador->obtener_material(BOMBA)->sumar_material(cantidad_requerida);
             // Resto los andycoins utilizados: 
             jugador->obtener_material(COINS)->restar_material(precio_total);
+
+            for (int i = 0; i < jugador ->obtener_inventario() ->obtener_cantidad(); i++)
+            {
+                jugador -> obtener_inventario() ->obtener_nodo(i) ->obtener_dato() ->sumar_bombas_compradas(cantidad_requerida);
+            }
         } else {
             cout << "\n -> No tenes la cantidad necesaria de Andycoins para comprar tantas bombas.\n" << endl;
         }
@@ -741,48 +753,38 @@ void Mapa::mostrar_inv(Jugador * jugador){
 void Mapa::actualiza_progreso_objetivos(Jugador * jugador)
 {
     int id_jugador = jugador->dar_numero();
-   ;
     int codigo_edificio;
-
-    string nombre_edificio;
-
+  
     Edificio * aux = nullptr;
 
-    cout << "\n";
     for ( int i = 0; i < cantidad_filas; i++)
     {
         for ( int j = 0; j < cantidad_columnas ; j++)
         {
             
-            if ( mapa[i][j]->existe_edificio() )
+            if (mapa[i][j]->existe_edificio() )
             {
-
-                aux = mapa[i][j]->obtener_edificio_construido();
+                aux = mapa[i][j]-> obtener_edificio_construido();
 
                 codigo_edificio = aux->devolver_id_jugador();
                 
                 if ( id_jugador == codigo_edificio)
                 {
-                    nombre_edificio = aux->obtener_nombre();
                     jugador -> actualizar_progreso_objetivos(aux); 
                 }
+
             }
-           
-        }
+       }
         
     }
-    
 }
 
 
 // 9) MOSTRAR OBJETIVOS
 void Mapa::mostrar_objetivos_jugadores(Jugador * jugador)
 {
-
     actualiza_progreso_objetivos(jugador);
-
     jugador -> mostrar_objetivos();
-
 }
 
 // 10) RECOLECTAR RECURSOS PRODUCIDOS ------------------------------------
@@ -816,8 +818,15 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
         else if (nombre_edificio == ASERRADERO){     
             madera += total_brindado;
         } 
+
         else if (nombre_edificio == MINA_ORO || nombre_edificio == ESCUELA ){
+            
             andycoin += total_brindado;
+
+            for(int i = 0; i < jugador ->obtener_inventario() ->obtener_cantidad(); i++)
+            {
+                jugador ->obtener_inventario()->obtener_nodo(i) ->obtener_dato() ->sumar_andycoins_totales(andycoin);
+            }
         } 
         else if (nombre_edificio == PLANTA_ELECTRICA){
             energia_rec += total_brindado;

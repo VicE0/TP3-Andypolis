@@ -104,6 +104,9 @@ public:
     //POS:
     void procesar_objetivos(Jugador * j1, Jugador *  j2);
 
+    
+    void procesar_objetivo_principal(Jugador * j1, Jugador *  j2);
+
     //PRE:
     //POS:
     bool verificacion_energia(int cantidad_disponible, int cantidad_necesaria);

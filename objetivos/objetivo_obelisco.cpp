@@ -4,7 +4,6 @@ Objetivo_obelisco::Objetivo_obelisco(int id_objetivo,int cantidad, bool cumplido
 {
     this -> id_objetivo = CONSTRUIR_OBELISCO;
     this -> cantidad = 1;
-    // this -> obelisco_construido = false;
     this ->cumplido = false;
 }
 
@@ -18,13 +17,18 @@ void Objetivo_obelisco::mostrar_progreso()
 void Objetivo_obelisco::mostrar_descripcion()
 {
     cout << "PRINCIPAL:" << endl;
-    cout << "\nMas alto que las nubes: construir el obelisco"<<endl;
+    cout << "\nMAS ALTO QUE LAS NUBES: CONSTRUIR EL OBELISCO"<<endl;
 
     if (cumplido)
     {
         cout << "¡¡OBJETIVO PRINCIPAL CUMPLIDO!!" << endl;
     }
-    mostrar_progreso();
+    else
+    {
+        mostrar_progreso();
+
+    }
+    
     cout << "-------------------------------------" << endl;
 }
 

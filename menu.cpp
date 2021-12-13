@@ -132,6 +132,10 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
     case FINALIZAR_TURNO:
             jugador->sumar_energia(20);
             cout << "\n\tSu turno ha finalizado.\n" << endl;
+            if(mapa -> ganar_partida(jugador))
+            {
+                mensaje_ganador(jugador);
+            }
         break;
     
     case GUARDAR_SALIR:
@@ -271,6 +275,17 @@ void randomizador_de_turnos(Jugador * j1, Jugador * j2){
     else{
         j1 -> establecer_turno(2);
         j2 -> establecer_turno(1);
+    }
+}
+
+void mensaje_ganador(Jugador * jugador)
+{
+    if (jugador -> dar_numero() == 1)
+    {
+        cout << "¡FELICIDADES JUGADOR 1, HAS GANADO EL JUEGO!" << endl;
+    }
+    else {
+        cout << "¡FELICIDADES JUGADOR 2, HAS GANADO EL JUEGO!" << endl;
     }
 }
 

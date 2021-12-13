@@ -4,7 +4,7 @@ Extremista::Extremista(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(
 {
     this -> id_objetivo = EXTREMISTA;
     this -> cantidad = 500;
-    this -> bombas_compradas;
+    this -> bombas_compradas = 0;
     this ->cumplido = false;
 }
 
@@ -12,7 +12,7 @@ Extremista::Extremista(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(
 void Extremista::mostrar_progreso()
 {
     cout << "Progreso: " << bombas_compradas << "/" << cantidad << endl;
-
+    
 }
 
 
@@ -30,6 +30,16 @@ void Extremista::mostrar_descripcion()
 
 
 void Extremista::progreso(Lista <Material> * inventario, int &energia, Edificio * edificio_objetivo)
- {
-     cout << endl;
- }
+{
+    for (int i = 0; i < inventario ->obtener_cantidad(); i++)
+    {
+
+        this -> bombas_compradas = inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_bombas_compradas();
+
+    }
+
+    if (bombas_compradas >= cantidad)
+    {
+        cumplido = true;
+    }
+}

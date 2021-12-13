@@ -35,11 +35,11 @@ void Armado::progreso(Lista <Material> * inventario, int &energia, Edificio * ed
     {
         if (inventario -> obtener_nodo(i) ->obtener_dato() ->obtener_nombre() == BOMBA)
         {
-            this -> bombas_inventario += inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
+            this -> bombas_inventario = inventario ->obtener_nodo(i) ->obtener_dato() ->obtener_cantidad_disponible();
         }
     }
 
-    if (bombas_inventario == cantidad)
+    if (bombas_inventario >= cantidad)
     {
         cumplido = true;
     }
