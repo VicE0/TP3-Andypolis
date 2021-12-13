@@ -16,7 +16,7 @@ public:
 
     virtual void camino_minimo(int origen, int destino) = 0;
 
-    virtual ListaObjetivos<string> * obtener_camino_recorrido() = 0;
+    virtual ListaSP<string> * obtener_camino_recorrido() = 0;
 
     virtual int obtener_energia_gastada() = 0;
 

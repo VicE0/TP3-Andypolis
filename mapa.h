@@ -311,7 +311,7 @@ public:
 
     //PRE: Necesita un jugador y una lista de strings con al menos 1 elemento
     //POS: Levanta los materiales de los casilleros que recorrio si es que tiene
-    void recoger_materiales(Jugador * jugador, ListaObjetivos<string> * recorrido);
+    void recoger_materiales(Jugador * jugador, ListaSP<string> * recorrido);
 
     //PRE: Necesita el id del jugador que quiere buscar
     //POS: Devuelve el casillero donde se encuentra ese jugador

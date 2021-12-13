@@ -221,7 +221,7 @@ void Grafo::actualizar_matriz_de_adyacencia_j2(int posicion_origen, int posicion
     matriz_adyacente_j2[posicion_destino][posicion_origen] = peso_origen_j2;
 }
 
-ListaObjetivos<string> * Grafo::obtener_recorrido(){
+ListaSP<string> * Grafo::obtener_recorrido(){
     return camino_minimo->obtener_camino_recorrido();
 }
 
