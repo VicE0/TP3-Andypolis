@@ -1,38 +1,38 @@
-#ifndef NODO_OBJETIVOS_H
-#define NODO_OBJETIVOS_H
+#ifndef NODO_SP_H
+#define NODO_SP_H
 
 template <typename Data>
 
-class NodoObjetivos
+class NodoSP
 {
 
     private:
         // ATRIBUTOS
         Data data;
-        NodoObjetivos<Data>* siguiente;
-        NodoObjetivos<Data>* anterior;
+        NodoSP<Data>* siguiente;
+        NodoSP<Data>* anterior;
 
     public:
         // METODOS
 
         // CONSTRUCTOR
-        NodoObjetivos(Data o); //o de objeto! 
+        NodoSP(Data o); //o de objeto! 
 
         // PRE: -
         // POST: cambia el nodo siguiente por ps
-        void cambiar_siguiente(NodoObjetivos* posicion);
+        void cambiar_siguiente(NodoSP* posicion);
 
         // PRE: -
         // POST: cambia el nodo anterior por ps
-        void cambiar_anterior(NodoObjetivos* posicion);
+        void cambiar_anterior(NodoSP* posicion);
 
         // PRE: -
         // POST: devuelve el nodo anterior
-        NodoObjetivos* obtener_anterior();
+        NodoSP* obtener_anterior();
 
         // PRE: -
         // POST: devuelve el nodo siguiente
-        NodoObjetivos* obtener_siguiente();
+        NodoSP* obtener_siguiente();
 
         // PRE: -
         // POST: devuelve el dato que contiene el nodo
@@ -41,7 +41,7 @@ class NodoObjetivos
 };
 
 template <typename Data>
-NodoObjetivos<Data>::NodoObjetivos(Data o) 
+NodoSP<Data>::NodoSP(Data o) 
 {
     data = o;
     siguiente = 0;
@@ -49,33 +49,33 @@ NodoObjetivos<Data>::NodoObjetivos(Data o)
 }
 
 template <typename Data>
-void NodoObjetivos<Data>::cambiar_siguiente(NodoObjetivos* posicion) 
+void NodoSP<Data>::cambiar_siguiente(NodoSP* posicion) 
 {
     siguiente = posicion;
 }
 
 template <typename Data>
-void NodoObjetivos<Data>::cambiar_anterior(NodoObjetivos* posicion) 
+void NodoSP<Data>::cambiar_anterior(NodoSP* posicion) 
 {
     anterior = posicion;
 }
 
 template <typename Data>
-NodoObjetivos<Data>* NodoObjetivos<Data>::obtener_anterior() 
+NodoSP<Data>* NodoSP<Data>::obtener_anterior() 
 {
     return anterior;
 }
 
 template <typename Data>
-NodoObjetivos<Data>* NodoObjetivos<Data>::obtener_siguiente() 
+NodoSP<Data>* NodoSP<Data>::obtener_siguiente() 
 {
     return siguiente;
 }
 
 template <typename Data>
-Data NodoObjetivos<Data>::obtener_data() 
+Data NodoSP<Data>::obtener_data() 
 {
     return data;
 }
 
-#endif //NODO_OBJETIVOS_H
+#endif //NODO_SP_H

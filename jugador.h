@@ -6,7 +6,6 @@ const int ENERGIA_INICIAL = 50;
 
 #include "material.h"
 #include "lista.h"
-#include "listaObjetivos.h"
 #include "edificio.h"
 #include "Objetivos.h"
 #include <string>

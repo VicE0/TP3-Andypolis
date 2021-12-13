@@ -84,7 +84,7 @@ public:
 
     //PRE:-
     //POST: Devuelve la lista con el recorrido del jugador
-    ListaObjetivos<string> * obtener_recorrido();
+    ListaSP<string> * obtener_recorrido();
 
     //PRE:-
     //POST: Obtiene el casillero ligado al codigo que le pasamos.

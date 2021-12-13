@@ -116,7 +116,6 @@ void Betun::eliminar_jugador(){
 }
 
 Betun::~Betun(){
-    cout << " destructor de betun " << endl;
     if ( material ){
         delete material;
     }

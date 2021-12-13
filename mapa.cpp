@@ -774,7 +774,7 @@ void Mapa::moverse(Jugador * jugador){
 
     grafo->usar_camino_minimo(posicion_origen, posicion_destino, id_jugador);
 
-    ListaObjetivos<string> * recorrido = grafo->obtener_recorrido();
+    ListaSP<string> * recorrido = grafo->obtener_recorrido();
 
     if ( grafo->obtener_energia_camino() <= jugador->obtener_energia() ){
         codigo_casillero_destino = recorrido->obtener_datos(1);
@@ -800,7 +800,7 @@ int Mapa::generar_numero_random(int min, int max){
 
 }
 
-void Mapa::recoger_materiales(Jugador * jugador, ListaObjetivos<string> * recorrido){
+void Mapa::recoger_materiales(Jugador * jugador, ListaSP<string> * recorrido){
     string codigo_casillero;
     Casillero * casillero;
     Material * material;

@@ -123,7 +123,6 @@ void Muelle::eliminar_jugador(){
 
 
 Muelle::~Muelle(){
-    cout << " destructor de muelle " << endl;
     if ( material ){
         delete material;
     }

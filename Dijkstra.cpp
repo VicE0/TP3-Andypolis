@@ -4,7 +4,7 @@ Dijkstra::Dijkstra(Lista<Casillero*> * vertices, int ** matriz_adyacente) : Cami
     this->vertices_visitados = new bool[ canitdad_vertices ];
     this->distancia = new int [ canitdad_vertices ];
     this->recorrido = new int [ canitdad_vertices ];
-    this->camino_recorrido = new ListaObjetivos<string>;
+    this->camino_recorrido = new ListaSP<string>;
     this->energia_gastada = INFINITO;
 }
 
@@ -94,7 +94,7 @@ void Dijkstra::mostrar_recorrido(int origen, int destino) {
     cout << endl;
 }
 
-ListaObjetivos<string> * Dijkstra::obtener_camino_recorrido(){
+ListaSP<string> * Dijkstra::obtener_camino_recorrido(){
     return camino_recorrido;
 }
 

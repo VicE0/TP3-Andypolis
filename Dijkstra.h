@@ -2,7 +2,7 @@
 #define DIJKSTRA_H
 
 #include "CaminoMinimo.h"
-#include "listaObjetivos.h"
+#include "listaSP.h"
 
 class Dijkstra: public CaminoMinimo {
 
@@ -12,7 +12,7 @@ private:
     int * distancia;
     int * recorrido;
     int energia_gastada;
-    ListaObjetivos<string> * camino_recorrido;
+    ListaSP<string> * camino_recorrido;
 
     // METODOS : 
     void inicializar_visitados(int origen);
@@ -32,7 +32,7 @@ public:
 
     void camino_minimo(int origen, int destino);
 
-    ListaObjetivos<string> * obtener_camino_recorrido();
+    ListaSP<string> * obtener_camino_recorrido();
 
     int obtener_energia_gastada();
 
