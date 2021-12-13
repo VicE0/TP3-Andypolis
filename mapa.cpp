@@ -36,8 +36,6 @@ void Mapa::ingreso_datos_mapa(Jugador * j1, Jugador * j2){
     cargar_edificios();
     procesar_archivo_mapa();
     procesar_archivo_ubicaciones( j1, j2);
-    // procesar_objetivos(j1,j2);
-
 }
 
 void Mapa::procesar_archivo_mapa(){
@@ -141,13 +139,6 @@ void Mapa::procesar_archivo_materiales(Jugador * j1, Jugador * j2){
 
     archivo.close();
 }
-
-// void Mapa::procesar_objetivos(Jugador * j1, Jugador *  j2)
-// {   
-//     j1 ->asignar_objetivos();
-//     j2 ->asignar_objetivos();
-// }
-
 
 void Mapa::insertar_jugador_mapa(string id_jugador,Jugador * j1,Jugador * j2, int fila, int columna){
     if ( id_jugador == "1" ){
@@ -560,7 +551,7 @@ void Mapa::obtengo_materiales_elimino_edificio(Jugador * jugador, string nombre_
 // 4) ATACAR UN EDIFICIO ------------------------------------
 void Mapa::atacar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 30 )){
@@ -608,7 +599,7 @@ void Mapa::realizar_ataque(Jugador * jugador){
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-    cout << "\n\t\t ###   En esta seccion podra ATACAR un EDIFICIO :   ###" << endl;
+    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
     cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 25 )){
