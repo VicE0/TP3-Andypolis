@@ -57,7 +57,7 @@ void Nodo<T>::cambiar_siguiente(Nodo * pn){
 }
 
 template <typename T>
-void Nodo<T>::pcambiar_dato(T d){
+void Nodo<T>::cambiar_dato(T d){
     pdato = d;
 }
 

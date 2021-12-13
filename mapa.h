@@ -247,15 +247,15 @@ public:
 
     
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio los materiales que estan en el mapa
+    // POST: Guarda en el archivo ubicaciones los materiales que estan en el mapa
     void guardar_materiales(std::ofstream &archivo_ubicaciones);
     
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio las posiciones de los jugadores en el mapa
+    // POST: Guarda en el archivo ubicaciones las posiciones de los jugadores en el mapa
     void guardar_jugador(std::ofstream &archivo_ubicaciones, int id_jugdor);
 
     // PRE: Necesito que exsiste el archivo ubicaciones
-    // POST: Imprimo en el archivio los edificios que estan en el mapa
+    // POST: Guarda en el archivo ubicaciones los edificios que estan en el mapa
     void guardar_edificios(std::ofstream &archivo_ubicaciones, int id_jugador);
 
     //Detructor
@@ -306,7 +306,21 @@ public:
     //POS: Devuelve la cantidad de columnas del mapa
     int devolver_cantidad_columnas();
 
+    //PRE: Necesita un jugador
+    //POS: Mueve al jugador de posicion
     void moverse(Jugador * jugador);
+
+    //PRE: Necesita un jugador y una lista de strings con al menos 1 elemento
+    //POS: Levanta los materiales de los casilleros que recorrio si es que tiene
+    void recoger_materiales(Jugador * jugador, ListaObjetivos<string> * recorrido);
+
+    //PRE: Necesita el id del jugador que quiere buscar
+    //POS: Devuelve el casillero donde se encuentra ese jugador
+    Casillero * buscar_posicion_jugador(int id_jugador);
+
+    //PRE: -
+    //POS: Guarda en el archivo inventario el inventario de ambos jugadores
+    void guardar_inventario();
 };
 
 

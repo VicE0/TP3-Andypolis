@@ -97,6 +97,16 @@ public:
     //POST: Devuelve el puntero del edificio  pedido en caso de que haya uno.
     Edificio * obtener_edificio_construido();
 
+    //PRE: -
+    //POST: Devuelve un nullptr ya que no puede tener materiales
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: -
+    void sacar_material();
+
+    void eliminar_jugador();
+
     // PRE: -
     // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.
     void comprobar_destruccion_edificio();

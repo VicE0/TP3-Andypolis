@@ -10,6 +10,7 @@ const int ENERGIA_INICIAL = 50;
 #include "edificio.h"
 #include "Objetivos.h"
 #include <string>
+#include <fstream>
 #include "objetivos/comprar_andypolis.h"
 #include "objetivos/edad_piedra.h"
 #include "objetivos/bombardero.h"
@@ -183,6 +184,8 @@ class Jugador
         void agregar_codigo_posicion(string codigo_posicion);
 
         string obtener_codigo_posicion();
+
+        void vaciar_inventario();
 
         //Destructor de jugador
         ~Jugador();

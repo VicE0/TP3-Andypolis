@@ -74,7 +74,11 @@ public:
     
     //PRE:-
     //POST: Le muestra por pantalla un mensaje al jugador explicando que es.
-    virtual void saludar();
+    void saludar();
+
+    //PRE:-
+    //POST: Reduce la cantidad del material a 0.
+    void vaciar();
 
 };
 

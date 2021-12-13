@@ -5,6 +5,14 @@
 
 using namespace std;
 
+#ifdef __linux__
+#define CLR_SCREEN "clear"
+#endif // __linux__
+
+#ifdef __MINGW32__
+#define CLR_SCREEN "CLS"
+#endif // __MINGW32__
+
 // MENU PRINCIPAL
 int const P_MODIFICAR_EDIFICIO = 1;
 int const P_LISTAR_TODOS_EDIFICIOS = 2;

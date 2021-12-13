@@ -15,6 +15,8 @@ int main(){
 
     mapa->ingreso_datos_mapa(j1,j2);
 
+    system(CLR_SCREEN);
+    
     if ( ! (mapa->carga_incorrecta_archivos()) ){
     selector_de_menu(mapa, j1, j2);
 

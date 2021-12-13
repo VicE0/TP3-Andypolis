@@ -45,6 +45,8 @@ public:
     //PRE: Le pido el puntero del nuevo nodo derecho
     //POST: Cambia la posicion derecho del nodo
     void cambiar_der(Nodo_ABB * pd);
+
+    //DESTRUCTOR
     ~Nodo_ABB();
 };
 

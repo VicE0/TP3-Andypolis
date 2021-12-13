@@ -403,13 +403,19 @@ string Jugador::obtener_codigo_posicion(){
     return codigo_posicion;
 }
 
+void Jugador::vaciar_inventario(){
+    for (int i = 0; i < inventario -> obtener_cantidad(); i++){
+        inventario -> obtener_nodo(i) -> obtener_dato() -> vaciar();
+    }
+}
+
 Jugador::~Jugador(){
-    cout << " Muere el jugador " << endl;
     delete inventario;
     inventario = 0;
+
     delete inventario_a_recolectar;
     inventario_a_recolectar = 0;
+
     delete lista_objetivos;
     lista_objetivos = 0;
-
 }

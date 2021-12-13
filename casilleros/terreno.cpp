@@ -28,7 +28,7 @@ void Terreno::mostrar_casillero(){
 }
 
 void Terreno::agregar_edificio(string nombre,int id_jugador, int vida, int piedra, int madera, int metal, int maximo){
-    if ( ! edificio_construido ){
+    if ( !edificio_construido && !jugador){
         if (nombre == ASERRADERO){
 
             this->edificio_construido = new Aserradero(id_jugador, vida, piedra, madera, metal, maximo);
@@ -160,6 +160,19 @@ void Terreno::comprobar_destruccion_edificio(){
         eliminar_edificio();
     }
 }
+
+void Terreno::eliminar_jugador(){
+    if (jugador){
+    jugador = nullptr;
+    peso = 25;
+    }
+}
+
+Material * Terreno::devolver_material(){
+    return nullptr;
+}
+
+void Terreno::sacar_material(){}
 
 Terreno::~Terreno(){
     if ( edificio_construido ){
