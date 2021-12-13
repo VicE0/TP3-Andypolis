@@ -129,7 +129,7 @@ public:
 
     // PRE: -
     // POS: Devuelve el peso de dicho casillero.
-   int obtener_peso();
+    int obtener_peso();
 
     // PRE: -
     // POS: Devuelve el diminutivo del jugador que se encuentre en ese casillero en caso de que haya alguno, sino lo devuelve vacio.

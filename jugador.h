@@ -46,19 +46,30 @@ class Jugador
     public:
 
         // -------------------------------- Constructores --------------------------------
+
+        // PRE: - 
+        // POS: Inicializo los valores en 0 o valores iniciales.
         Jugador();
 
-        Jugador(int id_jugador, string diminutivo); //constructor
+        // PRE: Le pido el id del jugador y su diminutivo para almacenarlo en su informacion
+        // POS: Inicializo los valores correctos del jugador con los datos disponibles
+        Jugador(int id_jugador, string diminutivo); 
 
         // -------------------------------- Funciones jugador --------------------------------
         //PRE: ~
         //POST: Devuelve el numero del jugador (1 / 2)
         int dar_numero();
 
+        //PRE: Le paso el nombre del material a buscar
+        //POST: Devuelve el puntero del material buscado
         Material * obtener_material(string nombre);
 
+        //PRE: Le paso el nombre del material a buscar
+        //POST: Devuelve el puntero del material buscado en el inventario a recolectar
         Material * obtener_material_recolectar(string nombre);
 
+        //PRE: ~
+        //POST: Me devuelve la lista del inventario principal
         Lista<Material> * obtener_inventario();
 
         
