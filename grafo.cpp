@@ -103,36 +103,6 @@ void Grafo::mostrar_vertices(){
     }
 }
 
-void Grafo::mostrar_adyacente(){
-    cout << "\nAdyacente 1" << endl;
-    int cantidad_elementos = vertices->obtener_cantidad();
-    for ( int i = 0; i < 30; i++ ){
-        cout << endl;
-        for ( int j = 0; j < 30; j ++ ){
-            if ( matriz_adyacente_j1[i][j] == INFINITO ){
-                cout << "∞";
-            } else {
-                cout << matriz_adyacente_j1[i][j];
-            }
-            cout << "|";
-        }
-    }
-    cout << endl;
-    cout << "\nAdyacente 2" << endl;
-    for ( int i = 0; i < 30; i++ ){
-        cout << endl;
-        for ( int j = 0; j < 30; j ++ ){
-            if ( matriz_adyacente_j2[i][j] == INFINITO ){
-                cout << "∞";
-           } else {
-                cout << matriz_adyacente_j2[i][j];
-            }
-            cout << "|";
-        }
-    }
-    cout << endl;
-}
-
 void Grafo::agregar_caminos(){
     int fila_anterior, fila_siguiente, columna_anterior, columna_siguiente;
     string origen, casillero_derecho, casillero_inferior, casillero_superior, casillero_izquierdo, fila_string, columna_string;

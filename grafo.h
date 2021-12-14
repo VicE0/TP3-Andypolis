@@ -66,10 +66,6 @@ public:
     //POST: Crea una matriz auxiliar para poder agrandar una posicion a la matriz
     void agrandar_matrices();
 
-    //PRE: -
-    //POST: Muestra por pantalla la matriz adyacente
-    void mostrar_adyacente();
-
     //PRE:-
     //POST: Actualiza las matrices de adyacencia.
     void agregar_caminos();

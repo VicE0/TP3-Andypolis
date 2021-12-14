@@ -434,7 +434,7 @@ void Mapa::construir_edificio_nombre(Jugador * jugador){
 
     if ( verificacion_energia( energia_jugador, 15) ){
 
-        bool existe_edificio = diccionario->existe_edificio(nombre_nuevo);
+        existe_edificio = diccionario->existe_edificio(nombre_nuevo);
         if ( existe_edificio ){
 
             realizar_construccion(nombre_nuevo, jugador);
@@ -505,7 +505,6 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
 // 2) LISTAR EDIFICIOS DEL JUGADOR ------------------------------------
 void Mapa::listar_edificios_construidos(Jugador * jugador){
     int id_jugador = jugador->dar_numero();
-    int cantidad_construidos;
     int codigo_edificio;
     string nombre_edificio;
     Edificio * aux = nullptr;
@@ -809,7 +808,7 @@ void Mapa::almacenar_recursos_producidos(Jugador * jugador){
     int metal = 0;
     int andycoin = 0;
     int energia_rec = 0;
-    int cantidad_edificios, total_brindado , cantidad_construidos, cantidad_a_brindar;
+    int total_brindado , cantidad_construidos, cantidad_a_brindar;
     string nombre_edificio;
 
     cantidad_edificios = obtener_cantidad_edificios();

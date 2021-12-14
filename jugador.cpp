@@ -317,8 +317,8 @@ void Jugador::restar_energia(int cantidad){
 
 Objetivo* Jugador::asignar_principal(int id_objetivo)
 {
-    int cantidad;
-    objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
+    int cantidad = 0;
+    Objetivo * objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
     return objetivo_principal;
 }
 
@@ -326,14 +326,14 @@ Objetivo* Jugador::sortear_objetivos(int id_objetivo)
 {
     Objetivo * obj = nullptr;
 
-    int cantidad;
+    int cantidad = 0;
     for(int i = 0; i < 9; i ++)
     {
         switch (id_objetivo)
         {
             case COMPRAR_ANDYPOLIS:
 
-                obj = new Comprar_andypolis(id_objetivo,cantidad, false);
+                obj = new Comprar_andypolis(id_objetivo, cantidad, false);
                 break;
 
             case EDAD_PIEDRA:
