@@ -124,8 +124,7 @@ void procesar_opcion_jugador(int opcion, Mapa * mapa, Jugador * jugador,bool rec
 
     case MOSTRAR_OBJETIVOS:
             cout << LGREEN << "\n\t SECCION : MOSTRAR OBJETIVOS \n" << endl;
-            cout << "Objetivos jugador (En proceso!)" << endl;
-            //Se carga y se da de alta, pero pincha al mostrar!
+            mapa -> mostrar_objetivos_jugadores(jugador);
         break;
 
     case RECOLECTAR_RECURSOS:
