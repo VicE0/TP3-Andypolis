@@ -1,0 +1,116 @@
+#ifndef TERRENO_H
+#define TERRENO_H
+
+#include "../edificios/aserradero.h"
+#include "../edificios/escuela.h"
+#include "../edificios/fabrica.h"
+#include "../edificios/mina.h"
+#include "../edificios/obelisco.h"
+#include "../edificios/planta_electrica.h"
+#include "../edificios/mina_oro.h"
+#include "casillero.h"
+
+
+class Terreno : public Casillero {
+
+private:
+    Edificio * edificio_construido;
+
+public:
+
+    // Constructor
+    //PRE: -
+    //POS: Le da nombre = 'T', y inicializa al puntero edificio_construido en NULL
+    Terreno(int fila, int columna, string id_casillero);
+
+    //PRE: -
+    //POS: Devuelve el nombre del casillero ( getter ).
+    string obtener_nombre();
+    
+    //PRE:
+    //POST: Devuelve un int con el costo de energia para transitar por este casillero.
+    int obtener_costo_energia(int id_jugador);
+
+    //PRE: Recibiendo como parametros los necesarios para el constructor de edificio
+    //POS: El puntero edificio_construido apuntara al nuevo espacio en memoria donde se guarda el edificio.
+    void agregar_edificio(string nombre, int id_jugador, int vida, int piedra, int madera, int metal, int maximo);
+
+    //PRE:-
+    //POS: En casilleros transitables hace apuntar el puntero material
+    //a un objeto material
+    void agregar_material(string nombre, int cantidad);
+
+    //PRE: - 
+    //POS: Getter , que me devuelve el nombre del edificio que hay en el casillero.
+    string obtener_nombre_edificio();
+
+    //PRE: - 
+    //POS: Devuelve un string vacio pues no se pueden ubicar materiales en casilleros construibles
+    string obtener_nombre_material();
+
+    //PRE: En caso de existir un edificio, que el edificio_construido != NULL. 
+    //POS: Voy a obtener el diminutivo del edificio que apunta edificio_construido.
+    string obtener_diminutivo_edificio();
+
+    //PRE: -  
+    //PRE:
+    //POST: Al ser un casillero construible devueve un string vacio pus
+    string obtener_diminutivo_material();
+
+    //PRE: En caso de existir un edificio , edificio_construido != NULL.
+    //POS: Libero espacio en memoria y edificio_construido = 0.
+    void eliminar_edificio();
+
+    //PRE: Dos casos posibles , si existe o no edificio_construido 
+    //POS: Si existe : se muestra el mensaje que el casillero no esta vacio y manda el mensaje del objeto,
+    //     si no existe: muestra el mensaje del tipo de casillero y que se encuentra vacio.
+    void mostrar_casillero();
+
+    //PRE: En caso edificio_construido != NULL.  
+    //POS: Muestra por pantalla las coordenadas del edificio y el nombre del edificio existente.
+    void mostrar_coordenadas_edificio(string nombre);
+
+    //PRE: -
+    //POS: Chequeo el casillero si existe o no un edificio , devuelve true si edificio_construido != NULL.
+    bool existe_edificio();
+
+    //PRE: -
+    //POS:  Devuelve false puesto que no se pueden colocar materiales en casilleros construibles
+    bool existe_material();
+
+    // Destructor
+    //PRE: En caso de que el casillero contenga un edificio. 
+    //POS: Libero la memoria y edificio_construido = 0.
+    ~Terreno();
+
+    //Obtener fila
+    //PRE:-
+    //POST: Devuelve un entero con la fila del casillero
+    int obtener_fila();
+
+    //Obtener columna
+    //PRE:-
+    //POST: Devuelve un entero con la columna del casillero
+    int obtener_columna();
+
+    //PRE: -
+    //POST: Devuelve el puntero del edificio  pedido en caso de que haya uno.
+    Edificio * obtener_edificio_construido();
+
+    //PRE: -
+    //POST: Devuelve un nullptr ya que no puede tener materiales
+    Material * devolver_material();
+
+    //PRE: -
+    //POST: -
+    void sacar_material();
+
+    void eliminar_jugador();
+
+    // PRE: -
+    // POS: Comprueba la destruccion del edificio e imprime un mensjae en base a eso.
+    void comprobar_destruccion_edificio();
+};
+
+
+#endif
