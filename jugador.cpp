@@ -3,7 +3,6 @@
 Jugador::Jugador(){
     this -> id_jugador = 0;
     this -> energia = 50;
-    this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
     this -> lista_objetivos = new ListaSP<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
@@ -18,7 +17,6 @@ Jugador::Jugador(int id_jugador, string diminutivo)
 {
     this -> id_jugador = id_jugador;
     this -> energia = 50;
-    this -> objetivos_cumplidos = 0;
     this -> inventario = new Lista<Material>;
     this -> lista_objetivos = new ListaSP<Objetivo*>;
     this -> inventario_a_recolectar = new Lista<Material>;
@@ -317,60 +315,59 @@ void Jugador::restar_energia(int cantidad){
 
 Objetivo* Jugador::asignar_principal(int id_objetivo)
 {
-    int cantidad = 0;
-    Objetivo * objetivo_principal = new Objetivo_obelisco(id_jugador, cantidad, false);
+    this->objetivo_principal = new Objetivo_obelisco(id_jugador, 1, false);
     return objetivo_principal;
 }
 
-Objetivo* Jugador::sortear_objetivos(int id_objetivo)
+Objetivo* Jugador::sortear_objetivos(int id_objetivo, Arbol * diccionario)
 {
     Objetivo * obj = nullptr;
-
-    int cantidad = 0;
+    int cantidad;
     for(int i = 0; i < 9; i ++)
     {
         switch (id_objetivo)
         {
             case COMPRAR_ANDYPOLIS:
 
-                obj = new Comprar_andypolis(id_objetivo, cantidad, false);
+                obj = new Comprar_andypolis(id_objetivo, 100000, false);
                 break;
 
             case EDAD_PIEDRA:
-                obj = new Edad_piedra(id_objetivo,cantidad,false);
+                obj = new Edad_piedra(id_objetivo, 50000,false);
                 break;
 
             case BOMBARDERO:
-                obj = new Bombardero(id_objetivo,cantidad,false);
+                obj = new Bombardero(id_objetivo, 5,false);
                 break;
 
             case ENERGETICO:
-                obj= new Energetico(id_objetivo ,cantidad,false);
+                obj= new Energetico(id_objetivo , 100,false);
                 break;
 
             case LETRADO:
-                obj = new Letrado(id_objetivo,cantidad,false);
+                cantidad = diccionario->encontrar("escuela")->obtener_edificio()->obtener_maximo_construir();
+                obj = new Letrado(id_objetivo, cantidad, false);
                 break;
 
             case MINERO:
-                obj = new Minero(id_objetivo,cantidad,false);
+                obj = new Minero(id_objetivo, 2,false);
                 break;
 
             case CANSADO:
-                obj = new Cansado(id_objetivo,cantidad,false);
+                obj = new Cansado(id_objetivo, 0,false);
                 break;
 
     
             case ARMADO:
-                obj = new Armado(id_objetivo ,cantidad,false);
+                obj = new Armado(id_objetivo , 10,false);
                 break;
 
             case EXTREMISTA:
-                obj = new Extremista(id_objetivo,cantidad,false);
+                obj = new Extremista(id_objetivo, 500,false);
                 break;
 
             case CONSTRUCTOR:
-               obj = new Constructor(id_objetivo,cantidad,false);
+               obj = new Constructor(id_objetivo, 6,false);
         }
     }
 
@@ -404,8 +401,9 @@ void Jugador::mostrar_objetivos()
 
 
 bool Jugador::objetivos_secundarios_cumplidos()
-{
-    for (int i = 1; i < lista_objetivos ->obtener_cantidad_elementos()-1; i++)
+{   
+    int objetivos_cumplidos = 0;
+    for (int i = 0; i < lista_objetivos ->obtener_cantidad_elementos() ; i++)
     {
         if (lista_objetivos -> obtener_datos(i) ->objetivo_cumplido())
         {
@@ -423,7 +421,6 @@ bool Jugador::objetivo_principal_cumplido()
 
 bool Jugador::gano_juego()
 {
-   
     if(objetivo_principal_cumplido()|| objetivos_secundarios_cumplidos())
     {
         ganador = true;

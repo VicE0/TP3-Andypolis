@@ -3,7 +3,7 @@
 Comprar_andypolis::Comprar_andypolis(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = COMPRAR_ANDYPOLIS;
-    this -> cantidad = 100000;
+    this -> cantidad = cantidad;
     this -> andycoins_totales = 0;
     this -> cumplido = false;
 }

@@ -3,7 +3,7 @@
 Minero::Minero(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = MINERO;
-    this -> cantidad = 2;
+    this -> cantidad = cantidad;
     this -> minas_construidas = 0;
     this -> cumplido = false;
     this -> mina_construida = false;

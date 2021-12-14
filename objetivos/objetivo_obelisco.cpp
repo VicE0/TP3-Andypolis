@@ -3,7 +3,7 @@
 Objetivo_obelisco::Objetivo_obelisco(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = CONSTRUIR_OBELISCO;
-    this -> cantidad = 1;
+    this -> cantidad = cantidad;
     this ->cumplido = false;
 }
 

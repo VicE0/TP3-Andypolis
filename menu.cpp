@@ -199,9 +199,10 @@ void partida(Mapa * mapa, Jugador * j1, Jugador * j2){
             if(mapa -> ganar_partida(jugador))
             {
                 mensaje_ganador(jugador);
+                opcion = GUARDAR_SALIR;
             }
         }
-        while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR);
+        while(opcion != FINALIZAR_TURNO && opcion != GUARDAR_SALIR );
         
         turno++;
     }

@@ -3,7 +3,7 @@
 Cansado::Cansado(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = CANSADO;
-    this -> cantidad = 0;
+    this -> cantidad = cantidad;
     this ->cumplido = false;
     this ->energia_jugador = 0;
 }

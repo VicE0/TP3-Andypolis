@@ -3,7 +3,7 @@
 Armado::Armado(int id_objetivo,int cantidad,  bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = ARMADO;
-    this -> cantidad = 10;
+    this -> cantidad = cantidad;
     this -> bombas_inventario = 0;
     this ->cumplido = false;
 }

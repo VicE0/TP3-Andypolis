@@ -3,7 +3,7 @@
 Extremista::Extremista(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = EXTREMISTA;
-    this -> cantidad = 500;
+    this -> cantidad = cantidad;
     this -> bombas_compradas = 0;
     this ->cumplido = false;
 }

@@ -3,7 +3,7 @@
 Bombardero::Bombardero(int id_objetivo, int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = BOMBARDERO;
-    this -> cantidad = 5;
+    this -> cantidad = cantidad;
     this -> bombas_usadas = 0;
     this ->cumplido = false;
 }

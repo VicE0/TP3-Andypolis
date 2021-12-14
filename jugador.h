@@ -22,6 +22,7 @@ const int ENERGIA_INICIAL = 50;
 #include "objetivos/armado.h"
 #include "objetivos/extremista.h"
 #include "objetivos/objetivo_obelisco.h"
+#include "ABB/ABB.h"
 
 using std::string;
 
@@ -34,7 +35,6 @@ class Jugador
         int id_jugador;
         int energia;
         int energia_recolectada;
-        int objetivos_cumplidos;
         int turno;
         bool ganador;
         string codigo_posicion;
@@ -183,7 +183,7 @@ class Jugador
 
         //PRE: Le paso el id el objetivo que le toco aleatoriamente
         //POST: Inicializo el objetivo asignado al jugador en la lista de objetivos
-        Objetivo* sortear_objetivos(int id_objetivo);
+        Objetivo* sortear_objetivos(int id_objetivo, Arbol * diccionario);
 
         //PRE:
         //POS: Muestra los saludos del jugador

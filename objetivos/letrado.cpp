@@ -3,7 +3,7 @@
 Letrado::Letrado(int id_objetivo,int cantidad,  bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = LETRADO;
-    this -> cantidad = 0;
+    this -> cantidad = cantidad;
     this -> escuelas_construidas = 0;
     this -> cumplido = false;
 }

@@ -3,7 +3,7 @@
 Constructor::Constructor(int id_objetivo,int cantidad, bool cumplido) : Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = CONSTRUCTOR;
-    this -> cantidad = 6; //cantidad de edificios diferentes (sin contar obelisco)
+    this -> cantidad = cantidad; //cantidad de edificios diferentes (sin contar obelisco)
     this -> cumplido = false;
     this -> mina_construida = false;
     this -> mina_oro_construida = false;
@@ -81,4 +81,3 @@ void Constructor::progreso(Lista <Material> *inventario, int &energia, Edificio 
     }
 
 }
- 

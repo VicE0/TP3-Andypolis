@@ -3,7 +3,7 @@
 Energetico::Energetico(int id_objetivo, int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = ENERGETICO;
-    this -> cantidad = 100;
+    this -> cantidad = cantidad;
     this ->cumplido = false;
     this -> energia_jugador = 0;
 }

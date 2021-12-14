@@ -3,7 +3,7 @@
 Edad_piedra::Edad_piedra(int id_objetivo,int cantidad, bool cumplido) :  Objetivo(id_objetivo, cantidad, cumplido)
 {
     this -> id_objetivo = EDAD_PIEDRA;
-    this -> cantidad = 50000;
+    this -> cantidad = cantidad;
     this -> piedras_inventario = 0;
     this -> cumplido = false;
 }

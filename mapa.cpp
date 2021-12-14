@@ -160,6 +160,7 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
 {
     
     int id_objetivo;
+    srand( (unsigned)time(0) );
 
     j1 -> agregar_objetivo(j1 -> asignar_principal(1));
     j2 -> agregar_objetivo(j2 -> asignar_principal(1));
@@ -167,7 +168,7 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
     for (int i = 0; i < 4; i++)
     {   
         id_objetivo = rand()%10;
-        j1 -> agregar_objetivo(j1-> sortear_objetivos(id_objetivo));
+        j1 -> agregar_objetivo(j1-> sortear_objetivos(id_objetivo, diccionario));
     
     }
     
@@ -175,7 +176,7 @@ void Mapa::procesar_objetivos(Jugador *j1, Jugador * j2)
     for (int i = 0; i < 4; i++)
     {   
         id_objetivo = rand()%10;
-        j2 -> agregar_objetivo(j2 ->sortear_objetivos(id_objetivo));
+        j2 -> agregar_objetivo(j2 ->sortear_objetivos(id_objetivo, diccionario));
         
     }
     
@@ -468,7 +469,6 @@ void Mapa::realizar_construccion(string nombre_nuevo, Jugador * jugador){
                 if ( aceptar_condiciones() ){
 
                     int fila , columna;
-                    cout << "\n ### En esta seccion podra CONSTRUIR un EDIFICIO : ###\n" << endl;
                     validar_coordenada( fila, columna);
                     if ( mapa[fila][columna]->obtener_nombre() == "T" ){
                         
@@ -650,9 +650,6 @@ void Mapa::realizar_ataque(Jugador * jugador){
 // 5) REPARAR UN EDIFICIO ------------------------------------
 void Mapa::reparar_edificios(Jugador * jugador){
     int energia_jugador = jugador->obtener_energia();
-
-    cout << "\n\t\t ###   En esta seccion podra REPARAR un EDIFICIO :   ###" << endl;
-    cout << "\n";
     
     if ( verificacion_energia(energia_jugador, 25 )){
             realizar_reparacion(jugador);
@@ -787,10 +784,8 @@ void Mapa::actualiza_progreso_objetivos(Jugador * jugador)
                 {
                     jugador -> actualizar_progreso_objetivos(aux); 
                 }
-
             }
-       }
-        
+        }
     }
 }
 
@@ -1129,8 +1124,8 @@ void Mapa::lluvia_recursos(){
 bool Mapa::ganar_partida(Jugador* jugador)
 {
     bool partida_ganada = false;
-
-    return partida_ganada = jugador -> gano_juego();
+    partida_ganada = jugador->gano_juego();
+    return partida_ganada;
 }
 
 // -------------- FINALIZA PUNTOS DEL MENU -------------------------------
@@ -1207,7 +1202,7 @@ Casillero * Mapa::buscar_posicion_jugador(int id_jugador){
 
 Mapa::~Mapa(){
 
-    if (mapa_bien_cargado && ubicaciones_bien_cargadas){
+    if (mapa_bien_cargado && ubicaciones_bien_cargadas ){
         ofstream archivo_ubicaciones;
         archivo_ubicaciones.open(ARCHIVO_UBICACIONES);
         guardar_materiales(archivo_ubicaciones);
