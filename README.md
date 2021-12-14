@@ -1,7 +1,13 @@
 # TP3-Andypolis
 
-hola soy gian
+.: ANDYPOLIS: LA BATALLA POR EL OBELISCO :.
 
-hola soy fran
 
-hola soy tomi
+.:CODING LIKE COSTA:.
+
+Integrantes: 
+
+• Szejnfeld Sirkis, Tomas -> 107710
+• Impedovo, Gianfranco -> 107817
+• Sobral, Francisco -> 108603
+• Espeche, Victoria -> 108400
